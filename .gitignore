@@ -1,0 +1,6 @@
+
+# Savefiles
+sav/*
+
+# Executables
+*.exe

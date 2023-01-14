@@ -1,0 +1,68 @@
+﻿; 어차피 주인공 이외의 대상에 대해 콜하지는 않긴 한데 이런저런 래퍼가 필요하긴 함
+@showMasterEquips
+#dim equipSlotIdx
+$wrapper
+
+	call showCharaEquips
+	
+	printL [900] - 돌아가기
+	input
+	equipSlotIdx = result
+	
+	if 11 <= equipSlotIdx && equipSlotIdx <= 19
+		if strlens(CFLAGNAME:equipSlotIdx) == 0
+			goto wrapper
+		endif
+
+		$equipChange
+
+		printFormL %substring(CFLAGNAME:equipSlotIdx, 4)% 장비 목록
+		printL 교체할 장비를 아래에서 선택해주세요
+		drawLine
+		
+		for i, 1 + (equipSlotIdx % 10) * 100, 99 + (equipSlotIdx % 10) * 100
+			if ITEM:i && CFLAG:equipSlotIdx != i
+				printFormL [{i}] - %ITEMNAME:i%
+			endif
+		next
+		
+		printL [1000] - 해제
+		input
+		
+		if ITEM:result && CFLAG:equipSlotIdx != result
+			CFLAG:equipSlotIdx = result
+			printFormL %substring(CFLAGNAME:equipSlotIdx, 4)% 장비를 %ITEMNAME:result%로 교체했습니다
+		elseif result == 1000
+			CFLAG:equipSlotIdx = 0
+			printFormL %substring(CFLAGNAME:equipSlotIdx, 4)% 장비를 해제했습니다
+		else
+			goto equipChange
+		endif
+	endif
+	
+	if result != 900
+		goto wrapper
+	endif
+
+	return 1
+
+@showCharaEquips
+
+	clearline 99999
+	
+	printFormL %NAME:MASTER%의 현재 장비 상태
+	drawLine
+	
+	for i, 11, 19
+		if strlens(CFLAGNAME:i) == 0
+			continue
+		endif
+		
+		printForm [{i}] %substring(CFLAGNAME:i, 4)% 장비 : 
+		
+		if CFLAG:i
+			printFormL %ITEMNAME:(CFLAG:i)%
+		else
+			printFormL 없음
+		endif
+	next

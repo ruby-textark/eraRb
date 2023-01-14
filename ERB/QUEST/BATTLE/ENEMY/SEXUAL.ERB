@@ -1,0 +1,168 @@
+﻿@isAttackableBodyPart(partIdx)
+#function
+#dim partIdx
+#dims partName
+
+	if strlens(BASENAME:i) == 0
+		returnf 0
+	endif
+
+	partName = %substring(BASENAME:i, 4)%
+	
+	if partName == "난소" && CFLAG:MASTER:삽입자궁 == 0
+		returnf 0
+	endif
+	if partName == "자궁" && CFLAG:MASTER:삽입질 == 0
+		returnf 0
+	endif
+
+	if partName == "질" && (CFLAG:MASTER:장비하의 != 0 || CFLAG:MASTER:장비속옷 != 0)
+		returnf 0
+	endif
+	if partName == "애널" && (CFLAG:MASTER:장비하의 != 0 || CFLAG:MASTER:장비속옷 != 0)
+		returnf 0
+	endif
+
+	returnf 1
+
+@getSexualAtkBodyPart
+#dim partsCount
+#dim attackedIdx
+
+	partsCount = 0
+	for i, 101, 199
+		if isAttackableBodyPart(i)
+			partsCount++
+		endif
+	next
+	
+	attackedIdx = RAND:partsCount
+
+	partsCount = 0
+	for i, 101, 199
+		if isAttackableBodyPart(i)
+			if partsCount == attackedIdx
+				return i
+			endif
+			partsCount++
+		endif
+	next
+
+	return -1
+
+@processSexualAttack
+#dim attackedIdx
+#dims attackedName
+
+	call getSexualAtkBodyPart
+	attackedIdx = RESULT
+	attackedName = %substring(BASENAME:attackedIdx, 4)%
+	
+	printFormL 성희롱:%attackedName%
+	printForm %NAME:TARGET%은 %NAME:MASTER%의 
+	
+	; Hole
+	if attackedName == "질" || attackedName == "애널"
+		; Already inserted
+		if CFLAG:MASTER:("삽입"+attackedName)
+			if rand:5 == 0
+				printFormL %kr(attackedName, "을", "를")% 쉴틈없이 쑤셔댔다
+			elseif rand:4 == 0
+				printFormL %kr(attackedName, "을", "를")% 계속해서 사용했다
+			elseif rand:3 == 0
+				printFormL %kr(attackedName, "을", "를")% 장난감처럼 다루고 있다
+			elseif rand:2 == 0
+				printFormL %kr(attackedName, "이", "가")% 아프도록 바벼댔다
+			else
+				printFormL %attackedName% 안 깊은곳까지 찌르고 있다
+			endif
+		; Insert
+		else
+			CFLAG:MASTER:("삽입"+attackedName) = 1
+
+			if rand:5 == 0
+				printFormL %kr(attackedName, "을", "를")% 향해 돌진했다
+			elseif rand:4 == 0
+				printFormL %attackedName% 안을 찔렀다
+			elseif rand:3 == 0
+				printFormL %kr(attackedName, "을", "를")% 아프게 꿰뚫었다
+			elseif rand:2 == 0
+				printFormL %attackedName% 속에 삽입했다
+			else
+				printFormL %kr(attackedName, "을", "를")% 범했다
+			endif
+		endif
+	elseif attackedName == "자궁" || attackedName == "난소"
+		; Already inserted
+		if CFLAG:MASTER:("삽입"+attackedName)
+			if rand:5 == 0
+				printFormL 가장 소중한 장소마저 범하고 있다
+			elseif rand:4 == 0
+				printFormL 절대 들키면 안되는 깊은 약점까지 낱낱이 파헤쳐지고 있다
+			elseif rand:3 == 0
+				printFormL %kr(attackedName, "을", "를")% 한 번 쓰리고 버릴 오나홀처럼 사용하고 있다
+			elseif rand:2 == 0
+				printFormL %kr(attackedName, "이", "가")% 아프도록 바벼댔다
+			else
+				printFormL %attackedName% 안 깊은곳까지 찌르고 있다
+			endif
+		; Insert
+		else
+			CFLAG:MASTER:("삽입"+attackedName) = 1
+
+			if rand:5 == 0
+				printFormL %kr(attackedName, "을", "를")% 향해 거침없이 나아갔다
+			elseif rand:4 == 0
+				printFormL %attackedName%마저 정복하고자 좁은 길목을 사정없이 벌렸다
+			elseif rand:3 == 0
+				printFormL %kr(attackedName, "을", "를")% 아프게 꿰뚫었다
+			elseif rand:2 == 0
+				printFormL %attackedName%의 좁은 틈을 비집어 삽입했다
+			else
+				printFormL %kr(attackedName, "을", "를")% 범했다
+			endif
+		endif
+	elseif attackedName == "유두"
+		; nipplefuck check
+		if CFLAG:MASTER:삽입유두 || (RAND:5 == 0 && ABL:attackedIdx > 3)
+			CFLAG:MASTER:삽입유두 = 1
+
+			if rand:5 == 0
+				printFormL %attackedName% 속으로 부드럽게 삽입했다
+			elseif rand:4 == 0
+				printFormL %attackedName%의 끝부분을 찔러, 그 안쪽을 탐하기 시작했다
+			elseif rand:3 == 0
+				printFormL %attackedName%를 살살 건드려 보더니 그대로 그 안으로 삽입했다
+			elseif rand:2 == 0
+				printFormL %attackedName% 사이를 억지로 비집고 들어가 단번에 끝을 찔렀다
+			else
+				printFormL %attackedName%를 한껏 약올리다가 푹 찔러 깊숙한 곳까지 음미하기 시작했다
+			endif
+		else
+			if rand:5 == 0
+				printFormL 가슴 안쪽 깊숙한 곳을 핥듯이 탐하고 있다
+			elseif rand:4 == 0
+				printFormL 유선 안쪽을 차근차근 다지듯이 희롱하고 있다
+			elseif rand:3 == 0
+				printFormL 젖가슴이 불타는 느낌을 받을 정도로 격렬하게 왕복운동을 반복했다
+			elseif rand:2 == 0
+				printFormL %attackedName%이 헐거워질 정도로 빠르게 비벼대고 있다
+			else
+				printFormL %attackedName%를 마구 찔러 찔꺽거리는 소리가 나는 것을 즐기고 있다
+			endif
+		endif
+	else
+		if rand:5 == 0
+			printFormL %kr(attackedName, "을", "를")% 노렸다
+		elseif rand:4 == 0
+			printFormL %kr(attackedName, "을", "를")% 부드럽게 쓰다듬었다
+		elseif rand:3 == 0
+			printFormL %kr(attackedName, "을", "를")% 핥았다
+		elseif rand:2 == 0
+			printFormL %kr(attackedName, "을", "를")% 격렬하게 자극했다
+		else
+			printFormL %kr(attackedName, "을", "를")% 깨물었다
+		endif
+	endif
+
+	SOURCE:attackedIdx = 100 * (ABL:attackedIdx + 1)

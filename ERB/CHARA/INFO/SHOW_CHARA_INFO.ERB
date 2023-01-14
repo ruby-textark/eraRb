@@ -1,0 +1,141 @@
+﻿; 어차피 주인공 이외의 대상에 대해 콜하지는 않긴 한데 이런저런 래퍼가 필요하긴 함
+@showMasterInfo
+
+$wrapper
+
+	call showCharaInfo
+	
+	printL [900] - 돌아가기
+	
+	input
+	
+	if result != 900
+		goto wrapper
+	endif
+
+	return 1
+
+@showCharaInfo
+
+	clearline 99999
+	printForm 이름 : %NAME:MASTER%
+
+	if TALENT:MASTER:성별 == 1
+		SETCOLOR 0x00ff00
+		printL ♂
+		RESETCOLOR
+	else
+		SETCOLOR 0xff0000
+		printL ♀
+		RESETCOLOR
+	endif
+
+	barstr BASE:MASTER:체력, MAXBASE:MASTER:체력, 10
+	printFormL 체력 : %results% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
+
+	barstr BASE:MASTER:마력, MAXBASE:MASTER:마력, 10
+	printFormL 마력 : %results% ({BASE:MASTER:마력}/{MAXBASE:MASTER:마력})
+
+	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
+	printL 장비
+	
+	for i, 11, 19
+		if strlens(CFLAGNAME:i) == 0
+			continue
+		endif
+
+		printForm %substring(CFLAGNAME:i, 4)% : 
+		if CFLAG:MASTER:i
+			printFormL %ITEMNAME:(CFLAG:MASTER:i)%
+		else
+			printFormL 장비 없음
+		endif
+	next
+
+	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
+
+	for i, 101, 199
+		if strlens(BASENAME:i) == 0
+			continue
+		endif
+
+		printForm %" " * (14 - strlens(BASENAME:i))% %substring(BASENAME:i, 4)% (감도Lv.{ABL:MASTER:i}) : 
+
+		barstr BASE:MASTER:마력, MAXBASE:MASTER:마력, 10
+		if BASE:MASTER:마력 > 67
+			setcolor 0x00ff00
+		elseif BASE:MASTER:마력 > 33
+			setcolor 0xffff00
+		else
+			setcolor 0xff0000
+		endif
+		printFormL %results%
+		resetcolor
+
+	next
+
+	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
+	printL 명성에 대해
+	if CFLAG:MASTER:명성기본 < 20
+		if rand:2 == 0
+			printL 아무도 당신을 모르고 있습니다.
+		else
+			printL 당신에게 신경쓸 여유가 있는 사람은 아무도 없습니다.
+		endif
+	elseif CFLAG:MASTER:명성기본 < 40
+		if rand:2 == 0
+			printL 종종 거리에서 당신에게 말을 거는 사람들이 있습니다.
+		else
+			printL 거리에서 종종 익숙한 사람들이 당신을 힐끗거리며 처다봅니다.
+		endif
+	elseif CFLAG:MASTER:명성기본 < 60
+		if rand:2 == 0
+			printL 당신을 보고 아는 체 하는 사람들이 생겼습니다.
+		else
+			printL 종종 거리에서 당신에게 말을 거는 사람들이 있습니다.
+		endif
+	elseif CFLAG:MASTER:명성기본 < 80
+		if rand:2 == 0
+			printL 가끔 멀리에서 사람들이 당신의 이름을 듣고 찾아오곤 합니다.
+		else
+			printL 사람들이 당신을 붙잡고 놓아주지 않을 정도입니다.
+		endif 
+	else
+		if rand:2 == 0
+			printL 당신은 어떤 파티에서도 환영받는 사람입니다.
+		else
+			printL 이 거리에서 당신이 모르는 사람은 없습니다.
+		endif
+	endif
+
+	if CFLAG:MASTER:명성성적 < 20
+		if rand:2 == 0
+			printL 당신에게 흥미를 갖는 사람이 보이지 않습니다.
+		else
+			printL 당신에게는 어떤 눈길도 주어지지 않습니다.
+		endif
+	elseif CFLAG:MASTER:명성성적 < 40
+		if rand:2 == 0
+			printL 뒷골목에서 당신의 이름이 들립니다.
+		else
+			printL 때때로 어둑한 거리에서 당신을 지켜보는 눈빛이 느껴집니다.
+		endif
+	elseif CFLAG:MASTER:명성성적 < 60
+		if rand:2 == 0
+			printL 대낮에도 당신의 몸을 위아래로 훑어보는 시선이 느껴집니다.
+		else
+			printL 사람이 붐비는 곳에서 당신의 몸을 더듬는 손이 생겼습니다.
+		endif
+	elseif CFLAG:MASTER:명성성적 < 80
+		if rand:2 == 0
+			printL 한밤중에 길을 걸을때면 뒤에서 발걸음 소리가 따라 들려옵니다.
+		else
+			printL 당신을 담은 외설적인 그림이 길바닥에 돌아다니곤 합니다.
+		endif 
+	else
+		if rand:2 == 0
+			printL 이제 뒷골목의 사람들은 당신보다 당신의 몸에 대해서 더 잘 알고 있습니다.
+		else
+			printL 당신에 대한 성적 시선을 바꾸기에는 이미 너무 늦었습니다.
+		endif
+	endif

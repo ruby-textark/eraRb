@@ -1,0 +1,8 @@
+﻿@checkVirgin
+
+	for i, 301, 399
+		if CFLAG:MASTER:i && TALENT:MASTER:i == 0
+			printFormL %NAME:MASTER%는 처음으로 %substring(EXPNAME:i, 4)%로 하는 성교를 경험했다.
+			TALENT:MASTER:i = 1
+		endif
+	next

@@ -1,0 +1,24 @@
+@processMenu
+
+	; QUEST MENU
+	if TARGET != 0 && RESULT == 101
+		call startQuest
+	elseif TARGET == 0 && RESULT == 102
+		call newQuest(1 + RAND:2)
+	elseif RESULT == 900
+		begin turnend
+
+	; CHARACTER MENU
+	elseif RESULT == 201
+		call showMasterInfo
+	elseif RESULT == 202
+		call showMasterEquips
+	else
+		RESULT = 0
+	endif
+
+	if RESULT
+		wait
+	endif
+
+	return RESULT

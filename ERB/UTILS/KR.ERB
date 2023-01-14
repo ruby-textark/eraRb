@@ -1,0 +1,11 @@
+@kr(text, postfix1, postfix2)
+#FUNCTIONS
+#dims text
+#dims postfix1
+#dims postfix2
+
+	if (encodeToUni(text, strlensu(text) - 1) - 44032) % 28 == 0
+		returnf text+postfix2
+	else
+		returnf text+postfix1
+	endif

@@ -1,0 +1,53 @@
+﻿@EVENTTRAIN
+
+	; 삽입상태초기화
+	CFLAG:MASTER:101 = 0
+	CFLAG:MASTER:102 = 0
+	CFLAG:MASTER:103 = 0
+	CFLAG:MASTER:104 = 0
+
+	printFormL %CALLNAME:TARGET% %kr(NAME:TARGET, "을", "를")% 발견. 전투를 개시합니다.
+	printL
+	wait
+
+@SHOW_STATUS
+
+	barstr BASE:MASTER:체력, MAXBASE:MASTER:체력, 10
+	printFormL %NAME:MASTER%의 체력 : %results% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
+
+	barstr BASE:TARGET:체력, MAXBASE:TARGET:체력, 10
+	printFormL %NAME:TARGET%의 체력 : %results% ({BASE:TARGET:체력}/{MAXBASE:TARGET:체력})
+	
+	drawLine
+	print_palam MASTER
+	drawLine
+
+@SHOW_USERCOM
+
+@USERCOM
+
+@SOURCE_CHECK
+
+	BASE:0 -= LOSEBASE:0
+	BASE:1 -= LOSEBASE:1
+	
+	; Check if killed
+	if BASE:TARGET:체력 <= 0
+		begin aftertrain
+		return
+	endif
+	
+	call processEnemy
+
+	BASE:MASTER:0 -= LOSEBASE:0
+	BASE:MASTER:1 -= LOSEBASE:1
+
+	; Check if failed
+	if BASE:MASTER:체력 <= 0
+		begin aftertrain
+		return
+	endif
+
+
+@EVENTCOMEND
+	call checkVirgin
