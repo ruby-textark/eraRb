@@ -1,10 +1,13 @@
 ﻿@EVENTTURNEND
 
-	for TARGET, 0, CHARANUM
-		BASE:체력 = MAXBASE:체력
-		BASE:마력 = MAXBASE:마력
-	next
+	BASE:MASTER:체력 = MAXBASE:MASTER:체력
+	BASE:MASTER:마력 = MAXBASE:MASTER:마력
 
 	DAY += 1
+	
+	if DAY % 7 == 0
+		printFormL 숙박비 2000$ 차감
+		MONEY -= 2000
+	endif
 
 	begin shop

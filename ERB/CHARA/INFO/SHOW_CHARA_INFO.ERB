@@ -20,7 +20,7 @@ $wrapper
 	clearline 99999
 	printForm 이름 : %NAME:MASTER%
 
-	if TALENT:MASTER:성별 == 1
+	if TALENT:MASTER:남성 == 1
 		SETCOLOR 0x00ff00
 		printL ♂
 		RESETCOLOR
@@ -37,29 +37,21 @@ $wrapper
 	printFormL 마력 : %results% ({BASE:MASTER:마력}/{MAXBASE:MASTER:마력})
 
 	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
-	printL 장비
 	
-	for i, 11, 19
-		if strlens(CFLAGNAME:i) == 0
-			continue
-		endif
-
-		printForm %substring(CFLAGNAME:i, 4)% : 
-		if CFLAG:MASTER:i
-			printFormL %ITEMNAME:(CFLAG:MASTER:i)%
-		else
-			printFormL 장비 없음
-		endif
-	next
+	print_talent MASTER
+	print_mark MASTER
+	print_abl MASTER
+	print_exp MASTER
 
 	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
+	printL 신체정보
 
 	for i, 101, 199
 		if strlens(BASENAME:i) == 0
 			continue
 		endif
 
-		printForm %" " * (14 - strlens(BASENAME:i))% %substring(BASENAME:i, 4)% (감도Lv.{ABL:MASTER:i}) : 
+		printForm %substring(BASENAME:i, 4), 14, RIGHT% (감도Lv.{ABL:MASTER:i}) : 
 
 		barstr BASE:MASTER:마력, MAXBASE:MASTER:마력, 10
 		if BASE:MASTER:마력 > 67

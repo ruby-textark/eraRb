@@ -16,10 +16,23 @@
 	endif
 	printLC [102] - 의뢰 수주
 	resetcolor
-	
-	printLC [201] - 능력표시
-	printLC [202] - 복장/장비변경
 
+	; Target does not exist
+	if TARGET == 0
+		setcolor 0x777777
+	endif
+	printLC [103] - 의뢰 취소
+	resetcolor
+	printL
+
+	printLC [201] - 능력표시
+	printLC [202] - 장비변경
+	printL
+
+	printLC [801] - 저장
+	printLC [802] - 불러오기
+	printL
+	
 	printLC [900] - 휴식
 
 	;printLC [103] - 캐릭터추가

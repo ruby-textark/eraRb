@@ -1,32 +1,90 @@
 ﻿@EVENTFIRST
-	
+
 	printL 이세계로 떨어진 여자가 모험가 길드 들어가는 이야기
 	printL 보통의 era와 다르게 여아나타가 당하는 주제로 제작함
 	printL 최신버전은 방주에서
 	wait
+	
+	printL 이름을 입력(기본: 당신)
+	inputs
+	
+	if strlens(results)
+		NAME:MASTER = %results%
+	endif
 
+	printL 부를 이름 입력(기본: 당신)
+	inputs
+	
+	if strlens(results)
+		CALLNAME:MASTER = %results%
+	endif
+
+	DAY = 1
 	TARGET = 0
 	MONEY = 10000
+	
+	printL 신체 선택
+	printL [1] - 일반
+	printL [2] - 그 외 모든 입력은 전신감도+1
 
+	input
+	if RESULT == 1
+		printL 처음부터 조교하는게 또 꼴리긴 함 ㅇㅇ
+	else
+		printL 모든 부위 감도 + 1LV
+		for i, 101, 199
+			if strlens(BASENAME:i)
+				ABL:MASTER:i++
+			endif
+		next
+	endif
+	wait
+	
+	printL 다음중 하나 선택
+	printL [1] - 체력 + 500
+	printL [2] - 마력 + 300
+	printL [3] - 이상성욕
+	printL [4] - 그 외 모든 입력은 특전 없이 진행
+	
+	input
+	if RESULT == 1
+		printL 체력 + 500으로 시작
+		BASE:MASTER:체력 += 500
+	elseif RESULT == 2
+		printL 마력 + 300으로 시작
+		BASE:MASTER:마력 += 500
+	elseif RESULT == 3
+		printL 이상성욕 1LV로 시작
+		TALENT:MASTER:이상성욕 = 1
+	else
+		printL 그게 좋다면야 뭐
+	endif
+	wait
+
+	printL 복장 선택
 	printL [1] - 평상복 스타트
 	printL [2] - 그 외의 입력은 전부 속옷만 입고 시작함 ㅅㄱ
 
 	input
 	
 	if RESULT == 1
+		printL 정상적으로 옷 입고 스타트
 		ITEM:201 = 1
 		ITEM:301 = 1
 		ITEM:401 = 1
 	
-		CFLAG:MASTER:장비상의 = 201 ; 하얀셔츠
-		CFLAG:MASTER:장비하의 = 301 ; 스커트
-		CFLAG:MASTER:장비신발 = 401 ; 운동화
+		EQUIP:MASTER:상의 = 201 ; 하얀셔츠
+		EQUIP:MASTER:하의 = 301 ; 스커트
+		EQUIP:MASTER:신발 = 401 ; 운동화
 	else
-		printL 옷이 없는 대신 돈 500원을 추가함
+		printL 옷이 없는 대신 돈 500원을 추가
 		MONEY += 500
 	endif
 
 	ITEM:501 = 1
-	CFLAG:MASTER:장비속옷 = 501 ; 보통속옷
+	EQUIP:MASTER:속옷 = 501 ; 보통속옷
+	
+	printL 설정 완료
+	wait
 
 	begin shop

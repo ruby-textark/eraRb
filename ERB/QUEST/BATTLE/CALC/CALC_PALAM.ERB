@@ -1,0 +1,16 @@
+﻿@calcPalam
+
+	; 성감
+	for i, 101, 199
+		if strlens(BASENAME:i) == 0
+			continue
+		endif
+
+		; 기본적으로 SOURCE를 받아옴
+		; ABL 적용
+		UP:i += (SOURCE:MASTER:i) * (ABL:MASTER:i + 1)
+		
+		UP:i *= (ABL:TARGET:기교 + 1)
+		
+		UP:욕정 += PALAM:MASTER:i / 100
+	next

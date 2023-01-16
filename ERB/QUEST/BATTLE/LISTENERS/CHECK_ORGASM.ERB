@@ -1,0 +1,77 @@
+﻿@checkOrgasm
+#dim dynamic orgasmThres
+#dim dynamic orgasmCount
+#dim dynamic insuffOrgasm
+
+	orgasmThres = 10000 * (1 + MARK:MASTER:절정봉인)
+	for i, 101, 199
+		if PALAM:MASTER:i >= orgasmThres
+			printFormL %bodyPartStr(i)% 절정
+			orgasmCount++
+			DOWN:i = PALAM:MASTER:i - PALAM:MASTER:i % orgasmThres
+			; 절정경험 증가
+			EXP:MASTER:(i + 100) += PALAM:MASTER:i / orgasmThres
+		elseif PALAM:MASTER:i >= 10000
+			; 절정봉인 적용중
+			insuffOrgasm++
+		endif
+	next
+
+	if orgasmCount
+		if ABL:TARGET:흡정
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% %NAME:TARGET%에게 착정당하고 있다
+
+			; 최대 마력의 5%를 강탈 / 최대 15%
+			if BASE:MASTER:마력 >= MIN(orgasmCount, 3) * MAXBASE:MASTER:마력 / 20
+				DOWNBASE:MASTER:마력 += MIN(orgasmCount, 3) * MAXBASE:MASTER:마력 / 20
+			; 무족하면 패널티
+			; 최대 체력의 2% / 최대 6%
+			else
+				printFormL 하지만 %CALLNAME:MASTER%의 마력은 이미 바닥이었고, 대신해서 체력을 흡수당했다
+
+				DOWNBASE:MASTER:마력 = BASE:MASTER:마력
+				DOWNBASE:MASTER:체력 = MIN(orgasmCount, 3) * MAXBASE:MASTER:체력 / 50
+			endif
+		endif
+	elseif insuffOrgasm
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% 절정을 봉인당한 상태다
+		
+		if RAND:5 == 0
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% 온몸을 애처로울 정도로 떨고 있다
+		elseif RAND:4 == 0
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% 간절한 눈빛으로 몸을 배배 꼬면서 %kr(NAME:TARGET, "을", "를")% 바라보았다
+		elseif RAND:3 == 0
+			printFormL 이리저리 사지를 뒤틀어보지만, %kr(CALLNAME:MASTER, "이", "가")% 절정에 도달하는 일은 없었다
+		elseif RAND:2 == 0
+			printFormL 음침한 붉은 문신이 %CALLNAME:MASTER%의 몸에서 밝게 빛날 뿐, 파들파들 떨리는 그 몸에 절정은 허락되지 않았다
+		else
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% 자존심도 내려놓고 스스로를 위로하려고 시도하지만, 효과가 있을 리가 없었다
+		endif
+	endif
+
+
+	if PALAM:TARGET:사정 >= 10000
+		if CFLAG:TARGET:생식분류 == 1
+			;사정
+		else
+			;산란
+		endif
+		
+		if ABL:MASTER:흡정
+			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 착정당하고 있다
+
+			; 최대 마력의 5%를 강탈
+			if BASE:TARGET:마력 >= MAXBASE:TARGET:마력 / 20
+				DOWNBASE:TARGET:마력 += MAXBASE:TARGET:마력 / 20
+			; 무족하면 패널티
+			; 최대 체력의 2%
+			else
+				printFormL 하지만 %NAME:TARGET%의 마력은 이미 바닥이었고, 대신해서 체력을 흡수당했다
+
+				DOWNBASE:TARGET:마력 = BASE:TARGET:마력
+				DOWNBASE:TARGET:체력 = MAXBASE:TARGET:체력 / 50
+			endif
+		endif
+
+		PALAM:TARGET:사정 -= 10000
+	endif

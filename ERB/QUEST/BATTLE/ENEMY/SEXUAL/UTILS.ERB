@@ -1,0 +1,51 @@
+﻿@isAttackableBodyPart(partIdx)
+#function
+#dim dynamic partIdx
+#dims dynamic partName
+
+	if strlens(BASENAME:i) == 0
+		returnf 0
+	endif
+
+	partName = %substring(BASENAME:i, 4)%
+	
+	if partName == "난소" && CFLAG:MASTER:삽입자궁 == 0
+		returnf 0
+	endif
+	if partName == "자궁" && CFLAG:MASTER:삽입질 == 0
+		returnf 0
+	endif
+
+	if partName == "질" && (EQUIP:MASTER:하의 != 0 || EQUIP:MASTER:속옷 != 0)
+		returnf 0
+	endif
+	if partName == "애널" && (EQUIP:MASTER:하의 != 0 || EQUIP:MASTER:속옷 != 0)
+		returnf 0
+	endif
+
+	returnf 1
+
+@getSexualAtkBodyPart
+#dim dynamic partsCount
+#dim dynamic attackedIdx
+
+	partsCount = 0
+	for i, 101, 199
+		if isAttackableBodyPart(i)
+			partsCount++
+		endif
+	next
+	
+	attackedIdx = RAND:partsCount
+
+	partsCount = 0
+	for i, 101, 199
+		if isAttackableBodyPart(i)
+			if partsCount == attackedIdx
+				return i
+			endif
+			partsCount++
+		endif
+	next
+
+	return -1

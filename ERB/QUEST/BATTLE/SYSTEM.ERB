@@ -13,7 +13,7 @@
 @SHOW_STATUS
 
 	barstr BASE:MASTER:체력, MAXBASE:MASTER:체력, 10
-	printFormL %NAME:MASTER%의 체력 : %results% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
+	printFormL %CALLNAME:MASTER%의 체력 : %results% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
 
 	barstr BASE:TARGET:체력, MAXBASE:TARGET:체력, 10
 	printFormL %NAME:TARGET%의 체력 : %results% ({BASE:TARGET:체력}/{MAXBASE:TARGET:체력})
@@ -27,20 +27,20 @@
 @USERCOM
 
 @SOURCE_CHECK
-
-	BASE:0 -= LOSEBASE:0
-	BASE:1 -= LOSEBASE:1
 	
+	SOURCE:MASTER:공격 = LOSEBASE:체력 / 10
+	BASE:TARGET:체력 -= LOSEBASE:0
+	BASE:TARGET:마력 -= LOSEBASE:1
+
 	; Check if killed
 	if BASE:TARGET:체력 <= 0
 		begin aftertrain
 		return
 	endif
 	
+	LOSEBASE:0 = 0
+	LOSEBASE:1 = 0
 	call processEnemy
-
-	BASE:MASTER:0 -= LOSEBASE:0
-	BASE:MASTER:1 -= LOSEBASE:1
 
 	; Check if failed
 	if BASE:MASTER:체력 <= 0
@@ -48,6 +48,21 @@
 		return
 	endif
 
+	SOURCE:MASTER:피격 = LOSEBASE:체력 / 10
+	BASE:MASTER:체력 -= LOSEBASE:체력
+	BASE:MASTER:마력 -= LOSEBASE:마력
+	
+	LOSEBASE:체력 = 0
+	LOSEBASE:마력 = 0
+
+	call calcPalam
 
 @EVENTCOMEND
 	call checkVirgin
+	call checkOrgasm
+
+	TARGET = MASTER
+	upCheck
+	TARGET = 1
+
+	wait

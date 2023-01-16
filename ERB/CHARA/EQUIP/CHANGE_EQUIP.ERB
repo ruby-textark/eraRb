@@ -1,0 +1,28 @@
+﻿@changeMasterEquips(equipSlotIdx, equipItemIdx)
+#function
+#dim dynamic equipSlotIdx
+#dim dynamic equipItemIdx
+
+	if equipSlotIdx < 11 || 19 < equipSlotIdx
+		printL 잘못된 장비 위치입니다
+		returnf 0
+	endif
+
+	if ITEM:equipItemIdx == 0
+		printL 해당 장비 아이템을 소지하고 있지 않습니다
+		returnf 0
+	endif
+	
+	EQUIP:MASTER:equipSlotIdx = equipItemIdx
+	printFormL %EQUIPNAME:equipSlotIdx% 장비를 %ITEMNAME:equipItemIdx%로 교체했습니다
+	
+	returnf 1
+
+@unequipMasterEquips(equipSlotIdx)
+#function
+#dim dynamic equipSlotIdx
+
+	EQUIP:MASTER:equipSlotIdx = 0
+	printFormL %EQUIPNAME:equipSlotIdx% 장비를 해제했습니다
+	
+	returnf 1

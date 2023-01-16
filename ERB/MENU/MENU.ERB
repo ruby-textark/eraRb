@@ -1,18 +1,31 @@
-@processMenu
+﻿@processMenu
 
 	; QUEST MENU
 	if TARGET != 0 && RESULT == 101
 		call startQuest
 	elseif TARGET == 0 && RESULT == 102
 		call newQuest(1 + RAND:2)
-	elseif RESULT == 900
-		begin turnend
+	elseif TARGET != 0 && RESULT == 103
+		call cancelQuest
 
 	; CHARACTER MENU
 	elseif RESULT == 201
 		call showMasterInfo
 	elseif RESULT == 202
 		call showMasterEquips
+	
+	; SYSTEM MENU
+	elseif RESULT == 801
+		printL savegame
+		saveGame
+	elseif RESULT == 802
+		loadGame
+
+	; TURN END
+	elseif RESULT == 900
+		begin turnend
+
+	; WRONG COMMAND
 	else
 		RESULT = 0
 	endif
@@ -22,3 +35,6 @@
 	endif
 
 	return RESULT
+
+@saveInfo
+	PUTFORM {DAY,3,RIGHT}일차 %NAME:MASTER, 14, LEFT%

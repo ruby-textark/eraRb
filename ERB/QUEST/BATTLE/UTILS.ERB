@@ -1,0 +1,53 @@
+﻿@getActualAtk(charaIdx)
+#function
+#dim dynamic charaIdx
+#dim dynamic actualAtk
+#dim dynamic orgasmParts
+
+	actualAtk = ABL:charaIdx:공격력
+	
+	; 전투기술 적용시 1레벨당 기본 공격력 + 10
+	actualAtk += ABL:charaIdx:전투기술 * 10
+
+	; 쾌락치 9000 이상 1부위당 공격력 +5%
+
+	orgasmParts = 0
+	for i, 101, 199
+		if PALAM:MASTER:i > 9000
+			orgasmParts++
+		endif
+	next
+	
+	actualAtk = (actualAtk * (20 + orgasmParts)) / 20
+
+	; 저주각인 적용시 1레벨당 공격력 -20%
+	actualAtk = ((10 - MARK:charaIdx:저주각인 * 2) * actualAtk) / 10
+	
+	returnf actualAtk
+
+@getActualDef(charaIdx)
+#function
+#dim dynamic charaIdx
+#dim dynamic actualDef
+#dim dynamic orgasmParts
+
+	actualDef = ABL:charaIdx:방어력
+	
+	; 전투기술 적용시 1레벨당 기본 방어력 + 2
+	actualDef += ABL:charaIdx:전투기술 * 2
+
+	; 쾌락치 9000 이상 1부위당 방어력 -5%
+
+	orgasmParts = 0
+	for i, 101, 199
+		if PALAM:MASTER:i > 9000
+			orgasmParts++
+		endif
+	next
+	
+	actualDef = (actualDef * (20 - orgasmParts)) / 20
+	
+	; 저주각인 적용시 1레벨당 방어력 -20%
+	actualDef = ((10 - MARK:charaIdx:저주각인 * 2) * actualDef) / 10
+	
+	returnf actualDef

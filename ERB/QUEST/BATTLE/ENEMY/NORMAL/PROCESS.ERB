@@ -1,0 +1,8 @@
+﻿@processNormalAttack
+
+	;멧돼지
+	if CFLAG:TARGET:1 == 1
+		call chara1NormalAttack
+	else
+		call fallbackNormalAttack
+	endif
