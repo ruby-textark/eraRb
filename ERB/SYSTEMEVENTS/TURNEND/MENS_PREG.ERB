@@ -1,0 +1,96 @@
+﻿
+; 유의사항
+; TALENT:임신 은 유저에게 표시해 주기 위한 용도로만 사용
+; 실제 계산에서는 BASE:임신일수 를 활용할것
+; 실제로 임신한 지 모르다 뒤늦게 알아차리게 되는 전개가 마음에 들었기 떄문
+
+@mensAndPreg
+
+	; 생리주기 계산
+	MAXBASE:MASTER:생리주기 = LIMIT(MAXBASE:MASTER:생리주기, 8, 35)
+	; 임신중이 아닐경우 생리주기 카운터 증가
+	if !BASE:MASTER:임신일수
+		BASE:MASTER:생리주기 = (BASE:MASTER:생리주기 + 1) % MAXBASE:MASTER:생리주기
+	endif
+	
+	if TALENT:MASTER:생리불순
+		BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 4
+		TALENT:MASTER:생리중 = 0
+	endif
+	
+	if BASE:MASTER:생리주기 == 0
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% 아랫배에 위화감을 느꼈다...
+		wait
+		printFormL 아무래도 생리가 시작된 모양이다
+		wait
+		TALENT:MASTER:생리중 = 1
+	elseif (BASE:MASTER:생리주기 == MAXBASE:MASTER:생리주기 / 4 - 1) || (BASE:MASTER:생리주기 < MAXBASE:MASTER:생리주기 / 4 - 1 && RAND:5 == 0)
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% 훨씬 상쾌한 기분이다
+		wait
+		printFormL %CALLNAME:MASTER%의 생리가 끝났다
+		wait
+		TALENT:MASTER:생리중 = 0
+	endif
+
+	if !(BASE:MASTER:임신일수 || TALENT:MASTER:생리중) && (MAXBASE:MASTER:생리주기 / 2 - 4) <= BASE:MASTER:생리주기 && BASE:MASTER:생리주기 <= (MAXBASE:MASTER:생리주기 / 2 + 1)
+		TALENT:MASTER:가임기 = 1
+	else
+		TALENT:MASTER:가임기 = 0
+	endif
+
+	; 자궁 크기에 맞춰 오늘 담은 정액을 흘림
+	BASE:MASTER:자궁내정액1 = LIMIT(BASE:MASTER:자궁내정액1, 0, BASE:MASTER:자궁크기)
+	
+	; 임신판정
+	if RAND:20 == 0 || TALENT:MASTER:가임기
+		; 자궁이 가득차있을 경우 100% 기준으로 난수 돌려서 임신판정
+		if RAND:100 < 100 * (BASE:MASTER:자궁내정액1 + BASE:MASTER:자궁내정액2 + BASE:MASTER:자궁내정액3 + BASE:MASTER:자궁내정액4) / (BASE:MASTER:자궁크기 * 15 / 8)
+			; todo 임신처리
+			BASE:MASTER:임신일수 = 1
+		endif
+	endif
+	
+	; 정액 하루씩 묵히기
+	BASE:MASTER:자궁내정액4 = BASE:MASTER:자궁내정액3 / 2
+	BASE:MASTER:자궁내정액3 = BASE:MASTER:자궁내정액2 / 2
+	BASE:MASTER:자궁내정액2 = BASE:MASTER:자궁내정액1 / 2
+
+	; 임신시 일수 증가
+	if BASE:MASTER:임신일수
+		BASE:MASTER:임신일수++
+	endif
+
+	; 임신자각
+	if BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수 / 10
+		; todo 임신자각처리
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% 최근 생리주기가 이상한 것을 알아챘다...
+		wait
+		printFormL 아무래도 임신한 모양이다
+		wait
+
+		TALENT:MASTER:임신 = 1
+	endif
+
+	; 임신중일 경우
+	if BASE:MASTER:임신일수 > 0
+		; 점차 자궁크기 증가
+		BASE:MASTER:자궁크기 = MAXBASE:MASTER:자궁크기 * BASE:MASTER:임신일수 / MAXBASE:MASTER:임신일수
+		; 점차 모유최대량 증가
+		; 모유체질일 경우 최대량 제한 없어짐
+		if TALENT:MASTER:모유체질
+			MAXBASE:MASTER:모유 = MAXBASE:MASTER:모유 + 10 + RAND:20
+		else
+			MAXBASE:MASTER:모유 = LIMIT(MAXBASE:MASTER:모유 + 10 + RAND:20, 0, 1500)
+		endif
+	endif
+	
+	; 임신중이 아닐경우
+	if BASE:MASTER:임신일수 == 0
+		; 점차 자궁크기 감소
+		BASE:MASTER:자궁크기 = LIMIT(BASE:MASTER:자궁크기 - ((10000 * (BASE:MASTER:자궁크기 / MAXBASE:MASTER:자궁크기)) + RAND:100), 100, 50000)
+		; 점차 모유최대량 감소
+		; 단 모유체질일 경우 감소하지 않음
+		if !TALENT:MASTER:모유체질
+			MAXBASE:MASTER:모유 = LIMIT(MAXBASE:MASTER:모유 - (5 + RAND:10), 0, 1500)
+		endif
+	endif

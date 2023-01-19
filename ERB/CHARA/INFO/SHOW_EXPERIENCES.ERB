@@ -1,0 +1,15 @@
+﻿@showExperiences
+#dim dynamic expCount
+
+	for i, 1, 999
+		if strlens(EXPNAME:i) == 0
+			continue
+		endif
+
+		expCount++
+		printForm %EXPNAME:i, 20% - {EXP:MASTER:i, 5}
+		if expCount % 4 == 0
+			printL
+		endif
+	next
+	printL

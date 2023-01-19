@@ -7,7 +7,7 @@
 		returnf 0
 	endif
 
-	partName = %substring(BASENAME:i, 4)%
+	partName = %STR:i%
 	
 	if partName == "난소" && CFLAG:MASTER:삽입자궁 == 0
 		returnf 0

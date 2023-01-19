@@ -13,7 +13,13 @@
 		call showMasterInfo
 	elseif RESULT == 202
 		call showMasterEquips
-	
+
+	; SHOT MENU
+	elseif RESULT == 301
+		call itemShop
+	elseif RESULT == 302
+		call backStreet
+
 	; SYSTEM MENU
 	elseif RESULT == 801
 		printL savegame

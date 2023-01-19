@@ -1,0 +1,11 @@
+﻿@showMarks
+
+	for i, 1, 99
+		
+		if MARK:MASTER:i
+			printForm [%MARKNAME:i% {MARK:MASTER:i}Lv]
+		endif
+		
+		fontRegular
+	next
+	printL

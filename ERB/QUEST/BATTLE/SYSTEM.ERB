@@ -6,7 +6,7 @@
 	CFLAG:MASTER:103 = 0
 	CFLAG:MASTER:104 = 0
 
-	printFormL %CALLNAME:TARGET% %kr(NAME:TARGET, "을", "를")% 발견. 전투를 개시합니다.
+	printFormL %NAME:TARGET% %kr(CALLNAME:TARGET, "을", "를")% 발견. 전투를 개시합니다.
 	printL
 	wait
 
@@ -16,7 +16,7 @@
 	printFormL %CALLNAME:MASTER%의 체력 : %results% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
 
 	barstr BASE:TARGET:체력, MAXBASE:TARGET:체력, 10
-	printFormL %NAME:TARGET%의 체력 : %results% ({BASE:TARGET:체력}/{MAXBASE:TARGET:체력})
+	printFormL %CALLNAME:TARGET%의 체력 : %results% ({BASE:TARGET:체력}/{MAXBASE:TARGET:체력})
 	
 	drawLine
 	print_palam MASTER

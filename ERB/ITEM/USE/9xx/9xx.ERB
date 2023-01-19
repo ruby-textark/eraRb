@@ -1,0 +1,74 @@
+; 미약
+@use901(targetIdx)
+#dim dynamic targetIdx
+
+	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:901, "을", "를)% 사용했다.
+	BASE:targetIdx:흥분 += 9999
+	BASE:targetIdx:흥분 = LIMIT(BASE:targetIdx:흥분, 0, MAXBASE:targetIdx:흥분)
+	wait
+
+; 피임약
+@use902(targetIdx)
+#dim dynamic targetIdx
+
+	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:902, "을", "를)% 사용했다.
+	BASE:targetIdx:생리주기 = MAXBASE:MASTER:생리주기 / 4 - 1
+	wait
+
+; 사후피임약
+@use903(targetIdx)
+#dim dynamic targetIdx
+
+	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:903, "을", "를)% 사용했다.
+
+	; 7일이내 2회이상 사용시 10% 확률로 생리불순
+	if RAND:10 == 0 && (DAY < CFLAG:targetIdx:사후피임약복용 + 7)
+		printFormL %kr(CALLNAME:targetIdx, "은", "는")% 잦은 사후피임약 복용으로 생리불순이 된 모양이다...
+		TALENT:targetIdx:생리불순 = 1
+	endif
+	wait
+
+; 자궁확대약
+@use904(targetIdx)
+#dim dynamic targetIdx
+
+	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:904, "을", "를)% 사용했다.
+	BASE:targetIdx:자궁크기 = LIMIT(BASE:targetIdx:자궁크기 + 100, 100, 50000)
+	wait
+
+; 자궁축소약
+@use905(targetIdx)
+#dim dynamic targetIdx
+
+	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:905, "을", "를)% 사용했다.
+	BASE:targetIdx:자궁크기 = LIMIT(BASE:targetIdx:자궁크기 - 100, 100, 50000)
+	wait
+
+; 생리가속약
+@use906(targetIdx)
+#dim dynamic targetIdx
+
+	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:906, "을", "를)% 사용했다.
+	MAXBASE:targetIdx:생리주기 = LIMIT(MAXBASE:targetIdx:생리주기 - (3 + RAND:3), 7, 35)
+	wait
+
+; 임신가속약
+@use907(targetIdx)
+#dim dynamic targetIdx
+
+	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:907, "을", "를)% 사용했다.
+	MAXBASE:targetIdx:임신일수 = LIMIT(MAXBASE:targetIdx:임신일수 - (14 + RAND:30), 14, 300)
+	wait
+
+; 모유체질약
+@use908(targetIdx)
+#dim dynamic targetIdx
+
+	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:908, "을", "를)% 사용했다.
+	TALENT:targetIdx:모유체질 = !TALENT:targetIdx:모유체질
+	if TALENT:targetIdx:모유체질
+		printFormL %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 획득했다.
+	else
+		printFormL %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 잃었다.
+	endif
+	wait

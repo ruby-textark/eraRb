@@ -19,7 +19,7 @@
 
 	if orgasmCount
 		if ABL:TARGET:흡정
-			printFormL %kr(CALLNAME:MASTER, "은", "는")% %NAME:TARGET%에게 착정당하고 있다
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% %CALLNAME:TARGET%에게 착정당하고 있다
 
 			; 최대 마력의 5%를 강탈 / 최대 15%
 			if BASE:MASTER:마력 >= MIN(orgasmCount, 3) * MAXBASE:MASTER:마력 / 20
@@ -66,7 +66,7 @@
 			; 무족하면 패널티
 			; 최대 체력의 2%
 			else
-				printFormL 하지만 %NAME:TARGET%의 마력은 이미 바닥이었고, 대신해서 체력을 흡수당했다
+				printFormL 하지만 %CALLNAME:TARGET%의 마력은 이미 바닥이었고, 대신해서 체력을 흡수당했다
 
 				DOWNBASE:TARGET:마력 = BASE:TARGET:마력
 				DOWNBASE:TARGET:체력 = MAXBASE:TARGET:체력 / 50

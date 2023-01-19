@@ -1,0 +1,14 @@
+﻿@showAbilities
+
+	for i, 1, 999
+	
+		; 신체감도는 별도의 탭으로 구분
+		if 100 <= i && i <= 199
+			continue
+		endif
+		
+		if ABL:MASTER:i
+			printForm %ABLNAME:i%+{ABL:MASTER:i} 
+		endif
+	next
+	printL

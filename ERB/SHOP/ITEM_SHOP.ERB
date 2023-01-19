@@ -1,0 +1,55 @@
+﻿@itemShop
+
+	printL 구매를 원하는 아이템 종류를 입력하세요
+	printFormL [1] - 잡화
+	printFormL [2] - 장비
+	printFormL [0] - 돌아가기
+
+$inputLoop
+	input
+	
+	if RESULT == 1
+		call itemShopMenu(0, 99)
+	elseif RESULT == 2
+		call itemShopMenu(1000, 1999)
+	elseif RESULT == 0
+		return
+	else
+		clearLine 1
+		goto inputLoop
+	endif
+
+	
+@itemShopMenu(startIdx, endIdx)
+#dim dynamic startIdx
+#dim dynamic endIdx
+
+	for i, startIdx, endIdx
+			if strlens(ITEMNAME:i) == 0
+				continue
+			endif
+			
+			printFormLC [{i}] - %ITEMNAME:i%
+		next
+
+		printL
+		printL [0] - 돌아가기
+
+$inputLoop
+	input
+	
+	if strlens(ITEMNAME:result) > 0
+		if MONEY >= ITEMPRICE:result
+			MONEY -= ITEMPRICE:result
+			ITEM:result++
+			printFormL %kr(ITEMNAME:result, "을", "를")% 구입했습니다
+		else
+			printL 돈이 부족합니다
+		endif
+		wait
+	elseif RESULT == 0
+		return
+	else
+		clearLine 1
+		goto inputLoop
+	endif

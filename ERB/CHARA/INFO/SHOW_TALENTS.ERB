@@ -1,0 +1,29 @@
+﻿@showTalents
+
+	for i, 1, 999
+		; 기생 / 이상성욕
+		if 100 <= i && i <= 299
+			fontBold
+			setColor 0xcc0000
+		; 임신
+		elseif i == 401
+			fontBold
+			setColor 0xcc0000
+		; 생리불순
+		elseif i == 402
+			fontBold
+			setColor 0x3399ff
+		; 가임기
+		elseif i == 403
+			fontBold
+			setColor 0xff3399
+		endif
+
+		if TALENT:MASTER:i
+			printForm [%TALENTNAME:i%]
+		endif
+		
+		fontRegular
+		resetColor
+	next
+	printL

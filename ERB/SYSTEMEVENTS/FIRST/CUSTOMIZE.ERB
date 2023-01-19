@@ -1,10 +1,5 @@
-﻿@EVENTFIRST
+﻿@startCustomization
 
-	printL 이세계로 떨어진 여자가 모험가 길드 들어가는 이야기
-	printL 보통의 era와 다르게 여아나타가 당하는 주제로 제작함
-	printL 최신버전은 방주에서
-	wait
-	
 	printL 이름을 입력(기본: 당신)
 	inputs
 	
@@ -18,20 +13,20 @@
 	if strlens(results)
 		CALLNAME:MASTER = %results%
 	endif
-
-	DAY = 1
-	TARGET = 0
-	MONEY = 10000
 	
 	printL 신체 선택
 	printL [1] - 일반
-	printL [2] - 그 외 모든 입력은 전신감도+1
+	printL [2] - 그 외 모든 입력은 전신감도 + 1
 
 	input
 	if RESULT == 1
 		printL 처음부터 조교하는게 또 꼴리긴 함 ㅇㅇ
 	else
+		printL 자위경험 + 50
 		printL 모든 부위 감도 + 1LV
+		
+		EXP:MASTER:자위경험 += 50
+		
 		for i, 101, 199
 			if strlens(BASENAME:i)
 				ABL:MASTER:i++
@@ -86,5 +81,3 @@
 	
 	printL 설정 완료
 	wait
-
-	begin shop
