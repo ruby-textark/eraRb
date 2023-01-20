@@ -1,26 +1,4 @@
-﻿@showBodyInfo
-
-	printL 신체정보
-
-	for i, 101, 199
-		if strlens(BASENAME:i) == 0
-			continue
-		endif
-
-		printForm %STR:i, 14, RIGHT% (감도Lv.{ABL:MASTER:i}) : 
-
-		barstr BASE:MASTER:마력, MAXBASE:MASTER:마력, 10
-		if BASE:MASTER:마력 > 67
-			setcolor 0x00ff00
-		elseif BASE:MASTER:마력 > 33
-			setcolor 0xffff00
-		else
-			setcolor 0xff0000
-		endif
-		printFormL %results%
-		resetcolor
-
-	next
+﻿@showFameInfo
 
 	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
 	printL 명성에 대해

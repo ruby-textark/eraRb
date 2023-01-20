@@ -60,9 +60,18 @@
 @EVENTCOMEND
 	call checkVirgin
 	call checkOrgasm
+	call checkCum
 
 	TARGET = MASTER
 	upCheck
 	TARGET = 1
 
 	wait
+
+@EVENTEND
+	; 삽입상태초기화
+	for i, 301, 399
+		if CFLAG:MASTER:i == 1
+			CFLAG:MASTER:i = 0
+		endif
+	next

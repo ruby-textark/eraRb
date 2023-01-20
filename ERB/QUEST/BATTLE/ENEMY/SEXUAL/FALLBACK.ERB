@@ -1,4 +1,5 @@
 ﻿@fallbackSexualAttack
+#dim dynamic sourceAmount
 #dim dynamic attackedIdx
 #dims dynamic attackedName
 
@@ -12,7 +13,7 @@
 	; Hole
 	if attackedName == "질" || attackedName == "애널"
 		; Already inserted
-		if CFLAG:MASTER:(200+attackedIdx)
+		if CFLAG:MASTER:(200 + attackedIdx)
 			if rand:5 == 0
 				printFormL %kr(attackedName, "을", "를")% 쉴틈없이 쑤셔댔다
 			elseif rand:4 == 0
@@ -26,7 +27,7 @@
 			endif
 		; Insert
 		else
-			CFLAG:MASTER:(200+attackedIdx) = 1
+			call sexualInsert(attackedIdx)
 
 			if rand:5 == 0
 				printFormL %kr(attackedName, "을", "를")% 향해 돌진했다
@@ -42,7 +43,7 @@
 		endif
 	elseif attackedName == "자궁" || attackedName == "난소"
 		; Already inserted
-		if CFLAG:MASTER:(200+attackedIdx)
+		if CFLAG:MASTER:(200 + attackedIdx)
 			if rand:5 == 0
 				printFormL 가장 소중한 장소마저 범하고 있다
 			elseif rand:4 == 0
@@ -56,7 +57,7 @@
 			endif
 		; Insert
 		else
-			CFLAG:MASTER:(200+attackedIdx) = 1
+			call sexualInsert(attackedIdx)
 
 			if rand:5 == 0
 				printFormL %kr(attackedName, "을", "를")% 향해 거침없이 나아갔다
@@ -85,8 +86,8 @@
 				printFormL %kr(attackedName, "을", "를")% 마구 찔러 찔꺽거리는 소리가 나는 것을 즐기고 있다
 			endif
 		
-		elseif RAND:5 == 0 && ABL:MASTER:attackedIdx > 3
-			CFLAG:MASTER:삽입유두 = 1
+		elseif RAND:5 == 0 && ABL:MASTER:attackedIdx > 7
+			call sexualInsert(attackedIdx)
 
 			if rand:5 == 0
 				printFormL %attackedName% 속으로 부드럽게 삽입했다
@@ -126,4 +127,9 @@
 		endif
 	endif
 
-	SOURCE:MASTER:attackedIdx = 90 + RAND:20
+	; source 취득
+	sourceAmount = 90 + RAND:20
+	SOURCE:MASTER:attackedIdx = sourceAmount
+
+	; exp 가산
+	EXP:MASTER:attackedIdx++

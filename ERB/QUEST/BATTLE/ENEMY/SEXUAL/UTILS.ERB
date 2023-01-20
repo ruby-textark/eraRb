@@ -49,3 +49,9 @@
 	next
 
 	return -1
+
+@sexualInsert(attackedIdx)
+#dim dynamic attackedIdx
+
+	CFLAG:MASTER:(200 + attackedIdx) = 1
+	EXP:MASTER:attackedIdx++

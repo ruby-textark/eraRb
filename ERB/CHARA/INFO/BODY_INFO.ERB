@@ -1,0 +1,35 @@
+﻿@showBodyInfo
+
+	printL 신체정보
+
+	for i, 101, 199
+		if strlens(BASENAME:i) == 0
+			continue
+		endif
+
+		printForm %STR:i, 14, RIGHT% (감도Lv.{ABL:MASTER:i}) : 
+
+		barstr BASE:MASTER:마력, MAXBASE:MASTER:마력, 10
+		if BASE:MASTER:마력 > 67
+			setcolor 0x00ff00
+		elseif BASE:MASTER:마력 > 33
+			setcolor 0xffff00
+		else
+			setcolor 0xff0000
+		endif
+		printForm %results% 
+		resetcolor
+		
+		if CFLAG:MASTER:(i + 200) == 1
+			print [삽입중]
+		elseif CFLAG:MASTER:(i + 200) == 2
+			print [음구삽입중]
+		elseif CFLAG:MASTER:(i + 200) == 3
+			print [기생중(슬라임)]
+		elseif CFLAG:MASTER:(i + 200) == 3
+			print [기생중(벌레)]
+		endif
+		
+		printL
+
+	next

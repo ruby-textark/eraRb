@@ -1,0 +1,157 @@
+﻿
+@parasite
+#dim dynamic spermAmount
+
+	for i, 301, 399
+		; 기생중
+		if CFLAG:MASTER:i > 2
+			if RAND:5 == 0
+				printFormL %CALLNAME:MASTER%의 %bodyPartStr(i - 200)%에서 미약한 꿈틀거림이 느껴진다
+			elseif RAND:4 == 0
+				printFormL 조용한 한밤중, %CALLNAME:MASTER%에게서 음란하게 찔꺽거리는 소리가 들려온다
+				printFormL %bodyPartStr(i - 200)%에서 미약한 꿈틀거림이 느껴진다
+			elseif RAND:3 == 0
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% 울먹이며 %bodyPartStr(i - 200)% 안 속 깊숙히 파고든 %STR:(200 + CFLAG:MASTER:i)%의 이물감을 견디고 있다
+			elseif RAND:2 == 0
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% %bodyPartStr(i - 200)%에서 퍼져나가는 쾌감에 녹아버린 표정을 짓고 있다
+			else
+				printFormL %CALLNAME:MASTER%의 %kr(bodyPartStr(i - 200), "은", "는")% %kr(STR:(200 + CFLAG:MASTER:i), "을", "를")% 품고 있다
+			endif
+			wait
+
+			; 빼내려고 시도 - 자궁과 난소는 불가능
+			if RAND:3 == 0 && (i != 315 && i != 316)
+				if RAND:5 == 0
+					printFormL %kr(CALLNAME:MASTER, "은", "는")% 손가락을 %bodyPartStr(i - 200)%에 넣어 %kr(STR:(200 + CFLAG:MASTER:i), "을", "를")% 빼내려고 했다
+				elseif RAND:4 == 0
+					printFormL %kr(CALLNAME:MASTER, "은", "는")% %kr(STR:(200 + CFLAG:MASTER:i), "을", "를")% 뽑아내려고 %bodyPartStr(i - 200)% 안 깊숙히 손가락을 찔러넣었다
+				elseif RAND:3 == 0
+					printFormL %kr(CALLNAME:MASTER, "은", "는")% 온몸을 흔들며 %kr(STR:(200 + CFLAG:MASTER:i), "이", "가")% 몸 밖으로 빠져나오도록 노력했다
+				elseif RAND:2 == 0
+					printFormL %kr(CALLNAME:MASTER, "은", "는")% %bodyPartStr(i - 200)% 근처의 살점을 꾹꾹 누르며 혹시라도 %kr(STR:(200 + CFLAG:MASTER:i), "이", "가")% 뽑혀나올까 시도하고 있다
+				else
+					printFormL %kr(CALLNAME:MASTER, "이", "가")% 안간힘을 쓰면서 %bodyPartStr(i - 200)%에 힘을 주어 %kr(STR:(200 + CFLAG:MASTER:i), "을", "를")% 내보내려고 했다
+				endif
+				wait
+
+				; 빼냄  - 기교판정있음
+				if RAND:(MAX(20 - ABL:MASTER:기교, 5)) == 0
+					CFLAG:MASTER:i = 0
+					if RAND:3 == 0
+						printFormL 천만다행히도 %kr(STR:(200 + CFLAG:MASTER:i), "이", "가")% 몸 밖으로 빼꼼 튀어나왔다
+						wait
+						printFormL %kr(CALLNAME:MASTER, "은", "는")% 그 틈을 놓치지 않고 잽싸게 뽑아내는데 성공했다
+					elseif RAND:2 == 0
+						printFormL %kr(CALLNAME:MASTER, "은", "는")% 간신히 %kr(STR:(200 + CFLAG:MASTER:i), "을", "를")% 꺼내는데 성공했다
+					else
+						printFormL 꼬박 몇 시간에 걸친 사투 끝에 %kr(CALLNAME:MASTER, "은", "는")% %kr(STR:(200 + CFLAG:MASTER:i), "을", "를")% 빼낼 수 있었다
+					endif
+					wait
+
+					continue
+				else
+					if RAND:3 == 0
+						printFormL 하지만 %kr(CALLNAME:MASTER, "은", "는")% 몸에서 스르르 힘이 빠져버리고 말았다
+					elseif RAND:2 == 0
+						printFormL %CALLNAME:MASTER%의 기색을 눈치챘는지 %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% 몸 안에 단단히 틀어박혀 나올 기미가 보이지 않았다
+					else
+						printFormL 한참을 시도했지만 %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% 닿을락 말락한 곳에서 %kr(CALLNAME:MASTER, "을", "를")% 약올리며 끝내 나오지 않았다
+					endif
+					wait
+				endif
+			endif
+
+			; 자생중 16.7% 확률로 사정
+			if RAND:6 == 0
+				if RAND:3 == 0
+					printFormL 갑작스럽게 %bodyPartStr(i - 200)%에서 뜨거운 열기가 느껴진다.
+				elseif RAND:2 == 0
+					printFormL 크게 한 번 요동친 %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %CALLNAME:MASTER%의 %kr(bodyPartStr(i - 200), "으", "")%로 기세 좋게 사정했다
+				else
+					printFormL %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% 꿀렁거리며 %CALLNAME:MASTER%의 안에 사정해버렸다
+				endif
+
+				; 질 / 자궁 / 난소일 경우 정액량 증가
+				if i == 315 || i == 316 || i == 321
+					spermAmount = RAND:10
+					BASE:MASTER:자궁내정액1 += spermAmount
+					if CFLAG:MASTER:i == 3
+						BASE:MASTER:자궁내몬스터정액 += spermAmount
+					elseif CFLAG:MASTER:i == 3
+						BASE:MASTER:자궁내벌레정액 += spermAmount
+					endif
+				endif
+			endif
+
+			; 슬라임일 경우 16.7% 확률로 체내미약분비
+			if RAND:6 == 0 && CFLAG:MASTER:i == 3
+				if RAND:3 == 0
+					printFormL 느릿느릿 움직이던  %kr(STR:(200 + CFLAG:MASTER:i), "이", "가")% 주는 느낌이 점점 열기를 띠기 시작한다...
+				elseif RAND:2 == 0
+					printFormL %kr(CALLNAME:MASTER, "은", "는")% %kr(bodyPartStr(i - 200), "으", "")%로부터 알 수 없는 충동을 느끼고 있다
+				else
+					printFormL %kr(STR:(200 + CFLAG:MASTER:i), "이", "가")% 만들어낸 이물감이 점차 쾌락으로 변해가는 것이 느껴진다
+				endif
+				wait
+				
+				printForm %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %CALLNAME:MASTER%의 몸 안에서
+				setColor 0xff3399
+				printL 미약을 분비한 것 같다
+				resetColor
+				wait
+				BASE:MASTER:혈중미약농도 += RAND:20
+			endif
+			
+			; 벌레일 경우 10% 확률로 해당 신체부위 상태 악화
+			if RAND:10 == 0 && CFLAG:MASTER:i == 4
+				; todo 신체결손구상
+				BASE:MASTER:(i - 200) -= LIMIT(BASE:MASTER:(i - 200) - RAND:5, 0, 100)
+			endif
+			
+			; 5% 확률로 질기생중에서난소기생중으로 전이
+			if RAND:20 == 0 && i == 321
+				if RAND:5 == 0
+					printFormL %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %bodyPartStr(121)% 속을 꿈틀거리며 나아가 마침내 %bodyPartStr(116)%으로 파고들었다
+				elseif RAND:4 == 0
+					printFormL 슬그머니 기어가는 %STR:(200 + CFLAG:MASTER:i)%의 감촉이 %kr(bodyPartStr(121), "을", "를")% 넘어 %bodyPartStr(116)%에서 느껴졌다
+				elseif RAND:3 == 0
+					printFormL %kr(STR:(200 + CFLAG:MASTER:i), "이", "가")% 더 포근하고 아늑한 곳을 찾아 %CALLNAME:MASTER%의 %bodyPartStr(116)%쪽으로 이동했다
+				elseif RAND:2 == 0
+					printFormL %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% 본능적으로 %CALLNAME:MASTER%의 더 소중한 부위를 눈치채고 %bodyPartStr(116)%쪽으로 이동했다
+				else
+					printFormL 찔꺽거리는 불길한 소리와 함께 %CALLNAME:MASTER%의 %bodyPartStr(i - 200)%에서 통증이 느껴지고 있다
+				endif
+				
+				printForm %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %CALLNAME:MASTER%의 몸 안에서
+				setColor 0xff3399
+				printL %bodyPartStr(116)%으로 이동했다
+				resetColor
+				wait
+				
+				CFLAG:MASTER:316 = CFLAG:MASTER:321
+				CFLAG:MASTER:321 = 0
+			; 5% 확률로 자궁기생중에 난소기생중으로 전이
+			elseif RAND:20 == 0 && i == 316
+				if RAND:5 == 0
+					printFormL %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %bodyPartStr(116)% 속을 꿈틀거리며 나아가 마침내 %bodyPartStr(115)%으로 파고들었다
+				elseif RAND:4 == 0
+					printFormL 슬그머니 기어가는 %STR:(200 + CFLAG:MASTER:i)%의 감촉이 %kr(bodyPartStr(116), "을", "를")% 넘어 %bodyPartStr(115)%에서 느껴졌다
+				elseif RAND:3 == 0
+					printFormL %kr(STR:(200 + CFLAG:MASTER:i), "이", "가")% 더 포근하고 아늑한 곳을 찾아 %CALLNAME:MASTER%의 %bodyPartStr(115)%쪽으로 이동했다
+				elseif RAND:2 == 0
+					printFormL %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% 본능적으로 %CALLNAME:MASTER%의 생명을 기르는 소중한 %bodyPartStr(115)%쪽으로 이동했다
+				else
+					printFormL 찔꺽거리는 불길한 소리와 함께 %CALLNAME:MASTER%의 %bodyPartStr(i - 200)%에서 통증이 느껴지고 있다
+				endif
+				
+				printForm %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %CALLNAME:MASTER%의 몸 안에서
+				setColor 0xff3399
+				printL %bodyPartStr(116)%으로 이동했다
+				resetColor
+				wait
+				
+				CFLAG:MASTER:315 = CFLAG:MASTER:316
+				CFLAG:MASTER:316 = 0
+			endif
+		endif
+	next

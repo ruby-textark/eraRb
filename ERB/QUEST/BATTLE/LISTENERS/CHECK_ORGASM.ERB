@@ -3,12 +3,14 @@
 #dim dynamic orgasmCount
 #dim dynamic insuffOrgasm
 
-	orgasmThres = 10000 * (1 + MARK:MASTER:절정봉인)
+	orgasmThres = (10000 - 19 * BASE:MASTER:혈중미약농도) * (1 + MARK:MASTER:절정봉인)
 	for i, 101, 199
 		if PALAM:MASTER:i >= orgasmThres
+			; todo 절정구상
 			printFormL %bodyPartStr(i)% 절정
 			orgasmCount++
 			DOWN:i = PALAM:MASTER:i - PALAM:MASTER:i % orgasmThres
+
 			; 절정경험 증가
 			EXP:MASTER:(i + 100) += PALAM:MASTER:i / orgasmThres
 		elseif PALAM:MASTER:i >= 10000
@@ -47,31 +49,4 @@
 		else
 			printFormL %kr(CALLNAME:MASTER, "은", "는")% 자존심도 내려놓고 스스로를 위로하려고 시도하지만, 효과가 있을 리가 없었다
 		endif
-	endif
-
-
-	if PALAM:TARGET:사정 >= 10000
-		if CFLAG:TARGET:생식분류 == 1
-			;사정
-		else
-			;산란
-		endif
-		
-		if ABL:MASTER:흡정
-			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 착정당하고 있다
-
-			; 최대 마력의 5%를 강탈
-			if BASE:TARGET:마력 >= MAXBASE:TARGET:마력 / 20
-				DOWNBASE:TARGET:마력 += MAXBASE:TARGET:마력 / 20
-			; 무족하면 패널티
-			; 최대 체력의 2%
-			else
-				printFormL 하지만 %CALLNAME:TARGET%의 마력은 이미 바닥이었고, 대신해서 체력을 흡수당했다
-
-				DOWNBASE:TARGET:마력 = BASE:TARGET:마력
-				DOWNBASE:TARGET:체력 = MAXBASE:TARGET:체력 / 50
-			endif
-		endif
-
-		PALAM:TARGET:사정 -= 10000
 	endif

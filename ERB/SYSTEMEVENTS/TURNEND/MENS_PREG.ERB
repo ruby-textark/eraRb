@@ -24,7 +24,7 @@
 		printFormL 아무래도 생리가 시작된 모양이다
 		wait
 		TALENT:MASTER:생리중 = 1
-	elseif (BASE:MASTER:생리주기 == MAXBASE:MASTER:생리주기 / 4 - 1) || (BASE:MASTER:생리주기 < MAXBASE:MASTER:생리주기 / 4 - 1 && RAND:5 == 0)
+	elseif TALENT:MASTER:생리중 && ((BASE:MASTER:생리주기 == MAXBASE:MASTER:생리주기 / 4 - 1) || (BASE:MASTER:생리주기 < MAXBASE:MASTER:생리주기 / 4 - 1 && RAND:5 == 0))
 		printFormL %kr(CALLNAME:MASTER, "은", "는")% 훨씬 상쾌한 기분이다
 		wait
 		printFormL %CALLNAME:MASTER%의 생리가 끝났다
@@ -44,10 +44,20 @@
 	; 임신판정
 	if RAND:20 == 0 || TALENT:MASTER:가임기
 		; 자궁이 가득차있을 경우 100% 기준으로 난수 돌려서 임신판정
-		if RAND:100 < 100 * (BASE:MASTER:자궁내정액1 + BASE:MASTER:자궁내정액2 + BASE:MASTER:자궁내정액3 + BASE:MASTER:자궁내정액4) / (BASE:MASTER:자궁크기 * 15 / 8)
+		if RAND:100 < 100 * (BASE:MASTER:자궁내정액1 + BASE:MASTER:자궁내정액2 + BASE:MASTER:자궁내정액3 + BASE:MASTER:자궁내정액4) / (BASE:MASTER:자궁크기 * 15 / 8)			
 			; todo 임신처리
 			BASE:MASTER:임신일수 = 1
 		endif
+	endif
+	
+	; 사후피임약 복용시 24-72시간 이내일 경우 95% / 80% / 50% 확률로 피임
+	; talent 있을경우 이미 확정되었으므로 돌이킬 수 없음
+	if RAND:20 < 19 && (DAY == CFLAG:MASTER:사후피임약복용 + 1) && !TALENT:MASTER:임신
+		BASE:MASTER:임신일수 = 0
+	elseif RAND:5 < 4 && (DAY == CFLAG:MASTER:사후피임약복용 + 2) && !TALENT:MASTER:임신
+		BASE:MASTER:임신일수 = 0
+	elseif RAND:2 == 0 && (DAY == CFLAG:MASTER:사후피임약복용 + 3) && !TALENT:MASTER:임신
+		BASE:MASTER:임신일수 = 0
 	endif
 	
 	; 정액 하루씩 묵히기
@@ -74,7 +84,7 @@
 	; 임신중일 경우
 	if BASE:MASTER:임신일수 > 0
 		; 점차 자궁크기 증가
-		BASE:MASTER:자궁크기 = MAXBASE:MASTER:자궁크기 * BASE:MASTER:임신일수 / MAXBASE:MASTER:임신일수
+		BASE:MASTER:자궁크기 = MAX(BASE:MASTER:자궁크기, MAXBASE:MASTER:자궁크기 * BASE:MASTER:임신일수 / MAXBASE:MASTER:임신일수)
 		; 점차 모유최대량 증가
 		; 모유체질일 경우 최대량 제한 없어짐
 		if TALENT:MASTER:모유체질
