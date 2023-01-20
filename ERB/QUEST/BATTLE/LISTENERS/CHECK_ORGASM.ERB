@@ -11,6 +11,21 @@
 			orgasmCount++
 			DOWN:i = PALAM:MASTER:i - PALAM:MASTER:i % orgasmThres
 
+			; 욕정 증가
+			; 약절정
+			if PALAM:MASTER:i / orgasmThres == 1
+				TIMES UP:욕정, 1.25
+			; 2배절정
+			elseif PALAM:MASTER:i / orgasmThres == 2
+				TIMES UP:욕정, 1.5
+			; 3배절정
+			elseif PALAM:MASTER:i / orgasmThres == 3
+				TIMES UP:욕정, 2
+			; 그외
+			elseif PALAM:MASTER:i / orgasmThres > 3
+				TIMES UP:욕정, 3
+			endif
+
 			; 절정경험 증가
 			EXP:MASTER:(i + 100) += PALAM:MASTER:i / orgasmThres
 		elseif PALAM:MASTER:i >= 10000

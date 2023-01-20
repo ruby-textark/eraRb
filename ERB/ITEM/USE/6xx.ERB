@@ -1,0 +1,24 @@
+﻿@useItem6xx(itemIdx)
+#dim dynamic itemIdx
+
+	if itemIdx == 901
+		call use901(MASTER)
+	elseif itemIdx == 902
+		call use902(MASTER)
+	elseif itemIdx == 903
+		call use903(MASTER)
+	elseif itemIdx == 904
+		call use904(MASTER)
+	elseif itemIdx == 905
+		call use905(MASTER)
+	elseif itemIdx == 906
+		call use906(MASTER)
+	elseif itemIdx == 907
+		call use907(MASTER)
+	elseif itemIdx == 908
+		call use908(MASTER)
+	endif
+	
+	if RESULT
+		ITEM:itemIdx--
+	endif

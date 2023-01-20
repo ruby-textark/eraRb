@@ -25,6 +25,12 @@
 		TARGET = 0
 		delchara 1
 
+	; 기생
+	elseif CFLAG:TARGET:기생성공
+		printFormL %NAME:TARGET% %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 기생해버렸습니다...
+		printFormL 토벌은 자동으로 취소됩니다.
+		
+		call cancelQuest
 	; Quest fail
 	else
 		; Check if cancel this quest or keep going with the wounded monster.

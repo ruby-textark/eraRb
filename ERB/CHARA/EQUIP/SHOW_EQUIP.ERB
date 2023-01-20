@@ -20,7 +20,7 @@ $wrapper
 		printL 교체할 장비를 아래에서 선택해주세요
 		drawLine
 		
-		for i, 1 + (equipSlotIdx - 10) * 100, 99 + (equipSlotIdx - 10) * 100
+		for i, 1001 + (equipSlotIdx - 10) * 100, 1099 + (equipSlotIdx - 10) * 100
 			if ITEM:i && EQUIP:MASTER:equipSlotIdx != i
 				printFormL [{i}] - %ITEMNAME:i%
 			endif

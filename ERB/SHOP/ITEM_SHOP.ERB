@@ -23,13 +23,18 @@ $inputLoop
 @itemShopMenu(startIdx, endIdx)
 #dim dynamic startIdx
 #dim dynamic endIdx
+#dim dynamic showCount
 
 	for i, startIdx, endIdx
 			if strlens(ITEMNAME:i) == 0
 				continue
 			endif
 			
-			printFormLC [{i}] - %ITEMNAME:i%
+			printFormLC [{i}] - %ITEMNAME:i, 14, RIGHT%({ITEMSALES:i, 5, LEFT})
+			showCount++
+			if showCount % 4 == 0
+				printL
+			endif
 		next
 
 		printL

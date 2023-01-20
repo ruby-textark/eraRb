@@ -7,24 +7,43 @@
 		returnf "ERROR"
 	endif
 	
-	returnf bodyPartPrefix(partIdx) + STR:partIdx
+	returnf bodyPartPrefix(partIdx) + specialPrefix(partIdx) + STR:partIdx
 
 @bodyPartPrefix(partIdx)
 #functions
 #dim dynamic partIdx
 
-	if RAND:3 == 0 && PALAM:partIdx > 9000
+	if RAND:3 == 0 && PALAM:MASTER:partIdx > 9000
 		returnf "불타는 듯한 "
-	elseif RAND:3 == 0 && PALAM:partIdx > 8000
+	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 8000
 		returnf "뜨겁게 떨리는 "
-	elseif RAND:3 == 0 && PALAM:partIdx > 7000
+	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 7000
 		returnf "터질듯한 "
-	elseif RAND:3 == 0 && PALAM:partIdx > 6000
+	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 6000
 		returnf "흥분한 "
-	elseif RAND:3 == 0 && PALAM:partIdx > 4000
+	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 4000
 		returnf "오슬오슬한 "
-	elseif RAND:3 == 0 && PALAM:partIdx > 2000
+	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 2000
 		returnf "간질거리는 "
 	else
 		returnf ""
+	endif
+
+@specialPrefix(partIdx)
+#functions
+#dim dynamic partIdx
+
+	if partIdx == 101
+	elseif partIdx == 102
+	elseif partIdx == 111
+	elseif partIdx == 112
+	elseif partIdx == 113
+	elseif partIdx == 114
+	elseif partIdx == 115
+	elseif partIdx == 116
+	elseif partIdx == 121
+	elseif partIdx == 122
+	elseif partIdx == 123
+	elseif partIdx == 124
+	elseif partIdx == 125
 	endif

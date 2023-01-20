@@ -1,8 +1,11 @@
 ﻿@processSexualAttack
 
-	;슬라임
+	; 음침한 슬라임
 	if CFLAG:TARGET:몬스터번호 == 2
 		call chara2SexualAttack
+	; 작은 슬라임
+	elseif CFLAG:TARGET:몬스터번호 == 3
+		call chara3SexualAttack
 	else
 		call fallbackSexualAttack
 	endif

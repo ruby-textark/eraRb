@@ -42,6 +42,8 @@ $charaInfoLoop
 	
 	printFormLC [901] - 이전 페이지로
 	printFormL [902] - 다음 페이지로
+	printFormLC [910] - 이름 변경
+	printFOrmL [911] - 신체 부위명 설정
 	printL [900] - 돌아가기
 	
 	input
@@ -50,6 +52,10 @@ $charaInfoLoop
 		page--
 	elseif result == 902
 		page++
+	elseif result == 910
+		call customizeName
+	elseif result == 911
+		call customizeBodyParts
 	elseif result == 900
 		return 1
 	endif

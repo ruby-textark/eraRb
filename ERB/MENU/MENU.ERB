@@ -4,7 +4,7 @@
 	if TARGET != 0 && RESULT == 101
 		call startQuest
 	elseif TARGET == 0 && RESULT == 102
-		call newQuest(1 + RAND:2)
+		call newQuest(1 + RAND:3)
 	elseif TARGET != 0 && RESULT == 103
 		call cancelQuest
 
@@ -14,11 +14,15 @@
 	elseif RESULT == 202
 		call showMasterEquips
 
-	; SHOT MENU
+	; SHOP MENU
 	elseif RESULT == 301
 		call itemShop
 	elseif RESULT == 302
 		call backStreet
+
+	; ITEM MENU
+	elseif RESULT == 401
+		call useItem
 
 	; SYSTEM MENU
 	elseif RESULT == 801

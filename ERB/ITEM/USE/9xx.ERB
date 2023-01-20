@@ -1,3 +1,28 @@
+﻿@useItem9xx(itemIdx)
+#dim dynamic itemIdx
+
+	if itemIdx == 901
+		call use901(MASTER)
+	elseif itemIdx == 902
+		call use902(MASTER)
+	elseif itemIdx == 903
+		call use903(MASTER)
+	elseif itemIdx == 904
+		call use904(MASTER)
+	elseif itemIdx == 905
+		call use905(MASTER)
+	elseif itemIdx == 906
+		call use906(MASTER)
+	elseif itemIdx == 907
+		call use907(MASTER)
+	elseif itemIdx == 908
+		call use908(MASTER)
+	endif
+	
+	if RESULT
+		ITEM:itemIdx--
+	endif
+
 ; 미약
 @use901(targetIdx)
 #dim dynamic targetIdx
@@ -6,6 +31,8 @@
 	BASE:targetIdx:혈중미약농도 += 20
 	BASE:targetIdx:혈중미약농도 = LIMIT(BASE:targetIdx:혈중미약농도, 0, MAXBASE:targetIdx:혈중미약농도)
 	wait
+	
+	return 1
 
 ; 피임약
 @use902(targetIdx)
@@ -14,12 +41,15 @@
 	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:902, "을", "를")% 사용했다.
 	BASE:targetIdx:생리주기 = MAXBASE:MASTER:생리주기 / 4 - 1
 	wait
+	
+	return 1
 
 ; 사후피임약
 @use903(targetIdx)
 #dim dynamic targetIdx
 
 	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:903, "을", "를")% 사용했다.
+	wait
 
 	; 7일이내 2회이상 사용시 10% 확률로 생리불순
 	if RAND:10 == 0 && (DAY < CFLAG:targetIdx:사후피임약복용 + 7)
@@ -28,8 +58,9 @@
 	endif
 	
 	CFLAG:targetIdx:사후피임약복용 = DAY
-	
 	wait
+	
+	return 1
 
 ; 자궁확대약
 @use904(targetIdx)
@@ -38,6 +69,8 @@
 	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:904, "을", "를")% 사용했다.
 	BASE:targetIdx:자궁크기 = LIMIT(BASE:targetIdx:자궁크기 + 100, 100, 50000)
 	wait
+	
+	return 1
 
 ; 자궁축소약
 @use905(targetIdx)
@@ -46,6 +79,8 @@
 	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:905, "을", "를")% 사용했다.
 	BASE:targetIdx:자궁크기 = LIMIT(BASE:targetIdx:자궁크기 - 100, 100, 50000)
 	wait
+	
+	return 1
 
 ; 생리가속약
 @use906(targetIdx)
@@ -54,6 +89,8 @@
 	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:906, "을", "를")% 사용했다.
 	MAXBASE:targetIdx:생리주기 = LIMIT(MAXBASE:targetIdx:생리주기 - (3 + RAND:3), 7, 35)
 	wait
+	
+	return 1
 
 ; 임신가속약
 @use907(targetIdx)
@@ -62,12 +99,15 @@
 	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:907, "을", "를")% 사용했다.
 	MAXBASE:targetIdx:임신일수 = LIMIT(MAXBASE:targetIdx:임신일수 - (14 + RAND:30), 14, 300)
 	wait
+	
+	return 1
 
 ; 모유체질약
 @use908(targetIdx)
 #dim dynamic targetIdx
 
 	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:908, "을", "를")% 사용했다.
+	wait
 	TALENT:targetIdx:모유체질 = !TALENT:targetIdx:모유체질
 	if TALENT:targetIdx:모유체질
 		printFormL %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 획득했다.
@@ -75,3 +115,5 @@
 		printFormL %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 잃었다.
 	endif
 	wait
+	
+	return 1

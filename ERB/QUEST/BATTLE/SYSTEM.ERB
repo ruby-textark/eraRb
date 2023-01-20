@@ -47,6 +47,12 @@
 		begin aftertrain
 		return
 	endif
+	
+	; Parasite!
+	if CFLAG:TARGET:기생성공
+		begin aftertrain
+		return
+	endif
 
 	SOURCE:MASTER:피격 = LOSEBASE:체력 / 10
 	BASE:MASTER:체력 -= LOSEBASE:체력

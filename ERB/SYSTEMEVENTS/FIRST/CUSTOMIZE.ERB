@@ -1,19 +1,7 @@
 ﻿@startCustomization
+	
+	call customizeName
 
-	printL 이름을 입력(기본: 당신)
-	inputs
-	
-	if strlens(results)
-		NAME:MASTER = %results%
-	endif
-
-	printL 부를 이름 입력(기본: 당신)
-	inputs
-	
-	if strlens(results)
-		CALLNAME:MASTER = %results%
-	endif
-	
 	printL 신체 선택
 	printL [1] - 일반
 	printL [2] - 그 외 모든 입력은 전신감도 + 1
@@ -64,20 +52,36 @@
 	
 	if RESULT == 1
 		printL 정상적으로 옷 입고 스타트
-		ITEM:201 = 1
-		ITEM:301 = 1
-		ITEM:401 = 1
+		ITEM:1201 = 1
+		ITEM:1301 = 1
+		ITEM:1401 = 1
 	
-		EQUIP:MASTER:상의 = 201 ; 하얀셔츠
-		EQUIP:MASTER:하의 = 301 ; 스커트
-		EQUIP:MASTER:신발 = 401 ; 운동화
+		EQUIP:MASTER:상의 = 1201 ; 하얀셔츠
+		EQUIP:MASTER:하의 = 1301 ; 스커트
+		EQUIP:MASTER:신발 = 1401 ; 운동화
 	else
 		printL 옷이 없는 대신 돈 500원을 추가
 		MONEY += 500
 	endif
 
-	ITEM:501 = 1
-	EQUIP:MASTER:속옷 = 501 ; 보통속옷
+	ITEM:1501 = 1
+	EQUIP:MASTER:속옷 = 1501 ; 보통속옷
 	
 	printL 설정 완료
 	wait
+
+@customizeName
+
+	printL 이름을 입력(기본: 당신)
+	inputs
+	
+	if strlens(results)
+		NAME:MASTER = %results%
+	endif
+
+	printL 부를 이름 입력(기본: 당신)
+	inputs
+	
+	if strlens(results)
+		CALLNAME:MASTER = %results%
+	endif
