@@ -8,14 +8,26 @@
 	endif
 
 	partName = %STR:i%
-	
+
+	; 요도->방광 순
+	if partName == "방광" && CFLAG:MASTER:삽입요도 == 0
+		returnf 0
+	endif
+	; 자궁->난소 순
 	if partName == "난소" && CFLAG:MASTER:삽입자궁 == 0
 		returnf 0
 	endif
+	; 질->자궁 순
 	if partName == "자궁" && CFLAG:MASTER:삽입질 == 0
 		returnf 0
 	endif
+	
+	; 상의를 입고 있는 경우
+	if partName == "유두" && (EQUIP:MASTER:상의 != 0 || EQUIP:MASTER:속옷 != 0)
+		returnf 0
+	endif
 
+	; 하의를 입고 있는 경우
 	if partName == "질" && (EQUIP:MASTER:하의 != 0 || EQUIP:MASTER:속옷 != 0)
 		returnf 0
 	endif

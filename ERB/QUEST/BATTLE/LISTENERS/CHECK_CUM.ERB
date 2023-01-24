@@ -1,14 +1,26 @@
 ﻿@checkCum
+#dim dynamic cumAmount
 
 	if PALAM:TARGET:사정 >= 10000
+		cumAmount = 1 + RAND:2
+		if TALENT:TARGET:대량사정 == 1
+			cumAmount *= (2 + RAND:4)
+		endif
+		
+		BASE:MASTER:자궁내정액1 += cumAmount
+			
 		if CFLAG:TARGET:생식분류 == 1
-			;사정
-		else
-			;산란
+			BASE:MASTER:자궁내인간정액 += cumAmount
+		elseif CFLAG:TARGET:생식분류 == 2
+			BASE:MASTER:자궁내몬스터정액 += cumAmount
+		elseif CFLAG:TARGET:생식분류 == 3
+			BASE:MASTER:자궁내벌레정액 += cumAmount
+		elseif CFLAG:TARGET:생식분류 == 4
+			BASE:MASTER:자궁내짐승정액 += cumAmount
 		endif
 		
 		if ABL:MASTER:흡정
-			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 착정당하고 있다
+			printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 착정당하고 있다
 
 			; 최대 마력의 5%를 강탈
 			if BASE:TARGET:마력 >= MAXBASE:TARGET:마력 / 20

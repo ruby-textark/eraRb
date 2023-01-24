@@ -4,7 +4,7 @@
 
 $charaInfoLoop
 
-	page = LIMIT(page, 0, 2)
+	page = LIMIT(page, 0, 3)
 
 	clearline 99999
 	printForm 이름 : %NAME:MASTER%
@@ -35,7 +35,9 @@ $charaInfoLoop
 	elseif page == 1
 		call showExperiences
 	elseif page == 2
-		call showBodyInfo
+		call showBasicBodyInfo
+	elseif page == 3
+		call showDetailedBodyInfo
 	endif
 
 	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥

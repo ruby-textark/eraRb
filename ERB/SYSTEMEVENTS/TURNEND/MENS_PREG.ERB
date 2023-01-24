@@ -5,6 +5,7 @@
 ; 실제로 임신한 지 모르다 뒤늦게 알아차리게 되는 전개가 마음에 들었기 떄문
 
 @mensAndPreg
+#dim dynamic pregType
 
 	; 생리주기 계산
 	MAXBASE:MASTER:생리주기 = LIMIT(MAXBASE:MASTER:생리주기, 8, 35)
@@ -24,7 +25,7 @@
 		printFormL 아무래도 생리가 시작된 모양이다
 		wait
 		TALENT:MASTER:생리중 = 1
-	elseif TALENT:MASTER:생리중 && ((BASE:MASTER:생리주기 == MAXBASE:MASTER:생리주기 / 4 - 1) || (BASE:MASTER:생리주기 < MAXBASE:MASTER:생리주기 / 4 - 1 && RAND:5 == 0))
+	elseif TALENT:MASTER:생리중 && ((BASE:MASTER:생리주기 == MAXBASE:MASTER:생리주기 / 4 - 1) || (BASE:MASTER:생리주기 < MAXBASE:MASTER:생리주기 / 4 - 1 && RAND:6 == 0))
 		printFormL %kr(CALLNAME:MASTER, "은", "는")% 훨씬 상쾌한 기분이다
 		wait
 		printFormL %CALLNAME:MASTER%의 생리가 끝났다
@@ -46,6 +47,21 @@
 		; 자궁이 가득차있을 경우 100% 기준으로 난수 돌려서 임신판정
 		if RAND:100 < 100 * (BASE:MASTER:자궁내정액1 + BASE:MASTER:자궁내정액2 + BASE:MASTER:자궁내정액3 + BASE:MASTER:자궁내정액4) / (BASE:MASTER:자궁크기 * 15 / 8)			
 			; todo 임신처리
+			
+			if RAND:(BASE:MASTER:자궁내인간정액+BASE:MASTER:자궁내몬스터정액+BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액) < BASE:MASTER:자궁내인간정액
+				; 인간임신
+				CFLAG:MASTER:아이아버지 = 1
+			elseif RAND:(BASE:MASTER:자궁내몬스터정액+BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액) < BASE:MASTER:자궁내몬스터정액
+				; 몬스터임신
+				CFLAG:MASTER:아이아버지 = 2
+			elseif RAND:(BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액) < BASE:MASTER:자궁내벌레정액
+				; 벌레임신
+				CFLAG:MASTER:아이아버지 = 3
+			else
+				; 짐승임신
+				CFLAG:MASTER:아이아버지 = 4
+			endif
+			
 			BASE:MASTER:임신일수 = 1
 		endif
 	endif
@@ -64,6 +80,10 @@
 	BASE:MASTER:자궁내정액4 = BASE:MASTER:자궁내정액3 / 2
 	BASE:MASTER:자궁내정액3 = BASE:MASTER:자궁내정액2 / 2
 	BASE:MASTER:자궁내정액2 = BASE:MASTER:자궁내정액1 / 2
+	
+	BASE:MASTER:자궁내인간정액 = BASE:MASTER:자궁내인간정액 / 2
+	BASE:MASTER:자궁내몬스터정액 = BASE:MASTER:자궁내몬스터정액 / 2
+	BASE:MASTER:자궁내벌레정액 = BASE:MASTER:자궁내벌레정액 / 2
 
 	; 임신시 일수 증가
 	if BASE:MASTER:임신일수
@@ -79,12 +99,16 @@
 		wait
 
 		TALENT:MASTER:임신 = 1
+		EXP:MASTER:임신경험++
+		if CFLAG:MASTER:아이아버지 > 1
+			EXP:MASTER:이종임신경험++
+		endif
 	endif
 
 	; 임신중일 경우
 	if BASE:MASTER:임신일수 > 0
 		; 점차 자궁크기 증가
-		BASE:MASTER:자궁크기 = MAX(BASE:MASTER:자궁크기, MAXBASE:MASTER:자궁크기 * BASE:MASTER:임신일수 / MAXBASE:MASTER:임신일수)
+		BASE:MASTER:자궁크기 = LIMIT(BASE:MASTER:자궁크기, MAXBASE:MASTER:자궁크기 * BASE:MASTER:임신일수 / MAXBASE:MASTER:임신일수, MAXBASE:MASTER:자궁크기)
 		; 점차 모유최대량 증가
 		; 모유체질일 경우 최대량 제한 없어짐
 		if TALENT:MASTER:모유체질
@@ -97,10 +121,58 @@
 	; 임신중이 아닐경우
 	if BASE:MASTER:임신일수 == 0
 		; 점차 자궁크기 감소
-		BASE:MASTER:자궁크기 = LIMIT(BASE:MASTER:자궁크기 - ((10000 * (BASE:MASTER:자궁크기 / MAXBASE:MASTER:자궁크기)) + RAND:100), 100, 50000)
+		BASE:MASTER:자궁크기 = LIMIT(BASE:MASTER:자궁크기 - ((10000 * (BASE:MASTER:자궁크기 / MAXBASE:MASTER:자궁크기)) + RAND:100), 100, MAXBASE:MASTER:자궁크기)
 		; 점차 모유최대량 감소
 		; 단 모유체질일 경우 감소하지 않음
 		if !TALENT:MASTER:모유체질
 			MAXBASE:MASTER:모유 = LIMIT(MAXBASE:MASTER:모유 - (5 + RAND:10), 0, 1500)
 		endif
+	endif
+
+	if TALENT:MASTER:임신 && BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수 / 5
+		if CFLAG:MASTER:아이아버지 == 1 && RAND:(MAXBASE:MASTER:자궁침식도) < BASE:MASTER:자궁침식도
+			; 인간임신실패 - 낙태
+			; 자궁침식도 감소
+			printForm %kr(CALLNAME:MASTER, "은", "는")% 
+			setColor 0xcc0000
+			printL 배에서 격통을 느꼈다
+			resetColor
+			wait
+
+			printForm 이미 이종의 정액에 수 차례 범해진 %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 사람의 아이를 무의식중에 거부해버렸다...
+			wait
+
+			setColor 0xcc0000
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% 낙태하여 [임신]을 잃었다
+			resetColor
+			wait
+
+			TALENT:MASTER:임신 = 0
+			BASE:MASTER:임신일수 = 0
+			EXP:MASTER:낙태경험++
+		elseif CFLAG:MASTER:아이아버지 > 1 && RAND:(MAXBASE:MASTER:자궁침식도) < BASE:MASTER:자궁침식도
+			; 이종임신실패 - 낙태
+			; 자궁침식도 증가
+			printForm %kr(CALLNAME:MASTER, "은", "는")% 갑자기
+			setColor 0xcc0000
+			printL 다리 사이로 대량의 피를 흘렸다
+			resetColor
+			wait
+
+			printForm %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 아직 사림이기를 포기하지 않은 듯 안간힘을 쓰며 이종의 아이를 쫓아내버렸다...
+			wait
+
+			setColor 0xcc0000
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% 낙태하여 [임신]을 잃었다
+			resetColor
+			wait
+
+			TALENT:MASTER:임신 = 0
+			BASE:MASTER:임신일수 = 0
+			EXP:MASTER:낙태경험++
+		endif
+	endif
+
+	if BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수
+		; todo 출산
 	endif

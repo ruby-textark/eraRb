@@ -8,7 +8,7 @@
 	attackedName = %bodyPartStr(attackedIdx)%
 	
 	printFormL 성희롱:%attackedName%
-	printForm %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 
+	printForm %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 
 	
 	; Hole
 	if attackedName == "질" || attackedName == "애널"
@@ -41,7 +41,7 @@
 				printFormL %kr(attackedName, "을", "를")% 범했다
 			endif
 		endif
-	elseif attackedName == "자궁" || attackedName == "난소"
+	elseif attackedName == "자궁"
 		; Already inserted
 		if CFLAG:MASTER:(200 + attackedIdx)
 			if rand:5 == 0
@@ -56,7 +56,63 @@
 				printFormL %attackedName% 안 깊은곳까지 찌르고 있다
 			endif
 		; Insert
+		elseif RAND:3 == 0 && EXP:MASTER:자궁구개발경험 > 30
+			call sexualInsert(attackedIdx)
+
+			if rand:5 == 0
+				printFormL %kr(attackedName, "을", "를")% 향해 거침없이 나아갔다
+			elseif rand:4 == 0
+				printFormL %attackedName%마저 정복하고자 좁은 길목을 사정없이 벌렸다
+			elseif rand:3 == 0
+				printFormL %kr(attackedName, "을", "를")% 아프게 꿰뚫었다
+			elseif rand:2 == 0
+				printFormL %attackedName%의 좁은 틈을 비집어 삽입했다
+			else
+				printFormL %kr(attackedName, "을", "를")% 범했다
+			endif
+		elseif EXP:MASTER:자궁구개발경험 > 30
+			if rand:4 == 0
+				printFormL 풀어진 %attackedName% 입구를 가지고 놀고 있다
+			elseif rand:3 == 0
+				printFormL %kr(attackedName, "을", "를")% 꿰뚫을 수 있음에도 불구하고 입구를 중점으로 자극하고 있다
+			elseif rand:2 == 0
+				printFormL 벌름거리는 %attackedName% 구멍을 톡톡 건드리며 개발하고 있다
+			else
+				printFormL %attackedName%의 넓혀질 대로 넗혀진 구멍의 주변을 조물거리듯 만져주었다
+			endif
+			EXP:MASTER:자궁구개발경험++
 		else
+			if rand:5 == 0
+				printFormL %attackedName% 입구를 살살 주무르고 있다
+			elseif rand:4 == 0
+				printFormL 꽉 닫힌 %attackedName%의 문을 노크하고 있다
+			elseif rand:3 == 0
+				printFormL %attackedName%의 앙다문 구멍에 키스하듯 자극을 주고 있다
+			elseif rand:2 == 0
+				printFormL %attackedName%의 좁은 틈을 억지로 벌리고 있다
+			else
+				printFormL %attackedName% 속에 삽입하려 했지만 잘 되지 않은 모양이다
+			endif
+			EXP:MASTER:자궁구개발경험++
+		endif
+	elseif attackedName == "난소"
+		; 일단 자궁과 동일
+		; todo 별도구상
+		; Already inserted
+		if CFLAG:MASTER:(200 + attackedIdx)
+			if rand:5 == 0
+				printFormL 가장 소중한 장소마저 범하고 있다
+			elseif rand:4 == 0
+				printFormL 절대 들키면 안되는 깊은 약점까지 낱낱이 파헤쳐지고 있다
+			elseif rand:3 == 0
+				printFormL %kr(attackedName, "을", "를")% 한 번 쓰리고 버릴 오나홀처럼 사용하고 있다
+			elseif rand:2 == 0
+				printFormL %kr(attackedName, "이", "가")% 아프도록 바벼댔다
+			else
+				printFormL %attackedName% 안 깊은곳까지 찌르고 있다
+			endif
+		; Insert
+		elseif RAND:3 == 0 && EXP:MASTER:자궁구개발경험 > 30
 			call sexualInsert(attackedIdx)
 
 			if rand:5 == 0

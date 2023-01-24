@@ -1,6 +1,6 @@
-﻿@showBodyInfo
+﻿@showBasicBodyInfo
 
-	printL 신체정보
+	printL 신체정보(기본)
 
 	for i, 101, 199
 		if strlens(BASENAME:i) == 0
@@ -29,7 +29,7 @@
 		elseif CFLAG:MASTER:(i + 200) == 3
 			print [기생중(벌레)]
 		endif
-		
+
 		printL
 
 	next

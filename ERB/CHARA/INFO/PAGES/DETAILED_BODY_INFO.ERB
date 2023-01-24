@@ -1,0 +1,19 @@
+﻿@showDetailedBodyInfo
+
+	printL 신체정보(상세)
+	
+	printL 생리/임신정보
+	if TALENT:MASTER:생리중
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% 현재 생리중입니다
+	elseif TALENT:MASTER:가임기
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% 지금 가임기입니다
+	else
+		printFormL %CALLNAME:MASTER%의 다음 생리 예정일은 {MAXBASE:MASTER:생리주기 - BASE:MASTER:생리주기}일 뒤입니다
+	endif
+
+	; 감도
+	; todo 감도
+	printL 신체 감도
+	if ABL:MASTER:귀감도 > 3
+		printFormL -
+	endif
