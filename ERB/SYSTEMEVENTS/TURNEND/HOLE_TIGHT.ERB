@@ -1,0 +1,19 @@
+﻿@holeTight
+
+	; 점점 느슨해짐
+	if BASE:MASTER:보지조임 < MAXBASE:MASTER:보지조임 - 10
+		MAXBASE:MASTER:보지조임--
+	endif
+	
+	if BASE:MASTER:애널조임 < MAXBASE:MASTER:애널조임 - 10
+		MAXBASE:MASTER:애널조임--
+	endif
+
+	; 점점 회복됨(20%)
+	if RAND:5 == 0 && BASE:MASTER:보지조임 == MAXBASE:MASTER:보지조임
+		MAXBASE:MASTER:보지조임++
+	endif
+	
+	if RAND:5 == 0 && BASE:MASTER:애널조임 == MAXBASE:MASTER:애널조임
+		MAXBASE:MASTER:애널조임++
+	endif

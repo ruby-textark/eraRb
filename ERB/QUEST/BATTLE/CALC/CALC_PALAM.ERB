@@ -14,3 +14,36 @@
 		
 		UP:욕정 += PALAM:MASTER:i / 100
 	next
+
+	; 삽입체크
+	if CFLAG:MASTER:삽입질 == 1
+		if BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50 > 30
+			UP:고통 += 1000 * (BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50)
+			PALAM:TARGET:사정 += 1000 * (BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50)
+		elseif BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50 > 25
+			UP:고통 += 500 * (BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50)
+			PALAM:TARGET:사정 += 800 * (BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50)
+		elseif BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50 > 20
+			UP:고통 += 200 * (BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50)
+			PALAM:TARGET:사정 += 600 * (BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50)
+		elseif BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50 > 10
+			UP:고통 += 100 * (BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50)
+			PALAM:TARGET:사정 += 400 * (BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50)
+		endif
+	endif
+
+	if CFLAG:MASTER:삽입애널 == 1
+		if BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50 > 30
+			UP:고통 += 1000 * (BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50)
+			PALAM:TARGET:사정 += 1000 * (BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50)
+		elseif BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50 > 25
+			UP:고통 += 500 * (BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50)
+			PALAM:TARGET:사정 += 800 * (BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50)
+		elseif BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50 > 20
+			UP:고통 += 200 * (BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50)
+			PALAM:TARGET:사정 += 600 * (BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50)
+		elseif BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50 > 10
+			UP:고통 += 100 * (BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50)
+			PALAM:TARGET:사정 += 400 * (BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50)
+		endif
+	endif

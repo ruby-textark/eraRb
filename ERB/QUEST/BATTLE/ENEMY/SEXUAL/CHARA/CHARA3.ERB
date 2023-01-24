@@ -4,7 +4,7 @@
 
 	partsCount = 0
 	for i, 301, 399
-		if CFLAG:i < 2 && isAttackableBodyPart(i - 200)
+		if strlens(CFLAGNAME:i) && CFLAG:MASTER:i < 2 && isAttackableBodyPart(i - 200)
 			partsCount++
 		endif
 	next
@@ -13,7 +13,7 @@
 
 	partsCount = 0
 	for i, 301, 399
-		if CFLAG:i < 2 && isAttackableBodyPart(i - 200)
+		if strlens(CFLAGNAME:i) && CFLAG:MASTER:i < 2 && isAttackableBodyPart(i - 200)
 			if partsCount == attackedIdx
 				; 기생
 				; todo 구상추가

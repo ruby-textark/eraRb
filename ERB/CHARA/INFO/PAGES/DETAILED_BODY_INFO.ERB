@@ -7,13 +7,80 @@
 		printFormL %kr(CALLNAME:MASTER, "은", "는")% 현재 생리중입니다
 	elseif TALENT:MASTER:가임기
 		printFormL %kr(CALLNAME:MASTER, "은", "는")% 지금 가임기입니다
+	elseif TALENT:MASTER:임신
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% 임신 {BASE:MASTER:임신일수}일입니다.
+		print 현재 
+		setColor 0xff8c00
+		if CFLAG:MASTER:아이아버지 == 1
+			print 인간 
+		elseif CFLAG:MASTER:아이아버지 == 2
+			print 몬스터 
+		elseif CFLAG:MASTER:아이아버지 == 3
+			print 벌레 
+		elseif CFLAG:MASTER:아이아버지 == 4
+			print 짐승 
+		endif
+		resetColor
+		printL 의 아이를 임신중입니다.
 	else
 		printFormL %CALLNAME:MASTER%의 다음 생리 예정일은 {MAXBASE:MASTER:생리주기 - BASE:MASTER:생리주기}일 뒤입니다
 	endif
 
+	printL
+	; 자궁내상태
+	printL 자궁상태
+	printFormL 자궁 내 정액량 : {BASE:MASTER:자궁내정액1+BASE:MASTER:자궁내정액2+BASE:MASTER:자궁내정액3+BASE:MASTER:자궁내정액4}mL
+	if BASE:MASTER:자궁침식도
+		if BASE:MASTER:자궁침식도 > 66
+			printFormL %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 인간의 아이를 거부하고 있습니다
+		elseif BASE:MASTER:자궁침식도 > 33
+			printFormL 끊임없이 들어오는 이종의 정자에 의해 %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 점점 침식되고 있습니다
+		endif
+		printFormL 자궁침식도 : {BASE:MASTER:자궁침식도}%"%"%
+	endif
+	
+	if EXP:MASTER:자궁구개발경험 > 30
+		printFormL 집요하게 공략된 끝에 %CALLNAME:MASTER%의 %STR:116% 입구는 완전히 풀어져 벌름거리고 있다.
+	endif
+	
+	printL
+	; 조임도
+	if TALENT:MASTER:허벌보지
+		if RAND:2 == 0
+			printFormL 쓰레기통처럼 다루어진 %STR:121% 입구는 완전히 벌어져 그 안쪽의 %STR:116%까지도 훤히 드러내고 있다.
+		else
+			printFormL 험하게 사용된 끝네 %kr(STR:121, "은", "는")% 침입자를 막으려는 생각은 완전히 잊어버린 듯 크게 벌린 채다.
+		endif
+	endif
+	if TALENT:MASTER:세로애널
+		if RAND:2 == 0
+			printFormL 지나치게 큰 물건을 받아들인 %kr(STR:123, "이", "가")% 한계에 도달해 세로로 길게 갈라져있다
+		else
+			printFormL 넓게 벌어진 입구를 자랑하는 %kr(STR:123, "이", "가")% 수시로 꿈틀거리며 그 안을 채워주기를 바라고 있다
+		endif
+	endif
+
+	printL
 	; 감도
 	; todo 감도
 	printL 신체 감도
 	if ABL:MASTER:귀감도 > 3
 		printFormL -
 	endif
+
+	printL 혈중약품농도
+	; 혈중농도
+	printForm 혈중 알코올 농도는 0.{BASE:MASTER:혈중알코올농도}%"%"%이며, 
+	if BASE:MASTER:혈중알코올농도 > 30
+		printL 만취해서 완전히 이성을 상실한 상태입니다.
+	elseif BASE:MASTER:혈중알코올농도 > 20
+		printL 심하게 취해서 몸을 제대로 가누지 못할 정도입니다.
+	elseif BASE:MASTER:혈중알코올농도 > 10
+		printL 상당히 들뜬 상태입니다.
+	elseif BASE:MASTER:혈중알코올농도 > 5
+		printL 꽤 기분이 좋아보입니다.
+	else
+		printL 취하지 않은 상태입니다.
+	endif
+
+	printFormL 혈중 미약 농도는 {BASE:MASTER:혈중미약농도/100}.{BASE:MASTER:혈중미약농도%100}%"%"%입니다.

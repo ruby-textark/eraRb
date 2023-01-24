@@ -1,0 +1,15 @@
+﻿@talentAfterBattle
+
+	if BASE:MASTER:보지조임 < 35
+		printFormL 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(STR:121, "은", "는")% 완전히 벌어져 버렸다...
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% [허벌보지]가 되었다.
+		wait
+		TALENT:MASTER:허벌보지 = 1
+	endif
+	
+	if BASE:MASTER:애널조임 < 35
+		printFormL 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(STR:123, "은", "는")% 완전히 벌어져 버렸다...
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% [세로애널]이 되었다.
+		wait
+		TALENT:MASTER:세로애널 = 1
+	endif

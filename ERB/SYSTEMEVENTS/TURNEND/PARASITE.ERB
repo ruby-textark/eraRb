@@ -1,10 +1,15 @@
 ﻿
 @parasite
 #dim dynamic spermAmount
+#dim dynamic seperateLine
 
 	for i, 301, 399
 		; 기생중
 		if CFLAG:MASTER:i > 2
+			if seperateLine
+				printL
+			endif
+			seperateLine = 1
 			if RAND:5 == 0
 				printFormL %CALLNAME:MASTER%의 %bodyPartStr(i - 200)%에서 미약한 꿈틀거림이 느껴진다
 			elseif RAND:4 == 0
@@ -36,7 +41,6 @@
 
 				; 빼냄  - 기교판정있음
 				if RAND:(MAX(20 - ABL:MASTER:기교, 5)) == 0
-					CFLAG:MASTER:i = 0
 					if RAND:3 == 0
 						printFormL 천만다행히도 %kr(STR:(200 + CFLAG:MASTER:i), "이", "가")% 몸 밖으로 빼꼼 튀어나왔다
 						wait
@@ -46,6 +50,7 @@
 					else
 						printFormL 꼬박 몇 시간에 걸친 사투 끝에 %kr(CALLNAME:MASTER, "은", "는")% %kr(STR:(200 + CFLAG:MASTER:i), "을", "를")% 빼낼 수 있었다
 					endif
+					CFLAG:MASTER:i = 0
 					wait
 
 					continue
@@ -61,8 +66,8 @@
 				endif
 			endif
 
-			; 자생중 16.7% 확률로 사정
-			if RAND:6 == 0
+			; 자생중 33.3% 확률로 사정
+			if RAND:3 == 0
 				if RAND:3 == 0
 					printFormL 갑작스럽게 %bodyPartStr(i - 200)%에서 뜨거운 열기가 느껴진다.
 				elseif RAND:2 == 0
@@ -124,7 +129,7 @@
 				
 				printForm %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %CALLNAME:MASTER%의 몸 안에서
 				setColor 0xff3399
-				printL %bodyPartStr(116)%으로 이동했다
+				printFormL %bodyPartStr(116)%으로 이동했다
 				resetColor
 				wait
 				
@@ -146,7 +151,7 @@
 				
 				printForm %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %CALLNAME:MASTER%의 몸 안에서
 				setColor 0xff3399
-				printL %bodyPartStr(116)%으로 이동했다
+				printFormL %bodyPartStr(115)%으로 이동했다
 				resetColor
 				wait
 				

@@ -1,0 +1,48 @@
+﻿@EVENTEND
+#dim dynamic mobDrop
+
+	; killed the monster
+	if BASE:TARGET:체력 <= 0
+		printFormL %NAME:TARGET% %CALLNAME:TARGET%의 토벌에 성공했습니다.
+		
+		; Looting
+		
+		MONEY += CFLAG:TARGET:드랍골드최소
+		if CFLAG:TARGET:드랍골드최소 != CFLAG:TARGET:드랍골드최대
+			MONEY += RAND:(CFLAG:TARGET:드랍골드최대 - CFLAG:TARGET:드랍골드최소)
+		endif
+		
+		mobDrop = 1 + RAND:3
+		if mobDrop == 1 && CFLAG:TARGET:드랍재료1 > 0
+			ITEM:(CFLAG:TARGET:드랍재료1) += 1
+		elseif mobDrop == 2 && CFLAG:TARGET:드랍재료1 > 0
+			ITEM:(CFLAG:TARGET:드랍재료2) += 1
+		elseif mobDrop == 3 && CFLAG:TARGET:드랍재료1 > 0
+			ITEM:(CFLAG:TARGET:드랍재료3) += 1
+		endif
+		
+		; Remove the monster
+		TARGET = 0
+		delchara 1
+
+	; 기생
+	elseif CFLAG:TARGET:기생성공
+		printFormL %NAME:TARGET% %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 기생해버렸습니다...
+		printFormL 토벌은 자동으로 취소됩니다.
+		
+		call cancelQuest
+	; Quest fail
+	else
+		; Check if cancel this quest or keep going with the wounded monster.
+		if FLAG:퀘스트재시도 > 0
+			printFormL 이번에는 실패했지만, 다음에는 충분히 준비해서 다시 도전하도록 합시다.
+			FLAG:퀘스트재시도 -= 1
+			printFormL 남은 도전 횟수 : {FLAG:퀘스트재시도}
+		else
+			
+		endif
+	endif
+	
+	call talentAfterBattle
+
+	begin shop

@@ -47,6 +47,7 @@
 		; 자궁이 가득차있을 경우 100% 기준으로 난수 돌려서 임신판정
 		if RAND:100 < 100 * (BASE:MASTER:자궁내정액1 + BASE:MASTER:자궁내정액2 + BASE:MASTER:자궁내정액3 + BASE:MASTER:자궁내정액4) / (BASE:MASTER:자궁크기 * 15 / 8)			
 			; todo 임신처리
+			BASE:MASTER:임신일수 = 1
 			
 			if RAND:(BASE:MASTER:자궁내인간정액+BASE:MASTER:자궁내몬스터정액+BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액) < BASE:MASTER:자궁내인간정액
 				; 인간임신
@@ -62,7 +63,12 @@
 				CFLAG:MASTER:아이아버지 = 4
 			endif
 			
-			BASE:MASTER:임신일수 = 1
+			if CFLAG:MASTER:아이아버지 == 1
+				BASE:MASTER:자궁침식도 -= 1 + RAND:4
+			else
+				BASE:MASTER:자궁침식도 += 1 + RAND:4
+			endif
+			BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도, 0, MAXBASE:MASTER:자궁침식도)
 		endif
 	endif
 	
@@ -80,6 +86,7 @@
 	BASE:MASTER:자궁내정액4 = BASE:MASTER:자궁내정액3 / 2
 	BASE:MASTER:자궁내정액3 = BASE:MASTER:자궁내정액2 / 2
 	BASE:MASTER:자궁내정액2 = BASE:MASTER:자궁내정액1 / 2
+	BASE:MASTER:자궁내정액1 = 0
 	
 	BASE:MASTER:자궁내인간정액 = BASE:MASTER:자궁내인간정액 / 2
 	BASE:MASTER:자궁내몬스터정액 = BASE:MASTER:자궁내몬스터정액 / 2
