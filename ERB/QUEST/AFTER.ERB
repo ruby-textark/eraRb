@@ -1,6 +1,11 @@
 ﻿@EVENTEND
 #dim dynamic mobDrop
 
+	if TARGET == 0
+		begin shop
+		return
+	endif
+
 	; killed the monster
 	if BASE:TARGET:체력 <= 0
 		printFormL %NAME:TARGET% %CALLNAME:TARGET%의 토벌에 성공했습니다.
@@ -21,6 +26,8 @@
 			ITEM:(CFLAG:TARGET:드랍재료3) += 1
 		endif
 		
+		TALENT:MASTER:패배자 = 0
+		
 		; Remove the monster
 		TARGET = 0
 		delchara 1
@@ -39,8 +46,12 @@
 			FLAG:퀘스트재시도 -= 1
 			printFormL 남은 도전 횟수 : {FLAG:퀘스트재시도}
 		else
-			
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% [패배자]가 되었다.
+			TALENT:MASTER:패배자 = 1
+			call cancelQuest
 		endif
 	endif
+	
+	wait
 
 	begin shop

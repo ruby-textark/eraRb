@@ -1,0 +1,25 @@
+﻿@addiction
+
+	BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도, 0, MAXBASE:MASTER:혈중미약농도)
+
+	if BASE:MASTER:혈중미약농도 >= (1 + ABL:MASTER:약물중독) * MAXBASE:MASTER:혈중미약농도 / 6
+		ABL:MASTER:약물중독++
+		if ABL:MASTER:약물중독 == 1
+			printFormL 지나치게 많은 약물 투여로 인해 %kr(CALLNAME:MASTER, "은", "는")% [약물중독]이 되었다...
+			wait
+		else
+			printFormL 경고에도 불구하고 계속되는 약물 복용 떄문에 %kr(CALLNAME:MASTER, "은", "는")% [약물중독]이 심화되었다.
+			wait
+		endif
+	elseif ABL:MASTER:약물중독 && RAND:(10 * ABL:MASTER:약물중독) == 0 && BASE:MASTER:혈중미약농도 <= (ABL:MASTER:약물중독) * MAXBASE:MASTER:혈중미약농도 / 6
+		ABL:MASTER:약물중독--
+		if ABL:MASTER:약물중독
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% [약물중독] 증세가 조금 호전되었다.
+			wait
+		else
+			printFormL 다행히도 %kr(CALLNAME:MASTER, "은", "는")% [약물중독]이 나았다.
+			wait
+		endif
+	endif
+	
+	BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 - RAND:3, 0, MAXBASE:MASTER:혈중미약농도)

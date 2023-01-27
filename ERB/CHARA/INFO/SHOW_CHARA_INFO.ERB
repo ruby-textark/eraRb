@@ -10,13 +10,9 @@ $charaInfoLoop
 	printForm 이름 : %NAME:MASTER%
 
 	if TALENT:MASTER:남성 == 1
-		SETCOLOR 0x00ff00
-		printL ♂
-		RESETCOLOR
+		call colorPrint(0x00ff00, "♂")
 	else
-		SETCOLOR 0xff0000
-		printL ♀
-		RESETCOLOR
+		call colorPrint(0xff0000, "♀")
 	endif
 
 	barstr BASE:MASTER:체력, MAXBASE:MASTER:체력, 10

@@ -100,9 +100,7 @@
 				wait
 				
 				printForm %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %CALLNAME:MASTER%의 몸 안에서
-				setColor 0xff3399
-				printL 미약을 분비한 것 같다
-				resetColor
+				call colorPrint(0xff3399, "미약을 분비한 것 같다")
 				wait
 				BASE:MASTER:혈중미약농도 += RAND:20
 			endif
@@ -128,9 +126,7 @@
 				endif
 				
 				printForm %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %CALLNAME:MASTER%의 몸 안에서
-				setColor 0xff3399
-				printFormL %bodyPartStr(116)%으로 이동했다
-				resetColor
+				call colorPrint(0xff3399, @"%bodyPartStr(116)%으로 이동했다")
 				wait
 				
 				CFLAG:MASTER:316 = CFLAG:MASTER:321
@@ -150,9 +146,7 @@
 				endif
 				
 				printForm %kr(STR:(200 + CFLAG:MASTER:i), "은", "는")% %CALLNAME:MASTER%의 몸 안에서
-				setColor 0xff3399
-				printFormL %bodyPartStr(115)%으로 이동했다
-				resetColor
+				call colorPrint(0xff3399, @"%bodyPartStr(115)%으로 이동했다")
 				wait
 				
 				CFLAG:MASTER:315 = CFLAG:MASTER:316

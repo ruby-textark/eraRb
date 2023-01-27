@@ -2,6 +2,7 @@
 
 	printL 신체정보(상세)
 	
+	printL
 	printL 생리/임신정보
 	if TALENT:MASTER:생리중
 		printFormL %kr(CALLNAME:MASTER, "은", "는")% 현재 생리중입니다
@@ -25,32 +26,38 @@
 	else
 		printFormL %CALLNAME:MASTER%의 다음 생리 예정일은 {MAXBASE:MASTER:생리주기 - BASE:MASTER:생리주기}일 뒤입니다
 	endif
+	if TALENT:MASTER:교미배란
+		printFormL 수상한 개조에 의해 %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 자극을 받으면 배란해버리게 되었다
+	endif
 
 	printL
-	; 자궁내상태
 	printL 자궁상태
 	printFormL 자궁 내 정액량 : {BASE:MASTER:자궁내정액1+BASE:MASTER:자궁내정액2+BASE:MASTER:자궁내정액3+BASE:MASTER:자궁내정액4}mL
 	if BASE:MASTER:자궁침식도
-		if BASE:MASTER:자궁침식도 > 66
-			printFormL %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 인간의 아이를 거부하고 있습니다
-		elseif BASE:MASTER:자궁침식도 > 33
-			printFormL 끊임없이 들어오는 이종의 정자에 의해 %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 점점 침식되고 있습니다
+		if BASE:MASTER:자궁침식도 > 75
+			printFormL %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 인간의 아이를 완강히 거부하고 있다
+		elseif BASE:MASTER:자궁침식도 > 50
+			printFormL 이형의 정액에 푹 적셔진 %CALLNAME:MASTER%의 %kr(STR:116, "을", "를")% 돌이키기엔 이미 늦었는지도 모른다
+		elseif BASE:MASTER:자궁침식도 > 25
+			printFormL 끊임없이 들어오는 이종의 정자에 의해 %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 점점 침식되고 있다
 		endif
 		printFormL 자궁침식도 : {BASE:MASTER:자궁침식도}%"%"%
 	endif
 	
 	if EXP:MASTER:자궁구개발경험 > 30
-		printFormL 집요하게 공략된 끝에 %CALLNAME:MASTER%의 %STR:116% 입구는 완전히 풀어져 벌름거리고 있다.
+		printFormL 집요하게 공략된 끝에 %CALLNAME:MASTER%의 %STR:116% 입구는 완전히 풀어져 벌름거리고 있다
 	endif
 	
 	printL
-	; 조임도
+	printL 성기상태
 	if TALENT:MASTER:허벌보지
 		if RAND:2 == 0
-			printFormL 쓰레기통처럼 다루어진 %STR:121% 입구는 완전히 벌어져 그 안쪽의 %STR:116%까지도 훤히 드러내고 있다.
+			printFormL 쓰레기통처럼 다루어진 %STR:121% 입구는 완전히 벌어져 그 안쪽의 %STR:116%까지도 훤히 드러내고 있다
 		else
-			printFormL 험하게 사용된 끝네 %kr(STR:121, "은", "는")% 침입자를 막으려는 생각은 완전히 잊어버린 듯 크게 벌린 채다.
+			printFormL 험하게 사용된 끝네 %kr(STR:121, "은", "는")% 침입자를 막으려는 생각은 완전히 잊어버린 듯 크게 벌린 채다
 		endif
+	else
+		printFormL %kr(STR:121, "은", "는")% 꽉 닫혀있다
 	endif
 	if TALENT:MASTER:세로애널
 		if RAND:2 == 0
@@ -58,6 +65,8 @@
 		else
 			printFormL 넓게 벌어진 입구를 자랑하는 %kr(STR:123, "이", "가")% 수시로 꿈틀거리며 그 안을 채워주기를 바라고 있다
 		endif
+	else
+		printFormL %kr(STR:123, "은", "는")% 꽉 닫혀있다
 	endif
 
 	printL
@@ -83,4 +92,23 @@
 		printL 취하지 않은 상태입니다.
 	endif
 
-	printFormL 혈중 미약 농도는 {BASE:MASTER:혈중미약농도/100}.{BASE:MASTER:혈중미약농도%100}%"%"%입니다.
+	if BASE:MASTER:혈중미약농도
+		printFormL 혈중 미약 농도는 {BASE:MASTER:혈중미약농도/100}.{BASE:MASTER:혈중미약농도%100}%"%"%입니다
+		print 일반인보다 쾌감에
+		call colorPrint(0xff8c00, @"{1000000 / (10000 - 19 * BASE:MASTER:혈중미약농도) - 100}%"%"%")
+		printL 더 민감합니다.
+	else
+		printFormL 혈관 속에 미약이 감지되지 않고 있습니다
+	endif
+
+	if ABL:MASTER:약물중독 == 5
+		printFormL 지냐친 약물 복용으로 완전히 중독되어버렸습니다. 상태를 지켜보며 기도할 수밖에 없습니다
+	elseif ABL:MASTER:약물중독 == 4
+		printFormL 심각한 약물 중독 상태입니다. 더 이상의 조치는 큰 의미를 갖기 힘들 것 같습니다 
+	elseif ABL:MASTER:약물중독 == 2
+		printFormL 중증의 약물 중독 증상을 나타냅니다. 아직 돌이킬 수 있는 수준이나 특단의 대책이 필요합니다
+	elseif ABL:MASTER:약물중독 == 3
+		printFormL 뚜렷한 약물 중독 증세가 보이고, 약물 농도가 낮아질때마다 금단 증상이 보입니다. 빠르게 조치할 필요가 있습니다
+	elseif ABL:MASTER:약물중독 == 1
+		printFormL 경미한 약물 중독 증세가 보입니다. 유의가 필요합니다
+	endif

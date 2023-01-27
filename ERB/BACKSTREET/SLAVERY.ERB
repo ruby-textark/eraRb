@@ -1,8 +1,10 @@
-﻿@brothel
+﻿@slavery
 
-	printFormL %kr(CALLNAME:MASTER, "은", "는")% 매음굴로 발걸음을 옮겼다
+	printFormL %kr(CALLNAME:MASTER, "은", "는")% 뒷골목에 발을 들였다
+	printL 어디로 갈까
 	printFormL [1] - 암거래상
 	printFormL [2] - 매음굴
+	printFormL [3] - 신체거래
 	printFormL [0] - 돌아가기
 
 $inputLoop
@@ -12,6 +14,8 @@ $inputLoop
 		call itemShopMenu(900, 999)
 	elseif RESULT == 2
 		call brothel
+	elseif RESULT == 3
+		call slavery
 	elseif RESULT == 0
 		return
 	else

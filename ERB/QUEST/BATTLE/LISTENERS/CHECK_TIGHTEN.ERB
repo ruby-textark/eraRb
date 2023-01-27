@@ -3,11 +3,13 @@
 	if CFLAG:MASTER:삽입질 == 1
 		if BASE:MASTER:보지조임 > 50 - BASE:TARGET:자지크기
 			BASE:MASTER:보지조임 -= 1 + RAND:2
+			EXP:MASTER:V확장경험++
 		endif
 	endif
 	
 	if CFLAG:MASTER:삽입애널 == 1
 		if BASE:MASTER:애널조임 > 50 - BASE:TARGET:자지크기
 			BASE:MASTER:애널조임 -= 1 + RAND:2
+			EXP:MASTER:A확장경험++
 		endif
 	endif

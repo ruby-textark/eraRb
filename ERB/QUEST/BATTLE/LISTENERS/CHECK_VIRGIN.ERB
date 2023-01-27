@@ -1,8 +1,17 @@
 ﻿@checkVirgin
 
 	for i, 301, 399
-		if CFLAG:MASTER:i && TALENT:MASTER:i == 1
+		if CFLAG:MASTER:i == 1 && TALENT:MASTER:i == 1
 			printFormL %kr(CALLNAME:MASTER, "은", "는")% 처음으로 %bodyPartStr(i - 200)%로 하는 성교를 경험했다.
+			TALENT:MASTER:i = 0
+		endif
+	next
+
+@checkVirginParasite
+
+	for i, 301, 399
+		if CFLAG:MASTER:i > 3 && TALENT:MASTER:i == 1
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% %kr(STR:(200+CFLAG:MASTER:i), "에", "")%게 %bodyPartStr(i - 200)%의 처녀를 잃었다.
 			TALENT:MASTER:i = 0
 		endif
 	next
