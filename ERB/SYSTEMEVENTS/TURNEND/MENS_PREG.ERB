@@ -43,7 +43,7 @@
 	BASE:MASTER:자궁내정액1 = LIMIT(BASE:MASTER:자궁내정액1, 0, BASE:MASTER:자궁크기)
 	
 	; 임신판정
-	if RAND:20 == 0 || TALENT:MASTER:가임기
+	if TALENT:MASTER:가임기
 		; 자궁이 가득차있을 경우 100% 기준으로 난수 돌려서 임신판정
 		if RAND:100 < 100 * (BASE:MASTER:자궁내정액1 + BASE:MASTER:자궁내정액2 + BASE:MASTER:자궁내정액3 + BASE:MASTER:자궁내정액4) / (BASE:MASTER:자궁크기 * 15 / 8)			
 			; todo 임신처리
@@ -132,7 +132,7 @@
 			MAXBASE:MASTER:모유 = LIMIT(MAXBASE:MASTER:모유 + 10 + RAND:20, 0, 1500)
 		endif
 	endif
-	
+
 	; 임신중이 아닐경우
 	if BASE:MASTER:임신일수 == 0
 		; 점차 자궁크기 감소

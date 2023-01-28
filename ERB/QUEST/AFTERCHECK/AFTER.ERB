@@ -1,6 +1,13 @@
 ﻿@EVENTEND
 #dim dynamic mobDrop
 
+	; 삽입상태초기화
+	for i, 301, 399
+		if CFLAG:MASTER:i == 1
+			CFLAG:MASTER:i = 0
+		endif
+	next
+
 	; killed the monster
 	if BASE:TARGET:체력 <= 0
 		printFormL %NAME:TARGET% %CALLNAME:TARGET%의 토벌에 성공했습니다.

@@ -1,0 +1,133 @@
+﻿@drugExperiment
+#dim dynamic sideEffect1
+#dim dynamic sideEffect2
+#dim dynamic reward
+
+	printFormL 점장은 가게 한쪽으로 가더니 서랍을 뒤적이고는 앰플 하나를 꺼내왔다.
+	wait
+
+$drugLoop
+	; sideEffect1은 base 변경
+	sideEffect1 = RAND:6
+	; sideEffect2는 talent 변경
+	sideEffect2 = RAND:3
+	reward = 1000 ; 기본보수
+	
+	call colorPrint(0xff8c00, "「이건 어떤가?」")
+	printL
+	printForm 그의 손에 들린 주사는%" "%
+	
+	if sideEffect1 == 0
+		; 아무 효과 없음
+		print 붉은색의
+	elseif sideEffect1 == 1
+		; 최대 체력 감소
+		reward *= 2
+		print 푸른색의
+	elseif sideEffect1 == 2
+		; 미약농도 대폭 증가
+		reward *= 2
+		print 회색의
+	elseif sideEffect1 == 3
+		; 임신일수 감소
+		reward *= 2
+		print 녹색의
+	elseif sideEffect1 == 4
+		; 자궁 or 난소 상태 하락
+		reward *= 3
+		print 보라색의
+	elseif sideEffect1 == 5
+		; 자궁침식도 대폭 상승
+		reward *= 2
+		print 검은색의
+	endif
+	
+	printForm %" "%
+	
+	if sideEffect2 == 0
+		; 생리불순
+		print 묽은
+	elseif sideEffect2 == 1
+		; 교미배란체질
+		print 끈적한
+	elseif sideEffect2 == 2
+		; 모유체질
+		print 얼어붙은
+	endif
+	
+	printFormL %" "%액체를 담고 있었다.
+	call colorPrint(0xff8c00, @"「보수는 {reward}. 선택은 자네 몫이야.」")
+	printL
+	
+	printL [0] - 다른 주사로 바꾼다
+	printL [1] - 맞는다
+	printL [2] - 거절한다
+	input
+	
+	if result == 0
+		goto drugLoop
+	elseif result ==2
+		return
+	endif
+	
+	printFormL 점장은 능숙하게 주사를 뽑고, %CALLNAME:MASTER%의 옷을 걷어낸 뒤, 드러난 살갗에 대고 주사바늘을 갖다댔다.
+	wait
+
+	call colorPrint(0xd0936d, "「잠깐 따끔할거야. 걱정 마. 주사는 많이 놓아 봤으니까.」")
+	wait
+	
+	if sideEffect1 == 0
+	elseif sideEffect1 == 1
+		; 최대 체력 감소
+		MAXBASE:MASTER = MAX(MAXBASE:MASTER - RAND:150, 500)
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% 몸이 무거워졌다...
+	elseif sideEffect1 == 2
+		; 미약농도 대폭 증가
+		BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 50 + RAND:50, 0, MAXBASE:MASTER:혈중미약농도)
+		printFormL %kr(CALLNAME:MASTER, "은", "는")% 몸에서 타오르는듯한 열기를 느꼈다
+	elseif sideEffect1 == 3
+		; 임신일수 감소
+		MAXBASE:MASTER:임신일수 = LIMIT(MAXBASE:MASTER:임신일수 - (30 + RAND:60), 14, 300)
+		printFormL 한순간 %CALLNAME:MASTER%의 배 안쪽이 조금 떨리는 듯한 느낌이 들었다
+	elseif sideEffect1 == 4
+		; 자궁 or 난소 상태 하락
+		if RAND:2 == 0
+			BASE:MASTER:자궁상태 -= 5 + RAND:10
+		else
+			BASE:MASTER:난소상태 -= 5 + RAND:10
+		endif
+		printFormL 갑작스레 %CALLNAME:MASTER%의 배에 격통이 찾아왔지만, 잠시 뒤 고통은 천천히 가라앉았다
+	elseif sideEffect1 == 5
+		; 자궁침식도 대폭 상승
+		BASE:MASTER:자궁침식도 += 10 + RAND:15
+		printFormL 몸 안 깊은곳에서부터 차오르는 서늘한 기운에 %kr(CALLNAME:MASTER, "은", "는")% 잠깐 소름이 돋았다
+	endif
+	
+	if sideEffect2 == 0
+		; 생리불순
+		TALENT:MASTER:생리불순 = !TALENT:MASTER:생리불순
+		if TALENT:MASTER:생리불순
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% [생리불순]이 되었다
+		else
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% [생리불순]을 잃었다
+		endif
+	elseif sideEffect2 == 1
+		; 교미배란체질
+		TALENT:MASTER:교미배란 = !TALENT:MASTER:교미배란
+		if TALENT:MASTER:교미배란
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% [교미배란]이 되었다
+		else
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% [교미배란]을 잃었다
+		endif
+	elseif sideEffect2 == 2
+		; 모유체질
+		TALENT:MASTER:모유체질 = !TALENT:MASTER:모유체질
+		if TALENT:MASTER:모유체질
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% [모유체질]이 되었다
+		else
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% [모유체질]을 잃었다
+		endif
+	endif
+	
+	MONEY += reward
+	wait

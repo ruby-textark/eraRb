@@ -1,9 +1,10 @@
 ﻿@checkTight
 
 	if CFLAG:MASTER:삽입질 == 1
-		if BASE:MASTER:보지조임 > 50 - BASE:TARGET:자지크기
+		if BASE:MASTER:보지조임 + BASE:TARGET:자지크기> 60
 			BASE:MASTER:보지조임 -= 1 + RAND:2
 			EXP:MASTER:V확장경험++
+			printFormL %CALLNAME:MASTER%의 %kr(STR:121, "이", "가")% 무리한 삽입으로 늘어나고 있다...
 		endif
 	endif
 	
@@ -11,5 +12,6 @@
 		if BASE:MASTER:애널조임 > 50 - BASE:TARGET:자지크기
 			BASE:MASTER:애널조임 -= 1 + RAND:2
 			EXP:MASTER:A확장경험++
+			printFormL %CALLNAME:MASTER%의 %kr(STR:123, "이", "가")% 무리한 삽입으로 늘어나고 있다...
 		endif
 	endif

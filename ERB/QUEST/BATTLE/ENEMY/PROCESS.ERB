@@ -6,7 +6,9 @@
 	printFormL %CALLNAME:TARGET%의 차례
 
 	if RAND:100 < CFLAG:TARGET:성공격빈도
+		TFLAG:이번턴성공격 = 1
 		call processSexualAttack
 	else
+		TFLAG:이번턴성공격 = 0
 		call processNormalAttack
 	endif	

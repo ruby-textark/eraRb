@@ -15,6 +15,11 @@
 		UP:욕정 += PALAM:MASTER:i / 100
 	next
 
+	; 기본 사정감 증가
+	if TFLAG:이번턴성공격
+		PALAM:TARGET:사정 += 900 + RAND:200
+	endif
+
 	; 삽입체크
 	if CFLAG:MASTER:삽입질 == 1
 		if BASE:MASTER:보지조임 + BASE:TARGET:자지크기 - 50 > 30
