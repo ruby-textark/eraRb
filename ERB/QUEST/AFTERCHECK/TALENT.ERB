@@ -18,7 +18,6 @@
 
 	; 적용체크
 	if TALENT:MASTER:교미배란
-		; todo 교미배란
 		if TFLAG:이번사정량
 			printFormL %STR:121% 안으로 들어온 정액에 %CALLNAME:MASTER%의 %kr(STR:115, "은", "는")% 환희하며 배란하고 있다.
 			BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2

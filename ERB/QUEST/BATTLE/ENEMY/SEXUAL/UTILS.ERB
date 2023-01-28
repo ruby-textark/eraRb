@@ -6,6 +6,10 @@
 	if strlens(BASENAME:i) == 0
 		returnf 0
 	endif
+	
+	if CFLAG:MASTER:(200 + i)
+		returnf 0
+	endif
 
 	partName = %STR:i%
 

@@ -46,7 +46,7 @@
 	if TALENT:MASTER:가임기
 		; 자궁이 가득차있을 경우 100% 기준으로 난수 돌려서 임신판정
 		if RAND:100 < 100 * (BASE:MASTER:자궁내정액1 + BASE:MASTER:자궁내정액2 + BASE:MASTER:자궁내정액3 + BASE:MASTER:자궁내정액4) / (BASE:MASTER:자궁크기 * 15 / 8)			
-			; todo 임신처리
+			; 임신처리
 			BASE:MASTER:임신일수 = 1
 			
 			if RAND:(BASE:MASTER:자궁내인간정액+BASE:MASTER:자궁내몬스터정액+BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액) < BASE:MASTER:자궁내인간정액
@@ -107,7 +107,7 @@
 
 	; 임신자각
 	if BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수 / 10
-		; todo 임신자각처리
+		; 임신자각처리
 		printFormL %kr(CALLNAME:MASTER, "은", "는")% 최근 생리주기가 이상한 것을 알아챘다...
 		wait
 		printFormL 아무래도 임신한 모양이다
