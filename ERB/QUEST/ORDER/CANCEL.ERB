@@ -1,15 +1,14 @@
 ﻿@cancelQuest
 #dim dynamic decreasedFame
 
-	printFormL %NAME:TARGET% %CALLNAME:TARGET%의 토벌을 취소했다.
+	printFormW %NAME:TARGET% %CALLNAME:TARGET%의 토벌을 취소했다.
 
 	delchara TARGET
 	TARGET = 0
 	
 	decreasedFame = RAND:5
 	
-	printFormL 명성이 {decreasedFame} 감소했다.
+	printFormW 명성이 {decreasedFame} 감소했다.
 	CFLAG:MASTER:명성기본 = MAX(CFLAG:MASTER:명성기본 - decreasedFame, 0)
-	wait
 
 	return 1

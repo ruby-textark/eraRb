@@ -3,24 +3,23 @@
 	; 습득체크
 
 	if BASE:MASTER:보지조임 < 35
-		printFormL 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(STR:121, "은", "는")% 완전히 벌어져 버렸다...
-		printFormL %kr(CALLNAME:MASTER, "은", "는")% [허벌보지]가 되었다.
-		wait
+		printFormW 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "은", "는")% 완전히 벌어져 버렸다...
+		printFormW %kr(CALLNAME:MASTER, "은", "는")% [허벌보지]가 되었다.
 		TALENT:MASTER:허벌보지 = 1
 	endif
 	
 	if BASE:MASTER:애널조임 < 35
-		printFormL 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(STR:123, "은", "는")% 완전히 벌어져 버렸다...
-		printFormL %kr(CALLNAME:MASTER, "은", "는")% [세로애널]이 되었다.
-		wait
+		printFormW 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(bodyPartStr(123), "은", "는")% 완전히 벌어져 버렸다...
+		printFormW %kr(CALLNAME:MASTER, "은", "는")% [세로애널]이 되었다.
 		TALENT:MASTER:세로애널 = 1
 	endif
 
 	; 적용체크
 	if TALENT:MASTER:교미배란
 		if TFLAG:이번사정량
-			printFormL %STR:121% 안으로 들어온 정액에 %CALLNAME:MASTER%의 %kr(STR:115, "은", "는")% 환희하며 배란하고 있다.
+			printFormW %bodyPartStr(121)% 안으로 들어온 정액에 %CALLNAME:MASTER%의 %kr(bodyPartStr(115), "은", "는")% 환희하며 배란하고 있다.
 			BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2
 			TALENT:MASTER:생리중 = 0
+			TALENT:MASTER:가임기 = 1
 		endif
 	endif

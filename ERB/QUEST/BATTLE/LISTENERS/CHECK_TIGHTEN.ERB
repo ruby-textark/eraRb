@@ -4,7 +4,12 @@
 		if BASE:MASTER:보지조임 + BASE:TARGET:자지크기> 60
 			BASE:MASTER:보지조임 -= 1 + RAND:2
 			EXP:MASTER:V확장경험++
-			printFormL %CALLNAME:MASTER%의 %kr(STR:121, "이", "가")% 무리한 삽입으로 늘어나고 있다...
+			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "이", "가")% 무리한 삽입으로 늘어나고 있다...
+		endif
+		
+		if BASE:MASTER:보지조임 + BASE:TARGET:자지크기> 65
+			BASE:MASTER:질상태 -= 3
+			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "이", "가")% 늘어나다 못해 일부 찢어진 것 같다
 		endif
 	endif
 	
@@ -12,6 +17,11 @@
 		if BASE:MASTER:애널조임 > 50 - BASE:TARGET:자지크기
 			BASE:MASTER:애널조임 -= 1 + RAND:2
 			EXP:MASTER:A확장경험++
-			printFormL %CALLNAME:MASTER%의 %kr(STR:123, "이", "가")% 무리한 삽입으로 늘어나고 있다...
+			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(123), "이", "가")% 무리한 삽입으로 늘어나고 있다...
+		endif
+		
+		if BASE:MASTER:애널조임 + BASE:TARGET:자지크기> 65
+			BASE:MASTER:애널상태 -= 3
+			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(123), "이", "가")% 늘어나다 못해 일부 찢어진 것 같다
 		endif
 	endif

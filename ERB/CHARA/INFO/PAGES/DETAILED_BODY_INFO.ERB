@@ -27,7 +27,7 @@
 		printFormL %CALLNAME:MASTER%의 다음 생리 예정일은 {MAXBASE:MASTER:생리주기 - BASE:MASTER:생리주기}일 뒤입니다
 	endif
 	if TALENT:MASTER:교미배란
-		printFormL 수상한 개조에 의해 %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 자극을 받으면 배란해버리게 되었다
+		printFormL 수상한 개조에 의해 %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 자극을 받으면 배란해버리게 되었다
 	endif
 
 	printL
@@ -35,38 +35,38 @@
 	printFormL 자궁 내 정액량 : {BASE:MASTER:자궁내정액1+BASE:MASTER:자궁내정액2+BASE:MASTER:자궁내정액3+BASE:MASTER:자궁내정액4}mL
 	if BASE:MASTER:자궁침식도
 		if BASE:MASTER:자궁침식도 > 75
-			printFormL %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 인간의 아이를 완강히 거부하고 있다
+			printFormL %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 인간의 아이를 완강히 거부하고 있다
 		elseif BASE:MASTER:자궁침식도 > 50
-			printFormL 이형의 정액에 푹 적셔진 %CALLNAME:MASTER%의 %kr(STR:116, "을", "를")% 돌이키기엔 이미 늦었는지도 모른다
+			printFormL 이형의 정액에 푹 적셔진 %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "을", "를")% 돌이키기엔 이미 늦었는지도 모른다
 		elseif BASE:MASTER:자궁침식도 > 25
-			printFormL 끊임없이 들어오는 이종의 정자에 의해 %CALLNAME:MASTER%의 %kr(STR:116, "은", "는")% 점점 침식되고 있다
+			printFormL 끊임없이 들어오는 이종의 정자에 의해 %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 점점 침식되고 있다
 		endif
 		printFormL 자궁침식도 : {BASE:MASTER:자궁침식도}%"%"%
 	endif
 	
 	if EXP:MASTER:자궁구개발경험 > 30
-		printFormL 집요하게 공략된 끝에 %CALLNAME:MASTER%의 %STR:116% 입구는 완전히 풀어져 벌름거리고 있다
+		printFormL 집요하게 공략된 끝에 %CALLNAME:MASTER%의 %bodyPartStr(116)% 입구는 완전히 풀어져 벌름거리고 있다
 	endif
 	
 	printL
 	printL 성기상태
 	if TALENT:MASTER:허벌보지
 		if RAND:2 == 0
-			printFormL 쓰레기통처럼 다루어진 %STR:121% 입구는 완전히 벌어져 그 안쪽의 %STR:116%까지도 훤히 드러내고 있다
+			printFormL 쓰레기통처럼 다루어진 %bodyPartStr(121)% 입구는 완전히 벌어져 그 안쪽의 %bodyPartStr(116)%까지도 훤히 드러내고 있다
 		else
-			printFormL 험하게 사용된 끝네 %kr(STR:121, "은", "는")% 침입자를 막으려는 생각은 완전히 잊어버린 듯 크게 벌린 채다
+			printFormL 험하게 사용된 끝네 %kr(bodyPartStr(121), "은", "는")% 침입자를 막으려는 생각은 완전히 잊어버린 듯 크게 벌린 채다
 		endif
 	else
-		printFormL %kr(STR:121, "은", "는")% 꽉 닫혀있다
+		printFormL %kr(bodyPartStr(121), "은", "는")% 꽉 닫혀있다
 	endif
 	if TALENT:MASTER:세로애널
 		if RAND:2 == 0
-			printFormL 지나치게 큰 물건을 받아들인 %kr(STR:123, "이", "가")% 한계에 도달해 세로로 길게 갈라져있다
+			printFormL 지나치게 큰 물건을 받아들인 %kr(bodyPartStr(123), "이", "가")% 한계에 도달해 세로로 길게 갈라져있다
 		else
-			printFormL 넓게 벌어진 입구를 자랑하는 %kr(STR:123, "이", "가")% 수시로 꿈틀거리며 그 안을 채워주기를 바라고 있다
+			printFormL 넓게 벌어진 입구를 자랑하는 %kr(bodyPartStr(123), "이", "가")% 수시로 꿈틀거리며 그 안을 채워주기를 바라고 있다
 		endif
 	else
-		printFormL %kr(STR:123, "은", "는")% 꽉 닫혀있다
+		printFormL %kr(bodyPartStr(123), "은", "는")% 꽉 닫혀있다
 	endif
 
 	printL

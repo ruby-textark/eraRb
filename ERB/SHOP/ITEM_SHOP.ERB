@@ -68,18 +68,16 @@ $itemLoop
 $amountLoop
 			input
 			if MONEY < result * ITEMPRICE:itemIdx
-				printL 돈이 부족합니다
-				wait
+				printW 돈이 부족합니다
 				goto amountLoop
 			else
 				MONEY -= result * ITEMPRICE:itemIdx
 				ITEM:itemIdx += result
-				printFormL %kr(ITEMNAME:itemIdx, "을", "를")% 구입했습니다
+				printFormW %kr(ITEMNAME:itemIdx, "을", "를")% 구입했습니다
 			endif
 		else
-			printL 돈이 부족합니다
+			printW 돈이 부족합니다
 		endif
-		wait
 		goto itemLoop
 	elseif itemIdx == 0
 		return

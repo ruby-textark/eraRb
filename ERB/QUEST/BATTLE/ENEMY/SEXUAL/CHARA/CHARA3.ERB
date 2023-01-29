@@ -17,13 +17,10 @@
 			if partsCount == attackedIdx
 				; 기생
 				; todo 구상추가
-				printFormL %kr(CALLNAME:TARGET, "이", "가")% 꾸물거리며 %CALLNAME:MASTER%의 %bodyPartStr(i - 200)% 안으로 기어들어간다
-				wait
-
-				printFormL %kr(CALLNAME:MASTER, "은", "는")% [기생]상태가 되었다.
+				printFormW %kr(CALLNAME:TARGET, "이", "가")% 꾸물거리며 %CALLNAME:MASTER%의 %bodyPartStr(i - 200)% 안으로 기어들어간다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% [기생]상태가 되었다.
 				CFLAG:MASTER:i = 3
 				CFLAG:TARGET:기생성공 = 1
-				wait
 
 				return 1
 			endif

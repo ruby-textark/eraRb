@@ -1,8 +1,12 @@
 ﻿@EVENTTRAIN
 
-	printFormL %NAME:TARGET% %kr(CALLNAME:TARGET, "을", "를")% 발견. 전투를 개시합니다.
+	printFormW %NAME:TARGET% %kr(CALLNAME:TARGET, "을", "를")% 발견. 전투를 개시합니다.
 	printL
-	wait
+	
+	; CFLAG -> PALAM 인계
+	for i, 101, 199
+		PALAM:MASTER:i = CFLAG:MASTER:(i + 400)
+	next
 
 @SHOW_STATUS
 
@@ -60,11 +64,9 @@
 @EVENTCOMEND
 	call checkVirgin
 	call checkTight
-	call checkOrgasm
+	call checkOrgasmInBattle
 	call checkCum
 
 	TARGET = MASTER
 	upCheck
 	TARGET = 1
-
-	wait

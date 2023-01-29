@@ -17,6 +17,8 @@
 		call use907(MASTER)
 	elseif itemIdx == 908
 		call use908(MASTER)
+	elseif itemIdx == 909
+		call use909(MASTER)
 	endif
 	
 	if RESULT
@@ -27,11 +29,10 @@
 @use901(targetIdx)
 #dim dynamic targetIdx
 
-	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:901, "을", "를")% 사용했다.
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:901, "을", "를")% 사용했다.
 	EXP:targetIdx:약물경험++
 	BASE:targetIdx:혈중미약농도 += 20
 	BASE:targetIdx:혈중미약농도 = LIMIT(BASE:targetIdx:혈중미약농도, 0, MAXBASE:targetIdx:혈중미약농도)
-	wait
 	
 	return 1
 
@@ -39,10 +40,9 @@
 @use902(targetIdx)
 #dim dynamic targetIdx
 
-	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:902, "을", "를")% 사용했다.
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:902, "을", "를")% 사용했다.
 	EXP:targetIdx:약물경험++
 	BASE:targetIdx:생리주기 = MAXBASE:MASTER:생리주기 / 4 - 1
-	wait
 	
 	return 1
 
@@ -50,18 +50,16 @@
 @use903(targetIdx)
 #dim dynamic targetIdx
 
-	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:903, "을", "를")% 사용했다.
-	wait
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:903, "을", "를")% 사용했다.
 
 	; 7일이내 2회이상 사용시 10% 확률로 생리불순
 	if RAND:10 == 0 && (DAY < CFLAG:targetIdx:사후피임약복용 + 7)
-		printFormL %kr(CALLNAME:targetIdx, "은", "는")% 잦은 사후피임약 복용으로 생리불순이 된 모양이다...
+		printFormW %kr(CALLNAME:targetIdx, "은", "는")% 잦은 사후피임약 복용으로 생리불순이 된 모양이다...
 		TALENT:targetIdx:생리불순 = 1
 	endif
 	
 	EXP:targetIdx:약물경험++
 	CFLAG:targetIdx:사후피임약복용 = DAY
-	wait
 	
 	return 1
 
@@ -69,10 +67,9 @@
 @use904(targetIdx)
 #dim dynamic targetIdx
 
-	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:904, "을", "를")% 사용했다.
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:904, "을", "를")% 사용했다.
 	EXP:targetIdx:약물경험++
 	BASE:targetIdx:자궁크기 = LIMIT(BASE:targetIdx:자궁크기 + 100, 100, 50000)
-	wait
 	
 	return 1
 
@@ -80,10 +77,9 @@
 @use905(targetIdx)
 #dim dynamic targetIdx
 
-	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:905, "을", "를")% 사용했다.
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:905, "을", "를")% 사용했다.
 	EXP:targetIdx:약물경험++
 	BASE:targetIdx:자궁크기 = LIMIT(BASE:targetIdx:자궁크기 - 100, 100, 50000)
-	wait
 	
 	return 1
 
@@ -91,10 +87,9 @@
 @use906(targetIdx)
 #dim dynamic targetIdx
 
-	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:906, "을", "를")% 사용했다.
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:906, "을", "를")% 사용했다.
 	EXP:targetIdx:약물경험++
 	MAXBASE:targetIdx:생리주기 = LIMIT(MAXBASE:targetIdx:생리주기 - (3 + RAND:3), 7, 35)
-	wait
 	
 	return 1
 
@@ -102,10 +97,9 @@
 @use907(targetIdx)
 #dim dynamic targetIdx
 
-	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:907, "을", "를")% 사용했다.
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:907, "을", "를")% 사용했다.
 	EXP:targetIdx:약물경험++
 	MAXBASE:targetIdx:임신일수 = LIMIT(MAXBASE:targetIdx:임신일수 - (14 + RAND:30), 14, 300)
-	wait
 	
 	return 1
 
@@ -113,16 +107,29 @@
 @use908(targetIdx)
 #dim dynamic targetIdx
 
-	printFormL %CALLNAME:targetIdx%에게 %kr(ITEMNAME:908, "을", "를")% 사용했다.
-	wait
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:908, "을", "를")% 사용했다.
 
 	EXP:targetIdx:약물경험++
 	TALENT:targetIdx:모유체질 = !TALENT:targetIdx:모유체질
 	if TALENT:targetIdx:모유체질
-		printFormL %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 획득했다.
+		printFormW %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 획득했다.
 	else
-		printFormL %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 잃었다.
+		printFormW %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 잃었다.
 	endif
-	wait
+	
+	return 1
+
+; 배란유도제
+@use909(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:909, "을", "를")% 사용했다.
+
+	EXP:targetIdx:약물경험++
+	BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2
+	TALENT:MASTER:생리중 = 0
+	TALENT:MASTER:가임기 = 1
+
+	printFormW %kr(CALLNAME:targetIdx, "은", "는")% 약물의 효과로 강제로 배란했다.
 	
 	return 1

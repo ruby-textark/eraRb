@@ -8,3 +8,14 @@
 
 	; RESULT sideeffect때문에
 	return RESULT
+
+@colorPrintW(color, string)
+#dim dynamic color
+#dims dynamic string
+
+	setColor color
+	printFormW %string%
+	resetColor
+
+	; RESULT sideeffect때문에
+	return RESULT

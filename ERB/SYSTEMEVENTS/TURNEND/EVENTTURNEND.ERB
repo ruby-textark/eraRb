@@ -2,14 +2,14 @@
 
 	printFormL 하루가 끝났습니다
 	
-	printFormL %kr(CALLNAME:MASTER, "은", "는")% 푹 쉬었다
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 푹 쉬었다
 	BASE:MASTER:체력 = MAXBASE:MASTER:체력
 	BASE:MASTER:마력 = MAXBASE:MASTER:마력
 
 	DAY += 1
 	
 	if DAY % 7 == 0
-		printFormL 1주일이 지나 숙박비 2000$가 차감됩니다
+		printFormW 1주일이 지나 숙박비 2000$가 차감됩니다
 		MONEY -= 2000
 	endif
 	
@@ -18,5 +18,4 @@
 	call holeTight
 	call addiction
 
-	wait
 	begin shop

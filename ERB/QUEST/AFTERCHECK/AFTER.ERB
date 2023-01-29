@@ -7,6 +7,11 @@
 			CFLAG:MASTER:i = 0
 		endif
 	next
+	
+	; PALAM -> CFLAG 인계
+	for i, 501, 599
+		CFLAG:MASTER:i = PALAM:MASTER:(i - 400)
+	next
 
 	; killed the monster
 	if BASE:TARGET:체력 <= 0
