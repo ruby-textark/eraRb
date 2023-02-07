@@ -7,3 +7,8 @@
 	for i, 101, 200
 		PALAM:MASTER:i = CFLAG:MASTER:(i + 400)
 	next
+	
+	; 사정거리 계산
+	
+	TCVAR:MASTER:사정거리 = 0
+	TCVAR:TARGET:사정거리 = CFLAG:TARGET:몬스터사거리

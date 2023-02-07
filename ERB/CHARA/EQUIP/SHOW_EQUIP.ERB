@@ -30,11 +30,13 @@ $wrapper
 		input
 		
 		if result == 1000
-			if !unequipMasterEquips(equipSlotIdx)
+			call unequipMasterEquips(equipSlotIdx)
+			if !result
 				goto equipChange
 			endif
 		else
-			if !changeMasterEquips(equipSlotIdx, result)
+			call changeMasterEquips(equipSlotIdx, result)
+			if !result
 				goto equipChange
 			endif
 		endif

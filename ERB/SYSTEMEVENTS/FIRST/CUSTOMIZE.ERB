@@ -51,9 +51,9 @@
 		ITEM:1301 = 1
 		ITEM:1401 = 1
 	
-		EQUIP:MASTER:상의 = 1201 ; 하얀셔츠
-		EQUIP:MASTER:하의 = 1301 ; 스커트
-		EQUIP:MASTER:신발 = 1401 ; 운동화
+		call changeMasterEquips(12, 1201) ; 하얀셔츠
+		call changeMasterEquips(13, 1301) ; 스커트
+		call changeMasterEquips(14, 1401) ; 운동화
 	else
 		printL 옷이 없는 대신 돈 500원을 추가
 		MONEY += 500

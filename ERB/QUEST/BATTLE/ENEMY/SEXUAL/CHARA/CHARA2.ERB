@@ -18,7 +18,7 @@
 				if breakableEquipSlots == brokenEquipSlot
 					printFormL %CALLNAME:TARGET%의 점액이 장비를 망가뜨린다
 					printFormL 망가진 장비는 이번 전투 중에서는 사용할 수 없을 것 같다...
-					callf unequipMasterEquips(i)
+					call unequipMasterEquips(i)
 				endif
 				breakableEquipSlots++
 			endif

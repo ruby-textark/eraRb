@@ -32,24 +32,9 @@ $inputLoop
 
 	input
 
-	if 101 <= result && result <= 199
-		call useItem1xx(result)
-	elseif 201 <= result && result <= 299
-		call useItem2xx(result)
-	elseif 301 <= result && result <= 399
-		call useItem3xx(result)
-	elseif 401 <= result && result <= 499
-		call useItem4xx(result)
-	elseif 501 <= result && result <= 599
-		call useItem5xx(result)
-	elseif 601 <= result && result <= 699
-		call useItem6xx(result)
-	elseif 701 <= result && result <= 799
-		call useItem7xx(result)
-	elseif 801 <= result && result <= 899
-		call useItem8xx(result)
-	elseif 901 <= result && result <= 999
-		call useItem9xx(result)
+	if 101 <= result && result <= 999
+		ITEM:result--
+		callForm useItem{result}
 	elseif result == 0
 		return
 	endif
