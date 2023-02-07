@@ -1,0 +1,10 @@
+﻿@COM_ABLE102
+
+	return 1
+
+@COM102
+
+	printW 몸통을 노렸다!
+	LOSEBASE:체력 = 10 * RAND:(MAX(2, getActualAtk(MASTER) - getActualDef(TARGET)))
+
+	return 1

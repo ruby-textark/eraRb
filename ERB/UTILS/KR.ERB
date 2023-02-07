@@ -9,3 +9,15 @@
 	else
 		returnf text+postfix1
 	endif
+
+@krPost(text, postfix1, postfix2)
+#FUNCTIONS
+#dims dynamic text
+#dims dynamic postfix1
+#dims dynamic postfix2
+
+	if (encodeToUni(text, strlensu(text) - 1) - 44032) % 28 == 0
+		returnf postfix2
+	else
+		returnf postfix1
+	endif

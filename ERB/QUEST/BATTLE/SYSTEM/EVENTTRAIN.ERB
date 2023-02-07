@@ -1,0 +1,9 @@
+﻿@EVENTTRAIN
+
+	printFormW %NAME:TARGET% %kr(CALLNAME:TARGET, "을", "를")% 발견. 전투를 개시합니다.
+	printL
+	
+	; CFLAG -> PALAM 인계
+	for i, 101, 200
+		PALAM:MASTER:i = CFLAG:MASTER:(i + 400)
+	next

@@ -1,0 +1,50 @@
+﻿@printTalent(talentIdx)
+#dim dynamic talentIdx
+
+	; 모유체질
+	if talentIdx == 5
+		setColor 0xf5dcb7
+	; 허벌보지
+	elseif talentIdx == 10
+		setColor 0x5e2c04
+	; 세로애널
+	elseif talentIdx == 10
+		setColor 0x5e2c04
+	; 음란
+	elseif talentIdx == 10
+		setColor 0xcc0000
+	; 패배자
+	elseif talentIdx == 11
+		setColor 0xcc0000
+	; 기생 / 이상성욕
+	elseif 100 <= i && i <= 299
+		fontBold
+		setColor 0xcc0000
+	; 임신
+	elseif talentIdx == 401
+		fontBold
+		setColor 0xcc0000
+	; 생리불순
+	elseif talentIdx == 402
+		fontBold
+		setColor 0x3399ff
+	; 가임기
+	elseif talentIdx == 404
+		fontBold
+		setColor 0xff3399
+	; 교미배란
+	elseif talentIdx == 405
+		fontBold
+		setColor 0xff8c00
+	endif
+	
+	printForm [%TALENTNAME:talentIdx%]
+	
+	fontRegular
+	resetColor
+
+@printGetTalent(talentIdx)
+#dim dynamic talentIdx
+	printForm %kr(CALLNAME:MASTER, "은", "는")%%" "%
+	call printTalent(talentIdx)
+	printForm %krPost(TALENTNAME:talentIdx, "을", "를")% 얻었다.

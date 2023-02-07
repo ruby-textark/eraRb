@@ -2,14 +2,14 @@
 #dim dynamic mobDrop
 
 	; 삽입상태초기화
-	for i, 301, 399
+	for i, 301, 400
 		if CFLAG:MASTER:i == 1
 			CFLAG:MASTER:i = 0
 		endif
 	next
 	
 	; PALAM -> CFLAG 인계
-	for i, 501, 599
+	for i, 501, 600
 		CFLAG:MASTER:i = PALAM:MASTER:(i - 400)
 	next
 
@@ -45,13 +45,18 @@
 		call cancelQuest
 	; Quest fail
 	else
+		if TALENT:MASTER:패배자
+			call reincarnation
+		endif
+
 		; Check if cancel this quest or keep going with the wounded monster.
 		if FLAG:퀘스트재시도 > 0
 			printFormL 이번에는 실패했지만, 다음에는 충분히 준비해서 다시 도전하도록 합시다.
 			FLAG:퀘스트재시도 -= 1
 			printFormL 남은 도전 횟수 : {FLAG:퀘스트재시도}
 		else
-			
+			printFormL 제한 조건을 만족하지 못하여 퀘스트는 자동으로 취소됩니다.
+			call cancelQuest
 		endif
 	endif
 	

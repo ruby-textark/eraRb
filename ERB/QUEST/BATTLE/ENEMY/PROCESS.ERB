@@ -2,13 +2,27 @@
 	
 	LOSEBASE:체력 = 0
 	LOSEBASE:마력 = 0
+	
+	if TCVAR:MASTER:추가행동 && !TCVAR:TARGET:추가행동
+		printFormW 추가 행동권이 남아있어 %CALLNAME:TARGET%의 차례를 스킵합니다
+		return
+	elseif TCVAR:MASTER:추가행동 && TCVAR:TARGET:추가행동
+		printFormW 서로에게 추가 행동권이 있기 떄문에 정상적으로 %CALLNAME:TARGET%의 차례가 돌아옵니다
+	endif
 
-	printFormL %CALLNAME:TARGET%의 차례
+	printFormW %CALLNAME:TARGET%의 차례
 
-	if RAND:100 < CFLAG:TARGET:성공격빈도
-		TFLAG:이번턴성공격 = 1
-		call processSexualAttack
+	; 같은 위치에 있는 경우
+	if isSameLocation()
+
+		if RAND:100 < CFLAG:TARGET:성공격빈도
+			TFLAG:이번턴성공격 = 1
+			call processSexualAttack
+		else
+			TFLAG:이번턴성공격 = 0
+			call processNormalAttack
+		endif
+	; 다른 위치에 있을 경우
 	else
-		TFLAG:이번턴성공격 = 0
-		call processNormalAttack
-	endif	
+		call processMoveEnemy
+	endif

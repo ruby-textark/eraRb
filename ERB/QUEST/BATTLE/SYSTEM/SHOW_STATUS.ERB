@@ -1,0 +1,37 @@
+﻿@SHOW_STATUS
+
+	barstr BASE:MASTER:체력, MAXBASE:MASTER:체력, 10
+	printFormL %CALLNAME:MASTER%의 체력 : %results% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
+
+	barstr BASE:TARGET:체력, MAXBASE:TARGET:체력, 10
+	printFormL %CALLNAME:TARGET%의 체력 : %results% ({BASE:TARGET:체력}/{MAXBASE:TARGET:체력})
+	
+	drawLine
+	
+	call showPosition
+	
+	drawLine
+
+@showPosition()
+
+	for i, -2, 3
+		for j, -2, 3
+			if TCVAR:MASTER:좌우 == j && TCVAR:MASTER:상하 == i
+				if TCVAR:TARGET:좌우 == j && TCVAR:TARGET:상하 == i
+					call colorPrint(0xcccc00, "※")
+				else
+					call colorPrint(0x00cc00, "★")
+				endif
+			elseif TCVAR:TARGET:좌우 == j && TCVAR:TARGET:상하 == i
+				call colorPrint(0xcc0000, "★")
+			else
+				print □
+			endif
+		next
+		printL
+	next
+
+	call colorPrint(0x00cc00, @"★ %CALLNAME:MASTER% ")
+	call colorPrint(0xcc0000, @"★ %CALLNAME:TARGET% ")
+	call colorPrint(0xcccc00, "※ 교전중")
+	printL

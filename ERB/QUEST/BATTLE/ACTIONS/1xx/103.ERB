@@ -1,0 +1,16 @@
+﻿@COM_ABLE103
+
+	return 1
+
+@COM103
+#dim dynamic advantage
+
+	printW 다리를 노렸다!
+	if TCVAR:TARGET:이번턴이동
+		printFormW 막 이동을 마친 %kr(CALLNAME:TARGET, "은", "는")% 허점을 보였다!
+		advantage = getActualAtk(MASTER)
+	endif
+	
+	LOSEBASE:체력 = 10 * RAND:(MAX(2, getActualAtk(MASTER) + advantage - getActualDef(TARGET)))
+
+	return 1

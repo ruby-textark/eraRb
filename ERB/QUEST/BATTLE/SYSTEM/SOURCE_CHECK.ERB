@@ -1,0 +1,49 @@
+﻿@SOURCE_CHECK
+	
+	SOURCE:MASTER:공격 = LOSEBASE:체력 / 10
+	BASE:TARGET:체력 -= LOSEBASE:0
+	BASE:TARGET:마력 -= LOSEBASE:1
+
+	; Check if killed
+	if BASE:TARGET:체력 <= 0
+		begin aftertrain
+		return
+	endif
+	
+	LOSEBASE:0 = 0
+	LOSEBASE:1 = 0
+	
+$enemyTurn
+	
+	call processEnemy
+
+	if TCVAR:TARGET:추가행동 && !TCVAR:MASTER:추가행동
+		printFormW 추가 행동권이 남아있어 %CALLNAME:TARGET%의 차례가 계속됩니다
+		
+		call onBattleTurnEnd
+		goto enemyTurn
+	elseif TCVAR:MASTER:추가행동 && TCVAR:TARGET:추가행동
+		printFormW 서로에게 추가 행동권이 있기 떄문에 정상적으로 %CALLNAME:MASTER%의 차례가 돌아옵니다
+	endif
+
+	; Check if failed
+	if BASE:MASTER:체력 <= 0
+		begin aftertrain
+		return
+	endif
+
+	; Parasite!
+	if CFLAG:TARGET:기생성공
+		begin aftertrain
+		return
+	endif
+
+	SOURCE:MASTER:피격 = LOSEBASE:체력 / 10
+	BASE:MASTER:체력 -= LOSEBASE:체력
+	BASE:MASTER:마력 -= LOSEBASE:마력
+	
+	LOSEBASE:체력 = 0
+	LOSEBASE:마력 = 0
+
+	call calcPalam
+

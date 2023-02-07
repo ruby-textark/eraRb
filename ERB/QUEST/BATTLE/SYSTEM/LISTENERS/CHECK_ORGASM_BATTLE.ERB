@@ -3,8 +3,8 @@
 #dim dynamic orgasmCount
 #dim dynamic insuffOrgasm
 
-	orgasmThres = (10000 - 19 * BASE:MASTER:혈중미약농도) * (1 + MARK:MASTER:절정봉인)
-	for i, 101, 199
+	orgasmThres = masterOrgasmThres()
+	for i, 101, 200
 		if PALAM:MASTER:i >= orgasmThres
 			; todo 절정구상
 			printFormL %bodyPartStr(i)% 절정

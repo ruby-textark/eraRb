@@ -1,7 +1,13 @@
-﻿@getActualAtk(charaIdx)
+﻿@isSameLocation()
+#function
+
+	returnf (TCVAR:MASTER:상하 == TCVAR:TARGET:상하) && (TCVAR:MASTER:좌우 == TCVAR:TARGET:좌우)
+
+@getActualAtk(charaIdx)
 #function
 #dim dynamic charaIdx
 #dim dynamic actualAtk
+#dim dynamic orgasmThres
 #dim dynamic orgasmParts
 
 	actualAtk = ABL:charaIdx:공격력
@@ -12,8 +18,9 @@
 	; 쾌락치 9000 이상 1부위당 공격력 +5%
 
 	orgasmParts = 0
-	for i, 101, 199
-		if PALAM:MASTER:i > 9000
+	orgasmThres = masterOrgasmThres()
+	for i, 101, 200
+		if PALAM:MASTER:i > (orgasmThres * 9 / 10)
 			orgasmParts++
 		endif
 	next
@@ -29,6 +36,7 @@
 #function
 #dim dynamic charaIdx
 #dim dynamic actualDef
+#dim dynamic orgasmThres
 #dim dynamic orgasmParts
 
 	actualDef = ABL:charaIdx:방어력
@@ -39,8 +47,9 @@
 	; 쾌락치 9000 이상 1부위당 방어력 -5%
 
 	orgasmParts = 0
-	for i, 101, 199
-		if PALAM:MASTER:i > 9000
+	orgasmThres = masterOrgasmThres()
+	for i, 101, 200
+		if PALAM:MASTER:i > (orgasmThres * 9 / 10)
 			orgasmParts++
 		endif
 	next

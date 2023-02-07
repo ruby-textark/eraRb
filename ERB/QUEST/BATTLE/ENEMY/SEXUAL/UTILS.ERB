@@ -49,7 +49,7 @@
 #dim dynamic attackedIdx
 
 	partsCount = 0
-	for i, 101, 199
+	for i, 101, 200
 		if isAttackableBodyPart(i)
 			partsCount++
 		endif
@@ -58,7 +58,7 @@
 	attackedIdx = RAND:partsCount
 
 	partsCount = 0
-	for i, 101, 199
+	for i, 101, 200
 		if isAttackableBodyPart(i)
 			if partsCount == attackedIdx
 				return i

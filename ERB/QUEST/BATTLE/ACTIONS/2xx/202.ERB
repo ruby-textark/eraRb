@@ -1,0 +1,12 @@
+﻿@COM_ABLE202
+
+	return TCVAR:MASTER:상하 != -2
+
+@COM202
+
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 앞으로 힘껏 굴렀다
+	
+	TCVAR:MASTER:상하--
+	TCVAR:MASTER:이번턴이동 = 1
+
+	return 1

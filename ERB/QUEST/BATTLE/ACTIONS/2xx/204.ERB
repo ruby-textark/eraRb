@@ -1,0 +1,12 @@
+﻿@COM_ABLE204
+
+	return TCVAR:MASTER:좌우 != -2
+
+@COM204
+
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 왼쪽으로 이동했다
+	
+	TCVAR:MASTER:좌우--
+	TCVAR:MASTER:이번턴이동 = 1
+
+	return 1

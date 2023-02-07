@@ -1,0 +1,16 @@
+﻿@COM_ABLE101
+
+	return 1
+
+@COM101
+
+	printW 급소를 노렸다!
+
+	if RAND:10 < 6
+		printW 빗나갔다!
+		return 0
+	endif
+
+	LOSEBASE:체력 = 20 * RAND:(MAX(2, getActualAtk(MASTER) - getActualDef(TARGET) / 2))
+
+	return 1

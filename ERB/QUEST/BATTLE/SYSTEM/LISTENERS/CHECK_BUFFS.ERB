@@ -1,0 +1,10 @@
+﻿@checkBuffs
+
+	for i, 101, 200
+		if TCVAR:MASTER:i
+			TCVAR:MASTER:i--
+		endif
+		if TCVAR:TARGET:i
+			TCVAR:TARGET:i--
+		endif
+	next
