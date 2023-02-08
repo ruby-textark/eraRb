@@ -1,0 +1,11 @@
+﻿@initSystem
+
+	FLAG:고정난수시드 = RAND:__INT_MAX__
+	
+	; 난이도별 몬스터 
+	for i, 100, 1000
+		existCsv i
+		if result
+			FLAG:(100 + (i / 100) * 10)++
+		endif
+	next

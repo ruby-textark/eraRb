@@ -3,14 +3,23 @@
 	return isTargetInRange()
 
 @COM101
+#dim dynamic damageBase
 
 	printW 급소를 노렸다!
+	
+	if !checkAmmo() && !isSameLocation()
+		printFormW 하지만 %kr(getAmmoName(), "이", "가")% 부족하여 실패했다...
+		return 0
+	endif
 
 	if RAND:10 < 6
 		printW 빗나갔다!
 		return 0
 	endif
-
-	LOSEBASE:체력 = 20 * RAND:(MAX(2, getActualAtk(MASTER) - getActualDef(TARGET) / 2))
+	
+	damageBase = 20 * MAX(2, getActualAtk(MASTER) - getActualDef(TARGET) / 2)
+	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+	
+	call useAmmo()
 
 	return 1

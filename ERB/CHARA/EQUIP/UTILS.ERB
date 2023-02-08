@@ -1,15 +1,44 @@
-﻿@getEquipAtk(charaIdx)
+﻿@getAttackRange()
 #function
-#dim dynamic charaIdx
-#dim dynamic totalAtk
 
-	totalAtk = 0
-	returnf totalAtk
+	if EQUIP:MASTER:16 == 1603
+		returnf 1
+	elseif EQUIP:MASTER:16 == 1604
+		returnf 2
+	else
+		returnf 0
+	endif
 
-@getEquipDef(charaIdx)
+@checkAmmo()
 #function
-#dim dynamic charaIdx
-#dim dynamic totalDef
 
-	totalDef = 0
-	returnf totalDef
+	if EQUIP:MASTER:16 == 1604
+		returnf ITEM:화살 > 0
+	else
+		returnf 1
+	endif
+
+@getAmmoName()
+#functions
+
+	if EQUIP:MASTER:16 == 1604
+		returnf "화살"
+	else
+		returnf ""
+	endif
+	
+@getAmmoAtk()
+#function
+
+	if EQUIP:MASTER:16 == 1604
+		returnf 2
+	else
+		returnf 0
+	endif
+
+@useAmmo()
+
+	if EQUIP:MASTER:16 == 1604
+		ITEM:화살--
+	else
+	endif

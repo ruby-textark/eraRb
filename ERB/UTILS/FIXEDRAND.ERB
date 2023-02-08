@@ -1,0 +1,6 @@
+﻿@frand(randMax)
+#function
+#dim dynamic randMax
+	FLAG:고정난수시드 = (FLAG:고정난수시드 * 6364136223846793005 + 1442695040888963407) % __INT_MAX__
+	
+	returnf FLAG:고정난수시드 % randMax

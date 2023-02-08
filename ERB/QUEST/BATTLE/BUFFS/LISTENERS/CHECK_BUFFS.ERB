@@ -1,0 +1,18 @@
+﻿@checkBuffs
+
+	for i, 101, 200
+		if TCVAR:MASTER:i
+			TCVAR:MASTER:i--
+			
+			if TCVAR:MASTER:i == 0
+				callForm offBuff{i}(MASTER)
+			endif
+		endif
+		if TCVAR:TARGET:i
+			TCVAR:TARGET:i--
+			
+			if TCVAR:TARGET:i == 0
+				callForm offBuff{i}(TARGET)
+			endif
+		endif
+	next

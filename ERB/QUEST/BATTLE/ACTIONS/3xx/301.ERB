@@ -1,0 +1,13 @@
+﻿@COM_ABLE301
+
+	return ITEM:화염병 > 0 && inBattleDistance() < 2
+
+@COM301
+
+	printFormL %kr(CALLNAME:MASTER, "은", "는")% 화염병을 힘껏 던졌다
+
+	LOSEBASE:체력 = 100 * RAND:MIN(getActualAtk(MASTER), 10)
+
+	ITEM:화염병--
+
+	return 1

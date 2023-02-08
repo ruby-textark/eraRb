@@ -4,15 +4,14 @@
 
 @isTargetInRange()
 #function
-	returnf inBattleDistance() < max(TCVAR:MASTER:사정거리, 0)
+	returnf inBattleDistance() <= max(TCVAR:MASTER:사정거리, 0)
 
 @isMasterInRange()
 #function
-	returnf inBattleDistance() < max(TCVAR:TARGET:사정거리, 0)
+	returnf inBattleDistance() <= max(TCVAR:TARGET:사정거리, 0)
 
 @isSameLocation()
 #function
-
 	returnf (TCVAR:MASTER:상하 == TCVAR:TARGET:상하) && (TCVAR:MASTER:좌우 == TCVAR:TARGET:좌우)
 
 @getActualAtk(charaIdx)
@@ -22,7 +21,12 @@
 #dim dynamic orgasmThres
 #dim dynamic orgasmParts
 
-	actualAtk = ABL:charaIdx:공격력
+	actualAtk = TCVAR:charaIdx:공격력
+
+	; 화살이나 탄약이 남아있을 경우
+	if checkAmmo()
+		actualAtk += getAmmoAtk()
+	endif
 	
 	; 전투기술 적용시 1레벨당 기본 공격력 + 10
 	actualAtk += ABL:charaIdx:전투기술 * 10
@@ -51,7 +55,7 @@
 #dim dynamic orgasmThres
 #dim dynamic orgasmParts
 
-	actualDef = ABL:charaIdx:방어력
+	actualDef = TCVAR:charaIdx:방어력
 	
 	; 전투기술 적용시 1레벨당 기본 방어력 + 2
 	actualDef += ABL:charaIdx:전투기술 * 2
@@ -69,6 +73,30 @@
 	actualDef = (actualDef * (20 - orgasmParts)) / 20
 	
 	; 저주각인 적용시 1레벨당 방어력 -20%
+	actualDef = ((10 - MARK:charaIdx:저주각인 * 2) * actualDef) / 10
+	
+	returnf actualDef
+
+@getActualMatk(charaIdx)
+#function
+#dim dynamic charaIdx
+#dim dynamic actualAtk
+
+	actualAtk = TCVAR:charaIdx:마법공격
+
+	; 저주각인 적용시 1레벨당 마법공격 -20%
+	actualAtk = ((10 - MARK:charaIdx:저주각인 * 2) * actualAtk) / 10
+	
+	returnf actualAtk
+
+@getActualMdef(charaIdx)
+#function
+#dim dynamic charaIdx
+#dim dynamic actualDef
+
+	actualDef = TCVAR:charaIdx:마법내성
+
+	; 저주각인 적용시 1레벨당 마법내성 -20%
 	actualDef = ((10 - MARK:charaIdx:저주각인 * 2) * actualDef) / 10
 	
 	returnf actualDef

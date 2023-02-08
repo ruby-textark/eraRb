@@ -1,0 +1,7 @@
+﻿@applyBuffTo(charIdx, buffIdx, buffTurn)
+#dim dynamic charIdx
+#dim dynamic buffIdx
+#dim dynamic buffTurn
+
+	TCVAR:charIdx:buffIdx += buffTurn
+	callForm onBuff{buffIdx}(charIdx)

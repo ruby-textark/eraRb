@@ -8,7 +8,21 @@
 		PALAM:MASTER:i = CFLAG:MASTER:(i + 400)
 	next
 	
-	; 사정거리 계산
+	TCVAR:MASTER:공격력 = ABL:MASTER:공격력
+	TCVAR:MASTER:방어력 = ABL:MASTER:방어력
+	TCVAR:MASTER:마법공격 = ABL:MASTER:마법공격
+	TCVAR:MASTER:마법내성 = ABL:MASTER:마법내성
 	
-	TCVAR:MASTER:사정거리 = 0
+	TCVAR:TARGET:공격력 = ABL:TARGET:공격력
+	TCVAR:TARGET:방어력 = ABL:TARGET:방어력
+	TCVAR:TARGET:마법공격 = ABL:TARGET:마법공격
+	TCVAR:TARGET:마법내성 = ABL:TARGET:마법내성
+	
+	TCVAR:MASTER:좌우 = RAND:5 - 2
+	TCVAR:MASTER:상하 = RAND:5 - 2
+	
+	TCVAR:TARGET:좌우 = RAND:5 - 2
+	TCVAR:TARGET:상하 = RAND:5 - 2
+	
+	TCVAR:MASTER:사정거리 = getAttackRange()
 	TCVAR:TARGET:사정거리 = CFLAG:TARGET:몬스터사거리

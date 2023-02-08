@@ -4,7 +4,7 @@
 
 	breakableEquipSlots = 0
 	for i, 11, 19
-		if EQUIP:MASTER:i != 0
+		if i != 16 && EQUIP:MASTER:i != 0
 			breakableEquipSlots++
 		endif
 	next
@@ -14,7 +14,7 @@
 		breakableEquipSlots = 0
 
 		for i, 11, 19
-			if EQUIP:MASTER:i != 0
+			if i != 16 && EQUIP:MASTER:i != 0
 				if breakableEquipSlots == brokenEquipSlot
 					printFormL %CALLNAME:TARGET%의 점액이 장비를 망가뜨린다
 					printFormL 망가진 장비는 이번 전투 중에서는 사용할 수 없을 것 같다...

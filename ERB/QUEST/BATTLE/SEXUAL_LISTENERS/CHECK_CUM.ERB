@@ -1,6 +1,10 @@
 ﻿@checkCum
 #dim dynamic cumAmount
 
+	if TALENT:TARGET:여성
+		return
+	endif
+
 	if PALAM:TARGET:사정 >= 10000
 		cumAmount = 1 + RAND:2
 		if TALENT:TARGET:대량사정 == 1

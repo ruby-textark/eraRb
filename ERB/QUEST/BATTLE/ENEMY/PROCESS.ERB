@@ -13,8 +13,7 @@
 	printFormW %CALLNAME:TARGET%의 차례
 
 	; 같은 위치에 있는 경우
-	if isSameLocation()
-
+	if isMasterInRange()
 		if RAND:100 < CFLAG:TARGET:성공격빈도
 			TFLAG:이번턴성공격 = 1
 			call processSexualAttack

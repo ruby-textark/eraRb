@@ -4,7 +4,7 @@
 	if TARGET != 0 && FLAG:자궁대여료 == 0 && RESULT == 101
 		call startQuest
 	elseif TARGET == 0 && RESULT == 102
-		call newQuest(1 + RAND:5)
+		call newQuestList
 	elseif TARGET != 0 && RESULT == 103
 		call cancelQuest
 

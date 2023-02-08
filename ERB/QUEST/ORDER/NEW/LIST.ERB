@@ -1,5 +1,31 @@
 ﻿@newQuestList()
 #dim dynamic questNumber
 
+	for i, 11, 16
+		; invalidate the expired quest
+		if DAY >= FLAG:(i * 10 + 1)
+			FLAG:(i * 10 + 1) = DAY + 1 + (RAND:6)
+			FLAG:(i * 10 + 2) = (i - 10) * 100 + 1 + RAND:(FLAG:(i * 10))
+			FLAG:(i * 10 + 3) = RAND:3
+		endif
+	next
+
+$showQuest
+
 	printFormL 현재 수주할 수 있는 퀘스트의 목록은 다음과 같습니다.
 	drawLine
+
+	for i, 11, 16
+		printFormL [{i - 10}] %kr(CSVCALLNAME(FLAG:(i * 10 + 2)), "을", "를")% 토벌할것(앞으로 {FLAG:(i * 10 + 1)}일/재도전{FLAG:(i * 10 + 3)}회)【%"★" * (i - 10)%】
+	next
+	
+	printL [0] 돌아가기
+
+	drawLine
+	input
+
+	if 0 < result && result < 6
+		questNumber = (10 + result) * 10
+		printFormW %CSVCALLNAME(FLAG:(questNumber + 2))% 토벌 의뢰를 수락했습니다.
+		call newQuest(FLAG:(questNumber + 2), FLAG:(questNumber + 3))
+	endif
