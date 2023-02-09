@@ -16,7 +16,7 @@ $showQuest
 	drawLine
 
 	for i, 11, 16
-		printFormL [{i - 10}] %kr(CSVCALLNAME(FLAG:(i * 10 + 2)), "을", "를")% 토벌할것(앞으로 {FLAG:(i * 10 + 1)}일/재도전{FLAG:(i * 10 + 3)}회)【%"★" * (i - 10)%】
+		printFormL [{i - 10}] %kr(CSVCALLNAME(FLAG:(i * 10 + 2)), "을", "를")% 토벌할것(앞으로 {FLAG:(i * 10 + 1) - DAY}일/재도전{FLAG:(i * 10 + 3)}회)【%"★" * (i - 10)%】
 	next
 	
 	printL [0] 돌아가기

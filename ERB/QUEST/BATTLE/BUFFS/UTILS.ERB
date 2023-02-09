@@ -5,3 +5,10 @@
 
 	TCVAR:charIdx:buffIdx += buffTurn
 	callForm onBuff{buffIdx}(charIdx)
+
+@hasBuff(charIdx, buffIdx)
+#function
+#dim dynamic charIdx
+#dim dynamic buffIdx
+
+	returnf TCVAR:charIdx:buffIdx > 0
