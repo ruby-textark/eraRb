@@ -1,20 +1,27 @@
 ﻿@bodyPartStr(partIdx)
 #functions
 #dim dynamic partIdx
+#dims dynamic retStr
 
 	if partIdx < 101 || partIdx > 199
 		printFormL {partIdx}는 올바른 신체 번호가 아닙니다
 		returnf "ERROR"
 	endif
 	
-	returnf bodyPartPrefix(partIdx) + specialPrefix(partIdx) + STR:partIdx
+	if RAND:3 == 0
+		retStr += bodyPartPrefix(partIdx)
+	elseif RAND:2 == 0
+		retStr += specialPrefix(partIdx)
+	endif
+	
+	returnf retStr + STR:partIdx
 
 @bodyPartPrefix(partIdx)
 #functions
 #dim dynamic partIdx
 
 	if RAND:3 == 0 && PALAM:MASTER:partIdx > 9000
-		returnf "불타는 듯한 "
+		returnf "불타오르는 "
 	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 8000
 		returnf "뜨겁게 떨리는 "
 	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 7000
@@ -34,7 +41,21 @@
 #dim dynamic partIdx
 
 	if partIdx == 101
+		if RAND:2 && ABL:MASTER:귀감도 > 9
+			returnf "완전히 암컷구멍이 되어버리고 말아버린"
+		elseif RAND:2 && ABL:MASTER:귀감도 > 6
+			returnf "스치는 바람에도 느껴버리는"
+		elseif RAND:2 && ABL:MASTER:귀감도 > 3
+			returnf "성감대로 개발된"
+		endif
 	elseif partIdx == 102
+		if RAND:2 && ABL:MASTER:입감도 > 9
+			returnf "호흡할 때 조차 느껴버릴 정도로 개발된"
+		elseif RAND:2 && ABL:MASTER:입감도 > 6
+			returnf "어느새 음란한 구멍이 되어버린"
+		elseif RAND:2 && ABL:MASTER:입감도 > 3
+			returnf "성감대로 개발된"
+		endif
 	elseif partIdx == 111
 	elseif partIdx == 112
 	elseif partIdx == 113

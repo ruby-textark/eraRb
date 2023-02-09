@@ -437,8 +437,7 @@ $drugLoop
 		EXP:MASTER:삽입경험++
 	endif
 
-	BASE:MASTER:자궁내정액1 = BASE:MASTER:자궁크기
-	BASE:MASTER:(320 + creatureType) = BASE:MASTER:자궁크기
+	call cumIntoMaster(BASE:MASTER:자궁크기, creatureType)
 	
 	FLAG:자궁대여료 = reward
 	EXP:MASTER:자궁대여경험++

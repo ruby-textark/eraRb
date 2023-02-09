@@ -160,13 +160,22 @@
 	endif
 
 	if BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수
-		; todo 출산
+		; todo 출산구상추가
+		printFormW 최근 %CALLNAME:MASTER%의 상태가 이상하다...
+		printFormW %kr(CALLNAME:MASTER, "은", "는")% 갑자기 찾아온 고통에 만삭의 배를 부여잡고 고통을 그저 견뎠다
+		printFormW .
+		printFormW .
+		printFormW .
+
+		printFormW %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%STR:(300 + CFLAG:MASTER:아이아버지)%]의 %CFLAG:MASTER:아이아버지 == 1 ? "아이" : "새끼"%를 출산했습니다
+		
 		TALENT:MASTER:임신 = 0
 		BASE:MASTER:임신일수 = 0
 		BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2 + 1
 		EXP:MASTER:출산경험++
+		
+		BASE:MASTER:질상태 = LIMIT(BASE:MASTER:질상태 - (1 + RAND:3), 0, MAXBASE:MASTER:질상태)
 
-		; todo 자궁대여 청산
 		if FLAG:자궁대여료
 			MONEY += FLAG:자궁대여료
 			FLAG:자궁대여료 = 0
@@ -178,8 +187,10 @@
 	TALENT:MASTER:임신 = 0
 	BASE:MASTER:임신일수 = 0
 	EXP:MASTER:낙태경험++
+	
+	BASE:MASTER:자궁상태 = LIMIT(BASE:MASTER:자궁상태 - (5 + RAND:10), 0, MAXBASE:MASTER:자궁상태)
+	BASE:MASTER:질상태 = LIMIT(BASE:MASTER:질상태 - (2 + RAND:5), 0, MAXBASE:MASTER:질상태)
 
-	; todo 자궁대여 청산
 	if FLAG:자궁대여료
 		FLAG:자궁대여료 = 0
 

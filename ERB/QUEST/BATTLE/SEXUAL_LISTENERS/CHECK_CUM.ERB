@@ -12,19 +12,7 @@
 		endif
 		
 		if CFLAG:MASTER:삽입질 == 1 || CFLAG:MASTER:삽입자궁 == 1|| CFLAG:MASTER:삽입난소 == 1
-			BASE:MASTER:자궁내정액1 += cumAmount
-			TFLAG:이번사정량 += cumAmount
-				
-			if CFLAG:TARGET:생식분류 == 1
-				BASE:MASTER:자궁내인간정액 += cumAmount
-			elseif CFLAG:TARGET:생식분류 == 2
-				BASE:MASTER:자궁내몬스터정액 += cumAmount
-			elseif CFLAG:TARGET:생식분류 == 3
-				BASE:MASTER:자궁내벌레정액 += cumAmount
-			elseif CFLAG:TARGET:생식분류 == 4
-				BASE:MASTER:자궁내짐승정액 += cumAmount
-			endif
-			
+			call cumIntoMaster(amount, CFLAG:TARGET:생식분류)
 		endif
 
 		if ABL:MASTER:흡정
