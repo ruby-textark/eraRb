@@ -1,0 +1,17 @@
+﻿@talentCheck
+
+	; 습득체크
+	if BASE:MASTER:보지조임 < 35
+		printFormW 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "은", "는")% 완전히 벌어져 버렸다...
+		call getTalent("허벌보지")
+	endif
+	
+	if BASE:MASTER:애널조임 < 35
+		printFormW 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(bodyPartStr(123), "은", "는")% 완전히 벌어져 버렸다...
+		call getTalent("세로애널")
+	endif
+	
+	if EXP:MASTER:자궁구개발경험 > 30
+		printFormL 집요하게 공략된 끝에 %CALLNAME:MASTER%의 %bodyPartStr(116)% 입구는 완전히 풀어져 벌름거리고 있다
+		call getTalent("자궁")
+	endif

@@ -32,8 +32,6 @@
 				else
 					print ★
 				endif
-			elseif TCVAR:TARGET:좌우 == j && TCVAR:TARGET:상하 == i
-				print ★
 			elseif TCVAR:MASTER:좌우 - 1 == j && TCVAR:MASTER:상하 == i
 				printButton "←", 1001
 			elseif TCVAR:MASTER:좌우 + 1 == j && TCVAR:MASTER:상하 == i
@@ -42,6 +40,8 @@
 				printButton "↑", 1003
 			elseif TCVAR:MASTER:좌우 == j && TCVAR:MASTER:상하 + 1 == i
 				printButton "↓", 1004
+			elseif TCVAR:TARGET:좌우 == j && TCVAR:TARGET:상하 == i
+				print ★
 			else
 				print □
 			endif

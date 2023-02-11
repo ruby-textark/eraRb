@@ -43,8 +43,10 @@
 	fontRegular
 	resetColor
 
-@printGetTalent(talentIdx)
-#dim dynamic talentIdx
+@getTalent(talentStr)
+#dims dynamic talentStr
+
+	TALENT:MASTER:talentStr = 1
 	printForm %kr(CALLNAME:MASTER, "은", "는")%%" "%
-	call printTalent(talentIdx)
-	printForm %krPost(TALENTNAME:talentIdx, "을", "를")% 얻었다.
+	call printTalent(getNum(TALENT, talentStr))
+	printForm %krPost(talentStr, "을", "를")% 얻었다.

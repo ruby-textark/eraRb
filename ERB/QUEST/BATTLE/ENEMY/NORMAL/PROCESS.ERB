@@ -1,8 +1,7 @@
 ﻿@processNormalAttack
 
-	;멧돼지
-	if CFLAG:TARGET:1 == 1
-		call chara1NormalAttack
-	else
+	tryccallform chara{CFLAG:TARGET:몬스터번호}NormalAttack
+		;
+	catch
 		call fallbackNormalAttack
-	endif
+	endcatch

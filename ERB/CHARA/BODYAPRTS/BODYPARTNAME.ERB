@@ -1,7 +1,8 @@
 ﻿@bodyPartStr(partIdx)
 #functions
 #dim dynamic partIdx
-#dims dynamic retStr
+#dim dynamic retStrCnt
+#dims dynamic retStr, 3
 
 	if partIdx < 101 || partIdx > 199
 		printFormL {partIdx}는 올바른 신체 번호가 아닙니다
@@ -9,62 +10,256 @@
 	endif
 	
 	if RAND:3 == 0
-		retStr += bodyPartPrefix(partIdx)
-	elseif RAND:2 == 0
-		retStr += specialPrefix(partIdx)
+		retStr:(retStrCnt++) = %bodyPartPrefix(partIdx)%
+		if !strlens(retStr:(retStrCnt - 1))
+			retStrCnt--
+		endif
+	endif
+	if RAND:3 == 0
+		retStr:(retStrCnt++) = %specialPrefix(partIdx)%
+		if !strlens(retStr:(retStrCnt - 1))
+			retStrCnt--
+		endif
 	endif
 	
-	returnf retStr + STR:partIdx
+	retStr:(retStrCnt++) = %STR:partIdx%
+	
+	returnf strJoin(retStr, " ", 0, retStrCnt)
 
 @bodyPartPrefix(partIdx)
 #functions
 #dim dynamic partIdx
 
-	if RAND:3 == 0 && PALAM:MASTER:partIdx > 9000
-		returnf "불타오르는 "
-	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 8000
-		returnf "뜨겁게 떨리는 "
-	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 7000
-		returnf "터질듯한 "
-	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 6000
-		returnf "흥분한 "
-	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 4000
-		returnf "오슬오슬한 "
-	elseif RAND:3 == 0 && PALAM:MASTER:partIdx > 2000
-		returnf "간질거리는 "
-	else
-		returnf ""
+	if RAND:2 && PALAM:MASTER:partIdx > 9000
+		returnf "불타오르는"
+	elseif RAND:2 && PALAM:MASTER:partIdx > 8000
+		returnf "뜨겁게 떨리는"
+	elseif RAND:2 && PALAM:MASTER:partIdx > 7000
+		returnf "터질듯한"
+	elseif RAND:2 && PALAM:MASTER:partIdx > 6000
+		returnf "흥분한"
+	elseif RAND:2 && PALAM:MASTER:partIdx > 4000
+		returnf "오슬오슬한"
+	elseif RAND:2 && PALAM:MASTER:partIdx > 2000
+		returnf "간질거리는"
 	endif
+	
+	returnf ""
 
 @specialPrefix(partIdx)
 #functions
 #dim dynamic partIdx
+#dim dynamic retStrCnt
+#dims dynamic retStr, 5
 
 	if partIdx == 101
 		if RAND:2 && ABL:MASTER:귀감도 > 9
-			returnf "완전히 암컷구멍이 되어버리고 말아버린"
+			retStr:(retStrCnt++) = 완전히 암컷구멍이 되어버리고 말아버린
 		elseif RAND:2 && ABL:MASTER:귀감도 > 6
-			returnf "스치는 바람에도 느껴버리는"
-		elseif RAND:2 && ABL:MASTER:귀감도 > 3
-			returnf "성감대로 개발된"
+			retStr:(retStrCnt++) = 스치는 바람에도 느껴버리는
+		elseif ABL:MASTER:귀감도 > 3
+			retStr:(retStrCnt++) = 성감대로 개발된
+		else
+			retStr:(retStrCnt++) = 아직 개발되지 않은
 		endif
 	elseif partIdx == 102
 		if RAND:2 && ABL:MASTER:입감도 > 9
-			returnf "호흡할 때 조차 느껴버릴 정도로 개발된"
+			retStr:(retStrCnt++) = 호흡할 때 조차 느껴버릴 정도로 개발된
 		elseif RAND:2 && ABL:MASTER:입감도 > 6
-			returnf "어느새 음란한 구멍이 되어버린"
-		elseif RAND:2 && ABL:MASTER:입감도 > 3
-			returnf "성감대로 개발된"
+			retStr:(retStrCnt++) = 어느새 음란한 구멍이 되어버린
+		elseif ABL:MASTER:입감도 > 3
+			retStr:(retStrCnt++) = 성감대로 개발된
+		else
+			retStr:(retStrCnt++) = 성감대로 개발되지 않은
 		endif
 	elseif partIdx == 111
+		if RAND:2 && ABL:MASTER:겨드랑이감도 > 9
+			retStr:(retStrCnt++) = 가랑이 사이처럼 개발되어버린
+		elseif RAND:2 && ABL:MASTER:겨드랑이감도 > 6
+			retStr:(retStrCnt++) = 틈새 사이로 전해지는 이물감에 느껴버리는
+		elseif ABL:MASTER:겨드랑이감도 > 3
+			retStr:(retStrCnt++) = 살이 스칠 떄마다 오싹오싹한
+		else
+			retStr:(retStrCnt++) = 아직 개발되지 않은
+		endif
 	elseif partIdx == 112
+		if !RAND:3 && BASE:MASTER:모유 > MAXBASE:MASTER:모유 * 2 / 3
+			retStr:(retStrCnt++) = 모유가 가득차
+		elseif !RAND:3 && BASE:MASTER:모유 > MAXBASE:MASTER:모유 / 3
+			retStr:(retStrCnt++) = 모유가 담겨
+		else
+			retStr:(retStrCnt++) = 모유가 바닥난 채
+		endif
+
+		if RAND:2
+			if RAND:2 && ABL:MASTER:가슴감도 > 9
+				retStr:(retStrCnt++) = 옷을 입으면 느껴버릴 정도로 개발된
+			elseif RAND:2 && ABL:MASTER:가슴감도 > 6
+				retStr:(retStrCnt++) = 무의식중에 주물러지기를 소망하는
+			elseif ABL:MASTER:가슴감도 > 3
+				retStr:(retStrCnt++) = 만져질 때마다 몸이 달아오르는
+			else
+				retStr:(retStrCnt++) = 경험 부족한
+			endif
+		else
+			if TALENT:MASTER:가슴크기 == -2
+				retStr:(retStrCnt++) = 안쓰러울 정도로 작은
+			elseif TALENT:MASTER:가슴크기 == -1
+				retStr:(retStrCnt++) = 조금 작은
+			elseif TALENT:MASTER:가슴크기 == 0
+				retStr:(retStrCnt++) = 한 손으로 쥐기에 알맞은
+			elseif TALENT:MASTER:가슴크기 == 1
+				retStr:(retStrCnt++) = 이리저리 출렁이는 큰
+			elseif TALENT:MASTER:가슴크기 == 2
+				retStr:(retStrCnt++) = 터무니없이 큰 크기의
+			endif
+		endif
 	elseif partIdx == 113
+		if !RAND:3 && BASE:MASTER:모유 > MAXBASE:MASTER:모유 * 2 / 3
+			retStr:(retStrCnt++) = 모유가 새어나오고
+		elseif !RAND:3 && BASE:MASTER:모유 > MAXBASE:MASTER:모유 / 3
+			retStr:(retStrCnt++) = 모유가 방울져 떨어지며
+		endif
+
+		if RAND:2 && ABL:MASTER:유두감도 > 9
+			retStr:(retStrCnt++) = 스치는 속옷에 일상생활조차 방해받을 정도로 개발된
+		elseif RAND:2 && ABL:MASTER:유두감도 > 6
+			retStr:(retStrCnt++) = 볼록 튀어나와 추잡한 욕망을 숨기려 하지도 않는
+		elseif ABL:MASTER:유두감도 > 3
+			retStr:(retStrCnt++) = 꼿꼿이 선 채로 도발하는
+		else
+			retStr:(retStrCnt++) = 아직 경험이 부족한
+		endif
 	elseif partIdx == 114
+		if !RAND:3 && TALENT:MASTER:임신
+			if CFLAG:MASTER:아이아버지 == 1
+				retStr:(retStrCnt++) = 아이를 밴 채
+			else
+				retStr:(retStrCnt++) = 이종의 새끼를 임신한 채
+			endif
+		endif
+
+		if !RAND:3 && ABL:MASTER:자궁감도 > 3
+			retStr:(retStrCnt++) = 개발된 %kr(STR:116, "을", "를")% 모른척 가리며
+		endif
+		if RAND:2 && ABL:MASTER:복부감도 > 9
+			retStr:(retStrCnt++) = 꾸욱 눌러주면 그만 반항할 수 없게 되버리는
+		elseif RAND:2 && ABL:MASTER:복부감도 > 6
+			retStr:(retStrCnt++) = 쓰다듬어주면 어느새 발정하고 마는 
+		elseif ABL:MASTER:복부감도 > 3
+			retStr:(retStrCnt++) = 꾸욱꾸욱 눌릴때마다 달아오르는
+		else
+			retStr:(retStrCnt++) = 아직 성감대로 개발되지 않은
+		endif
 	elseif partIdx == 115
+		if RAND:2 && ABL:MASTER:난소감도 > 9
+			retStr:(retStrCnt++) = 자지를 만나면 기뻐하며 수정의 준비를 하는
+		elseif RAND:2 && ABL:MASTER:난소감도 > 6
+			retStr:(retStrCnt++) = 아기를 낳고 싶어 안달난
+		elseif ABL:MASTER:난소감도 > 3
+			retStr:(retStrCnt++) = 느껴서는 안 될 쾌락을 알아버린
+		else
+			retStr:(retStrCnt++) = 성적인 자극에 익숙하지 않은
+		endif
 	elseif partIdx == 116
+		if BASE:MASTER:자궁내정액1 || BASE:MASTER:자궁내정액2 || BASE:MASTER:자궁내정액3 || BASE:MASTER:자궁내정액4
+			retStr:(retStrCnt++) = 찐득한 정액이 들어차
+		endif
+		if RAND:2 && ABL:MASTER:자궁감도 > 9
+			retStr:(retStrCnt++) = 아기보다 자지를 더 반기는
+		elseif RAND:2 && ABL:MASTER:자궁감도 > 6
+			retStr:(retStrCnt++) = 괴롭혀지면 두근거리며 기대하는
+		elseif ABL:MASTER:자궁감도 > 3
+			retStr:(retStrCnt++) = 꾸욱 눌릴때마다 행복을 느끼는
+		else
+			retStr:(retStrCnt++) = 아직은 경험이 부족한
+		endif
 	elseif partIdx == 121
+		if RAND:3 && BASE:MASTER:보지조임 < MAXBASE:MASTER:보지조임 / 2
+			retStr:(retStrCnt++) = 돌이킬 수 없을 정도로 늘어나버려
+		endif
+		
+		if TALENT:MASTER:처녀질
+			if EXP:MASTER:질경험 < 50 && ABL:MASTER:질감도 < 3
+				retStr:(retStrCnt++) = 아직 남자를 허용하지 않은
+			elseif EXP:MASTER:질경험 < 100 && ABL:MASTER:질감도 < 6
+				retStr:(retStrCnt++) = 처녀인 채 쾌락을 알아버린
+			else
+				retStr:(retStrCnt++) = 삽입을 제외하고는 이미 경험 가득한
+			endif
+		endif
+
+		if RAND:2 && ABL:MASTER:질감도 > 9
+			retStr:(retStrCnt++) = 믿기지 않을 정도고 경험이 풍부한
+		elseif RAND:2 && ABL:MASTER:질감도 > 6
+			retStr:(retStrCnt++) = 완전히 암컷구멍으로 개발된
+		elseif ABL:MASTER:질감도 > 3
+			retStr:(retStrCnt++) = 음란하게 거듭난
+		else
+			retStr:(retStrCnt++) = 경험 부족의 미숙한
+		endif
 	elseif partIdx == 122
+		if RAND:2 && ABL:MASTER:클리감도 > 9
+			retStr:(retStrCnt++) = 과연 암컷 자지라고밖에 볼 수 없는
+		elseif RAND:2 && ABL:MASTER:클리감도 > 6
+			retStr:(retStrCnt++) = 꾸짖어주는 것을 즐기는
+		elseif ABL:MASTER:클리감도 > 3
+			retStr:(retStrCnt++) = 귀엽게 튀어나온
+		else
+			retStr:(retStrCnt++) = 몇 번 만져보지 않은
+		endif
 	elseif partIdx == 123
+		if RAND:3 && BASE:MASTER:애널조임 < MAXBASE:MASTER:애널조임 / 2
+			retStr:(retStrCnt++) = 한계 이상으로 늘어나버려
+		endif
+		
+		if EXP:MASTER:애널경험 > 2 * EXP:MASTER:질경험
+			if TALENT:MASTER:처녀질
+				retStr:(retStrCnt++) = 처녀인 주제에 이쪽은 완전히 개발되어
+			else
+				retStr:(retStrCnt++) = 앞구멍보다 배는 더 사용되어
+			endif
+		endif
+		
+		if RAND:2 && ABL:MASTER:애널감도 > 9
+			retStr:(retStrCnt++) = 질척이는 구멍이 되어버린
+		elseif RAND:2 && ABL:MASTER:애널감도 > 6
+			retStr:(retStrCnt++) = 
+		elseif ABL:MASTER:애널감도 > 3
+			retStr:(retStrCnt++) = 꾸물거리며 삽입된 물건을 조이길 좋아하는
+		else
+			retStr:(retStrCnt++) = 경험 부족의 미숙한
+		endif
 	elseif partIdx == 124
+		if RAND:2 && ABL:MASTER:방광감도 > 9
+			retStr:(retStrCnt++) = 안쪽이 가득 채워지는 감각을 즐기는
+		elseif RAND:2 && ABL:MASTER:방광감도 > 6
+			retStr:(retStrCnt++) = 구석구석 꼼꼼히 개발된
+		elseif ABL:MASTER:방광감도 > 3
+			retStr:(retStrCnt++) = 사용감이 오르기 시작한
+		else
+			retStr:(retStrCnt++) = 신품이나 다름없는
+		endif
 	elseif partIdx == 125
+		if RAND:2 && ABL:MASTER:요도감도 > 9
+			retStr:(retStrCnt++) = 걸핏하면 실금하며 절정해버리는
+		elseif RAND:2 && ABL:MASTER:요도감도 > 6
+			retStr:(retStrCnt++) = 화장실에 갈 떄마다 느껴버리는
+		elseif ABL:MASTER:요도감도 > 3
+			retStr:(retStrCnt++) = 이물감에 적응하기 시작한
+		else
+			retStr:(retStrCnt++) = 성적인 자극에 익숙하지 않은
+		endif
+	elseif partIdx == 126
+		if RAND:2 && ABL:MASTER:발감도 > 9
+			retStr:(retStrCnt++) = 기분 좋은 압박감을 즐기는
+		elseif RAND:2 && ABL:MASTER:발감도 > 6
+			retStr:(retStrCnt++) = 음란한 자극에 익숙해진
+		elseif ABL:MASTER:발감도 > 3
+			retStr:(retStrCnt++) = 꾹 눌러주면 귀엽게 달아오르는
+		else
+			retStr:(retStrCnt++) = 성적인 자극에 익숙하지 않은
+		endif
 	endif
+	
+	returnf strJoin(retStr, " ", 0, retStrCnt)

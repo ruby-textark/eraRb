@@ -7,7 +7,7 @@
 	orgasmThres = (10000 - 19 * BASE:MASTER:혈중미약농도) * (1 + MARK:MASTER:절정봉인)
 	for i, 501, 600
 		if CFLAG:MASTER:i >= orgasmThres
-			printFormW %bodyPartStr(i - 500)% 절정
+			printFormW %STR:(i - 500)% 절정
 			orgasmCount++
 			DOWN:i = CFLAG:MASTER:i - CFLAG:MASTER:i % orgasmThres
 

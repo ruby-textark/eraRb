@@ -18,6 +18,8 @@
 			call colorPrint(0xff3399, "[피임결계]")
 			printW 가 해제되었다
 			
+			TALENT:MASTER:피임결계 = 0
+			
 			if RAND:3 == 0
 				printFormW 그동안 정액에 갈증을 느끼던 %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "이", "가")% 무너진 결계 사이로 들어오는 정자에 환희하고 있다
 			elseif RAND:2 == 0
@@ -33,9 +35,16 @@
 			return
 		endif
 	endif
+	
+	if TALENT:MASTER:교미배란
+		printFormW %bodyPartStr(121)% 안으로 들어온 정액에 %CALLNAME:MASTER%의 %kr(bodyPartStr(115), "은", "는")% 환희하며 배란하고 있다.
+		BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2
+		TALENT:MASTER:생리중 = 0
+		TALENT:MASTER:가임기 = 1
+	endif
 
 	BASE:MASTER:자궁내정액1 += amount
 	BASE:MASTER:(320 + fatherType) += amount
 
 	; 전투중일경우 필요함
-	TFLAG:이번사정량 += cumAmount
+	TFLAG:이번사정량 += amount
