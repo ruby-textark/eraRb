@@ -7,7 +7,9 @@
 		returnf 0
 	endif
 	
-	if CFLAG:MASTER:(200 + i)
+	if CFLAG:(200 + i) == 2 && !ABL:TARGET:도구사용
+		returnf 0
+	elseif CFLAG:(200 + i) > 2
 		returnf 0
 	endif
 
@@ -46,28 +48,22 @@
 
 @getSexualAtkBodyPart
 #dim dynamic partsCount
-#dim dynamic attackedIdx
+#dim dynamic availableParts, 100
+
+	if TCVAR:TARGET:성희롱부위 && isAttackableBodyPart(TCVAR:TARGET:성희롱부위)
+		if RAND:5 < 4
+			return TCVAR:TARGET:성희롱부위
+		endif
+	endif
 
 	partsCount = 0
 	for i, 101, 200
 		if isAttackableBodyPart(i)
-			partsCount++
-		endif
-	next
-	
-	attackedIdx = RAND:partsCount
-
-	partsCount = 0
-	for i, 101, 200
-		if isAttackableBodyPart(i)
-			if partsCount == attackedIdx
-				return i
-			endif
-			partsCount++
+			availableParts:(partsCount++) = i
 		endif
 	next
 
-	return -1
+	return availableParts:(RAND:partsCount)
 
 @sexualInsert(attackedIdx)
 #dim dynamic attackedIdx

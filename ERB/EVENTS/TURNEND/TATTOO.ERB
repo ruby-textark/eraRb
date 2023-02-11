@@ -1,0 +1,26 @@
+﻿@tattoo
+
+	if MARK:MASTER:음문각인 >= 1
+		if BASE:MASTER:자궁내정액1 < BASE:MASTER:자궁크기 / 2
+			printFormW %CALLNAME:MASTER%의 하복부에 새겨진 음문이 정액의 갈증을 호소하고 있다...
+			BASE:MASTER:이성 = LIMIT(BASE:MASTER:이성 - 100, 0, MAXBASE:MASTER:이성)
+			
+			if BASE:MASTER:이성 == 0
+				printFormW 결국 이성이 바닥나버린 %kr(CALLNAME:MASTER, "은", "는")% 필사적으로 정기를 갈구하고 있다...
+				call getTalent("발정")
+			endif
+		endif
+	endif
+	
+	if MARK:MASTER:음문각인 >= 2
+		if !RAND:10 && MAXBASE:MASTER:자궁크기
+		endif
+	endif
+	
+	if MARK:MASTER:음문각인 >= 3
+		; 상시발정
+		if !TALENT:MASTER:발정
+			printFormW 음문의 힘으로 %kr(CALLNAME:MASTER, "은", "는")% 강제로 몸이 뜨거워지고 있다...
+			call getTalent("발정")
+		endif
+	endif

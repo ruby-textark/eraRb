@@ -1,0 +1,26 @@
+﻿@isMasterLewd()
+#function
+
+	if ABL:MASTER:욕망 > 5
+		returnf 1
+	elseif (TALENT:MASTER:음란 || TALENT:MASTER:발정) && BASE:MASTER:이성 < MAXBASE:MASTER:이성 * 3 / 4
+		returnf 1
+	endif
+	
+	returnf 0
+
+@isMasterSubmissive()
+#function
+
+	if ABL:MASTER:순종 > 5
+		returnf 1
+	elseif (TALENT:MASTER:패배자  && BASE:MASTER:이성 < MAXBASE:MASTER:이성 * 3 / 4) || BASE:MASTER:이성 < MAXBASE:MASTER:이성 / 4
+		returnf 1
+	endif
+
+	returnf 0
+
+@isHole(partIdx)
+#dim dynamic partIdx
+#function
+	returnf partIdx == 101 || partIdx == 102 || partIdx == 115 || partIdx == 116 || partIdx == 121 || partIdx == 123 || partIdx == 124 || partIdx == 125
