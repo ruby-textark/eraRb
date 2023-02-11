@@ -1,4 +1,4 @@
-﻿@chara103Parasite
+﻿@c103Parasite
 #dim dynamic partsCount
 #dim dynamic attackedIdx
 #dim dynamic availableParts, 100
@@ -21,16 +21,16 @@
 
 	return 0
 
-@chara103SexualAttack
+@c103onSexualAttack
 
 	; 5%확률로 기생
 	if RAND:20 == 0
-		call chara103Parasite
+		call c103Parasite
 		; 실패했을 경우 음침한 슬라임과 같음
 		if !RESULT
-			call chara102SexualAttack
+			call c102onSexualAttack
 		endif
 	; 그 외의 경우 음침한 슬라임과 같음
 	else
-		call chara102SexualAttack
+		call c102onSexualAttack
 	endif

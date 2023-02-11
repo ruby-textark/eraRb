@@ -1,11 +1,11 @@
-﻿@fallbackSexualAttack
+﻿@fallbackOnSexualAttack_e
 #dim dynamic sourceAmount
 #dim dynamic attackedIdx
 #dims dynamic attackedName
 
 	call getSexualAtkBodyPart
 	attackedIdx = RESULT
-	attackedName = %bodyPartStr(attackedIdx)%
+	attackedName = %STR:attackedIdx%
 	
 	printFormL 성희롱:%attackedName%
 	printForm %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 

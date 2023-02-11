@@ -1,6 +1,7 @@
 ﻿@checkOrgasmInBattle
 #dim dynamic orgasmThres
 #dim dynamic orgasmCount
+#dim dynamic orgasmParts, 100
 #dim dynamic insuffOrgasm
 
 	orgasmThres = masterOrgasmThres()
@@ -8,7 +9,7 @@
 		if PALAM:MASTER:i >= orgasmThres
 			; todo 절정구상
 			printFormL %STR:(i)% 절정
-			orgasmCount++
+			orgasmParts:(orgasmCount++) = i - 400
 			DOWN:i = PALAM:MASTER:i - PALAM:MASTER:i % orgasmThres
 
 			; 욕정 증가
@@ -52,18 +53,10 @@
 			endif
 		endif
 		; todo 절정구상
+		call onMasterOrgasm_m(orgasmParts, orgasmCount, 1)
+		call onMasterOrgasm_e(orgasmParts, orgasmCount, 1)
 	elseif insuffOrgasm
 		printFormL %kr(CALLNAME:MASTER, "은", "는")% 절정을 봉인당한 상태다
-		
-		if RAND:5 == 0
-			printFormL %kr(CALLNAME:MASTER, "은", "는")% 온몸을 애처로울 정도로 떨고 있다
-		elseif RAND:4 == 0
-			printFormL %kr(CALLNAME:MASTER, "은", "는")% 간절한 눈빛으로 몸을 배배 꼬면서 %kr(CALLNAME:TARGET, "을", "를")% 바라보았다
-		elseif RAND:3 == 0
-			printFormL 이리저리 사지를 뒤틀어보지만, %kr(CALLNAME:MASTER, "이", "가")% 절정에 도달하는 일은 없었다
-		elseif RAND:2 == 0
-			printFormL 음침한 붉은 문신이 %CALLNAME:MASTER%의 몸에서 밝게 빛날 뿐, 파들파들 떨리는 그 몸에 절정은 허락되지 않았다
-		else
-			printFormL %kr(CALLNAME:MASTER, "은", "는")% 자존심도 내려놓고 스스로를 위로하려고 시도하지만, 효과가 있을 리가 없었다
-		endif
+		call onMasterInsuffOrgasm_m(1)
+		call onMasterInsuffOrgasm_e(1)
 	endif

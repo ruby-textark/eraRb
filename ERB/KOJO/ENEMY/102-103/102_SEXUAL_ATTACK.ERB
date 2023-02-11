@@ -1,4 +1,4 @@
-﻿@chara102ClothDestroy
+﻿@c102ClothDestroy
 #dim dynamic breakableEquipSlots
 #dim dynamic brokenEquipSlot
 
@@ -26,17 +26,17 @@
 	endif
 
 
-@chara102SexualAttack
+@c102onSexualAttack
 #dim dynamic attackedIdx
 #dims dynamic attackedName
 
 	if RAND:10 == 0
-		call chara102ClothDestroy
+		call c102ClothDestroy
 	endif
 
 	call getSexualAtkBodyPart
 	attackedIdx = RESULT
-	attackedName = %bodyPartStr(attackedIdx)%
+	attackedName = %STR:attackedIdx%
 	
 	printFormL 성희롱:%attackedName%
 	

@@ -5,7 +5,7 @@
 	if TALENT:MASTER:피임결계
 		printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 피임의 마법으로 보호되고 있다
 		
-		if BASE:MASTER:마력 < amount * 10
+		if BASE:MASTER:마력 < amount * 50
 			if RAND:3 == 0
 				printFormW 그러나 바닥나버린 마력에 의해 얇아진 방벽은 더 이상 자궁을 지켜줄 수 없었다
 			elseif RAND:2 == 0
@@ -28,7 +28,7 @@
 				printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 밀물처럼 쏟아져 들어오는 정액을 막을 생각조차 못하고 그저 받아들이고 있다
 			endif
 		else
-			BASE:MASTER:마력 -= amount * 10
+			BASE:MASTER:마력 -= amount * 50
 			if BASE:MASTER:마력 < 100
 				printFormW 
 			endif

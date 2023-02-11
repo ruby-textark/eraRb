@@ -4,6 +4,9 @@
 		if CFLAG:MASTER:i == 1 && TALENT:MASTER:i == 1
 			printFormL %kr(CALLNAME:MASTER, "은", "는")% 처음으로 %bodyPartStr(i - 200)%로 하는 성교를 경험했다.
 			TALENT:MASTER:i = 0
+			
+			call onMasterLostVirgin_m(i - 200)
+			call onMasterLostVirgin_e(i - 200)
 		endif
 	next
 
@@ -13,5 +16,8 @@
 		if CFLAG:MASTER:i > 3 && TALENT:MASTER:i == 1
 			printFormL %kr(CALLNAME:MASTER, "은", "는")% %STR:(200+CFLAG:MASTER:i)%에게 %bodyPartStr(i - 200)%의 처녀를 잃었다.
 			TALENT:MASTER:i = 0
+			
+			call onMasterLostVirgin_m(i - 200)
+			call onMasterLostVirgin_e(i - 200)
 		endif
 	next

@@ -11,6 +11,9 @@
 			BASE:MASTER:질상태 -= 3
 			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "이", "가")% 늘어나다 못해 일부 찢어진 것 같다
 		endif
+
+		call onMasterExpansion_m(getNum(BASE, "보지조임"))
+		call onMasterExpansion_e(getNum(BASE, "보지조임"))
 	endif
 	
 	if CFLAG:MASTER:삽입애널 == 1
@@ -24,4 +27,7 @@
 			BASE:MASTER:애널상태 -= 3
 			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(123), "이", "가")% 늘어나다 못해 일부 찢어진 것 같다
 		endif
+
+		call onMasterExpansion_m(getNum(BASE, "애널조임"))
+		call onMasterExpansion_e(getNum(BASE, "애널조임"))
 	endif

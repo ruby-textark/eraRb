@@ -1,10 +1,14 @@
 ﻿@SHOW_STATUS
 
 	barstr BASE:MASTER:체력, MAXBASE:MASTER:체력, 10
-	printFormL %CALLNAME:MASTER%의 체력 : %results% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
+	printForm %CALLNAME:MASTER%의 체력 : %results% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
+	barstr BASE:MASTER:마력, MAX(MAXBASE:MASTER:마력, 1), 10
+	printFormL /마력 : %results% ({BASE:MASTER:마력}/{MAXBASE:MASTER:마력})
 
 	barstr BASE:TARGET:체력, MAXBASE:TARGET:체력, 10
-	printFormL %CALLNAME:TARGET%의 체력 : %results% ({BASE:TARGET:체력}/{MAXBASE:TARGET:체력})
+	printForm %CALLNAME:TARGET%의 체력 : %results% ({BASE:TARGET:체력}/{MAXBASE:TARGET:체력})
+	barstr BASE:TARGET:마력, MAX(MAXBASE:TARGET:마력, 1), 10
+	printFormL /마력 : %results% ({BASE:TARGET:마력}/{MAXBASE:TARGET:마력})
 	
 	drawLine
 	

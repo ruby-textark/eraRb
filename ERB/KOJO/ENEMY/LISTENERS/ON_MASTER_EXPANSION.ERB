@@ -1,0 +1,10 @@
+﻿@onMasterExpansion_e(partIdx)
+#dim dynamic partIdx
+
+	tryccallform c{CFLAG:TARGET:몬스터번호}onMasterExpansion(partIdx)
+		;
+	catch
+		call fallbackOnMasterExpansion_e(partIdx)
+	endcatch
+
+

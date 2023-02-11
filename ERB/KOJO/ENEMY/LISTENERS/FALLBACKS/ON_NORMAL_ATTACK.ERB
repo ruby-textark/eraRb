@@ -1,0 +1,5 @@
+﻿@fallbackOnNormalAttack_e
+#dim dynamic damageBase
+
+	damageBase = 10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER))
+	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)

@@ -1,0 +1,15 @@
+﻿@c___onSexualAttack
+#dim dynamic attackedIdx
+#dims dynamic attackedName
+
+	call getSexualAtkBodyPart
+	attackedIdx = RESULT
+	attackedName = %STR:attackedIdx%
+	
+	printFormL 성희롱:%attackedName%
+
+	SOURCE:MASTER:attackedIdx = 90 + RAND:20
+
+	; exp 가산
+	EXP:MASTER:attackedIdx++
+	

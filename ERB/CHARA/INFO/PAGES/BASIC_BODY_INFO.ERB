@@ -9,7 +9,7 @@
 
 		printForm %STR:i, 14, RIGHT% (감도Lv.{ABL:MASTER:i}) : 
 
-		barstr BASE:MASTER:마력, MAXBASE:MASTER:마력, 10
+		barstr BASE:MASTER:마력, MAX(MAXBASE:MASTER:마력, 1), 10
 		if BASE:MASTER:마력 > 67
 			call colorPrint(0x00ff00, results)
 		elseif BASE:MASTER:마력 > 33

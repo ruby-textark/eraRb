@@ -1,0 +1,9 @@
+﻿@onMasterLostVirgin_e(partIdx)
+#dim dynamic partIdx
+
+	tryccallform c{CFLAG:TARGET:몬스터번호}onMasterLostVirgin(partIdx)
+		;
+	catch
+		call fallbackOnMasterLostVirgin_e(partIdx)
+	endcatch
+

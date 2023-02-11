@@ -1,0 +1,21 @@
+﻿@onMasterOrgasm_e(orgasmParts, orgasmCounts, inBattle)
+#dim dynamic orgasmParts, 100
+#dim dynamic orgasmCounts
+#dim dynamic inBattle
+
+	tryccallform c{CFLAG:TARGET:몬스터번호}onMasterOrgasm(orgasmParts, orgasmCounts, inBattle)
+		;
+	catch
+		call fallbackOnMasterOrgasm_e(orgasmParts, orgasmCounts, inBattle)
+	endcatch
+
+
+@onMasterInsuffOrgasm_e(inBattle)
+#dim dynamic inBattle
+
+	tryccallform c{CFLAG:TARGET:몬스터번호}onMasterInsuffOrgasm(inBattle)
+		;
+	catch
+		call fallbackOnMasterInsuffOrgasm_e(inBattle)
+	endcatch
+

@@ -1,4 +1,4 @@
-﻿@processEnemy
+﻿@onEnemyTurn
 	
 	LOSEBASE:체력 = 0
 	LOSEBASE:마력 = 0
@@ -15,11 +15,21 @@
 	; 같은 위치에 있는 경우
 	if isMasterInRange()
 		if RAND:100 < CFLAG:TARGET:성공격빈도
+			printFormW %CALLNAME:TARGET%의 성희롱
 			TFLAG:이번턴성공격 = 1
-			call processSexualAttack
+			tryccallform c{CFLAG:TARGET:몬스터번호}onSexualAttack
+				;
+			catch
+				call fallbackOnSexualAttack_e
+			endcatch
 		else
+			printFormW %CALLNAME:TARGET%의 공격
 			TFLAG:이번턴성공격 = 0
-			call processNormalAttack
+			tryccallform c{CFLAG:TARGET:몬스터번호}onNormalAttack
+				;
+			catch
+				call fallbackOnNormalAttack_e
+			endcatch
 		endif
 	; 다른 위치에 있을 경우
 	else
