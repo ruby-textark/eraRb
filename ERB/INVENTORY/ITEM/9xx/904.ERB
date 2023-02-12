@@ -1,0 +1,22 @@
+﻿; 자궁확대약
+@isUsable904(targetIdx)
+#dim dynamic targetIdx
+
+	return targetIdx == MASTER
+
+@onUseItem904(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:904, "을", "를")% 사용했다.
+	EXP:targetIdx:약물경험++
+	BASE:targetIdx:자궁크기 = LIMIT(BASE:targetIdx:자궁크기 + 100, 100, 50000)
+	
+	return 1
+
+@isEquipable904()
+	return 0
+@isUnequipable904()
+	return 0
+
+@onEquip904()
+@onUnequip904()

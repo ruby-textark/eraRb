@@ -1,0 +1,70 @@
+﻿; 어차피 주인공 이외의 대상에 대해 콜하지는 않긴 한데 이런저런 래퍼가 필요하긴 함
+@showMasterEquips
+#dim dynamic equipSlotIdx
+$wrapper
+
+	call showCharaEquips
+	
+	printL [900] - 돌아가기
+	input
+	equipSlotIdx = result
+	
+	if 11 <= equipSlotIdx && equipSlotIdx <= 19
+		if strlens(EQUIPNAME:equipSlotIdx) == 0
+			goto wrapper
+		endif
+
+		$equipChange
+
+		printFormL %EQUIPNAME:equipSlotIdx% 장비 목록
+		printL 교체할 장비를 아래에서 선택해주세요
+		drawLine
+		
+		for i, 1001 + (equipSlotIdx - 10) * 100, 1100 + (equipSlotIdx - 10) * 100
+			if ITEM:i && EQUIP:MASTER:equipSlotIdx != i
+				printFormL [{i}] - %ITEMNAME:i%
+			endif
+		next
+		
+		printL [1000] - 해제
+		input
+		
+		if result == 1000
+			call unequipMasterEquips(equipSlotIdx)
+			if !result
+				goto equipChange
+			endif
+		else
+			call changeMasterEquips(equipSlotIdx, result)
+			if !result
+				goto equipChange
+			endif
+		endif
+	endif
+
+	if result != 900
+		goto wrapper
+	endif
+
+	return 1
+
+@showCharaEquips
+
+	clearline 99999
+	
+	printFormL %NAME:MASTER%의 현재 장비 상태
+	drawLine
+	
+	for i, 11, 19
+		if strlens(EQUIPNAME:i) == 0
+			continue
+		endif
+		
+		printForm [{i}] %EQUIPNAME:i% 장비 : 
+		
+		if EQUIP:MASTER:i
+			printFormL %ITEMNAME:(EQUIP:MASTER:i)%
+		else
+			printFormL 없음
+		endif
+	next

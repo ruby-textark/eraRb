@@ -1,0 +1,20 @@
+﻿; 마녀의고깔모자
+@isUsable1102(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1102(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1102()
+	return 1
+@isUnequipable1102()
+	return 1
+
+@onEquip1102
+	ABL:MASTER:마법내성++
+	ABL:MASTER:방어력++
+
+@onUnequip1102
+	ABL:MASTER:마법내성--
+	ABL:MASTER:방어력--

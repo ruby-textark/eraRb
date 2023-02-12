@@ -1,0 +1,18 @@
+﻿; 스커트
+@isUsable1301(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1301(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1301()
+	return 1
+@isUnequipable1301()
+	return 1
+
+@onEquip1301
+	ABL:MASTER:방어력 += 1
+
+@onUnequip1301
+	ABL:MASTER:방어력 -= 1

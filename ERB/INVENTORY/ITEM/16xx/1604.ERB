@@ -1,0 +1,18 @@
+﻿; 활
+@isUsable1604(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1604(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1604()
+	return 1
+@isUnequipable1604()
+	return 1
+
+@onEquip1604
+	ABL:MASTER:공격력 += 1
+
+@onUnequip1604
+	ABL:MASTER:공격력 -= 1

@@ -1,0 +1,18 @@
+﻿; 가벼운투구
+@isUsable1103(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1103(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1103()
+	return 1
+@isUnequipable1103()
+	return 1
+
+@onEquip1103
+	ABL:MASTER:방어력 += 4
+
+@onUnequip1103
+	ABL:MASTER:방어력 -= 4

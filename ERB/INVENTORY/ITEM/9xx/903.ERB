@@ -1,0 +1,29 @@
+﻿; 사후피임약
+@isUsable903(targetIdx)
+#dim dynamic targetIdx
+
+	return targetIdx == MASTER
+
+@onUseItem903(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:903, "을", "를")% 사용했다.
+
+	; 7일이내 2회이상 사용시 10% 확률로 생리불순
+	if RAND:10 == 0 && (DAY < CFLAG:targetIdx:사후피임약복용 + 7)
+		printFormW %kr(CALLNAME:targetIdx, "은", "는")% 잦은 사후피임약 복용으로 생리불순이 된 모양이다...
+		TALENT:targetIdx:생리불순 = 1
+	endif
+	
+	EXP:targetIdx:약물경험++
+	CFLAG:targetIdx:사후피임약복용 = DAY
+	
+	return 1
+
+@isEquipable903()
+	return 0
+@isUnequipable903()
+	return 0
+
+@onEquip903()
+@onUnequip903()

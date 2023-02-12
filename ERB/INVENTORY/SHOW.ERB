@@ -1,29 +1,45 @@
 ﻿@showInventory
 #dim dynamic showCount
+#dim dynamic selectedItem
+#dim dynamic isItemUsable
+#dim dynamic isItemEquipable
 
 $inputLoop
 	redraw 999
 	printL =인벤토리=
-	printL 사용하려는 아이템을 선택하세요
+	printL 사용할 아이템을 선택해주세요
 
 	showCount = 0
 	for i, 1, 1500
+	
+		if !ITEM:i
+			continue
+		endif
 	
 		; No such item
 		if strlens(ITEMNAME:i) == 0
 			continue
 		endif
-		; Equipment
-		if 101 <= i && i <= 999
+
+		tryccallform isUsable{i}(MASTER)
+			isItemUsable = result
+		catch
+			isItemUsable = 0
+		endcatch
+		
+		if !isItemUsable
+			call colorPrint(0x888888, @"[{i, 4, RIGHT}] ")
+		else
+			printForm [{i, 4, RIGHT}]%" "%
 		endif
-			
-		if ITEM:i
-			printFormLC [{i}] %ITEMNAME:i, 14, RIGHT%x{ITEM:i, 3, LEFT}
-			showCount++
-			if showCount % 4 == 0
-				printL
-			endif
+
+		printFormLC %ITEMNAME:i, 14, RIGHT%x{ITEM:i, 3, LEFT}
+		showCount++
+		if showCount % 4 == 0
+			printL
 		endif
+		
+		resetColor
 	
 	next
 
@@ -31,11 +47,20 @@ $inputLoop
 	printL [0] - 돌아가기
 
 	input
+	selectedItem = result
+	
+	tryccallform isUsable{selectedItem}(MASTER)
+		isItemUsable = result
+	catch
+		isItemUsable = 0
+	endcatch
 
-	if 101 <= result && result <= 999
-		ITEM:result--
-		callForm useItem{result}
-	elseif result == 0
+	if ITEM:selectedItem > 0 && isItemUsable
+		tryccallform onUseItem{selectedItem}(MASTER)
+			ITEM:selectedItem--
+		catch
+		endcatch
+	elseif selectedItem == 0
 		return
 	endif
 

@@ -1,24 +1,44 @@
 ﻿@isMasterLewd()
 #function
+#dim dynamic parameter
 
-	if ABL:MASTER:욕망 > 5
-		returnf 1
-	elseif (TALENT:MASTER:음란 || TALENT:MASTER:발정) && BASE:MASTER:이성 < MAXBASE:MASTER:이성 * 3 / 4
-		returnf 1
+	parameter += ABL:MASTER:욕망 * 3
+	if TALENT:MASTER:음란 || TALENT:MASTER:발정
+		parameter += 15 * (MAXBASE:MASTER:이성 - BASE:MASTER:이성) / MAXBASE:MASTER:이성
 	endif
 	
-	returnf 0
+	if TARGET
+		parameter += ABL:TARGET:성교기술
+	endif
+	
+	for i, 101, 200
+		; 부위약점인데 삽입중이면 +1가산
+		if TALENT:MASTER:i && CFLAG:MASTER:(200 + i)
+			parameter++
+		endif
+	next
+	
+	returnf parameter > 20
 
 @isMasterSubmissive()
 #function
+#dim dynamic parameter
 
-	if ABL:MASTER:순종 > 5
-		returnf 1
-	elseif (TALENT:MASTER:패배자  && BASE:MASTER:이성 < MAXBASE:MASTER:이성 * 3 / 4) || BASE:MASTER:이성 < MAXBASE:MASTER:이성 / 4
-		returnf 1
+	parameter += ABL:MASTER:순종 * 3
+
+	if TARGET
+		parameter += ABL:TARGET:전투기술
+	endif
+	
+	if TALENT:MASTER:패배자
+		parameter += 15 * (MAXBASE:MASTER:체력 - BASE:MASTER:체력) / MAXBASE:MASTER:체력
+	endif
+	
+	if FLAG:성교합의
+		parameter += 10
 	endif
 
-	returnf 0
+	returnf parameter > 20
 
 @isHole(partIdx)
 #dim dynamic partIdx

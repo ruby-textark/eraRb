@@ -1,0 +1,18 @@
+﻿; 평범한모자
+@isUsable1101(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1101(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1101()
+	return 1
+@isUnequipable1101()
+	return 1
+
+@onEquip1101
+	ABL:MASTER:방어력 += 2
+
+@onUnequip1101
+	ABL:MASTER:방어력 -= 2

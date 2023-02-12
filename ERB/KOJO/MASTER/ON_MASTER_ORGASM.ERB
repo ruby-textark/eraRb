@@ -7,6 +7,13 @@
 
 	targetPart = orgasmParts:(RAND:orgasmCounts)
 	orgasmThres = masterOrgasmThres()
+	
+	; todo 이쪽 추가작성
+	if isMasterLewd() && isMasterSubmissive()
+	elseif isMasterLewd() && !isMasterSubmissive()
+	elseif !isMasterLewd() && isMasterSubmissive()
+	elseif !isMasterLewd() && !isMasterSubmissive()
+	endif
 
 	if CFLAG:MASTER:i >= 2 * orgasmThres
 		if RAND:5 == 0

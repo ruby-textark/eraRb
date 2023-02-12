@@ -1,0 +1,22 @@
+﻿; 생리가속약
+@isUsable906(targetIdx)
+#dim dynamic targetIdx
+
+	return targetIdx == MASTER
+
+@onUseItem906(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:906, "을", "를")% 사용했다.
+	EXP:targetIdx:약물경험++
+	MAXBASE:targetIdx:생리주기 = LIMIT(MAXBASE:targetIdx:생리주기 - (3 + RAND:3), 7, 35)
+	
+	return 1
+
+@isEquipable906()
+	return 0
+@isUnequipable906()
+	return 0
+
+@onEquip906()
+@onUnequip906()

@@ -1,0 +1,18 @@
+﻿; 가죽갑옷하의
+@isUsable1303(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1303(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1303()
+	return 1
+@isUnequipable1303()
+	return 1
+
+@onEquip1303
+	ABL:MASTER:방어력 += 3
+
+@onUnequip1303
+	ABL:MASTER:방어력 -= 3

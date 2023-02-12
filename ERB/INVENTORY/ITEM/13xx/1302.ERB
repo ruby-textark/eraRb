@@ -1,0 +1,18 @@
+﻿; 바지
+@isUsable1302(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1302(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1302()
+	return 1
+@isUnequipable1302()
+	return 1
+
+@onEquip1302
+	ABL:MASTER:방어력 += 2
+
+@onUnequip1302
+	ABL:MASTER:방어력 -= 2

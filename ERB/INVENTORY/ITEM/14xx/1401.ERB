@@ -1,0 +1,18 @@
+﻿; 운동화
+@isUsable1401(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1401(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1401()
+	return 1
+@isUnequipable1401()
+	return 1
+
+@onEquip1401
+	ABL:MASTER:방어력 += 1
+
+@onUnequip1401
+	ABL:MASTER:방어력 -= 1

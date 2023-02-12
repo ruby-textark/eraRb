@@ -1,0 +1,18 @@
+﻿; 하얀셔츠
+@isUsable1201(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1201(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1201()
+	return 1
+@isUnequipable1201()
+	return 1
+
+@onEquip1201
+	ABL:MASTER:방어력 += 2
+
+@onUnequip1201
+	ABL:MASTER:방어력 -= 2

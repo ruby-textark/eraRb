@@ -1,0 +1,27 @@
+﻿; 배란유도제
+@isUsable909(targetIdx)
+#dim dynamic targetIdx
+
+	return targetIdx == MASTER
+
+@onUseItem909(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:909, "을", "를")% 사용했다.
+
+	EXP:targetIdx:약물경험++
+	BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2
+	TALENT:MASTER:생리중 = 0
+	TALENT:MASTER:가임기 = 1
+
+	printFormW %kr(CALLNAME:targetIdx, "은", "는")% 약물의 효과로 강제로 배란했다.
+	
+	return 1
+
+@isEquipable909()
+	return 0
+@isUnequipable909()
+	return 0
+
+@onEquip909()
+@onUnequip909()

@@ -73,13 +73,7 @@
 
 				; 질 / 자궁 / 난소일 경우 정액량 증가
 				if i == 315 || i == 316 || i == 321
-					spermAmount = RAND:10
-					BASE:MASTER:자궁내정액1 += spermAmount
-					if CFLAG:MASTER:i == 3
-						BASE:MASTER:자궁내몬스터정액 += spermAmount
-					elseif CFLAG:MASTER:i == 4
-						BASE:MASTER:자궁내벌레정액 += spermAmount
-					endif
+					call cumIntoMaster(RAND:10, CFLAG:MASTER:i)
 				endif
 			endif
 

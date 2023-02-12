@@ -1,0 +1,22 @@
+﻿; 자궁축소약
+@isUsable905(targetIdx)
+#dim dynamic targetIdx
+
+	return targetIdx == MASTER
+
+@onUseItem905(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:905, "을", "를")% 사용했다.
+	EXP:targetIdx:약물경험++
+	BASE:targetIdx:자궁크기 = LIMIT(BASE:targetIdx:자궁크기 - 100, 100, 50000)
+	
+	return 1
+
+@isEquipable905()
+	return 0
+@isUnequipable905()
+	return 0
+
+@onEquip905()
+@onUnequip905()

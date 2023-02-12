@@ -1,0 +1,18 @@
+﻿; 창
+@isUsable1603(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1603(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1603()
+	return 1
+@isUnequipable1603()
+	return 1
+
+@onEquip1603
+	ABL:MASTER:공격력 += 4
+
+@onUnequip1603
+	ABL:MASTER:공격력 -= 4

@@ -1,0 +1,28 @@
+﻿; 모유체질약
+@isUsable908(targetIdx)
+#dim dynamic targetIdx
+
+	return targetIdx == MASTER
+
+@onUseItem908(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:908, "을", "를")% 사용했다.
+
+	EXP:targetIdx:약물경험++
+	TALENT:targetIdx:모유체질 = !TALENT:targetIdx:모유체질
+	if TALENT:targetIdx:모유체질
+		printFormW %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 획득했다.
+	else
+		printFormW %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 잃었다.
+	endif
+	
+	return 1
+
+@isEquipable908()
+	return 0
+@isUnequipable908()
+	return 0
+
+@onEquip908()
+@onUnequip908()

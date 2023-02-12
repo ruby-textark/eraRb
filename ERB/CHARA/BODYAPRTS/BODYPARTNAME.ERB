@@ -180,30 +180,30 @@
 		endif
 		
 		if TALENT:MASTER:처녀질
-			if EXP:MASTER:질경험 < 50 && ABL:MASTER:질감도 < 3
+			if EXP:MASTER:질경험 < 50 && ABL:MASTER:질감도 < 4
 				retStr:(retStrCnt++) = 아직 남자를 허용하지 않은
-			elseif EXP:MASTER:질경험 < 100 && ABL:MASTER:질감도 < 6
+			elseif EXP:MASTER:질경험 < 100 && ABL:MASTER:질감도 < 7
 				retStr:(retStrCnt++) = 처녀인 채 쾌락을 알아버린
 			else
 				retStr:(retStrCnt++) = 삽입을 제외하고는 이미 경험 가득한
 			endif
 		endif
 
-		if RAND:2 && ABL:MASTER:질감도 > 9
+		if RAND:2 && ABL:MASTER:질감도 > 10
 			retStr:(retStrCnt++) = 믿기지 않을 정도고 경험이 풍부한
-		elseif RAND:2 && ABL:MASTER:질감도 > 6
+		elseif RAND:2 && ABL:MASTER:질감도 > 7
 			retStr:(retStrCnt++) = 완전히 암컷구멍으로 개발된
-		elseif ABL:MASTER:질감도 > 3
+		elseif ABL:MASTER:질감도 > 4
 			retStr:(retStrCnt++) = 음란하게 거듭난
 		else
 			retStr:(retStrCnt++) = 경험 부족의 미숙한
 		endif
 	elseif partIdx == 122
-		if RAND:2 && ABL:MASTER:클리감도 > 9
+		if RAND:2 && ABL:MASTER:클리감도 > 10
 			retStr:(retStrCnt++) = 과연 암컷 자지라고밖에 볼 수 없는
-		elseif RAND:2 && ABL:MASTER:클리감도 > 6
+		elseif RAND:2 && ABL:MASTER:클리감도 > 7
 			retStr:(retStrCnt++) = 꾸짖어주는 것을 즐기는
-		elseif ABL:MASTER:클리감도 > 3
+		elseif ABL:MASTER:클리감도 > 4
 			retStr:(retStrCnt++) = 귀엽게 튀어나온
 		else
 			retStr:(retStrCnt++) = 몇 번 만져보지 않은

@@ -1,0 +1,22 @@
+﻿; 임신가속약
+@isUsable907(targetIdx)
+#dim dynamic targetIdx
+
+	return targetIdx == MASTER
+
+@onUseItem907(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:907, "을", "를")% 사용했다.
+	EXP:targetIdx:약물경험++
+	MAXBASE:targetIdx:임신일수 = LIMIT(MAXBASE:targetIdx:임신일수 - (14 + RAND:30), 14, 300)
+	
+	return 1
+
+@isEquipable907()
+	return 0
+@isUnequipable907()
+	return 0
+
+@onEquip907()
+@onUnequip907()

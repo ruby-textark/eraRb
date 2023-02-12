@@ -1,0 +1,22 @@
+﻿; 피임약
+@isUsable902(targetIdx)
+#dim dynamic targetIdx
+
+	return targetIdx == MASTER
+
+@onUseItem902(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:902, "을", "를")% 사용했다.
+	EXP:targetIdx:약물경험++
+	BASE:targetIdx:생리주기 = MAXBASE:MASTER:생리주기 / 4 - 1
+	
+	return 1
+
+@isEquipable902()
+	return 0
+@isUnequipable902()
+	return 0
+
+@onEquip902()
+@onUnequip902()

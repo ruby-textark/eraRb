@@ -1,0 +1,18 @@
+﻿; 장검
+@isUsable1602(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1602(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1602()
+	return 1
+@isUnequipable1602()
+	return 1
+
+@onEquip1602
+	ABL:MASTER:공격력 += 5
+
+@onUnequip1602
+	ABL:MASTER:공격력 -= 5
