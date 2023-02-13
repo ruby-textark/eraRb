@@ -2,25 +2,25 @@
 
 	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
 	printL 명성에 대해
-	if CFLAG:MASTER:명성기본 < 20
+	if CFLAG:MASTER:기본명성 < 20
 		if RAND:2 == 0
 			printL 아무도 당신을 모르고 있습니다.
 		else
 			printL 당신에게 신경쓸 여유가 있는 사람은 아무도 없습니다.
 		endif
-	elseif CFLAG:MASTER:명성기본 < 40
+	elseif CFLAG:MASTER:기본명성 < 40
 		if RAND:2 == 0
 			printL 종종 거리에서 당신에게 말을 거는 사람들이 있습니다.
 		else
 			printL 거리에서 종종 익숙한 사람들이 당신을 힐끗거리며 처다봅니다.
 		endif
-	elseif CFLAG:MASTER:명성기본 < 60
+	elseif CFLAG:MASTER:기본명성 < 60
 		if RAND:2 == 0
 			printL 당신을 보고 아는 체 하는 사람들이 생겼습니다.
 		else
 			printL 종종 거리에서 당신에게 말을 거는 사람들이 있습니다.
 		endif
-	elseif CFLAG:MASTER:명성기본 < 80
+	elseif CFLAG:MASTER:기본명성 < 80
 		if RAND:2 == 0
 			printL 가끔 멀리에서 사람들이 당신의 이름을 듣고 찾아오곤 합니다.
 		else
@@ -34,25 +34,25 @@
 		endif
 	endif
 
-	if CFLAG:MASTER:명성성적 < 20
+	if CFLAG:MASTER:성적명성 < 20
 		if RAND:2 == 0
 			printL 당신에게 흥미를 갖는 사람이 보이지 않습니다.
 		else
 			printL 당신에게는 어떤 눈길도 주어지지 않습니다.
 		endif
-	elseif CFLAG:MASTER:명성성적 < 40
+	elseif CFLAG:MASTER:성적명성 < 40
 		if RAND:2 == 0
 			printL 뒷골목에서 당신의 이름이 들립니다.
 		else
 			printL 때때로 어둑한 거리에서 당신을 지켜보는 눈빛이 느껴집니다.
 		endif
-	elseif CFLAG:MASTER:명성성적 < 60
+	elseif CFLAG:MASTER:성적명성 < 60
 		if RAND:2 == 0
 			printL 대낮에도 당신의 몸을 위아래로 훑어보는 시선이 느껴집니다.
 		else
 			printL 사람이 붐비는 곳에서 당신의 몸을 더듬는 손이 생겼습니다.
 		endif
-	elseif CFLAG:MASTER:명성성적 < 80
+	elseif CFLAG:MASTER:성적명성 < 80
 		if RAND:2 == 0
 			printL 한밤중에 길을 걸을때면 뒤에서 발걸음 소리가 따라 들려옵니다.
 		else

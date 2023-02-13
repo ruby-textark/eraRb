@@ -22,7 +22,7 @@
 		endif
 	endif
 	
-	retStr:(retStrCnt++) = %STR:partIdx%
+	retStr:(retStrCnt++) = %CSTR:MASTER:partIdx%
 	
 	returnf strJoin(retStr, " ", 0, retStrCnt)
 
@@ -140,7 +140,7 @@
 		endif
 
 		if !RAND:3 && ABL:MASTER:자궁감도 > 3
-			retStr:(retStrCnt++) = 개발된 %kr(STR:116, "을", "를")% 모른척 가리며
+			retStr:(retStrCnt++) = 개발된 %kr(CSTR:MASTER:자궁, "을", "를")% 모른척 가리며
 		endif
 		if RAND:2 && ABL:MASTER:복부감도 > 9
 			retStr:(retStrCnt++) = 꾸욱 눌러주면 그만 반항할 수 없게 되버리는

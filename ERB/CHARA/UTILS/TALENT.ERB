@@ -13,12 +13,16 @@
 	; 패배자
 	elseif talentIdx == 11
 		setColor 0xaa0000
+	; 육변기
+	elseif talentIdx == 12
+		fontBold
+		setColor 0xaa0000
 	; 약점 / 이상성욕
-	elseif 100 <= i && i <= 299
+	elseif 100 <= talentIdx && talentIdx <= 299
 		fontBold
 		setColor 0xcc0000
 	; 처녀
-	elseif 300 <= i && i <= 399
+	elseif 300 <= talentIdx && talentIdx <= 399
 		fontBold
 		setColor 0xd0fc5c
 	; 임신
@@ -48,6 +52,14 @@
 #dims dynamic talentStr
 
 	TALENT:MASTER:talentStr = 1
-	printForm %kr(CALLNAME:MASTER, "은", "는")%%" "%
+	printForm %kr(CALLNAME:MASTER, "은", "는")% 소질%" "%
 	call printTalent(getNum(TALENT, talentStr))
-	printForm %krPost(talentStr, "을", "를")% 얻었다.
+	printFormW %krPost(talentStr, "을", "를")% 얻었다.
+
+@loseTalent(talentStr)
+#dims dynamic talentStr
+
+	TALENT:MASTER:talentStr = 0
+	printForm %kr(CALLNAME:MASTER, "은", "는")% 소질%" "%
+	call printTalent(getNum(TALENT, talentStr))
+	printFormW %krPost(talentStr, "을", "를")% 잃었다.

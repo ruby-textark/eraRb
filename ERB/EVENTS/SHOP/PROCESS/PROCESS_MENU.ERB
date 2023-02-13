@@ -1,8 +1,16 @@
 ﻿@processMenu
 
+	; This commands are always OK
+	if RESULT != 201 && RESULT != 202 && RESULT < 800
+		if !isMasterFree()
+			return 0
+		endif
+	endif
+
 	; QUEST MENU
 	if TARGET != 0 && FLAG:자궁대여료 == 0 && RESULT == 101
 		call startQuest
+		result = 0
 	elseif TARGET == 0 && RESULT == 102
 		call newQuestList
 	elseif TARGET != 0 && RESULT == 103
@@ -11,12 +19,16 @@
 	; CHARACTER MENU
 	elseif RESULT == 201
 		call showMasterInfo
+		result = 0
 	elseif RESULT == 202
 		call showInventory
+		result = 0
 	elseif RESULT == 203
 		call showMasterEquips
+		result = 0
 	elseif RESULT == 204
 		call reincarnation
+		result = 0
 
 	; SHOP MENU
 	elseif RESULT == 301
@@ -27,6 +39,7 @@
 	; SYSTEM MENU
 	elseif RESULT == 801
 		saveGame
+		RESULT = 0
 	elseif RESULT == 802
 		loadGame
 

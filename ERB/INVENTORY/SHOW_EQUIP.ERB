@@ -1,5 +1,6 @@
 ﻿; 어차피 주인공 이외의 대상에 대해 콜하지는 않긴 한데 이런저런 래퍼가 필요하긴 함
 @showMasterEquips
+#dim dynamic equipIdx
 #dim dynamic equipSlotIdx
 $wrapper
 
@@ -20,9 +21,9 @@ $wrapper
 		printL 교체할 장비를 아래에서 선택해주세요
 		drawLine
 		
-		for i, 1001 + (equipSlotIdx - 10) * 100, 1100 + (equipSlotIdx - 10) * 100
-			if ITEM:i && EQUIP:MASTER:equipSlotIdx != i
-				printFormL [{i}] - %ITEMNAME:i%
+		for equipIdx, 1001 + (equipSlotIdx - 10) * 100, 1100 + (equipSlotIdx - 10) * 100
+			if ITEM:equipIdx && EQUIP:MASTER:equipSlotIdx != equipIdx
+				printFormL [{equipIdx}] - %ITEMNAME:equipIdx%
 			endif
 		next
 		
@@ -49,21 +50,22 @@ $wrapper
 	return 1
 
 @showCharaEquips
+#dim dynamic equipSlotIdx
 
 	clearline 99999
 	
 	printFormL %NAME:MASTER%의 현재 장비 상태
 	drawLine
 	
-	for i, 11, 19
-		if strlens(EQUIPNAME:i) == 0
+	for equipSlotIdx, 11, 19
+		if strlens(EQUIPNAME:equipSlotIdx) == 0
 			continue
 		endif
 		
-		printForm [{i}] %EQUIPNAME:i% 장비 : 
+		printForm [{equipSlotIdx}] %EQUIPNAME:equipSlotIdx% 장비 : 
 		
-		if EQUIP:MASTER:i
-			printFormL %ITEMNAME:(EQUIP:MASTER:i)%
+		if EQUIP:MASTER:equipSlotIdx
+			printFormL %ITEMNAME:(EQUIP:MASTER:equipSlotIdx)%
 		else
 			printFormL 없음
 		endif

@@ -10,13 +10,8 @@
 	if TARGET
 		parameter += ABL:TARGET:성교기술
 	endif
-	
-	for i, 101, 200
-		; 부위약점인데 삽입중이면 +1가산
-		if TALENT:MASTER:i && CFLAG:MASTER:(200 + i)
-			parameter++
-		endif
-	next
+
+	parameter += isWeaknessAttacked()
 	
 	returnf parameter > 20
 
@@ -37,8 +32,26 @@
 	if FLAG:성교합의
 		parameter += 10
 	endif
+	
+	if TALENT:MASTER:육변기
+		parameter += 99
+	endif
 
 	returnf parameter > 20
+
+@isWeaknessAttacked()
+#function
+#dim dynamic partIdx
+#dim dynamic parameter
+
+	for partIdx, 101, 200
+		; 부위약점인데 삽입중이면 +1가산
+		if TALENT:MASTER:partIdx && CFLAG:MASTER:(200 + partIdx)
+			parameter++
+		endif
+	next
+	
+	returnf parameter
 
 @isHole(partIdx)
 #dim dynamic partIdx

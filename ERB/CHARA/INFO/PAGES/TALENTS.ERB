@@ -1,8 +1,9 @@
 ﻿@showTalents
+#dim dynamic talentIdx
 
-	for i, 1, 1000
-		if TALENT:MASTER:i
-			call printTalent(i)
+	for talentIdx, 1, 1000
+		if TALENT:MASTER:talentIdx
+			call printTalent(talentIdx)
 		endif
 	next
 	printL

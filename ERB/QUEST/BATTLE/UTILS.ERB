@@ -19,6 +19,7 @@
 #dim dynamic charaIdx
 #dim dynamic actualAtk
 #dim dynamic orgasmThres
+#dim dynamic partIdx
 #dim dynamic orgasmParts
 
 	actualAtk = TCVAR:charaIdx:공격력
@@ -35,8 +36,8 @@
 
 	orgasmParts = 0
 	orgasmThres = masterOrgasmThres()
-	for i, 101, 200
-		if PALAM:MASTER:i > (orgasmThres * 9 / 10)
+	for partIdx, 101, 200
+		if PALAM:MASTER:partIdx > (orgasmThres * 9 / 10)
 			orgasmParts++
 		endif
 	next
@@ -52,6 +53,7 @@
 #function
 #dim dynamic charaIdx
 #dim dynamic actualDef
+#dim dynamic partIdx
 #dim dynamic orgasmThres
 #dim dynamic orgasmParts
 
@@ -64,8 +66,8 @@
 
 	orgasmParts = 0
 	orgasmThres = masterOrgasmThres()
-	for i, 101, 200
-		if PALAM:MASTER:i > (orgasmThres * 9 / 10)
+	for partIdx, 101, 200
+		if PALAM:MASTER:partIdx > (orgasmThres * 9 / 10)
 			orgasmParts++
 		endif
 	next

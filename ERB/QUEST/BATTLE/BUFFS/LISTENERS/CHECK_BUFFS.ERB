@@ -1,18 +1,19 @@
 ﻿@checkBuffs
+#dim dynamic buffIdx
 
-	for i, 101, 200
-		if TCVAR:MASTER:i
-			TCVAR:MASTER:i--
+	for buffIdx, 101, 200
+		if TCVAR:MASTER:buffIdx
+			TCVAR:MASTER:buffIdx--
 			
-			if TCVAR:MASTER:i == 0
-				callForm offBuff{i}(MASTER)
+			if TCVAR:MASTER:buffIdx == 0
+				callForm offBuff{buffIdx}(MASTER)
 			endif
 		endif
-		if TCVAR:TARGET:i
-			TCVAR:TARGET:i--
+		if TCVAR:TARGET:buffIdx
+			TCVAR:TARGET:buffIdx--
 			
-			if TCVAR:TARGET:i == 0
-				callForm offBuff{i}(TARGET)
+			if TCVAR:TARGET:buffIdx == 0
+				callForm offBuff{buffIdx}(TARGET)
 			endif
 		endif
 	next

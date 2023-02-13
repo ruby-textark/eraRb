@@ -1,52 +1,50 @@
 ﻿@isAttackableBodyPart(partIdx)
 #function
 #dim dynamic partIdx
-#dims dynamic partName
 
-	if strlens(BASENAME:i) == 0
+	if strlens(BASENAME:partIdx) == 0
 		returnf 0
 	endif
 	
-	if CFLAG:(200 + i) == 2 && !ABL:TARGET:도구사용
+	if CFLAG:(200 + partIdx) == 2 && !ABL:TARGET:도구사용
 		returnf 0
-	elseif CFLAG:(200 + i) > 2
+	elseif CFLAG:(200 + partIdx) > 2
 		returnf 0
 	endif
 
-	partName = %STR:i%
-
 	; 요도->방광 순
-	if partName == "방광" && CFLAG:MASTER:삽입요도 == 0
+	if partIdx == 124 && CFLAG:MASTER:삽입요도 == 0
 		returnf 0
 	endif
 	; 자궁->난소 순
-	if partName == "난소" && CFLAG:MASTER:삽입자궁 == 0
+	if partIdx == 115 && CFLAG:MASTER:삽입자궁 == 0
 		returnf 0
 	endif
 	; 질->자궁 순
-	if partName == "자궁" && CFLAG:MASTER:삽입질 == 0
+	if partIdx == 116 && CFLAG:MASTER:삽입질 == 0
 		returnf 0
 	endif
 	
 	; 상의를 입고 있는 경우
-	if partName == "유두" && (EQUIP:MASTER:상의 != 0 || EQUIP:MASTER:속옷 != 0)
+	if partIdx == 113 && (EQUIP:MASTER:상의 != 0 || EQUIP:MASTER:속옷 != 0)
 		returnf 0
 	endif
 
 	; 하의를 입고 있는 경우
-	if partName == "질" && (EQUIP:MASTER:하의 != 0 || EQUIP:MASTER:속옷 != 0)
+	if partIdx == 121 && (EQUIP:MASTER:하의 != 0 || EQUIP:MASTER:속옷 != 0)
 		returnf 0
 	endif
-	if partName == "애널" && (EQUIP:MASTER:하의 != 0 || EQUIP:MASTER:속옷 != 0)
+	if partIdx == 123 && (EQUIP:MASTER:하의 != 0 || EQUIP:MASTER:속옷 != 0)
 		returnf 0
 	endif
-	if partName == "요도" && (EQUIP:MASTER:하의 != 0 || EQUIP:MASTER:속옷 != 0)
+	if partIdx == 125 && (EQUIP:MASTER:하의 != 0 || EQUIP:MASTER:속옷 != 0)
 		returnf 0
 	endif
 
 	returnf 1
 
 @getSexualAtkBodyPart
+#dim dynamic partIdx
 #dim dynamic partsCount
 #dim dynamic availableParts, 100
 
@@ -57,9 +55,9 @@
 	endif
 
 	partsCount = 0
-	for i, 101, 200
-		if isAttackableBodyPart(i)
-			availableParts:(partsCount++) = i
+	for partIdx, 101, 200
+		if isAttackableBodyPart(partIdx)
+			availableParts:(partsCount++) = partIdx
 		endif
 	next
 

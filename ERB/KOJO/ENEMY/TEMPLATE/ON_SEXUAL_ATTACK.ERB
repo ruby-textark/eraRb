@@ -4,9 +4,13 @@
 
 	call getSexualAtkBodyPart
 	attackedIdx = RESULT
-	attackedName = %STR:attackedIdx%
+	attackedName = %CSTR:MASTER:attackedIdx%
 	
 	printFormL 성희롱:%attackedName%
+
+	if TCVAR:TARGET:성희롱부위 && TCVAR:TARGET:성희롱부위 != attackedIdx
+		call outFromMaster(TCVAR:TARGET:성희롱부위)
+	endif
 
 	TCVAR:TARGET:성희롱부위 = attackedIdx
 	SOURCE:MASTER:attackedIdx = 90 + RAND:20

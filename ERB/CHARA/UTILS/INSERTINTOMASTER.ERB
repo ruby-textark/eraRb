@@ -1,0 +1,21 @@
+﻿@insertIntoMaster(partIdx, insertType)
+#dim dynamic partIdx
+#dim dynamic insertType
+
+	CFLAG:MASTER:(200 + partIdx) = insertType
+	
+	EXP:MASTER:partIdx++
+	EXP:MASTER:삽입경험++
+	
+	call checkVirgin
+	if CFLAG:MASTER:삽입질 == 1
+		call checkTight(1, BASE:TARGET:자지크기)
+	endif
+	if CFLAG:MASTER:삽입애널 == 1
+		call checkTight(2, BASE:TARGET:자지크기)
+	endif
+
+@outFromMaster(partIdx)
+#dim dynamic partIdx
+
+	CFLAG:MASTER:(200 + partIdx) = 0

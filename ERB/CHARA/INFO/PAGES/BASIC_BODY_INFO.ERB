@@ -1,30 +1,31 @@
 ﻿@showBasicBodyInfo
+#dim dynamic partIdx
 
 	printL 신체정보(기본)
 
-	for i, 101, 200
-		if strlens(BASENAME:i) == 0
+	for partIdx, 101, 200
+		if strlens(BASENAME:partIdx) == 0
 			continue
 		endif
 
-		printForm %STR:i, 14, RIGHT% (감도Lv.{ABL:MASTER:i}) : 
+		printForm %CSTR:MASTER:partIdx, 14, RIGHT% (감도Lv.{ABL:MASTER:partIdx}) : 
 
-		barstr BASE:MASTER:마력, MAX(MAXBASE:MASTER:마력, 1), 10
-		if BASE:MASTER:마력 > 67
+		barstr BASE:MASTER:partIdx, MAX(MAXBASE:MASTER:partIdx, 1), 10
+		if BASE:MASTER:partIdx > 67
 			call colorPrint(0x00ff00, results)
-		elseif BASE:MASTER:마력 > 33
+		elseif BASE:MASTER:partIdx > 33
 			call colorPrint(0xffff00, results)
 		else
 			call colorPrint(0xff0000, results)
 		endif
 		
-		if CFLAG:MASTER:(i + 200) == 1
+		if CFLAG:MASTER:(partIdx + 200) == 1
 			print [삽입중]
-		elseif CFLAG:MASTER:(i + 200) == 2
+		elseif CFLAG:MASTER:(partIdx + 200) == 2
 			print [음구삽입중]
-		elseif CFLAG:MASTER:(i + 200) == 3
+		elseif CFLAG:MASTER:(partIdx + 200) == 3
 			print [기생중(슬라임)]
-		elseif CFLAG:MASTER:(i + 200) == 3
+		elseif CFLAG:MASTER:(partIdx + 200) == 3
 			print [기생중(벌레)]
 		endif
 

@@ -1,16 +1,17 @@
 ﻿@EVENTEND
+#dim dynamic partIdx
 #dim dynamic mobDrop
 
 	; 삽입상태초기화
-	for i, 301, 400
-		if CFLAG:MASTER:i == 1
-			CFLAG:MASTER:i = 0
+	for partIdx, 301, 400
+		if CFLAG:MASTER:partIdx == 1
+			CFLAG:MASTER:partIdx = 0
 		endif
 	next
 	
 	; PALAM -> CFLAG 인계
-	for i, 501, 600
-		CFLAG:MASTER:i = PALAM:MASTER:(i - 400)
+	for partIdx, 501, 600
+		CFLAG:MASTER:partIdx = PALAM:MASTER:(partIdx - 400)
 	next
 
 	; killed the monster

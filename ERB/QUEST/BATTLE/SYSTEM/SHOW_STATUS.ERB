@@ -17,34 +17,36 @@
 	drawLine
 
 @showPosition()
+#dim dynamic xPos
+#dim dynamic yPos
 
-	for i, -2, 3
-		for j, -2, 3
-			if TCVAR:MASTER:좌우 == j && TCVAR:MASTER:상하 == i
-				if TCVAR:TARGET:좌우 == j && TCVAR:TARGET:상하 == i
+	for yPos, -2, 3
+		for xPos, -2, 3
+			if TCVAR:MASTER:좌우 == xPos && TCVAR:MASTER:상하 == yPos
+				if TCVAR:TARGET:좌우 == xPos && TCVAR:TARGET:상하 == yPos
 					setColor 0xcccc00
 				else
 					setColor 0x00cc00
 				endif
-			elseif TCVAR:TARGET:좌우 == j && TCVAR:TARGET:상하 == i
+			elseif TCVAR:TARGET:좌우 == xPos && TCVAR:TARGET:상하 == yPos
 				setColor 0xcc0000
 			endif
 			
-			if TCVAR:MASTER:좌우 == j && TCVAR:MASTER:상하 == i
-				if TCVAR:TARGET:좌우 == j && TCVAR:TARGET:상하 == i
+			if TCVAR:MASTER:좌우 == xPos && TCVAR:MASTER:상하 == yPos
+				if TCVAR:TARGET:좌우 == xPos && TCVAR:TARGET:상하 == yPos
 					print ※
 				else
 					print ★
 				endif
-			elseif TCVAR:MASTER:좌우 - 1 == j && TCVAR:MASTER:상하 == i
+			elseif TCVAR:MASTER:좌우 - 1 == xPos && TCVAR:MASTER:상하 == yPos
 				printButton "←", 1001
-			elseif TCVAR:MASTER:좌우 + 1 == j && TCVAR:MASTER:상하 == i
+			elseif TCVAR:MASTER:좌우 + 1 == xPos && TCVAR:MASTER:상하 == yPos
 				printButton "→", 1002
-			elseif TCVAR:MASTER:좌우 == j && TCVAR:MASTER:상하 - 1 == i
+			elseif TCVAR:MASTER:좌우 == xPos && TCVAR:MASTER:상하 - 1 == yPos
 				printButton "↑", 1003
-			elseif TCVAR:MASTER:좌우 == j && TCVAR:MASTER:상하 + 1 == i
+			elseif TCVAR:MASTER:좌우 == xPos && TCVAR:MASTER:상하 + 1 == yPos
 				printButton "↓", 1004
-			elseif TCVAR:TARGET:좌우 == j && TCVAR:TARGET:상하 == i
+			elseif TCVAR:TARGET:좌우 == xPos && TCVAR:TARGET:상하 == yPos
 				print ★
 			else
 				print □

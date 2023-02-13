@@ -6,12 +6,12 @@ $inputLoop
 	printFormL 신체 부위의 호칭 변경
 	printFormL 어느 부위의 부르는 이름을 변경할까요?
 
-	for i, 101, 200
-		if strlens(BASENAME:i) == 0
+	for partIdx, 101, 200
+		if strlens(BASENAME:partIdx) == 0
 			continue
 		endif
 		
-		printFormL [{i}] %substringu(BASENAME:i, 0, strlensu(BASENAME:i) - 2)%(현재 : %STR:i%)
+		printFormL [{partIdx}] %substringu(BASENAME:partIdx, 0, strlensu(BASENAME:partIdx) - 2)%(현재 : %CSTR:MASTER:partIdx%)
 	next
 
 	printL [999] 돌아간다
@@ -20,12 +20,12 @@ $inputLoop
 	
 	if 101 <= result && result <= 199
 		partIdx = result
-		printFormL 새 이름을 입력하세요(현재: %STR:result%) - 입력하지 않을 경우 돌아갑니다
+		printFormL 새 이름을 입력하세요(현재: %CSTR:MASTER:result%) - 입력하지 않을 경우 돌아갑니다
 		
 		inputs
 		if strlens(results)
-			STR:partIdx = %results%
-			printFormL %substring(BASENAME:partIdx, 0, strlensu(BASENAME:partIdx) - 2)%을 앞으로 %STR:partIdx%로 부르도록 합니다.
+			CSTR:MASTER:partIdx = %results%
+			printFormL %substring(BASENAME:partIdx, 0, strlensu(BASENAME:partIdx) - 2)%을 앞으로 %CSTR:MASTER:partIdx%로 부르도록 합니다.
 		endif
 	elseif result == 999
 		return

@@ -11,10 +11,7 @@
 			cumAmount *= (2 + RAND:4)
 		endif
 		
-		; 난소/자궁/질
-		if TCVAR:TARGET:성희롱부위 == 115 || TCVAR:TARGET:성희롱부위 == 116 || TCVAR:TARGET:성희롱부위 == 121
-			call cumIntoMaster(cumAmount, CFLAG:TARGET:종족)
-		endif
+		call cumIntoMaster(TCVAR:TARGET:성희롱부위, cumAmount, CFLAG:TARGET:종족)
 
 		PALAM:TARGET:사정 -= 10000
 

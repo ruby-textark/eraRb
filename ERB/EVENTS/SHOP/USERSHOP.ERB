@@ -1,0 +1,10 @@
+﻿@USERSHOP
+#dim dynamic menuResult
+	call processMenu
+	menuResult = result
+	
+	if menuResult
+		call afterAction
+	endif
+
+	return result

@@ -87,6 +87,7 @@
 	BASE:MASTER:자궁내인간정액 = BASE:MASTER:자궁내인간정액 / 2
 	BASE:MASTER:자궁내몬스터정액 = BASE:MASTER:자궁내몬스터정액 / 2
 	BASE:MASTER:자궁내벌레정액 = BASE:MASTER:자궁내벌레정액 / 2
+	BASE:MASTER:자궁내짐승정액 = BASE:MASTER:자궁내짐승정액 / 2
 	
 	; 몬스터 혹은 벌레 정액이 인간 정액보다 많을 경우 침식도 증가
 	if BASE:MASTER:자궁내몬스터정액 + BASE:MASTER:자궁내벌레정액 > BASE:MASTER:자궁내인간정액
@@ -180,7 +181,7 @@
 		printFormW .
 		printFormW .
 
-		printForm %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%STR:(300 + CFLAG:MASTER:아이아버지)%]의%" "%
+		printForm %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%CSTR:MASTER:(300 + CFLAG:MASTER:아이아버지)%]의%" "%
 		if CFLAG:MASTER:아이아버지 == 1
 			printW 아이를 출산했습니다
 		else

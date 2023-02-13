@@ -1,6 +1,21 @@
-﻿@cumIntoMaster(amount, fatherType)
+﻿@cumIntoMaster(partIdx, amount, fatherType)
+#dim dynamic partIdx
 #dim dynamic amount
 #dim dynamic fatherType
+
+	EXP:MASTER:정액경험++
+	if partIdx == 115 || partIdx == 116 || partIdx == 121
+		EXP:MASTER:질내사정경험++
+	elseif partIdx == 123
+		EXP:MASTER:항내사정경험++
+	elseif partIdx == 102
+		EXP:MASTER:정음경험++
+	endif
+
+	; 이하는 임신처리
+	if partIdx != 115 && partIdx != 116 && partIdx != 121
+		return
+	endif
 
 	if TALENT:MASTER:피임결계
 		printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 피임의 마법으로 보호되고 있다

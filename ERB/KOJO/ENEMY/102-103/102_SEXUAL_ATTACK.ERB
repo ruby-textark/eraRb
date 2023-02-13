@@ -1,28 +1,18 @@
 ﻿@c102ClothDestroy
-#dim dynamic breakableEquipSlots
-#dim dynamic brokenEquipSlot
+#dim dynamic equipSlotIdx
+#dim dynamic breakableEquipCount
+#dim dynamic breakableEquips, 10
 
-	breakableEquipSlots = 0
-	for i, 11, 19
-		if i != 16 && EQUIP:MASTER:i != 0
-			breakableEquipSlots++
+	for equipSlotIdx, 11, 19
+		if equipSlotIdx != 16 && EQUIP:MASTER:equipSlotIdx != 0
+			breakableEquips:(breakableEquipCount++) = equipSlotIdx
 		endif
 	next
 
-	if breakableEquipSlots
-		brokenEquipSlot = RAND:breakableEquipSlots
-		breakableEquipSlots = 0
-
-		for i, 11, 19
-			if i != 16 && EQUIP:MASTER:i != 0
-				if breakableEquipSlots == brokenEquipSlot
-					printFormW %CALLNAME:TARGET%의 점액이 장비를 망가뜨린다
-					printFormW 망가진 장비는 이번 전투 중에서는 사용할 수 없을 것 같다...
-					call unequipMasterEquips(i)
-				endif
-				breakableEquipSlots++
-			endif
-		next
+	if breakableEquipCount
+		printFormW %CALLNAME:TARGET%의 점액이 장비를 망가뜨린다
+		printFormW 망가진 장비는 이번 전투 중에서는 사용할 수 없을 것 같다...
+		call unequipMasterEquips(breakableEquips:(RAND:breakableEquipCount))
 	endif
 
 
@@ -36,17 +26,18 @@
 
 	call getSexualAtkBodyPart
 	attackedIdx = RESULT
-	attackedName = %STR:attackedIdx%
+	attackedName = %CSTR:MASTER:attackedIdx%
 	
 	printFormL 성희롱:%attackedName%
 	
 	if TCVAR:TARGET:성희롱부위 && TCVAR:TARGET:성희롱부위 != attackedIdx
+		call outFromMaster(TCVAR:TARGET:성희롱부위)
 		if RAND:3 == 0
-			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %STR:(TCVAR:TARGET:성희롱부위)%에 흥미를 잃은 것 같다
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에 흥미를 잃은 것 같다
 		elseif RAND:2 == 0
-			printFormW %kr(CALLNAME:TARGET, "은", "는")% 꾸물거리며 %CALLNAME:MASTER%의 %STR:(TCVAR:TARGET:성희롱부위)%에서 떨어져나왔다
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% 꾸물거리며 %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에서 떨어져나왔다
 		else
-			printFormW 무언가 마음에 들지 않은 것인지 %kr(CALLNAME:TARGET, "은", "는")% 붙들고 있던 %CALLNAME:MASTER%의 %kr(STR:(TCVAR:TARGET:성희롱부위), "을", "를")% 놓아주었다
+			printFormW 무언가 마음에 들지 않은 것인지 %kr(CALLNAME:TARGET, "은", "는")% 붙들고 있던 %CALLNAME:MASTER%의 %kr(CSTR:MASTER:(TCVAR:TARGET:성희롱부위), "을", "를")% 놓아주었다
 		endif
 	endif
 	

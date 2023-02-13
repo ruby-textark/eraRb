@@ -1,0 +1,14 @@
+﻿@isMasterFree
+#function
+	returnf !FLAG:육변기형시작일
+
+@SHOW_SHOP
+
+	drawline
+	printFormL {DAY}일차 소지금 : %TOSTR(MONEY,"#,###")%
+	
+	if FLAG:육변기형시작일
+		call showCumDump
+	endif
+	
+	call showMenu

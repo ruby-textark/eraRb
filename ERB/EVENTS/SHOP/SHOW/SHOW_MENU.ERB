@@ -1,10 +1,6 @@
-﻿@SHOW_SHOP
-
-	drawline
-	printFormL {DAY}일차 소지금 : %TOSTR(MONEY,"#,###")%
-
+﻿@showMenu
 	; Target does not exist
-	if TARGET == 0
+	if !isMasterFree() || TARGET == 0
 		setcolor 0x777777
 	; 자궁대여중
 	elseif FLAG:자궁대여료
@@ -14,14 +10,14 @@
 	resetcolor
 
 	; Target already exists
-	if TARGET == 1
+	if !isMasterFree() || TARGET == 1
 		setcolor 0x777777
 	endif
 	printLC [102] - 의뢰 수주
 	resetcolor
 
 	; Target does not exist
-	if TARGET == 0
+	if !isMasterFree() || TARGET == 0
 		setcolor 0x777777
 	endif
 	printLC [103] - 의뢰 취소
@@ -30,11 +26,19 @@
 
 	printLC [201] - 상태창
 	printLC [202] - 인벤토리
+	if !isMasterFree()
+		setColor 0x777777
+	endif
 	printLC [203] - 장비변경
+	resetColor
 	printL
 
+	if !isMasterFree()
+		setColor 0x777777
+	endif
 	printLC [301] - 아이템 거래
 	printLC [302] - 뒷골목
+	resetColor
 	printL
 	
 	printL

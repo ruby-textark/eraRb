@@ -1,11 +1,12 @@
 ﻿@initSystem
+#dim dynamic mobIdx
 
 	FLAG:고정난수시드 = RAND:__INT_MAX__
 	
 	; 난이도별 몬스터 
-	for i, 100, 1000
-		existCsv i
+	for mobIdx, 100, 1000
+		existCsv mobIdx
 		if result
-			FLAG:(100 + (i / 100) * 10)++
+			FLAG:(100 + (mobIdx / 100) * 10)++
 		endif
 	next

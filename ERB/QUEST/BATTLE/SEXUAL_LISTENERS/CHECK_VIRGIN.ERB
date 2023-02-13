@@ -1,23 +1,25 @@
 ﻿@checkVirgin
+#dim dynamic partIdx
 
-	for i, 301, 400
-		if CFLAG:MASTER:i == 1 && TALENT:MASTER:i == 1
-			printFormL %kr(CALLNAME:MASTER, "은", "는")% 처음으로 %bodyPartStr(i - 200)%로 하는 성교를 경험했다.
-			TALENT:MASTER:i = 0
+	for partIdx, 301, 400
+		if CFLAG:MASTER:partIdx == 1 && TALENT:MASTER:partIdx == 1
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% 처음으로 %bodyPartStr(partIdx - 200)%로 하는 성교를 경험했다.
+			TALENT:MASTER:partIdx = 0
 			
-			call onMasterLostVirgin_m(i - 200)
-			call onMasterLostVirgin_e(i - 200)
+			call onMasterLostVirgin_m(partIdx - 200)
+			call onMasterLostVirgin_e(partIdx - 200)
 		endif
 	next
 
 @checkVirginParasite
+#dim dynamic partIdx
 
-	for i, 301, 400
-		if CFLAG:MASTER:i > 3 && TALENT:MASTER:i == 1
-			printFormL %kr(CALLNAME:MASTER, "은", "는")% %STR:(200+CFLAG:MASTER:i)%에게 %bodyPartStr(i - 200)%의 처녀를 잃었다.
-			TALENT:MASTER:i = 0
+	for partIdx, 301, 400
+		if CFLAG:MASTER:partIdx > 3 && TALENT:MASTER:partIdx == 1
+			printFormL %kr(CALLNAME:MASTER, "은", "는")% %STR:(200+CFLAG:MASTER:partIdx)%에게 %bodyPartStr(partIdx - 200)%의 처녀를 잃었다.
+			TALENT:MASTER:partIdx = 0
 			
-			call onMasterLostVirgin_m(i - 200)
-			call onMasterLostVirgin_e(i - 200)
+			call onMasterLostVirgin_m(partIdx - 200)
+			call onMasterLostVirgin_e(partIdx - 200)
 		endif
 	next

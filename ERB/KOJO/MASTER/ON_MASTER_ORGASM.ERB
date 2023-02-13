@@ -15,7 +15,7 @@
 	elseif !isMasterLewd() && !isMasterSubmissive()
 	endif
 
-	if CFLAG:MASTER:i >= 2 * orgasmThres
+	if CFLAG:MASTER:targetPart >= 2 * orgasmThres
 		if RAND:5 == 0
 			printFormW %kr(CALLNAME:MASTER, "은", "는")% 참다 못해 %bodyPartStr(targetPart)%의 쾌감으로 가버렸다
 		elseif RAND:4 == 0

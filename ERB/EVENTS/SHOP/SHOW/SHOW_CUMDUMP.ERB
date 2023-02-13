@@ -1,0 +1,55 @@
+﻿@showCumDump
+#dim dynamic reportIdx
+#dims dynamic report, 100
+
+	drawLine
+	printForm %kr(CALLNAME:MASTER, "은", "는")% 현재 공개 육변기형에 처해 있다(전시된 일수 : 
+	call colorPrint(0xffff33, @"{DAY - FLAG:육변기형시작일}")
+	printL 일)
+	
+	printL
+	printFormL 사용 기록
+	
+	printForm 사용 인원수
+	call colorPrint(0xff33ff, @" {FLAG:육변기사용인원수}")
+	print 인(최근 이용자수
+	call colorPrint(0xff33ff, @" {FLAG:육변기최근이용자수}")
+	print 인) / 사용 회수
+	call colorPrint(0xff33ff, @" {FLAG:육변기사용횟수}")
+	printL 회
+	
+	print 총
+	call colorPrint(0xfdfff5, @" {FLAG:육변기사정량}")
+	print mL의 정액을 사정당했고, 그중
+	call colorPrint(0xfdfff5, @" {FLAG:육변기정음량}")
+	print mL은 입으로 마셨으며,
+	call colorPrint(0xfdfff5, @" {FLAG:육변기질내사정량}")
+	print mL은 보지로,
+	call colorPrint(0xfdfff5, @" {FLAG:육변기항내사정량}")
+	printL mL은 애널로 받았습니다.
+	
+	printL
+	printL ※사용자 리뷰※
+	
+	split CSTR:MASTER:육변기형소감문, "\n", report
+	
+	for reportIdx, 0, 100
+		if !strlens(report:reportIdx)
+			break
+		endif
+
+		setColor (0x88 + RAND:0x77) * 0x10000 + (0x88 + RAND:0x77) * 0x100 + (0x88 + RAND:0x77) * 0x1
+		if RAND:4 == 0
+			fontItalic
+		elseif RAND:3 == 0
+			fontBold
+		endif
+		
+		printFormL %report:reportIdx%
+		
+		fontRegular
+		resetColor
+	next
+	
+	
+	drawLine

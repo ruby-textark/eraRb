@@ -1,33 +1,32 @@
-﻿@checkTight
+﻿@checkTight(vaginaOrAnal, penisSize)
+#dim dynamic vaginaOrAnal
+#dim dynamic penisSize
+#dim dynamic partIdx
+#dim dynamic expansionBaseIdx
+#dim dynamic expansionExpIdx
 
-	if CFLAG:MASTER:삽입질 == 1
-		if BASE:MASTER:보지조임 + BASE:TARGET:자지크기> 60
-			BASE:MASTER:보지조임 -= 1 + RAND:2
-			EXP:MASTER:V확장경험++
-			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "이", "가")% 무리한 삽입으로 늘어나고 있다...
-		endif
-		
-		if BASE:MASTER:보지조임 + BASE:TARGET:자지크기> 65
-			BASE:MASTER:질상태 -= 3
-			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "이", "가")% 늘어나다 못해 일부 찢어진 것 같다
-		endif
+	if vaginaOrAnal == 1
+		partIdx = getNum(BASE, "질상태")
+		expansionBaseIdx = getNum(BASE, "보지조임")
+		expansionExpIdx = getNum(EXP, "V확장경험")
+	elseif vaginaOrAnal == 2
+		partIdx = getNum(BASE, "애널상태")
+		expansionBaseIdx = getNum(BASE, "애널조임")
+		expansionExpIdx = getNum(EXP, "A확장경험")
+	else
+		return
+	endif
 
-		call onMasterExpansion_m(getNum(BASE, "보지조임"))
-		call onMasterExpansion_e(getNum(BASE, "보지조임"))
+	if BASE:MASTER:expansionBaseIdx + penisSize> 60
+		BASE:MASTER:expansionBaseIdx -= 1 + RAND:2
+		EXP:MASTER:expansionExpIdx++
+		printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(partIdx), "이", "가")% 무리한 삽입으로 늘어나고 있다...
 	endif
 	
-	if CFLAG:MASTER:삽입애널 == 1
-		if BASE:MASTER:애널조임 > 50 - BASE:TARGET:자지크기
-			BASE:MASTER:애널조임 -= 1 + RAND:2
-			EXP:MASTER:A확장경험++
-			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(123), "이", "가")% 무리한 삽입으로 늘어나고 있다...
-		endif
-		
-		if BASE:MASTER:애널조임 + BASE:TARGET:자지크기> 65
-			BASE:MASTER:애널상태 -= 3
-			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(123), "이", "가")% 늘어나다 못해 일부 찢어진 것 같다
-		endif
-
-		call onMasterExpansion_m(getNum(BASE, "애널조임"))
-		call onMasterExpansion_e(getNum(BASE, "애널조임"))
+	if BASE:MASTER:expansionBaseIdx + penisSize> 65
+		BASE:MASTER:partIdx -= 3
+		printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(partIdx), "이", "가")% 늘어나다 못해 일부 찢어진 것 같다
 	endif
+
+	call onMasterExpansion_m(expansionBaseIdx)
+	call onMasterExpansion_e(expansionBaseIdx)

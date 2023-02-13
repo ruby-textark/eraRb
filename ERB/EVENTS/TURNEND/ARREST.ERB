@@ -1,0 +1,48 @@
+﻿@arrest
+
+	; 악명 1당 0.2% 확률로 체포됨
+	if !FLAG:육변기형시작일 && (frand(500) < CFLAG:MASTER:악명)
+		call colorPrintW(0x008080, "「어이, 잠깐.」")
+		printFormW 길을 걷던 %CALLNAME:MASTER%의 등 뒤에서 누군가 어깨에 손을 짚으며 말했다
+		call colorPrintW(0x008080, "「이 근처에서 범죄자가 돌아다닌다는 신고가 들어왔다. 잠시 협조하도록.」")
+		printFormL %kr(CALLNAME:MASTER, "은", "는")%...
+		printL [1] - 순순히 멈춰선다
+		printL [2] - 도망친다
+		
+$choiceLoop
+		input
+		
+		if result == 1
+			printFormW 화려한 갑옷으로 무장한 사람들이 어느새 양옆에 서 있었고, 반항하는 것은 의미가 없음을 확인한 %kr(CALLNAME:MASTER, "은", "는")% 가만히 서서 천천히 뒤를 돌아보았다
+			printFormW %CALLNAME:MASTER%에게 말을 건 기사가 말했다
+			call colorPrintW(0x008080, @"「제보와 일치하는군. 너, %kr(CALLNAME:MASTER, "이", "가")% 맞나?」")
+			printFormW %kr(CALLNAME:MASTER, "이", "가")% 두려움이 섞인 얼굴로 천천히 고개를 끄덕이자 양옆에서 차가운 금속의 기운이 느껴졌다
+			call colorPrintW(0x008080, "「좋아. 조사가 필요하니 따라와 줘야겠어.」")
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 그대로 구속된 채 끌려갔다
+		elseif result == 2
+			printFormW 큰 일이 난 것을 직감한 %kr(CALLNAME:MASTER, "은", "는")% 멈춰서서 뒤돌아보는 척을 하다가, 순간 손을 쳐내고 도망치기 시작했다
+			call colorPrintW(0x008080, @"「%CALLNAME:MASTER%! 저 녀석이 %kr(CALLNAME:MASTER, "이다", "다")%! 잡아라!」")
+			
+			if RAND:30 < ABL:MASTER:전투기술
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 온 힘을 다해 도망쳤고, 간신히 추적자들을 뿌리칠 수 있었다.
+				return
+			else
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 사력을 다해 뛰었지만 뒤쫓아오는 기사들이 훨씬 빨랐고, 얼마 가지 않아 잡히고 말았다.
+				call colorPrintW(0x008080, @"「%CALLNAME:MASTER%, 너를 체포한다. 네 죄에 대한 대가를 치르게 해 주지.」")
+			endif
+		else
+			redraw 1
+			goto choiceLoop
+		endif
+		
+		printFormW 기사들에게 체포된 %kr(CALLNAME:MASTER, "은", "는")% 한참 동안을 시달린 끝에 육변기형을 받았다.
+		call colorPrintW(0x008080, @"「%CALLNAME:MASTER%, 네 죄를 뉘우칠 때까지 봉사하도록.」")
+
+		FLAG:육변기형시작일 = DAY
+		FLAG:육변기사용인원수 = 0
+		FLAG:육변기사용횟수 = 0
+		CSTR:MASTER:육변기형소감문 = 
+
+		call getTalent("육변기")
+		printFormW 이제부터 %kr(CALLNAME:MASTER, "은", "는")% 악명이 일정 수준 이하가 될 때까지 구속되어 봉사하게 되며, 그 동안 일부 메뉴를 제외한 행동이 봉인됩니다.
+	endif

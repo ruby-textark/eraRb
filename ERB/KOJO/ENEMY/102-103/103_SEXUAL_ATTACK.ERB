@@ -1,12 +1,13 @@
 ﻿@c103Parasite
+#dim dynamic parasiteIdx
 #dim dynamic partsCount
 #dim dynamic attackedIdx
 #dim dynamic availableParts, 100
 
 	partsCount = 0
-	for i, 301, 400
-		if strlens(CFLAGNAME:i) && CFLAG:MASTER:i < 2 && isAttackableBodyPart(i - 200)
-			availableParts:(partsCount++) = i
+	for parasiteIdx, 301, 400
+		if strlens(CFLAGNAME:parasiteIdx) && CFLAG:MASTER:parasiteIdx < 2 && isAttackableBodyPart(parasiteIdx - 200)
+			availableParts:(partsCount++) = parasiteIdx
 		endif
 	next
 	

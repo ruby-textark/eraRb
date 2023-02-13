@@ -1,9 +1,10 @@
 ﻿@showMarks
+#dim dynamic markIdx
 
-	for i, 1, 100
+	for markIdx, 1, 100
 		
-		if MARK:MASTER:i
-			printForm [%MARKNAME:i% {MARK:MASTER:i}Lv]
+		if MARK:MASTER:markIdx
+			printForm [%MARKNAME:markIdx% {MARK:MASTER:markIdx}Lv]
 		endif
 		
 		fontRegular

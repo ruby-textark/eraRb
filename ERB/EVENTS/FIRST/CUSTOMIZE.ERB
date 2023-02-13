@@ -1,4 +1,5 @@
 ﻿@startCustomization
+#dim dynamic partIdx
 
 	call customizeName
 
@@ -12,9 +13,9 @@
 	else
 		printW 모든 부위 감도 + 1LV
 		
-		for i, 101, 200
-			if strlens(BASENAME:i)
-				ABL:MASTER:i++
+		for partIdx, 101, 200
+			if strlens(BASENAME:partIdx)
+				ABL:MASTER:partIdx++
 			endif
 		next
 	endif

@@ -31,22 +31,22 @@ $inputLoop
 $itemLoop
 	showCount = 0
 	clearLine 999
-	for i, startIdx, endIdx
-			if strlens(ITEMNAME:i) == 0
-				continue
-			endif
-			
-			itemString = [{i}] - %ITEMNAME:i% ({ITEMPRICE:i})
-			
-			printFormLC %itemString, 30, LEFT%
-			showCount++
-			if showCount % 4 == 0
-				printL
-			endif
-		next
+	for itemIdx, startIdx, endIdx
+		if strlens(ITEMNAME:itemIdx) == 0
+			continue
+		endif
+		
+		itemString = [{itemIdx}] - %ITEMNAME:itemIdx% ({ITEMPRICE:itemIdx})
+		
+		printFormLC %itemString, 30, LEFT%
+		showCount++
+		if showCount % 4 == 0
+			printL
+		endif
+	next
 
-		printL
-		printL [0] - 돌아가기
+	printL
+	printL [0] - 돌아가기
 
 	input
 	itemIdx = result
