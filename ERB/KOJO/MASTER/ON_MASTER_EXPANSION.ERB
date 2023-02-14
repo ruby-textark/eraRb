@@ -1,6 +1,10 @@
 ﻿@onMasterExpansion_m(partIdx)
 #dim dynamic partIdx
 
+	if !RAND:3
+		return
+	endif
+
 	if partIdx == getNum(BASE, "보지조임")
 		if isMasterLewd() && TALENT:MASTER:허벌보지
 			if RAND:3 == 0

@@ -1,0 +1,55 @@
+﻿@isParasiteInside(partIdx)
+#function
+#dim dynamic partIdx
+
+	returnf getBit(CFLAG:MASTER:(200 + partIdx), 3) || getBit(CFLAG:MASTER:(200 + partIdx), 4)
+
+@clearParasite(partIdx)
+#dim dynamic partIdx
+
+	call outFromMaster(partIdx, 3)
+	call outFromMaster(partIdx, 4)
+
+@moveParasite(fromPartIdx, toPartIdx)
+#dim dynamic fromPartIdx
+#dim dynamic toPartIdx
+
+	if getBit(CFLAG:MASTER:(200 + fromPartIdx), 3)
+		call insertIntoMaster(toPartIdx, 3)
+		call outFromMaster(fromPartIdx, 3)
+	endif
+	
+	if getBit(CFLAG:MASTER:(200 + fromPartIdx), 4)
+		call insertIntoMaster(toPartIdx, 4)
+		call outFromMaster(fromPartIdx, 4)
+	endif
+	
+	call checkVirginParasite
+
+@parasiteType(partIdx)
+#function
+#dim dynamic partIdx
+
+	if getBit(CFLAG:MASTER:(200 + partIdx), 3)
+		returnf 3
+	endif
+	
+	if getBit(CFLAG:MASTER:(200 + partIdx), 4)
+		returnf 4
+	endif
+	
+	returnf 0
+
+@parasiteName(partIdx)
+#functions
+#dim dynamic partIdx
+
+	if getBit(CFLAG:MASTER:(200 + partIdx), 3)
+		returnf "슬라임"
+	endif
+	
+	if getBit(CFLAG:MASTER:(200 + partIdx), 4)
+		returnf "벌레"
+	endif
+
+	returnf 

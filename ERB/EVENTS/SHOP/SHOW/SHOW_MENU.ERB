@@ -47,6 +47,9 @@
 	printLC [802] - 불러오기
 	printL
 	
-	printLC [900] - 휴식
-
-	;printLC [103] - 캐릭터추가
+	printLC [900] - 눈을 붙인다
+	if !isMasterFree() || MONEY >= 2000
+		setColor 0x777777
+	endif
+	printLC [901] - 푹 쉰다(\\2000 소모)
+	resetColor

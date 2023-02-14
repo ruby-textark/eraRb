@@ -5,8 +5,8 @@
 #dim dynamic availableParts, 100
 
 	partsCount = 0
-	for parasiteIdx, 301, 400
-		if strlens(CFLAGNAME:parasiteIdx) && CFLAG:MASTER:parasiteIdx < 2 && isAttackableBodyPart(parasiteIdx - 200)
+	for parasiteIdx, 101, 200
+		if strlens(CFLAGNAME:parasiteIdx) && !isParasiteInside(parasiteIdx) && isAttackableBodyPart(parasiteIdx - 200)
 			availableParts:(partsCount++) = parasiteIdx
 		endif
 	next
@@ -15,7 +15,7 @@
 	
 	printFormW %kr(CALLNAME:TARGET, "이", "가")% 꾸물거리며 %CALLNAME:MASTER%의 %bodyPartStr((availableParts:attackedIdx) - 200)% 안으로 기어들어간다
 	printFormW %kr(CALLNAME:MASTER, "은", "는")% [기생]상태가 되었다.
-	CFLAG:MASTER:(availableParts:attackedIdx) = 3
+	call insertIntoMaster(attackedIdx, 3)
 	CFLAG:TARGET:기생성공 = 1
 	
 	return 1

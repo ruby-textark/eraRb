@@ -19,13 +19,13 @@
 			call colorPrint(0xff0000, results)
 		endif
 		
-		if CFLAG:MASTER:(partIdx + 200) == 1
+		if getBit(CFLAG:MASTER:(partIdx + 200), 1)
 			print [삽입중]
-		elseif CFLAG:MASTER:(partIdx + 200) == 2
+		elseif getBit(CFLAG:MASTER:(partIdx + 200), 2)
 			print [음구삽입중]
-		elseif CFLAG:MASTER:(partIdx + 200) == 3
+		elseif getBit(CFLAG:MASTER:(partIdx + 200), 3)
 			print [기생중(슬라임)]
-		elseif CFLAG:MASTER:(partIdx + 200) == 3
+		elseif getBit(CFLAG:MASTER:(partIdx + 200), 4)
 			print [기생중(벌레)]
 		endif
 

@@ -1,7 +1,7 @@
 ﻿@processMenu
 
 	; This commands are always OK
-	if RESULT != 201 && RESULT != 202 && RESULT < 800
+	if RESULT != 201 && RESULT != 202 && RESULT < 800 || RESULT == 901
 		if !isMasterFree()
 			return 0
 		endif
@@ -46,7 +46,16 @@
 	; TURN END
 	elseif RESULT == 900
 		begin turnend
+	elseif RESULT == 901 && MONEY >= 2000
+		printFormW %kr(CALLNAME:MASTER, "은", "는")% 푹 쉬었다
+		printFormW 숙박비 \\2000 차감
+		
+		MONEY -= 2000
 
+		BASE:MASTER:체력 = MAXBASE:MASTER:체력
+		BASE:MASTER:마력 = MAXBASE:MASTER:마력
+
+		begin turnend
 	; WRONG COMMAND
 	else
 		RESULT = 0

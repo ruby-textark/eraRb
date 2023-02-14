@@ -1,4 +1,4 @@
-﻿@checkOrgasmInBattle
+﻿@checkOrgasm
 #dim dynamic partIdx
 #dim dynamic orgasmThres
 #dim dynamic orgasmCount
@@ -57,10 +57,10 @@
 			endif
 		endif
 		; todo 절정구상
-		call onMasterOrgasm_m(orgasmParts, orgasmCount, 1)
-		call onMasterOrgasm_e(orgasmParts, orgasmCount, 1)
+		call onMasterOrgasm_m(orgasmParts, orgasmCount)
+		call onMasterOrgasm_e(orgasmParts, orgasmCount)
 	elseif insuffOrgasm
 		printFormL %kr(CALLNAME:MASTER, "은", "는")% 절정을 봉인당한 상태다
-		call onMasterInsuffOrgasm_m(1)
-		call onMasterInsuffOrgasm_e(1)
+		call onMasterInsuffOrgasm_m
+		call onMasterInsuffOrgasm_e
 	endif

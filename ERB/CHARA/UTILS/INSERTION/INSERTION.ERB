@@ -1,0 +1,34 @@
+﻿@insertIntoMaster(partIdx, insertType)
+#dim dynamic partIdx
+#dim dynamic insertType
+
+	setBit CFLAG:MASTER:(200 + partIdx), insertType
+	
+	EXP:MASTER:partIdx++
+	EXP:MASTER:삽입경험++
+	
+	call checkVirgin
+	call checkVirginParasite
+	call increaseArousal(partIdx, 100 * (ABL:MASTER:partIdx + 1) * (90 + RAND:20))
+
+	; 보지조임체크
+	if isMasterInserted(121, 1)
+		call checkTight(1, BASE:TARGET:자지크기)
+	endif
+	; 애널조임체크
+	if isMasterInserted(123, 1)
+		call checkTight(2, BASE:TARGET:자지크기)
+	endif
+
+@outFromMaster(partIdx, insertType)
+#dim dynamic partIdx
+#dim dynamic insertType
+
+	clearBit CFLAG:MASTER:(200 + partIdx), insertType
+
+@isMasterInserted(partIdx, insertType)
+#function
+#dim dynamic partIdx
+#dim dynamic insertType
+
+	returnf getBit(CFLAG:MASTER:(200 + partIdx), insertType)

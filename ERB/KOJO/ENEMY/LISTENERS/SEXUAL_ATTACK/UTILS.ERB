@@ -13,15 +13,15 @@
 	endif
 
 	; 요도->방광 순
-	if partIdx == 124 && CFLAG:MASTER:삽입요도 == 0
+	if partIdx == 124 && !isMasterInserted(125, 1)
 		returnf 0
 	endif
 	; 자궁->난소 순
-	if partIdx == 115 && CFLAG:MASTER:삽입자궁 == 0
+	if partIdx == 115 && !isMasterInserted(116, 1)
 		returnf 0
 	endif
 	; 질->자궁 순
-	if partIdx == 116 && CFLAG:MASTER:삽입질 == 0
+	if partIdx == 116 && !isMasterInserted(121, 1)
 		returnf 0
 	endif
 	
@@ -62,9 +62,3 @@
 	next
 
 	return availableParts:(RAND:partsCount)
-
-@sexualInsert(attackedIdx)
-#dim dynamic attackedIdx
-
-	CFLAG:MASTER:(200 + attackedIdx) = 1
-	EXP:MASTER:attackedIdx++

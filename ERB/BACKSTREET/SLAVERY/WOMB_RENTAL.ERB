@@ -87,8 +87,8 @@ $drugLoop
 	
 	printFormW 옷을 갈아입은 %CALLNAME:MASTER%에게 점장은 다리를 벌려보라고 주문했다.
 	call colorPrintW(0xd0936d, "「상품의 상태가 어떤지 확인해야지. 혹시라도 불량품이면 안되니 말이야.」")
-	
-	if CFLAG:MASTER:삽입질 > 2 || CFLAG:MASTER:삽입자궁 > 2 || CFLAG:MASTER:삽입난소 > 2
+
+	if isParasiteInside(115) || isParasiteInside(116) || isParasiteInside(121)
 		printFormW 한참동안 %CALLNAME:MASTER%의 %bodyPartStr(121)% 속을 들여다 본 점장은 한숨을 쉬면서 말했다.
 		call colorPrintW(0xd0936d, "「안에 뭔가 들어있군 그래. 하는 김에 이것부터 제거해주지. 비용은 보수에서 빼겠네.」")
 		
@@ -105,14 +105,14 @@ $drugLoop
 			BASE:MASTER:자궁상태 = LIMIT(BASE:MASTER:자궁상태 - 5, 0, MAXBASE:MASTER:자궁상태)
 		endif
 		
-		if CFLAG:MASTER:삽입질 > 2
-			CFLAG:MASTER:삽입질 = 0
+		if isParasiteInside(115)
+			call clearParasite(115)
 		endif
-		if CFLAG:MASTER:삽입자궁 > 2
-			CFLAG:MASTER:삽입자궁 = 0
+		if isParasiteInside(116)
+			call clearParasite(116)
 		endif
-		if CFLAG:MASTER:삽입난소 > 2
-			CFLAG:MASTER:삽입난소 = 0
+		if isParasiteInside(121)
+			call clearParasite(121)
 		endif
 	endif
 

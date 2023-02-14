@@ -17,13 +17,13 @@
 		return
 	endif
 
-	if BASE:MASTER:expansionBaseIdx + penisSize> 60
+	if BASE:MASTER:expansionBaseIdx + penisSize> MAXBASE:MASTER:expansionBaseIdx + 5
 		BASE:MASTER:expansionBaseIdx -= 1 + RAND:2
 		EXP:MASTER:expansionExpIdx++
 		printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(partIdx), "이", "가")% 무리한 삽입으로 늘어나고 있다...
 	endif
 	
-	if BASE:MASTER:expansionBaseIdx + penisSize> 65
+	if BASE:MASTER:expansionBaseIdx + penisSize> MAXBASE:MASTER:expansionBaseIdx + 10
 		BASE:MASTER:partIdx -= 3
 		printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(partIdx), "이", "가")% 늘어나다 못해 일부 찢어진 것 같다
 	endif

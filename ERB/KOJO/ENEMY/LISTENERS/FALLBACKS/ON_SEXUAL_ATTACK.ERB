@@ -25,7 +25,7 @@
 	; Hole
 	if attackedName == "질" || attackedName == "애널"
 		; Already inserted
-		if CFLAG:MASTER:(200 + attackedIdx)
+		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
 				printFormL %kr(attackedName, "을", "를")% 쉴틈없이 쑤셔댔다
 			elseif RAND:4 == 0
@@ -39,7 +39,7 @@
 			endif
 		; Insert
 		else
-			call sexualInsert(attackedIdx)
+			call insertIntoMaster(attackedIdx, 1)
 
 			if RAND:5 == 0
 				printFormL %kr(attackedName, "을", "를")% 향해 돌진했다
@@ -55,7 +55,7 @@
 		endif
 	elseif attackedName == "자궁"
 		; Already inserted
-		if CFLAG:MASTER:(200 + attackedIdx)
+		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
 				printFormL 가장 소중한 장소마저 범하고 있다
 			elseif RAND:4 == 0
@@ -69,7 +69,7 @@
 			endif
 		; Insert
 		elseif RAND:3 == 0 && EXP:MASTER:자궁구개발경험 > 30
-			call sexualInsert(attackedIdx)
+			call insertIntoMaster(attackedIdx, 1)
 
 			if RAND:5 == 0
 				printFormL %kr(attackedName, "을", "를")% 향해 거침없이 나아갔다
@@ -111,7 +111,7 @@
 		; 일단 자궁과 동일
 		; todo 별도구상
 		; Already inserted
-		if CFLAG:MASTER:(200 + attackedIdx)
+		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
 				printFormL 가장 소중한 장소마저 범하고 있다
 			elseif RAND:4 == 0
@@ -125,7 +125,7 @@
 			endif
 		; Insert
 		elseif RAND:3 == 0 && EXP:MASTER:자궁구개발경험 > 30
-			call sexualInsert(attackedIdx)
+			call insertIntoMaster(attackedIdx, 1)
 
 			if RAND:5 == 0
 				printFormL %kr(attackedName, "을", "를")% 향해 거침없이 나아갔다
@@ -141,7 +141,7 @@
 		endif
 	elseif attackedName == "유두"
 		; nipplefuck check
-		if CFLAG:MASTER:삽입유두
+		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
 				printFormL 가슴 안쪽 깊숙한 곳을 핥듯이 탐하고 있다
 			elseif RAND:4 == 0
@@ -155,7 +155,7 @@
 			endif
 		
 		elseif RAND:5 == 0 && ABL:MASTER:attackedIdx > 7
-			call sexualInsert(attackedIdx)
+			call insertIntoMaster(attackedIdx, 1)
 
 			if RAND:5 == 0
 				printFormL %attackedName% 속으로 부드럽게 삽입했다

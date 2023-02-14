@@ -61,7 +61,17 @@
 			printFormL 험하게 사용된 끝네 %kr(bodyPartStr(121), "은", "는")% 침입자를 막으려는 생각은 완전히 잊어버린 듯 크게 벌린 채다
 		endif
 	else
-		printFormL %kr(bodyPartStr(121), "은", "는")% 꽉 닫혀있다
+		if MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 < 5
+			printFormL %kr(bodyPartStr(121), "은", "는")% 꽉 닫혀있어 흠뻑 젖지 않으면 삽입하기 힘들다
+		elseif MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 < 10
+			printFormL %kr(bodyPartStr(121), "은", "는")% 잘 쪼여준다
+		elseif MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 < 15
+			printFormL %kr(bodyPartStr(121), "은", "는")% 자지가 들어오면 부드럽게 감싸안는다
+		elseif MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 < 20
+			printFormL %kr(bodyPartStr(121), "은", "는")% 풀어져서 큰 자지도 쉽게 삼킨다
+		elseif MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 < 25
+			printFormL %kr(bodyPartStr(121), "은", "는")% 꽤 벌어져서 주먹도 들어갈 것 같다
+		endif
 	endif
 	if TALENT:MASTER:세로애널
 		if RAND:2 == 0
@@ -70,7 +80,17 @@
 			printFormL 넓게 벌어진 입구를 자랑하는 %kr(bodyPartStr(123), "이", "가")% 수시로 꿈틀거리며 그 안을 채워주기를 바라고 있다
 		endif
 	else
-		printFormL %kr(bodyPartStr(123), "은", "는")% 꽉 닫혀있다
+		if MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 < 5
+			printFormL %kr(bodyPartStr(123), "은", "는")% 꽉 닫혀있어 흠뻑 젖지 않으면 삽입하기 힘들다
+		elseif MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 < 10
+			printFormL %kr(bodyPartStr(123), "은", "는")% 잘 쪼여준다
+		elseif MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 < 15
+			printFormL %kr(bodyPartStr(123), "은", "는")% 자지가 들어오면 부드럽게 감싸안는다
+		elseif MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 < 20
+			printFormL %kr(bodyPartStr(123), "은", "는")% 풀어져서 큰 자지도 쉽게 삼킨다
+		elseif MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 < 25
+			printFormL %kr(bodyPartStr(123), "은", "는")% 꽤 벌어져서 주먹도 들어갈 것 같다
+		endif
 	endif
 
 	printL

@@ -127,7 +127,7 @@
 					reports:(reportCount++) = "여기 주를 모르는 불쌍한 어린 양에게 천국을 보여드렸습니다."
 				endif
 			elseif RAND:2 == 0
-				printFormW \@ RAND:2 ? 비열한 # 더러운 \@ 말썽꾸리거 꼬마가 당신의 뒷보지를 사용하고 지나갔다.
+				printFormW \@ RAND:2 ? 비열한 # 더러운 \@ 애송이가 당신의 뒷보지를 사용하고 지나갔다.
 				cumAmount /= 2
 				BASE:MASTER:애널상태 = LIMIT(BASE:MASTER:애널상태  - (5 + RAND:5), 0, MAXBASE:MASTER:애널상태)
 
@@ -135,6 +135,12 @@
 					reports:(reportCount++) = "구멍이 새까맣고 고약한 냄새가 나서 이상함."
 				elseif RAND:3 == 0 && TALENT:MASTER:세로애널
 					reports:(reportCount++) = "엉덩이에 주먹 넣어는데 다 들어감."
+				elseif RAND:3 == 0 && isMasterInserted(123, 3)
+					reports:(reportCount++) = "뒷구멍에 슬라임 들어있어서 수분감 최고."
+				elseif RAND:3 == 0
+					reports:(reportCount++) = "입구는 꽉 조이고 안쪽은 부드럽게 감싸줘서 그야말로 극상의 애널."
+				elseif RAND:2 == 0
+					reports:(reportCount++) = "자지 넣으면 아첨하듯 달라붙는 애널. 이 기회에 경험하지 않으면 손해봄."
 				else
 					reports:(reportCount++) = "화장실이 급해서 잠깐 엉덩이 좀 빌렸어요."
 				endif
@@ -201,21 +207,32 @@
 				penisSize /= 2
 				BASE:MASTER:질상태 = LIMIT(BASE:MASTER:질상태  - (5 + RAND:5), 0, MAXBASE:MASTER:질상태)
 
-				if RAND:3 == 0 && EXP:MASTER:질경험 > 50
-					reports:(reportCount++) = "구멍이 새까맣고 고약한 냄새가 나서 이상함."
+				if RAND:3 == 0 && EXP:MASTER:질경험 > 100
+					reports:(reportCount++) = "구멍이 새까맣고 고약한 냄새가 나서 별로."
 				elseif RAND:3 == 0 && TALENT:MASTER:허벌보지
 					reports:(reportCount++) = "주먹 한번 넣어봤는데 보지에 다 들어갔어."
+				elseif RAND:3 == 0 && FLAG:육변기사용횟수 > 50
+					reports:(reportCount++) = "괜찮긴 한데 닭장 냄새가 남. 좀 깨끗하게 써요."
+				elseif RAND:3 == 0 && TALENT:MASTER:임신
+					reports:(reportCount++) = "이거 살 찐게 아니라 임신한 거 맞죠?"
+				elseif RAND:3 == 0 && BASE:MASTER:자궁내정액1 > 5
+					BASE:MASTER:자궁내정액1 /= 2
+					reports:(reportCount++) = "박아주려고 보지 벌렸는데 이미 찐득하게 정액 흘러나오길래 물로 한 번 헹구고 썼음. 뒷 사람들도 써야되니까 뒷처리 잘하세요."
 				else
-					reports:(reportCount++) = "화장실이 급해서 잠깐 보지 좀 빌렸는데."
+					reports:(reportCount++) = "화장실이 급해서 잠깐 보지 좀 빌렸는데 나쁘지 않았음."
 				endif
 			else
 				fatherType = 4
 				if RAND:2 == 0
 					printFormW \@ RAND:2 ? 발기한 # 헐떡이는 \@ 대형견이 당신의 보지를 사용하고 지나갔다.
-					if isMasterLewd()
+					if isMasterLewd() && TALENT:MASTER:임신
+						reports:(reportCount++) = "임신해서 배가 불러와도 개 자지만 보면 보지 벌리는 걸 보면 이미 사람 취급은 받고 싶지도 않은가 봄."
+					elseif isMasterLewd() && !TALENT:MASTER:임신
 						reports:(reportCount++) = "짐승이 다가오는걸 보면 저절로 다리를 벌리는데다가 개랑 뒹굴며 헐떡이는 꼴이 딱 암캐."
+					elseif !isMasterLewd() && TALENT:MASTER:임신
+						reports:(reportCount++) = "저번에 발정난 개가 덮치던데 임신 중이어서 아기 다칠까봐 그만 하라고 밀어내는데 그래봐야 개가 막 짖으면서 다가오니까 결국 허락해주던 것도 봄."
 					else
-						reports:(reportCount++) = "개들이 으르렁거리면서 다가오는데 뭔가 개들한테도 쉬운 암컷으로 낙인찍힌 모양임."
+						reports:(reportCount++) = "개들이 으르렁거리면서 다가오는데 그냥 짐승들한테도 쉬운 암컷으로 낙인찍힌 모양."
 					endif
 				elseif RAND:2 == 0
 					printFormW \@ RAND:2 ? 흥분한 # 성난 \@ 종마가 당신의 암컷구멍을 사용하고 지나갔다.
@@ -223,7 +240,7 @@
 					penisSize = 50 + RAND:10
 					reports:(reportCount++) = "살다살다 말의 씨받이를 하는 사람은 또 처음 봄. 그거 다 안 긁어내면 분명 임신할 텐데."
 				else
-					printFormW \@ RAND:2 ? 다 큰 # 교미용 \@ 돼지가 당신의 뒷보지를 사용하고 지나갔다.
+					printFormW \@ RAND:2 ? 다 큰 # 교미용 \@ 돼지가 당신의 보지를 사용하고 지나갔다.
 					cumAmount *= 10
 					penisSize /= 2
 					if isMasterLewd()
@@ -231,29 +248,41 @@
 					else
 						reports:(reportCount++) = "돼지한테 사정당하고 나서 정액이 안 빠져나오는거 보고 울먹이는데 그거 보고 좀 꼴렸음. 물론 더러워서 박지는 않음."
 					endif
+
+					call insertIntoMaster(116, 1)
 				endif
 			endif
 			FLAG:육변기질내사정량 += cumAmount
 			call checkTight(1, penisSize)
-		endif		
+		endif
 
-		call insertIntoMaster(insertInto, fatherType)
+		call insertIntoMaster(insertInto, 1)
 		call cumIntoMaster(insertInto, cumAmount, fatherType)
 		call outFromMaster(insertInto)
 		
 		FLAG:육변기사정량 += cumAmount
 		
-		if RAND:10 == 0
+		if RAND:50 == 0
 			printFormW 잠시 쉬고 있던 %CALLNAME:MASTER%의 뒷편에서 부스럭거리는 소리가 나더니, 순간 따끔한 느낌이 들었다.
 			
-			print 아무래도 누군가 지나가면서
-			call colorPrint(0xcc33cc, " 미약을 주사")
-			printW 한 것 같다...
+			print 몸에 음란한 열기가 퍼져나가는 것을 보니, 아무래도 누군가 지나가면서
+			call colorPrint(0xcc33cc, " 미약")
+			printW 을 주사한 것 같다...
+			BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 10 + RAND:10, 0, MAXBASE:MASTER:혈중미약농도)
+		endif
+		
+		if RAND:100 == 0
+			printFormW 잠시 쉬고 있던 %CALLNAME:MASTER%에게 모자를 푹 눌러쓴 괴한이 다가와 아랫배에 손을 갖다대자 순간 따끔한 느낌이 들었다.
+			
+			print 아랫배가 심상찮게 떨려오는 것을 보니, 아무래도
+			call colorPrint(0xcc0000, " 배란유도제")
+			printW 를 주사당한 것 같다...
 			BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 10 + RAND:10, 0, MAXBASE:MASTER:혈중미약농도)
 		endif
 		
 		FLAG:육변기사용인원수++
-		FLAG:육변기사용횟수++
+		FLAG:육변기사용횟수 += 1 + RAND:3
+		printL
 	next
 	
 	CSTR:MASTER:육변기형소감문 = %strJoin(reports, "\n", 0, reportCount)%
