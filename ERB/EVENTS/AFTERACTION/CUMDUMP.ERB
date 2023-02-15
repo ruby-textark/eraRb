@@ -250,6 +250,7 @@
 					endif
 
 					call insertIntoMaster(116, 1)
+					call outFromMaster(116, 1)
 				endif
 			endif
 			FLAG:육변기질내사정량 += cumAmount
@@ -258,7 +259,7 @@
 
 		call insertIntoMaster(insertInto, 1)
 		call cumIntoMaster(insertInto, cumAmount, fatherType)
-		call outFromMaster(insertInto)
+		call outFromMaster(insertInto, 1)
 		
 		FLAG:육변기사정량 += cumAmount
 		

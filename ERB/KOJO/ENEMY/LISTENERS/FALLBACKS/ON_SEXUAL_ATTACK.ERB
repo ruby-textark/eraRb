@@ -10,7 +10,7 @@
 	printFormL 성희롱:%attackedName%
 	
 	if TCVAR:TARGET:성희롱부위 && TCVAR:TARGET:성희롱부위 != attackedIdx
-		call outFromMaster(TCVAR:TARGET:성희롱부위)
+		call outFromMaster(TCVAR:TARGET:성희롱부위, 1)
 		if RAND:3 == 0
 			printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에 흥미를 잃은 것 같다
 		elseif RAND:2 == 0

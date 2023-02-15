@@ -51,7 +51,7 @@
 		endif
 	endif
 	
-	if TALENT:MASTER:교미배란
+	if TALENT:MASTER:교미배란 && !TALENT:MASTER:임신
 		printFormW %bodyPartStr(121)% 안으로 들어온 정액에 %CALLNAME:MASTER%의 %kr(bodyPartStr(115), "은", "는")% 환희하며 배란하고 있다.
 		BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2
 		TALENT:MASTER:생리중 = 0

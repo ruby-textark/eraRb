@@ -14,9 +14,13 @@
 		BASE:MASTER:생리주기 = (BASE:MASTER:생리주기 + 1) % MAXBASE:MASTER:생리주기
 	endif
 	
-	if TALENT:MASTER:생리불순
-		BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 4
-		TALENT:MASTER:생리중 = 0
+	; 반대로, 임신시 일수 증가
+	if BASE:MASTER:임신일수
+		BASE:MASTER:임신일수++
+	endif
+	
+	if !RAND:2 && TALENT:MASTER:생리불순
+		BASE:MASTER:생리주기 = (BASE:MASTER:생리주기 - 1 + MAXBASE:MASTER:생리주기) % MAXBASE:MASTER:생리주기
 	endif
 	
 	if BASE:MASTER:생리주기 == 0
@@ -98,18 +102,13 @@
 	endif
 	BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도, 0, MAXBASE:MASTER:자궁침식도)
 
-	; 임신시 일수 증가
-	if BASE:MASTER:임신일수
-		BASE:MASTER:임신일수++
-	endif
-
 	; 임신자각
 	if BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수 / 10
 		; 임신자각처리
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 최근 생리주기가 이상한 것을 알아챘다...
 		printFormW 아무래도 %kr(CALLNAME:MASTER, "은", "는")% 임신한 모양이다
 
-		TALENT:MASTER:임신 = 1
+		call getTalent("임신")
 		EXP:MASTER:임신경험++
 		if CFLAG:MASTER:아이아버지 > 1
 			EXP:MASTER:이종임신경험++
@@ -181,7 +180,7 @@
 		printFormW .
 		printFormW .
 
-		printForm %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%CSTR:MASTER:(300 + CFLAG:MASTER:아이아버지)%]의%" "%
+		printForm %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%STR:(300 + CFLAG:MASTER:아이아버지)%]의%" "%
 		if CFLAG:MASTER:아이아버지 == 1
 			printW 아이를 출산했습니다
 		else

@@ -9,7 +9,7 @@
 	printFormL 성희롱:%attackedName%
 
 	if TCVAR:TARGET:성희롱부위 && TCVAR:TARGET:성희롱부위 != attackedIdx
-		call outFromMaster(TCVAR:TARGET:성희롱부위)
+		call outFromMaster(TCVAR:TARGET:성희롱부위, 1)
 	endif
 
 	TCVAR:TARGET:성희롱부위 = attackedIdx
