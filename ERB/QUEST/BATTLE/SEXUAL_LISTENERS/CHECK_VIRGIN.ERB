@@ -1,13 +1,18 @@
 ﻿@checkVirgin
 #dim dynamic partIdx
 
-	for partIdx, 301, 400
-		if getBit(CFLAG:MASTER:partIdx, 1) && TALENT:MASTER:partIdx
-			printFormL %kr(CALLNAME:MASTER, "은", "는")% 처음으로 %bodyPartStr(partIdx - 200)%로 하는 성교를 경험했다.
-			TALENT:MASTER:partIdx = 0
+	for partIdx, 101, 200
+		if isMasterInserted(partIdx, 1) && TALENT:MASTER:(200 + partIdx)
+			if RAND:2 == 0
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 처음으로 %partStr(partIdx)%로 하는 성교를 경험했다.
+			else
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% %partStr(partIdx)%의 처녀를 잃었다.
+			endif
+
+			call loseTalent(TALENTNAME:(200 + partIdx))
 			
-			call onMasterLostVirgin_m(partIdx - 200)
-			call onMasterLostVirgin_e(partIdx - 200)
+			call onMasterLostVirgin_m(partIdx)
+			call onMasterLostVirgin_e(partIdx)
 		endif
 	next
 
@@ -15,9 +20,10 @@
 #dim dynamic partIdx
 
 	for partIdx, 101, 200
-		if isParasiteInside(partIdx) && TALENT:MASTER:partIdx
-			printFormL %kr(CALLNAME:MASTER, "은", "는")% %STR:(CFLAG:MASTER:partIdx)%에게 %bodyPartStr(partIdx)%의 처녀를 잃었다.
-			TALENT:MASTER:partIdx = 0
+		if isParasiteInside(partIdx) && TALENT:MASTER:(200 + partIdx)
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% %parasiteName(partIdx)%에게 %partStr(partIdx)%의 처녀를 잃었다.
+
+			call loseTalent(TALENTNAME:(200 + partIdx))
 			
 			call onMasterLostVirgin_m(partIdx)
 			call onMasterLostVirgin_e(partIdx)

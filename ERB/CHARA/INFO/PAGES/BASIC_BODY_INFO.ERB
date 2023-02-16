@@ -8,7 +8,7 @@
 			continue
 		endif
 
-		printForm %CSTR:MASTER:partIdx, 14, RIGHT% (감도Lv.{ABL:MASTER:partIdx}) : 
+		printForm %partStrRaw(partIdx), 14, RIGHT% (감도Lv.{ABL:MASTER:partIdx}) : 
 
 		barstr BASE:MASTER:partIdx, MAX(MAXBASE:MASTER:partIdx, 1), 10
 		if BASE:MASTER:partIdx > 67

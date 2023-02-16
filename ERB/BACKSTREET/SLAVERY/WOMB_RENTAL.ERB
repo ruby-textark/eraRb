@@ -2,6 +2,7 @@
 #dim dynamic ejacType
 #dim dynamic creatureType
 #dim dynamic reward
+#dim dynamic mobIdx
 
 	if FLAG:자궁대여료
 		call colorPrintW(0xff8c00, "「가서 몸 조리나 잘 하라고. 일단 그 건이 끝나야 다음 손님을 받지.」")
@@ -84,17 +85,28 @@ $drugLoop
 		MONEY += ITEM:사후피임약 * ITEMPRICE:사후피임약
 		ITEM:사후피임약 = 0
 	endif
+	CFLAG:MASTER:사후피임약복용 = 0
 	
 	printFormW 옷을 갈아입은 %CALLNAME:MASTER%에게 점장은 다리를 벌려보라고 주문했다.
 	call colorPrintW(0xd0936d, "「상품의 상태가 어떤지 확인해야지. 혹시라도 불량품이면 안되니 말이야.」")
+	
+	if TALENT:MASTER:피임결계
+		call colorPrintW(0xd0936d, "「자네 이런 마법은 또 어디서 배워온건가?」")
+		printFormW 점장은 %CALLNAME:MASTER%의 하복부를 흘깃 바라보더니 %kr(CALLNAME:MASTER, "이", "가")% 피임결계로 보호받고 있다는 사실을 간파해냈다.
+		call colorPrintW(0xd0936d, "「이건 해제해야겠지?」")
+		printFormW 그러고는 %CALLNAME:MASTER%의 아랫배에 손바닥을 얹고 은근히 힘을 주다가, 순간 강하게 한 번 누르면서 마력을 조종했다.
+		call loseTalent("피임결계")
+
+		call colorPrintW(0xd0936d, "「좋아, 다음.」")
+	endif
 
 	if isParasiteInside(115) || isParasiteInside(116) || isParasiteInside(121)
-		printFormW 한참동안 %CALLNAME:MASTER%의 %bodyPartStr(121)% 속을 들여다 본 점장은 한숨을 쉬면서 말했다.
+		printFormW 한참동안 %CALLNAME:MASTER%의 %partStr(121)% 속을 들여다 본 점장은 한숨을 쉬면서 말했다.
 		call colorPrintW(0xd0936d, "「안에 뭔가 들어있군 그래. 하는 김에 이것부터 제거해주지. 비용은 보수에서 빼겠네.」")
 		
-		printFormW 점장이 알 수 없는 물약을 들고와서 그대로 %CALLNAME:MASTER%의 %bodyPartStr(121)%에 들이붓고는 입구를 손으로 막자, 얼마 지나지 않아 %CALLNAME:MASTER%는 하복부에서 요란한 고통을 느꼈다.
+		printFormW 점장이 알 수 없는 물약을 들고와서 그대로 %CALLNAME:MASTER%의 %partStr(121)%에 들이붓고는 입구를 손으로 막자, 얼마 지나지 않아 %CALLNAME:MASTER%는 하복부에서 요란한 고통을 느꼈다.
 		call colorPrintW(0xd0936d, "「이게 기생생물한테는 특효약이거든. 자, 보라고.」")
-		printFormW 점장이 손을 뗴자마자 %CALLNAME:MASTER%의 %bodyPartStr(121)%에서 뭔가 꾸물거리며 기어나왔고, 점장은 아무렇지도 않게 그것을 손으로 쓸어서 버려버렸다.
+		printFormW 점장이 손을 뗴자마자 %CALLNAME:MASTER%의 %partStr(121)%에서 뭔가 꾸물거리며 기어나왔고, 점장은 아무렇지도 않게 그것을 손으로 쓸어서 버려버렸다.
 		
 		reward -= 1000
 		
@@ -114,13 +126,14 @@ $drugLoop
 		if isParasiteInside(121)
 			call clearParasite(121)
 		endif
+		call colorPrintW(0xd0936d, "「좋아, 다음.」")
 	endif
 
 	if BASE:MASTER:자궁내정액1 || BASE:MASTER:자궁내정액2 || BASE:MASTER:자궁내정액3 || BASE:MASTER:자궁내정액4
-		printFormW %CALLNAME:MASTER%의 %bodyPartStr(121)%에 아직 찐득한 정액이 남아있는 것을 확인한 점장은, 한구석에서 고무 호스를 꺼냈다.
+		printFormW %CALLNAME:MASTER%의 %partStr(121)%에 아직 찐득한 정액이 남아있는 것을 확인한 점장은, 한구석에서 고무 호스를 꺼냈다.
 		call colorPrintW(0xd0936d, "「자네가 이해해주게. 이쪽이 아무래도 확실한 결과물을 보장해 줄 수 있을 테니까 말이야.」")
 		
-		printFormW 치욕스러운 자세로 %kr(CALLNAME:MASTER, "은", "는")% %bodyPartStr(121)%에 관을 삽입해 안에 남아있던 액체를 씻어냈다...
+		printFormW 치욕스러운 자세로 %kr(CALLNAME:MASTER, "은", "는")% %partStr(121)%에 관을 삽입해 안에 남아있던 액체를 씻어냈다...
 		
 		if RAND:2 == 0
 			printFormW 당연히 이런 행위는 몸에 악영향을 끼친다. %CALLNAME:MASTER%의 질 상태가 악화되었다.
@@ -139,12 +152,16 @@ $drugLoop
 		BASE:MASTER:자궁내몬스터정액 = 0
 		BASE:MASTER:자궁내벌레정액 = 0
 		BASE:MASTER:자궁내짐승정액 = 0
+		
+		call colorPrintW(0xd0936d, "「좋아, 다음.」")
 	endif
+	
+	call colorPrintW(0xd0936d, "「이정도면 상품에 문제는 없을 것 같군.」")
 	
 	call onUseItem909(MASTER)
 	
 	if creatureType != 1
-		printFormW 이어서 점장은 %CALLNAME:MASTER%의 %bodyPartStr(121)% 벽면에 면봉을 문질러보고 그것을 언제 가져왔는지 모를 투명한 액체가 담긴 컵에 넣어 휘저었다
+		printFormW 이어서 점장은 %CALLNAME:MASTER%의 %partStr(121)% 벽면에 면봉을 문질러보고 그것을 언제 가져왔는지 모를 투명한 액체가 담긴 컵에 넣어 휘저었다
 		call colorPrintW(0xd0936d, "「사람의 새끼가 아니니까. 좀 자궁에 적응을 시킬 필요가 있거든.」")
 		
 		if BASE:MASTER:자궁침식도 < 25
@@ -158,9 +175,9 @@ $drugLoop
 			call colorPrintW(0xd0936d, "「거 준비 한번 완벽하구만. 그래도 혹시 모르니 주사 한번 맞고 가자고.」")
 		endif
 		
-		printFormW 점장은 길다란 주사를 꺼내 %CALLNAME:MASTER%의 배 너머로 %kr(bodyPartStr(116), "을", "를")% 겨냥해 푹 찔러넣었다.
-		printFormW 주사는 신기하게도 전혀 아프지 않았지만, %kr(CALLNAME:MASTER, "은", "는")% 뱃속에서 %kr(bodyPartStr(116), "이", "가")% 더 이상 자신을 괴롭히지 말라는 듯 고통스럽게 뜨거운 열기를 머금는 것을 느낄 수 있었다
-		printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 이종의 새끼를 낳기 위한 것으로 변해버렸다...
+		printFormW 점장은 길다란 주사를 꺼내 %CALLNAME:MASTER%의 배 너머로 %kr(partStr(116), "을", "를")% 겨냥해 푹 찔러넣었다.
+		printFormW 주사는 신기하게도 전혀 아프지 않았지만, %kr(CALLNAME:MASTER, "은", "는")% 뱃속에서 %kr(partStr(116), "이", "가")% 더 이상 자신을 괴롭히지 말라는 듯 고통스럽게 뜨거운 열기를 머금는 것을 느낄 수 있었다
+		printFormW %CALLNAME:MASTER%의 %kr(partStr(116), "은", "는")% 이종의 새끼를 낳기 위한 것으로 변해버렸다...
 		BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도 + 10, 50, MAXBASE:MASTER:자궁침식도)
 	endif
 
@@ -178,6 +195,9 @@ $drugLoop
 			printFormW 잠시 따끔한 느낌이 느껴진 뒤, 점장의 손가락이 주사기의 끝을 누르자 %kr(CALLNAME:MASTER, "은", "는")% 모순적이게도 아랫배에서 차가운 감각과 음란한 따스함이 동시에 올라오는 것을 느꼈다.
 		endif
 		
+		BASE:MASTER:자궁내정액1 = 2 + RAND:10
+		BASE:MASTER:(320 + creatureType) = BASE:MASTER:자궁내정액1
+		
 	elseif ejacType == 1
 		; 직접교미
 		call colorPrintW(0xd0936d, "「자, 마지막으로 이걸 목에 차면 끝이야.」")
@@ -193,6 +213,8 @@ $drugLoop
 		; todo 교미구상
 		if creatureType == 1
 			if RAND:2 == 0
+				call addMobChara(1201)
+
 				printFormW 잠시 뒤, 문을 열고 들어온 것은 고급스러운 보라색 옷차림의 남자와 허름한 천옷을 입은 남자였다.
 				call colorPrintW(0xd0936d, "「그래, 자네가 이번 상품인가보군.」")
 				printFormW 천천히 고개를 끄덕인 %kr(CALLNAME:MASTER, "을", "를")% 위아래로 훑어본 보라색 옷의 남자는 동행에게 턱으로 %kr(CALLNAME:MASTER, "을", "를")% 가리켰다.
@@ -208,7 +230,7 @@ $drugLoop
 				
 				if BASE:MASTER:보지조임 > 35
 					printFormW 그렇다 해도 %kr(CALLNAME:MASTER, "은", "는")% 그의 것을 받아들이기에는 조금 버거웠다.
-					printFormW 노예 역시 이런 일이 잦았던 모양인지 %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "이", "가")% 너무 다치지는 않도록 자제하는 모습이었다
+					printFormW 노예 역시 이런 일이 잦았던 모양인지 %CALLNAME:MASTER%의 %kr(partStr(121), "이", "가")% 너무 다치지는 않도록 자제하는 모습이었다
 					printFormW 하지만 그 떄문에 행위가 끝날 기색이 보이지 않자 %kr(CALLNAME:MASTER, "은", "는")% 차라리 빨리 끝내달라고 애원했고, 그제서야 그는 속도를 올리기 시작했다
 					printFormW 그제서야 무언가 잘못된 것을 느낀 %kr(CALLNAME:MASTER, "은", "는")% 몇 번이고 이건 싫다며 그만두겠다고 말하려 했지만 그럴 때마다 목에 찬 초커가 울렸고, %CALLNAME:MASTER%의 몸에서 힘이 빠져나갔다
 					printFormW 그 뒤로 이어진 찢어지는 고통을 간신히 참아낸 %kr(CALLNAME:MASTER, "이", "가")% 정신을 차린 것은, 이미 그 둘이 정리를 마치고 방을 나선 뒤였다
@@ -218,16 +240,17 @@ $drugLoop
 					BASE:MASTER:질상태 -= 2
 				elseif BASE:MASTER:보지조임 > 30
 					printFormW %kr(CALLNAME:MASTER, "은", "는")%, 하지만, 이미 확장이 끝난 상태였고, 그의 것을 받아들이기에 딱 적합한 크기였다.
-					printFormW 그 역시 %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "이", "가")% 궁합이 잘 맞는다는 것을 눈치챘는지, 어루만지는 듯한 행위는 점점 열기가 붙기 시작했다
-					printFormW 분명 대여해 준 것은 %bodyPartStr(116)%뿐이었을 텐데, %kr(CALLNAME:MASTER, "은", "는")% 어느새 정신을 차려보니 그와 격렬하게 혀까지 섞어가며 그저 아이를 낳기 위한 몸짓을 이어나갔다
+					printFormW 그 역시 %CALLNAME:MASTER%의 %kr(partStr(121), "이", "가")% 궁합이 잘 맞는다는 것을 눈치챘는지, 어루만지는 듯한 행위는 점점 열기가 붙기 시작했다
+					printFormW 분명 대여해 준 것은 %partStr(116)%뿐이었을 텐데, %kr(CALLNAME:MASTER, "은", "는")% 어느새 정신을 차려보니 그와 격렬하게 혀까지 섞어가며 그저 아이를 낳기 위한 몸짓을 이어나갔다
 				else
 					printFormW 하지만 아무리 물건이 크다 해도 %kr(CALLNAME:MASTER, "은", "는")% 이미 인간의 것조차 아닌 것들을 수 차례 경험했기 떄문에 이 정도로는 큰 자극도 되지 못했다
-					printFormW 너무나도 넓은 %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "을", "를")% 그도 느낀 것인지, %kr(CALLNAME:MASTER, "을", "를")% 봐주던 몸짓이 어느 순간 꽤 격렬해졌다
+					printFormW 너무나도 넓은 %CALLNAME:MASTER%의 %kr(partStr(121), "을", "를")% 그도 느낀 것인지, %kr(CALLNAME:MASTER, "을", "를")% 봐주던 몸짓이 어느 순간 꽤 격렬해졌다
 					printFormW 노예상이 그를 떼어놓기 전까지, 그는 심지어 %kr(CALLNAME:MASTER, "을", "를")% 보며 싸구려 창녀도 이것보다는 박는 맛이 있겠다며 질 낮은 농담까지 섞어가며 짐승처럼 박아댔다
 				endif
 				
 			else
 				; 전사일족의 후계자 만들기
+				call addMobChara(1202)
 
 				if !FLAG:전사일족손님
 					FLAG:전사일족손님 = 1
@@ -245,12 +268,12 @@ $drugLoop
 					printFormW 뭐라 말을 하려고 할 떄마다 목에 채워진 초커가 떨리며 목소리가 나오지 않게 되었고, 잠시간의 침묵을 무언의 동의라 생각했는지 그는 그대로 %CALLNAME:MASTER%를 들어 침대 위에 엎드리게 했다
 					call colorPrintW(0x4b6043, "「빨리 끝내주도록 할게. 그게 서로 편하잖아?」")
 					printFormW 잠시 발버둥을 쳐 보려 했지만 초커가 %kr(CALLNAME:MASTER, "이", "가")% 무엇을 하려는지 귀신같이 눈치채고 번번히 팔다리에서 힘을 빼버리는 탓에, %kr(CALLNAME:MASTER, "은", "는")% 숨죽여 눈물을 흘릴수밖에 없었다
-					printFormW 그러나 슬픔도 잠시, 그의 밤일은 너무나도 완벽했고, %CALLNAME:MASTER%의 %bodyPartStr(121)% 역시 그의 물건을 정성스레 물어대며 훌륭한 수컷에게 본능적으로 봉사하기 시작했다
+					printFormW 그러나 슬픔도 잠시, 그의 밤일은 너무나도 완벽했고, %CALLNAME:MASTER%의 %partStr(121)% 역시 그의 물건을 정성스레 물어대며 훌륭한 수컷에게 본능적으로 봉사하기 시작했다
 					printFormW 어느새 %kr(CALLNAME:MASTER, "이", "가")% 흘리던 눈물은, 고통과 절망의 눈물에서 희열과 쾌락의 그것으로 변해 있었다.
 				else
 					printFormW 큰 소리를 내며 문을 열어젖힌 %kr(CALLNAME:MASTER, "과", "와")% 눈을 마주친 것은, 처음 보는 전사의 일족이었다.
 					printFormW 그럼 그렇지, 한숨을 푹 쉰, %kr(CALLNAME:MASTER, "은", "는")% 무의식중에 저번에 만난 그의 일족과의 정사를 떠올렸고, 본능적으로 다리 사이가 뜨거워지는 것을 느꼈다
-					printFormW 평범한 사람과는 결코 느껴보지 못할 황홀한 경험에, 본능적으로 %kr(bodyPartStr(121), "이", "가")% 다시금 그 쾌락을 느끼고자 떨려오는 듯 했다
+					printFormW 평범한 사람과는 결코 느껴보지 못할 황홀한 경험에, 본능적으로 %kr(partStr(121), "이", "가")% 다시금 그 쾌락을 느끼고자 떨려오는 듯 했다
 					printFormW 뒤틀린 생각에서 나온 고혹적인 미소에, %kr(CALLNAME:MASTER, "은", "는")% 아무 말 없이 엎드려 엉덩이를 내밀었고, 남자는 무언가 말하려 했던 것 같지만 벌름거리는 %CALLNAME:MASTER%의 보지를 보고는 그대로 덮쳐왔다
 					printFormW 과연 그들 일족은 사냥과 전투에만 뛰어난 것이 아닌지, 이번에 만난 이 남자 역시 훌륭한 물건과 솜씨를 자랑했지만, 어딘가 아쉬운 나머지 %kr(CALLNAME:MASTER, "은", "는")% 저번의 그 남자의 이름을 은근슬쩍 부르며 남자를 자극했다
 					printFormW 서로가 아는 사이인지는 모르겠지만, 그 이름을 듣고 반응한 남자는 좀 더 짐승같은 시간을 선사해 주었고, 끝내 %kr(CALLNAME:MASTER, "은", "는")% 밀려오는 절정에 눈을 까뒤집고 기절해 버렸다
@@ -259,6 +282,7 @@ $drugLoop
 		elseif creatureType == 2
 			;if RAND:2 == 0
 				; 몬스터 연구가의 희귀종 번식의뢰
+				call addMobChara(1203)
 				printFormW 똑똑 노크 소리와 함꼐 방안으로 들어온 것은 말끔하게 차려입은 마른 남자와, 그 남자가 들고있는 우리에 갇힌 작은 몬스터였다
 				printForm 처음 보는 몬스터에 놀란 %kr(CALLNAME:MASTER, "은", "는")%%" "%
 				if !FLAG:몬스터학자손님
@@ -282,7 +306,7 @@ $drugLoop
 				endif
 				
 				if RAND:2 == 0 && EXP:MASTER:이종임신경험 > 5
-					printFormW 몬스터는 %CALLNAME:MASTER%의 %bodyPartStr(116)%이 이미 수 차례 이종의 새끼를 수태한 것을 눈치채고, 저것이 자신의 자식을 받아 줄 곳이라는 것을 눈치챘는지 그대로 달려들었다
+					printFormW 몬스터는 %CALLNAME:MASTER%의 %partStr(116)%이 이미 수 차례 이종의 새끼를 수태한 것을 눈치채고, 저것이 자신의 자식을 받아 줄 곳이라는 것을 눈치챘는지 그대로 달려들었다
 				elseif RAND:2 == 0 && TALENT:MASTER:교미배란
 					printFormW 몬스터는 천천히 %CALLNAME:MASTER%에게 다가와 하복부를 꾹꾹 눌러댔고, 그것을 본 학자가 고개를 갸우뚱거렸다
 					call colorPrintW(0x87ceeb, "「이건 보통 교미배란의 특성을 갖는 녀석들이 보이는 현상인데, 기묘하군요.」")
@@ -299,7 +323,7 @@ $drugLoop
 						call colorPrintW(0x87ceeb, "「혹시 당신이 한번 시도해보겠습니까? 」")
 						printFormW %kr(CALLNAME:MASTER, "이", "가")% 손을 내밀어 생식기를 자극해 봤지만, 여전히 꿈쩍않는 몬스터를 보고 학자가 특단의 대책을 꺼냈다
 						call colorPrintW(0x87ceeb, "「앞에서 한번 자위해보시죠. 암컷이 준비된 이후에야 반응하는 녀석들도 종종 있거든요.」")
-						printFormW 빨리 끝내버리고 싶은 마음이 치욕스러운 마음을 간신히 앞서, %kr(CALLNAME:MASTER, "이", "가")% %bodyPartStr(121)% 안으로 손가락을 집어넣어 휘젓기 시작하자, 은은하게 암컷의 냄새가 감도는 것을 느꼈는지 몬스터도 반응이 오기 시작했다
+						printFormW 빨리 끝내버리고 싶은 마음이 치욕스러운 마음을 간신히 앞서, %kr(CALLNAME:MASTER, "이", "가")% %partStr(121)% 안으로 손가락을 집어넣어 휘젓기 시작하자, 은은하게 암컷의 냄새가 감도는 것을 느꼈는지 몬스터도 반응이 오기 시작했다
 					else
 						printFormW 몬스터는 물끄러미 %kr(CALLNAME:MASTER, "을", "를")% 쳐다보더니 몇 차례 보지를 핥아 맛을 본 다음에 올라타려고 낑낑댔다
 					endif
@@ -326,11 +350,11 @@ $drugLoop
 					call colorPrintW(0x87ceeb, "「음? 이건 무슨...?」")
 					printFormW 몬스터가 갑자기 몸을 부르르 떨면서, 온몸을 크게 부풀리기 시작한 것이었다.
 					call colorPrintW(0x87ceeb, "「이게 무슨 상황인지...」")
-					printFormW %kr(CALLNAME:MASTER, "은", "는")% 학자보다 두 배는 더 당황했는데, %bodyPartStr(116)%에서 몬스터의 생식기가 덩달아 커지고 있는 것을 느꼈기 떄문이다
+					printFormW %kr(CALLNAME:MASTER, "은", "는")% 학자보다 두 배는 더 당황했는데, %partStr(116)%에서 몬스터의 생식기가 덩달아 커지고 있는 것을 느꼈기 떄문이다
 					call colorPrintW(0x87ceeb, "「구애도 아니고 굳이 몸을 부풀릴 이유가... 아니지, 어쩌면 원래 이 모습이 본모습이고 교미중에는 여력이 없어 위장이 풀린다든지...」")
 					printFormW 점점 버거움을 느낀 %kr(CALLNAME:MASTER, "이", "가")% 도움을 요청했지만, 학자는 고개를 저으면서 말했다.
 					call colorPrintW(0x87ceeb, "「이건 흔하지 않은 케이스라서, 연구할 필요가 있으니 계속 진행해주시죠.」")
-					printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "이", "가")% 늘어나든 말든, 몬스터도 학자도 자신의 일에 열중한 채 %kr(CALLNAME:MASTER, "은", "는")% 그야말로 도구처럼 취급당했다
+					printFormW %CALLNAME:MASTER%의 %kr(partStr(116), "이", "가")% 늘어나든 말든, 몬스터도 학자도 자신의 일에 열중한 채 %kr(CALLNAME:MASTER, "은", "는")% 그야말로 도구처럼 취급당했다
 				endif
 				
 				printFormW 그야말로 토끼처럼 몰아치는 피스톤 운동이 끝나자 %kr(CALLNAME:MASTER, "은", "는")% 가쁜 숨을 몰아쉬었다.
@@ -338,6 +362,8 @@ $drugLoop
 				call colorPrintW(0x87ceeb, "「음, 그런가, 과연...」")
 				printFormW 그런 뒤 그는 %CALLNAME:MASTER%의 상태는 신경도 쓰지 않고 연구에만 정신을 쏟은 채 그대로 우리를 들고 나가버렸다.
 		elseif creatureType == 3
+			call addMobChara(1204)
+			
 			printFormW 조용히 문을 열고 들어온 사람은 푸른 머리칼을 가진 로브 차림의 아름다운 소녀였다.
 			if !FLAG:연금술사손님
 				printFormW 전혀 어울리지 않을 것 같은 외모라, %kr(CALLNAME:MASTER, "은", "는")% 물끄러미 그녀를 쳐다봤다.
@@ -396,13 +422,13 @@ $drugLoop
 				call colorPrintW(0x87ceeb, "「아무래도 그렇게 기절하는 분들이 많더라고요. 그래서 그 사이에 해치웠어요.」")
 				printFormW 잘 했죠? 칭찬해 주세요 라는 표정으로 바라보는 그녀에게 %kr(CALLNAME:MASTER, "은", "는")% 순간 한 대 쥐어박고싶은 충동이 일었지만, 그랬다가는 또 기절해서 그 사이에 무슨 꼴을 당할지 몰라 속으로만 분노를 삭였다.
 				call colorPrintW(0x87ceeb, "「잠깐만요, 슬슬 시작할 떄가 된 거 같은데?」")
-				printFormW 그 말이 끝나기가 무섭게 %kr(CALLNAME:MASTER, "은", "는")% %bodyPartStr(116)%에서의 고통을 느껴 눈쌀을 찌푸렸다.
+				printFormW 그 말이 끝나기가 무섭게 %kr(CALLNAME:MASTER, "은", "는")% %partStr(116)%에서의 고통을 느껴 눈쌀을 찌푸렸다.
 				call colorPrintW(0x87ceeb, "「아, 시작됐나보네요. 걔는 산란관이라는게 있어서 그걸 자궁에 찔러넣어서 알을 낳거든요?」")
 				printFormW 적어도 눈 앞에서 벌어지는 일이 아니라 그나마 견딜만하다고 느끼던 %CALLNAME:MASTER%의 생각을 읽은건지, 일부러 벌레가 산란하는 과정을 묘사하는 그녀의 입을 막아버리려는 순간 이번에는 아른 느낌이 몸을 덮쳤다.
 				printFormW 순간 눈 앞이 흐려지고, 호흡이 빨라졌다. 시간이 느리게 흘러가는 듯한 느낌 속에서, %CALLNAME:MASTER%의 온 몸이 민감해진 듯한 느낌이 들었다.
 				printFormW 날숨을 뱉으며 공기가 지나가는 흐름조차 야한 손길처럼 느껴지고, 상반신을 가리는 천쪼가리가 유두를 스치는 감각이 민감하게 느껴졌다. 온 세상이 %kr(CALLNAME:MASTER, "을", "를")% 음란하게 쓰다듬는듯한 느낌에 소름조차 들 정도였다.
 				printFormW 몇 분이나 지났을까? 영겁같이 느껴진 시간이 지나고 %kr(CALLNAME:MASTER, "은", "는")% 문득 포만감 비슷한 무언가를 하복부에서 느낄 수 있었다.
-				printFormW %kr(CALLNAME:MASTER, "이", "가")% 그것이 %bodyPartStr(116)%을 가득 채우는 알의 감각이라는 것을 꺠닫는 데에는 오랜 시간이 걸리지 않았다.
+				printFormW %kr(CALLNAME:MASTER, "이", "가")% 그것이 %partStr(116)%을 가득 채우는 알의 감각이라는 것을 꺠닫는 데에는 오랜 시간이 걸리지 않았다.
 				call colorPrintW(0x87ceeb, "「어때요, 첫 경험은? 저도 그랬지만 처음은 정말 엄청나죠! 저도 중독될 뻔 했다니까요?」")
 				printFormW 그 벌레의 미약은 특제라 그렇다느니, 아쉽게도 이미 알을 깐 상태에서는 다시 산란하려는 시도를 하지 않는다느니 혼잣말을 하던 그녀는 어느새 다리 사이로 빠져나온 벌레를 집어서는 다시 케이스에 쑤셔넣고 정리를 마친 채였다.
 				call colorPrintW(0x87ceeb, "「좋아요. 수고 많았어요.」")
@@ -411,15 +437,15 @@ $drugLoop
 				printFormW 그 황홀한 쾌락과 전능감을 다시 맛볼 수 있다면... 한순간의 불쾌감 정도야 과연 참을 만 했다.
 				printFormW 벌레가 다가와 %CALLNAME:MASTER%의 다리 사이에 위치한 앙증맞은 균열으로 기어올라, 그 틈을 벌리기 시작하는 감각은 과연 저번에는 기절하느라 느끼지 못한 감각이었으나, 이것 또한 끔찍함은커녕 쾌락의 전조와도 같은 오싹함이 느껴질 뿐이었다
 				call colorPrintW(0x87ceeb, "「이번에는 기절하지 않으셨네요. 하긴, 그걸 못 즐기면 인생 절반 손해보는거라니까요.」")
-				printFormW 좁은 틈을 벌리고 나아간 벌레가 %bodyPartStr(121)% 벽을 스치고 지나가며 자아내는 쾌감 역시, 산란할 때만큼은 못하지만 그야말로 극상의 쾌락이라고 하기에 충분했다.
+				printFormW 좁은 틈을 벌리고 나아간 벌레가 %partStr(121)% 벽을 스치고 지나가며 자아내는 쾌감 역시, 산란할 때만큼은 못하지만 그야말로 극상의 쾌락이라고 하기에 충분했다.
 				printFormW 이미 입을 벌리고 침을 흘리기 시작한 %CALLNAME:MASTER%의 모습에 실실 웃던 푸른 머리의 연금술사가 부럽다는 듯 말했다
 				call colorPrintW(0x87ceeb, "「아~ 저도 갖고 싶은데 말이에요, 어떻게 기막히게 알아가지고 다 낳기 전까지는 더 산란해 주지를 않더라고요.」")
 				printFormW 슬슬 그녀가 뭐라고 떠들든간에, 그 내용은 벌레가 선사하는 쾌락에 온 정신을 집중하던 %CALLNAME:MASTER%에게는 닿지 않는 모양이었다
-				printFormW 콩, %bodyPartStr(121)% 입구 앞에 부딪힌 벌레가 이곳이 알을 낳을 장소라는 것을 파악했는지 산란관을 들이대고자 한 바퀴 도는 감각에, %kr(CALLNAME:MASTER, "은", "는")% 얼굴에서 미소를 떠나보내지 않고 있었다
+				printFormW 콩, %partStr(121)% 입구 앞에 부딪힌 벌레가 이곳이 알을 낳을 장소라는 것을 파악했는지 산란관을 들이대고자 한 바퀴 도는 감각에, %kr(CALLNAME:MASTER, "은", "는")% 얼굴에서 미소를 떠나보내지 않고 있었다
 				printFormW 그리고 기대하던 그 순간이 찾아오자
 				printW
-				printFormW 저번에 보여준 것은 맛보기에 불과했다는 듯 더욱 강렬한 쾌락이 그녀의 머리를 사로잡았다. 아니, %bodyPartStr(116)%을 휘감았다. 지금의 %CALLNAME:MASTER%에게는 %kr(bodyPartStr(116), "이", "가")% 모든 사고의 근원이었기 떄문에.
-				printFormW 인간의 존엄성조차 내려놓게 만드는 쾌감이, %kr(CALLNAME:MASTER, "을", "를")% %bodyPartStr(116)%으로 사고하게 만들어버렸다고 할까. 느려진 인식 속에서 %kr(CALLNAME:MASTER, "은", "는")% 그런 복잡한 생각을 할 여력은 없었다.
+				printFormW 저번에 보여준 것은 맛보기에 불과했다는 듯 더욱 강렬한 쾌락이 그녀의 머리를 사로잡았다. 아니, %partStr(116)%을 휘감았다. 지금의 %CALLNAME:MASTER%에게는 %kr(partStr(116), "이", "가")% 모든 사고의 근원이었기 떄문에.
+				printFormW 인간의 존엄성조차 내려놓게 만드는 쾌감이, %kr(CALLNAME:MASTER, "을", "를")% %partStr(116)%으로 사고하게 만들어버렸다고 할까. 느려진 인식 속에서 %kr(CALLNAME:MASTER, "은", "는")% 그런 복잡한 생각을 할 여력은 없었다.
 				printFormW 다만 %kr(CALLNAME:MASTER, "은", "는")% 벌레가 주입하는 미약과 알에 간헐적으로 허리를 튕기며, 쾌감에 간신히 반응할 뿐 억지로 주어진 초과분의 쾌감에 몸을 제대로 가누지도 못하는 모습일 뿐이었다.
 				printFormW 그리고 그 옆에서, 그런 %CALLNAME:MASTER%의 모습에 자궁의 갈증을 달래보려고 가랑이 사이로 손가락을 집어넣어 스스로를 애처로이 위로하는 연금술사까지.
 				printFormW 더 이상 이 방안에 여인은 없었다. 그저 한 마리의 벌레와 두 모판이 있었을 뿐.
@@ -432,12 +458,13 @@ $drugLoop
 			; 애완동물 주인의 애완동물의 욕구처리 의뢰
 			; 포인트는 "사람의 맛을 알아버린 녀석이라 기구로는 처리할 수 없음" - 수상하게 높은 지능을 가진 개
 		endif
-		
-		EXP:MASTER:질경험++
-		EXP:MASTER:삽입경험++
-	endif
 
-	call cumIntoMaster(BASE:MASTER:자궁크기, creatureType)
+		; 삽입 - 사정 - 마무리		
+		call insertIntoMaster(121, 1)
+		call cumIntoMaster(121)
+		call outFromMaster(121, 1)
+		call delMobChara
+	endif
 	
 	FLAG:자궁대여료 = reward
 	EXP:MASTER:자궁대여경험++

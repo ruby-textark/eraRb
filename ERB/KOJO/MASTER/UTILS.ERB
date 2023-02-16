@@ -10,6 +10,12 @@
 	if TARGET
 		parameter += ABL:TARGET:성교기술
 	endif
+	
+	if FLAG:성교합의
+		parameter += 5
+	else
+		parameter -= 5
+	endif
 
 	parameter += isWeaknessAttacked()
 	
@@ -31,6 +37,8 @@
 	
 	if FLAG:성교합의
 		parameter += 10
+	else
+		parameter -= 10
 	endif
 	
 	if TALENT:MASTER:육변기

@@ -2,40 +2,37 @@
 @parasite
 #dim dynamic insertIdx
 #dim dynamic spermAmount
-#dim dynamic seperateLine
 
 	for insertIdx, 101, 200
 		; 기생중
 		if isParasiteInside(insertIdx)
-			if seperateLine
-				printL
-			endif
-			seperateLine = 1
+			call addParasite(1301 + parasiteType(insertIdx) - 3)
+
 			if RAND:5 == 0
-				printFormW %CALLNAME:MASTER%의 %bodyPartStr(insertIdx)%에서 미약한 꿈틀거림이 느껴진다
+				printFormW %CALLNAME:MASTER%의 %partStr(insertIdx)%에서 미약한 꿈틀거림이 느껴진다
 			elseif RAND:4 == 0
 				printFormW 조용한 한밤중, %CALLNAME:MASTER%에게서 음란하게 찔꺽거리는 소리가 들려온다
-				printFormW %bodyPartStr(insertIdx)%에서 미약한 꿈틀거림이 느껴진다
+				printFormW %partStr(insertIdx)%에서 미약한 꿈틀거림이 느껴진다
 			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 울먹이며 %bodyPartStr(insertIdx)% 안 속 깊숙히 파고든 %parasiteName(insertIdx)%의 이물감을 견디고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 울먹이며 %partStr(insertIdx)% 안 속 깊숙히 파고든 %parasiteName(insertIdx)%의 이물감을 견디고 있다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% %bodyPartStr(insertIdx)%에서 퍼져나가는 쾌감에 녹아버린 표정을 짓고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% %partStr(insertIdx)%에서 퍼져나가는 쾌감에 녹아버린 표정을 짓고 있다
 			else
-				printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(insertIdx), "은", "는")% %kr(parasiteName(insertIdx), "을", "를")% 품고 있다
+				printFormW %CALLNAME:MASTER%의 %kr(partStr(insertIdx), "은", "는")% %kr(parasiteName(insertIdx), "을", "를")% 품고 있다
 			endif
 
 			; 빼내려고 시도 - 자궁과 난소는 불가능
 			if RAND:3 == 0 && (insertIdx != 115 && insertIdx != 116)
 				if RAND:5 == 0
-					printFormW %kr(CALLNAME:MASTER, "은", "는")% 손가락을 %bodyPartStr(insertIdx)%에 넣어 %kr(parasiteName(insertIdx), "을", "를")% 빼내려고 했다
+					printFormW %kr(CALLNAME:MASTER, "은", "는")% 손가락을 %partStr(insertIdx)%에 넣어 %kr(parasiteName(insertIdx), "을", "를")% 빼내려고 했다
 				elseif RAND:4 == 0
-					printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(parasiteName(insertIdx), "을", "를")% 뽑아내려고 %bodyPartStr(insertIdx)% 안 깊숙히 손가락을 찔러넣었다
+					printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(parasiteName(insertIdx), "을", "를")% 뽑아내려고 %partStr(insertIdx)% 안 깊숙히 손가락을 찔러넣었다
 				elseif RAND:3 == 0
 					printFormW %kr(CALLNAME:MASTER, "은", "는")% 온몸을 흔들며 %kr(parasiteName(insertIdx), "이", "가")% 몸 밖으로 빠져나오도록 노력했다
 				elseif RAND:2 == 0
-					printFormW %kr(CALLNAME:MASTER, "은", "는")% %bodyPartStr(insertIdx)% 근처의 살점을 꾹꾹 누르며 혹시라도 %kr(parasiteName(insertIdx), "이", "가")% 뽑혀나올까 시도하고 있다
+					printFormW %kr(CALLNAME:MASTER, "은", "는")% %partStr(insertIdx)% 근처의 살점을 꾹꾹 누르며 혹시라도 %kr(parasiteName(insertIdx), "이", "가")% 뽑혀나올까 시도하고 있다
 				else
-					printFormW %kr(CALLNAME:MASTER, "이", "가")% 안간힘을 쓰면서 %bodyPartStr(insertIdx)%에 힘을 주어 %kr(parasiteName(insertIdx), "을", "를")% 내보내려고 했다
+					printFormW %kr(CALLNAME:MASTER, "이", "가")% 안간힘을 쓰면서 %partStr(insertIdx)%에 힘을 주어 %kr(parasiteName(insertIdx), "을", "를")% 내보내려고 했다
 				endif
 
 				; 빼냄  - 기교판정있음
@@ -65,14 +62,14 @@
 			; 자생중 33.3% 확률로 사정
 			if RAND:3 == 0
 				if RAND:3 == 0
-					printFormW 갑작스럽게 %bodyPartStr(insertIdx)%에서 뜨거운 열기가 느껴진다.
+					printFormW 갑작스럽게 %partStr(insertIdx)%에서 뜨거운 열기가 느껴진다.
 				elseif RAND:2 == 0
-					printFormW 크게 한 번 요동친 %kr(parasiteName(insertIdx), "은", "는")% %CALLNAME:MASTER%의 %kr(bodyPartStr(insertIdx), "으", "")%로 기세 좋게 사정했다
+					printFormW 크게 한 번 요동친 %kr(parasiteName(insertIdx), "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(insertIdx), "으", "")%로 기세 좋게 사정했다
 				else
 					printFormW %kr(parasiteName(insertIdx), "은", "는")% 꿀렁거리며 %CALLNAME:MASTER%의 안에 사정해버렸다
 				endif
 
-				call cumIntoMaster(insertIdx - 20, RAND:10, parasiteType(insertIdx))
+				call cumIntoMaster(insertIdx)
 			endif
 
 			; 슬라임일 경우 16.7% 확률로 체내미약분비
@@ -80,7 +77,7 @@
 				if RAND:3 == 0
 					printFormW 느릿느릿 움직이던  %kr(parasiteName(insertIdx), "이", "가")% 주는 느낌이 점점 열기를 띠기 시작한다...
 				elseif RAND:2 == 0
-					printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(bodyPartStr(insertIdx), "으", "")%로부터 알 수 없는 충동을 느끼고 있다
+					printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(partStr(insertIdx), "으", "")%로부터 알 수 없는 충동을 느끼고 있다
 				else
 					printFormW %kr(parasiteName(insertIdx), "이", "가")% 만들어낸 이물감이 점차 쾌락으로 변해가는 것이 느껴진다
 				endif
@@ -98,37 +95,39 @@
 			; 5% 확률로 질기생중에서난소기생중으로 전이
 			if RAND:20 == 0 && insertIdx == 121
 				if RAND:5 == 0
-					printFormL %kr(parasiteName(insertIdx), "은", "는")% %bodyPartStr(121)% 속을 꿈틀거리며 나아가 마침내 %bodyPartStr(116)%으로 파고들었다
+					printFormL %kr(parasiteName(insertIdx), "은", "는")% %partStr(121)% 속을 꿈틀거리며 나아가 마침내 %partStr(116)%으로 파고들었다
 				elseif RAND:4 == 0
-					printFormL 슬그머니 기어가는 %parasiteName(insertIdx)%의 감촉이 %kr(bodyPartStr(121), "을", "를")% 넘어 %bodyPartStr(116)%에서 느껴졌다
+					printFormL 슬그머니 기어가는 %parasiteName(insertIdx)%의 감촉이 %kr(partStr(121), "을", "를")% 넘어 %partStr(116)%에서 느껴졌다
 				elseif RAND:3 == 0
-					printFormL %kr(parasiteName(insertIdx), "이", "가")% 더 포근하고 아늑한 곳을 찾아 %CALLNAME:MASTER%의 %bodyPartStr(116)%쪽으로 이동했다
+					printFormL %kr(parasiteName(insertIdx), "이", "가")% 더 포근하고 아늑한 곳을 찾아 %CALLNAME:MASTER%의 %partStr(116)%쪽으로 이동했다
 				elseif RAND:2 == 0
-					printFormL %kr(parasiteName(insertIdx), "은", "는")% 본능적으로 %CALLNAME:MASTER%의 더 소중한 부위를 눈치채고 %bodyPartStr(116)%쪽으로 이동했다
+					printFormL %kr(parasiteName(insertIdx), "은", "는")% 본능적으로 %CALLNAME:MASTER%의 더 소중한 부위를 눈치채고 %partStr(116)%쪽으로 이동했다
 				else
-					printFormL 찔꺽거리는 불길한 소리와 함께 %CALLNAME:MASTER%의 %bodyPartStr(insertIdx)%에서 통증이 느껴지고 있다
+					printFormL 찔꺽거리는 불길한 소리와 함께 %CALLNAME:MASTER%의 %partStr(insertIdx)%에서 통증이 느껴지고 있다
 				endif
 				
-				call colorPrintW(0xff3399, @"%kr(parasiteName(insertIdx), "은", "는")% %CALLNAME:MASTER%의 몸 안에서 %bodyPartStr(116)%으로 이동했다")
+				call colorPrintW(0xff3399, @"%kr(parasiteName(insertIdx), "은", "는")% %CALLNAME:MASTER%의 몸 안에서 %partStr(116)%으로 이동했다")
 				
 				call moveParasite(121, 116)
 			; 5% 확률로 자궁기생중에 난소기생중으로 전이
 			elseif RAND:20 == 0 && insertIdx == 116
 				if RAND:5 == 0
-					printFormL %kr(parasiteName(insertIdx), "은", "는")% %bodyPartStr(116)% 속을 꿈틀거리며 나아가 마침내 %bodyPartStr(115)%으로 파고들었다
+					printFormL %kr(parasiteName(insertIdx), "은", "는")% %partStr(116)% 속을 꿈틀거리며 나아가 마침내 %partStr(115)%으로 파고들었다
 				elseif RAND:4 == 0
-					printFormL 슬그머니 기어가는 %parasiteName(insertIdx)%의 감촉이 %kr(bodyPartStr(116), "을", "를")% 넘어 %bodyPartStr(115)%에서 느껴졌다
+					printFormL 슬그머니 기어가는 %parasiteName(insertIdx)%의 감촉이 %kr(partStr(116), "을", "를")% 넘어 %partStr(115)%에서 느껴졌다
 				elseif RAND:3 == 0
-					printFormL %kr(parasiteName(insertIdx), "이", "가")% 더 포근하고 아늑한 곳을 찾아 %CALLNAME:MASTER%의 %bodyPartStr(115)%쪽으로 이동했다
+					printFormL %kr(parasiteName(insertIdx), "이", "가")% 더 포근하고 아늑한 곳을 찾아 %CALLNAME:MASTER%의 %partStr(115)%쪽으로 이동했다
 				elseif RAND:2 == 0
-					printFormL %kr(parasiteName(insertIdx), "은", "는")% 본능적으로 %CALLNAME:MASTER%의 생명을 기르는 소중한 %bodyPartStr(115)%쪽으로 이동했다
+					printFormL %kr(parasiteName(insertIdx), "은", "는")% 본능적으로 %CALLNAME:MASTER%의 생명을 기르는 소중한 %partStr(115)%쪽으로 이동했다
 				else
-					printFormL 찔꺽거리는 불길한 소리와 함께 %CALLNAME:MASTER%의 %bodyPartStr(insertIdx)%에서 통증이 느껴지고 있다
+					printFormL 찔꺽거리는 불길한 소리와 함께 %CALLNAME:MASTER%의 %partStr(insertIdx)%에서 통증이 느껴지고 있다
 				endif
 				
-				call colorPrintW(0xff3399, @"%kr(parasiteName(insertIdx), "은", "는")% %CALLNAME:MASTER%의 몸 안에서 %bodyPartStr(115)%으로 이동했다")
+				call colorPrintW(0xff3399, @"%kr(parasiteName(insertIdx), "은", "는")% %CALLNAME:MASTER%의 몸 안에서 %partStr(115)%으로 이동했다")
 				
 				call moveParasite(116, 115)
 			endif
+			
+			call delParasite
 		endif
 	next

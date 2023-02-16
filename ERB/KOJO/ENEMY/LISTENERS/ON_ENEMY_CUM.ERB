@@ -1,7 +1,7 @@
 ﻿@onEnemyCum_e(partIdx)
 #dim dynamic partIdx
 
-	tryccallform c{CFLAG:TARGET:몬스터번호}onEnemyCum(partIdx)
+	tryccallform c{CFLAG:TARGET:캐릭터번호}onEnemyCum(partIdx)
 		;
 	catch
 		call fallbackOnEnemyCum_e(partIdx)

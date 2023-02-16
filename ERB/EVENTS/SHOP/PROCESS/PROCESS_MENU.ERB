@@ -8,10 +8,10 @@
 	endif
 
 	; QUEST MENU
-	if TARGET != 0 && FLAG:자궁대여료 == 0 && RESULT == 101
+	if hasHuntQuest() && FLAG:자궁대여료 == 0 && RESULT == 101
 		call startQuest
 		result = 0
-	elseif TARGET == 0 && RESULT == 102
+	elseif !hasHuntQuest() && RESULT == 102
 		call newQuestList
 	elseif TARGET != 0 && RESULT == 103
 		call cancelQuest

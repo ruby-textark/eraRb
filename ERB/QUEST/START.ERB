@@ -3,11 +3,12 @@
 
 	printFormL %kr(CALLNAME:TARGET, "을", "를")% 토벌하기 위해 모험을 떠납니다.
 
-	; Some misc events come here.
-
+	TARGET = 1
 	; PALAM -> CFLAG 인계
 	for partIdx, 501, 600
 		CFLAG:MASTER:partIdx = PALAM:MASTER:(partIdx - 400)
 	next
+	
+	; Some misc events come here.
 
 	begin train

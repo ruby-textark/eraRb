@@ -2,7 +2,7 @@
 #dim dynamic orgasmParts, 100
 #dim dynamic orgasmCounts
 
-	tryccallform c{CFLAG:TARGET:몬스터번호}onMasterOrgasm(orgasmParts, orgasmCounts)
+	tryccallform c{CFLAG:TARGET:캐릭터번호}onMasterOrgasm(orgasmParts, orgasmCounts)
 		;
 	catch
 		call fallbackOnMasterOrgasm_e(orgasmParts, orgasmCounts)
@@ -11,7 +11,7 @@
 
 @onMasterInsuffOrgasm_e()
 
-	tryccallform c{CFLAG:TARGET:몬스터번호}onMasterInsuffOrgasm()
+	tryccallform c{CFLAG:TARGET:캐릭터번호}onMasterInsuffOrgasm()
 		;
 	catch
 		call fallbackOnMasterInsuffOrgasm_e()

@@ -6,21 +6,23 @@
 
 	partsCount = 0
 	for parasiteIdx, 101, 200
-		if strlens(CFLAGNAME:parasiteIdx) && !isParasiteInside(parasiteIdx) && isAttackableBodyPart(parasiteIdx - 200)
+		if strlens(CFLAGNAME:(200 + parasiteIdx)) && !isParasiteInside(parasiteIdx) && isAttackableBodyPart(parasiteIdx)
 			availableParts:(partsCount++) = parasiteIdx
 		endif
 	next
 	
-	attackedIdx = RAND:partsCount
+	if !partsCount
+		return 0
+	endif
 	
-	printFormW %kr(CALLNAME:TARGET, "이", "가")% 꾸물거리며 %CALLNAME:MASTER%의 %bodyPartStr((availableParts:attackedIdx) - 200)% 안으로 기어들어간다
+	attackedIdx = availableParts:(RAND:partsCount)
+	
+	printFormW %kr(CALLNAME:TARGET, "이", "가")% 꾸물거리며 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안으로 기어들어간다
 	printFormW %kr(CALLNAME:MASTER, "은", "는")% [기생]상태가 되었다.
 	call insertIntoMaster(attackedIdx, 3)
 	CFLAG:TARGET:기생성공 = 1
 	
 	return 1
-
-	return 0
 
 @c103onSexualAttack
 

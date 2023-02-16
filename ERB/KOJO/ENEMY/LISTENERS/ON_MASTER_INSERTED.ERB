@@ -1,0 +1,11 @@
+﻿@onMasterInserted_e(partIdx, insertType)
+#dim dynamic partIdx
+#dim dynamic insertType
+
+	tryccallform c{CFLAG:TARGET:캐릭터번호}onMasterInserted(partIdx, insertType)
+		;
+	catch
+		call fallbackonMasterInserted_e(partIdx, insertType)
+	endcatch
+
+

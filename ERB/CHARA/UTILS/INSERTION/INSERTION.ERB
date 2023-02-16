@@ -10,6 +10,9 @@
 	call checkVirgin
 	call checkVirginParasite
 	call increaseArousal(partIdx, 100 * (ABL:MASTER:partIdx + 1) * (90 + RAND:20))
+	
+	call onMasterInserted_m(partIdx, insertType)
+	call onMasterInserted_e(partIdx, insertType)
 
 	; 보지조임체크
 	if isMasterInserted(121, 1)

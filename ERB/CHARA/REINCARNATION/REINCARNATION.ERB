@@ -1,9 +1,5 @@
 ﻿@reincarnation()
-	delchara 0
-	addchara 0
-	
-	if TARGET
-		swapChara TARGET, MASTER
-	endif
-	
+	call delCharaAtPos(0)
+	call addCharaAtPos(0, 0)
+
 	call initMaster

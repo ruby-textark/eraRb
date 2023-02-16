@@ -2,22 +2,22 @@
 
 	; 습득체크
 	if MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 >= 30
-		printFormW 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "은", "는")% 완전히 벌어져 버렸다...
+		printFormW 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(partStr(121), "은", "는")% 완전히 벌어져 버렸다...
 		call getTalent("허벌보지")
 	elseif TALENT:MASTER:허벌보지
-		printFormW 시간이 지난 덕에 %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "은", "는")% 조금 아물은 것 같다.
+		printFormW 시간이 지난 덕에 %CALLNAME:MASTER%의 %kr(partStr(121), "은", "는")% 조금 아물은 것 같다.
 		call loseTalent("허벌보지")
 	endif
 	
 	if MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 >= 30
-		printFormW 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(bodyPartStr(123), "은", "는")% 완전히 벌어져 버렸다...
+		printFormW 격렬한 성행위 끝에 %CALLNAME:MASTER%의 %kr(partStr(123), "은", "는")% 완전히 벌어져 버렸다...
 		call getTalent("세로애널")
 	elseif TALENT:MASTER:허벌보지
-		printFormW 시간이 지난 덕에 %CALLNAME:MASTER%의 %kr(bodyPartStr(121), "은", "는")% 조금 아물은 것 같다.
+		printFormW 시간이 지난 덕에 %CALLNAME:MASTER%의 %kr(partStr(121), "은", "는")% 조금 아물은 것 같다.
 		call loseTalent("세로애널")
 	endif
 	
 	if EXP:MASTER:자궁구개발경험 > 30
-		printFormL 집요하게 공략된 끝에 %CALLNAME:MASTER%의 %bodyPartStr(116)% 입구는 완전히 풀어져 벌름거리고 있다
+		printFormL 집요하게 공략된 끝에 %CALLNAME:MASTER%의 %partStr(116)% 입구는 완전히 풀어져 벌름거리고 있다
 		call getTalent("자궁")
 	endif

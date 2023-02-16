@@ -1,0 +1,15 @@
+﻿@getRandomBodyPart()
+#function
+#dim dynamic partIdx
+#dim partCount
+#dim parts, 100
+
+	if !partCount
+		for partIdx, 101, 200
+			if strlens(BASENAME:partIdx)
+				parts:(partCount++) = partIdx
+			endif
+		next
+	endif
+	
+	returnf parts:RAND(partCount)

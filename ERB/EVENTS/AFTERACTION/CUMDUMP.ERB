@@ -1,11 +1,11 @@
 ﻿@cumDump
 #dim dynamic eachUser
 #dim dynamic insertInto
-#dim dynamic cumAmount
-#dim dynamic penisSize
-#dim dynamic fatherType
 #dim dynamic reportCount
 #dims dynamic reports, 100
+#dim dynamic equipSlotIdx
+#dim dynamic breakableEquipCount
+#dim dynamic breakableEquips, 10
 
 	if !FLAG:육변기형시작일
 		return
@@ -16,252 +16,161 @@
 	printFormW %kr(CALLNAME:MASTER, "은", "는")% 육변기로 전시되어 사람들에게 사용되고 있다...
 
 	for eachUser, 0, FLAG:육변기최근이용자수
-		cumAmount = 1 + RAND:2
-		fatherType = 1
-		penisSize = 8 + RAND:8
-
-		; 대량사정
-		if RAND:3 == 0
-			cumAmount *= (2 + RAND:4)
+	
+		call addMobChara(1101 + RAND:10)
+		insertInto = getSexualAtkBodyPart()
+		
+		printFormW %NAME:TARGET% %kr(CALLNAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 %kr(partStrRaw(insertInto), "을", "를")% 사용했다
+		
+		if isHole(insertInto)
+			call insertIntoMaster(insertInto, 1)
 		endif
-
-		;구
-		if RAND:5 == 0
-			insertInto = 102
-			if RAND:5 == 0
-				printFormW \@ RAND:2 ? 젊은 # 근육질의 \@ \@ RAND:2 ? 남성이# 청년이\@ 당신의 입을 사용하고 지나갔다.
-				reports:(reportCount++) = "최근 소문의 %CALLNAME:MASTER%의 입보지를 사용해 보았는데, 과연 나쁘지 않은 사용감이라 만족했습니다."
-			elseif RAND:4 == 0
-				printFormW \@ RAND:2 ? 졸부 # 귀족 \@ \@ RAND:2 ? 호색한이# 늙은이가\@ 당신의 입을 맛보고 지나갔다.
-				if EXP:MASTER:입경험 > 100 && ABL:MASTER:입감도 > 3
-					reports:(reportCount++) = "%"★" * 5%. 훌륭합니다."
-				elseif EXP:MASTER:입경험 > 100
-					reports:(reportCount++) = "%"★" * (3 + RAND:2)%. 부족한 피지컬을 스킬로 보완하려는게 눈에 보여서 아쉬움."
-				elseif ABL:MASTER:입감도 > 3
-					reports:(reportCount++) = "%"★" * (3 + RAND:2)%. 능숙해지기 시작한 구멍과 그에 대비되는 감촉이 언밸런스함."
-				else
-					reports:(reportCount++) = "%"★" * (1 + RAND:2)%. 평가 불가. 상태가 나빠 조금 버릇을 고쳐 줄 필요가 있음."
-				endif
-			elseif RAND:3 == 0
-				printFormW \@ RAND:2 ? 뒷골목 # 홍등가 \@ 양아치가 당신의 입보지를 사용하고 지나갔다.
-				if CFLAG:MASTER:성적명성 > 80
-					reports:(reportCount++) = "뒷골목에선 %kr(CALLNAME:MASTER, "이라고", "라고")% 하면 다들 알아줌. 프로다운 입보지. {9 + RAND:2}/10"
-				elseif CFLAG:MASTER:성적명성 > 60
-					reports:(reportCount++) = "나쁜 건 아닌데 좀 어설픔. 몸 좀 험하게 굴리는 년이라고 들었는데 입으로는 아직 많이 하지 않은듯. {7 + RAND:2}/10"
-				elseif CFLAG:MASTER:성적명성 > 40
-					reports:(reportCount++) = "솔직히 말해 거품. %CALLNAME:MASTER%? 공짜라서 쓰지 이걸 돈 주고 사먹던 놈은 대체 여자가 얼마나 고팠던걸까? {5 + RAND:2}/10"
-				else
-					if EXP:MASTER:입경험 > 30
-						reports:(reportCount++) = "처음 보는데 신입인거 감안하고 이 정도면 나쁘지 않다. 객관적으로는 좋은 편 아님. {3 + RAND:2}/10"
-					else
-						reports:(reportCount++) = "별로. 공공변소니까 딴 년들 안 받아주던거 시켜보는 용도론 괜찮을지도. {1 + RAND:2}/10"
-					endif
-				endif
-			elseif RAND:2 == 0
-				printFormW \@ RAND:2 ? 음습한 # 냄새나는 \@ \@ RAND:2 ? 거렁뱅이가# 아저씨가\@ 당신의 입을 사용하고 지나갔다.
-				if RAND:3 == 0
-					reports:(reportCount++) = "%CALLNAME:MASTER% 입보지가 너무 기분 좋아서 그만 입 안에 오줌 지려버리고 말았는데 그걸 또 마셔줘서 감동했다."
-				elseif RAND:2 == 0
-					reports:(reportCount++) = "진짜 뭐든지 다 받아준다길래 입에 오줌 싸봤는데 바로 뱉어버리길래 그만 한 대 때려버렸다."
-					EXP:MASTER:피학경험++
-				endif
+		
+		call cumIntoMaster(insertInto)
+		
+		if isHole(insertInto)
+			call outFromMaster(insertInto, 1)
+		endif
+		
+		; reports:(reportCount++) = "최근 소문의 %CALLNAME:MASTER%의 %kr(partStrRaw(insertInto), "을", "를")% 사용해 보았는데, 과연 나쁘지 않은 사용감이라 만족했습니다."
+		
+		; 짐승
+		if CFLAG:TARGET:종족 != 1
+			if isMasterLewd() && TALENT:MASTER:임신
+				reports:(reportCount++) = "임신해서 배가 불러와도 개 자지만 보면 다리를 벌리는 걸 보면 이미 사람 취급은 받고 싶지도 않은가 봄."
+			elseif isMasterLewd() && !TALENT:MASTER:임신
+				reports:(reportCount++) = "짐승이 다가오는걸 보면 저절로 혀를 내밀고 개랑 뒹굴다가 헐떡이는 꼴이 딱 암캐."
+			elseif !isMasterLewd() && TALENT:MASTER:임신
+				reports:(reportCount++) = "저번에 발정난 개가 덮치던데 임신 중이어서 아기 다칠까봐 그만 하라고 밀어내는데 그래봐야 개가 막 짖으면서 다가오니까 결국 허락해주던 것도 봄."
 			else
-				fatherType = 4
-				if RAND:3 == 0
-					printFormW \@ RAND:2 ? 떠돌이 # 얼룩무늬 \@ 개가 당신의 입을 쑤시고 지나갔다.
-					reports:(reportCount++) = "지나가다 봤는데, 길거리에 돌아다니던 개가 입에 자지 들이미는거 핥아서 봉사해주는 것 보고 좀 놀랐습니다."
-				elseif RAND:2 == 0
-					printFormW \@ RAND:2 ? 커다란 # 훈련된 \@ 말이 당신의 입으로 성처리를 하고 지나갔다.
-					cumAmount *= 2
-					reports:(reportCount++) = "말들이 요새 번식기라 그런지 성질이 사나웠는데, 마침 %kr(CALLNAME:MASTER, "이", "가")% 보이길래 입으로 처리해줬더니 많이 온순해져서 좋았습니다."
+				reports:(reportCount++) = "개들이 으르렁거리면서 다가오는데 그냥 짐승들한테도 쉬운 암컷으로 낙인찍힌 모양."
+			endif
+		; 입
+		elseif RAND:5 == 0 && insertInto == 102
+			if EXP:MASTER:입경험 > 100 && ABL:MASTER:입감도 > 3
+				reports:(reportCount++) = "%"★" * 5%. 훌륭합니다."
+			elseif EXP:MASTER:입경험 > 100
+				reports:(reportCount++) = "%"★" * (3 + RAND:2)%. 부족한 피지컬을 스킬로 보완하려는게 눈에 보여서 아쉬움."
+			elseif ABL:MASTER:입감도 > 3
+				reports:(reportCount++) = "%"★" * (3 + RAND:2)%. 능숙해지기 시작한 구멍과 그에 대비되는 감촉이 언밸런스함."
+			else
+				reports:(reportCount++) = "%"★" * (1 + RAND:2)%. 평가 불가. 상태가 나빠 조금 버릇을 고쳐 줄 필요가 있음."
+			endif
+		; 모지
+		elseif RAND:5 == 0 && insertInto == 121
+			if TALENT:MASTER:허벌보지
+				reports:(reportCount++) = "조이는 감각이 부족하다. 싸구려 창녀도 이것보다는 박는 맛이 있었는데."
+			elseif RAND:2 && ABL:MASTER:질감도 > 8 && EXP:MASTER:질경험 < 100
+				reports:(reportCount++) = "{9 + RAND:2}점. 끈적하게 달라붙는 보지가 일품. 자지가 빠져나갈 때마다 아첨하듯 딸려나오면서 사정을 졸라대는 것이 포인트."
+			elseif RAND:2 && ABL:MASTER:질감도 > 6 || EXP:MASTER:질경험 > 100
+				reports:(reportCount++) = "이정도면 {7 + RAND:2}점 정도. 따지고 보면 상급이긴 한데 너무 많이 써서 그런지 좀 느낌이 부족함."
+			elseif RAND:2 && EXP:MASTER:질경험 > 100 && ABL:MASTER:질감도 < 5
+				reports:(reportCount++) = "감촉은 싸구려. 기술은 뛰어남. 딱 창녀 보지 이상도 이하도 아닌 것 같다."
+			elseif RAND:2 && EXP:MASTER:질경험 < 100 && ABL:MASTER:질감도 > 5
+				reports:(reportCount++) = "서툰 것을 보면 경험은 부족한 것 같은데 보지는 쫄깃하게 감싸는 감촉이 뛰어나다."
+			elseif RAND:2 && ABL:MASTER:질감도 > 4
+				reports:(reportCount++) = "그럭저럭 {5 + RAND:2}점? 맛있긴 한데, 이 정도 보지는 사실 창관에서도 찾으면 찾을 수 있음."
+			elseif RAND:2 && EXP:MASTER:질경험 < 100
+				reports:(reportCount++) = "보지 상태가 새것이나 다름없음. 사람들 몰리기 전에 빨리 즐기는 것을 추천함."
+			elseif EXP:MASTER:질경험 < 100
+				reports:(reportCount++) = "{5 + RAND:2}점. 그렇지만 오히려 좋다. 아직 경험이 부족해서 자지 모양으로 딱 맞게 감싸오는 느낌이 발전할 여지가 있음."
+			elseif RAND:2
+				reports:(reportCount++) = "평범함. 조이는 맛이나 기술 모두 무난하긴 한데 돈 받는 거였으면 좀 고민할 것 같다."
+			else
+				reports:(reportCount++) = "{RAND:2}점. 아니, 그냥 0점. 그냥 허공에 대고 좆질하는게 이거보다 기분 좋을듯. 뭐 이런 쓰레기같은 보지가 다 있나 싶을정도."
+			endif
+		; 애널
+		elseif RAND:5 == 0 && insertInto == 123
+			if RAND:3 == 0 && TALENT:MASTER:세로애널
+				reports:(reportCount++) = "안그래도 거리에서 개처럼 따먹어달라고 엉덩이 흔들고 다니더니 꼴 좋다. 벌어져서 안 다물어질 때까지 박아줬다."
+			elseif RAND:3 == 0 && EXP:MASTER:질경험 < 50 && EXP:MASTER:애널경험 > 50
+				reports:(reportCount++) = "보지는 신품인데 후장은 개발 끝난 거 보면 그냥 변태. 다음에 올 때까지 아다면 그냥 뚫어버릴 예정."
+			elseif RAND:3 == 0 && !(BASE:MASTER:애널조임 > MAXBASE:MASTER:애널조임 - 15) && EXP:MASTER:애널경험 > 100
+				reports:(reportCount++) = "지금까지 본 것중 최고의 애널. 잘 쪼이는데 개발도 끝나서 사용감이 아주 좋다."
+			elseif RAND:3 == 0 && EXP:MASTER:애널경험 < 100
+				reports:(reportCount++) = "신품 애널. 확실히 직접 개발하면서 늘리는 맛이 있다."
+			else
+				reports:(reportCount++) = "다들 %CALLNAME:MASTER% 애널이 평가가 좋대서 와봤는데 그냥 평범하고 딱히 특출난 점은 없었음."
+			endif
+		; 일반 구멍구상
+		elseif RAND:5 == 0 && isHole(insertInto)
+			if RAND:3 == 0 && EXP:MASTER:insertInto > 50
+				reports:(reportCount++) = "구멍이 새까맣고 고약한 냄새가 나서 이상함."
+			elseif RAND:3 == 0 && isMasterInserted(insertInto, 3)
+				reports:(reportCount++) = "%partStrRaw(insertInto)%에 슬라임 들어있어서 수분감 최고."
+			elseif RAND:3 == 0
+				reports:(reportCount++) = "입구는 꽉 조이고 안쪽은 부드럽게 감싸줘서 그야말로 극상의 %partStrRaw(insertInto)%."
+			elseif RAND:2 == 0
+				reports:(reportCount++) = "자지 넣으면 아첨하듯 달라붙는 %partStrRaw(insertInto)%. 이 기회에 경험하지 않으면 손해봄."
+			else
+				reports:(reportCount++) = "화장실이 급해서 잠깐 %partStrRaw(insertInto)% 좀 빌렸어요."
+			endif
+		elseif RAND:3 == 0
+			if CFLAG:MASTER:성적명성 > 80
+				reports:(reportCount++) = "뒷골목에선 %kr(CALLNAME:MASTER, "이라고", "라고")% 하면 다들 알아줌. 프로다운 %partStrRaw(insertInto)%. {9 + RAND:2}/10"
+			elseif CFLAG:MASTER:성적명성 > 60
+				reports:(reportCount++) = "나쁜 건 아닌데 좀 어설픔. 몸 좀 험하게 굴리는 년이라고 들었는데 입으로는 아직 많이 하지 않은듯. {7 + RAND:2}/10"
+			elseif CFLAG:MASTER:성적명성 > 40
+				reports:(reportCount++) = "솔직히 말해 거품. %CALLNAME:MASTER%? 공짜라서 쓰지 이걸 돈 주고 사먹던 놈은 대체 여자가 얼마나 고팠던걸까? {5 + RAND:2}/10"
+			else
+				if EXP:MASTER:insertInto > 30
+					reports:(reportCount++) = "처음 보는데 신입인거 감안하고 이 정도면 나쁘지 않다. 객관적으로는 좋은 편 아님. {3 + RAND:2}/10"
 				else
-					printFormW \@ RAND:2 ? 비실비실한 # 버려진 \@ \@ RAND:2 ? 똥개가# 늙다리 개\@ 당신의 입을 사용하고 지나갔다.
-					reports:(reportCount++) = "새벽에 사람들 잘 안 지나다닐때 보면 길거리 똥개들도 발정나서 덤비던데 그걸 좋다고 다 삼키는걸 보면 타고나긴 한가보죠."
+					reports:(reportCount++) = "별로. 공공변소니까 딴 년들 안 받아주던거 시켜보는 용도론 괜찮을지도. {1 + RAND:2}/10"
 				endif
 			endif
-
-			FLAG:육변기정음량 += cumAmount
-		;항
-		elseif RAND:4 == 0
-			insertInto = 123
-
-			if RAND:5 == 0
-				printFormW \@ RAND:2 ? 실실 웃는 # 음침한 \@ 마법사가 당신의 뒷구멍을 사용하고 지나갔다.
-				if RAND:3 == 0 && TALENT:MASTER:세로애널
-					reports:(reportCount++) = "안그래도 거리에서 개처럼 따먹어달라고 엉덩이 흔들고 다니더니 꼴 좋다. 벌어져서 안 다물어질 때까지 박아줬다."
-				elseif RAND:3 == 0 && EXP:MASTER:질경험 < 50 && EXP:MASTER:애널경험 > 50
-					reports:(reportCount++) = "보지는 신품인데 후장은 개발 끝난 거 보면 그냥 변태. 다음에 올 때까지 아다면 그냥 뚫어버릴 예정."
-				elseif RAND:3 == 0 && !(BASE:MASTER:애널조임 > MAXBASE:MASTER:애널조임 - 15) && EXP:MASTER:애널경험 > 100
-					reports:(reportCount++) = "지금까지 본 것중 최고의 애널. 잘 쪼이는데 개발도 끝나서 사용감이 아주 좋다."
-				elseif RAND:3 == 0 && EXP:MASTER:애널경험 < 100
-					reports:(reportCount++) = "신품 애널. 확실히 직접 개발하면서 늘리는 맛이 있다."
-				else
-					reports:(reportCount++) = "다들 %CALLNAME:MASTER% 애널이 평가가 좋대서 와봤는데 그냥 평범하고 딱히 특출난 점은 없었음."
-				endif
-			elseif RAND:4 == 0
-				printFormW \@ RAND:2 ? 안경잡이 # 마른 \@ 마약 중독자가 당신의 애널을 사용하고 지나갔다.
-				
-				if RAND:3 == 0
-					BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 10 + RAND:10, 0, MAXBASE:MASTER:혈중미약농도)
-					reports:(reportCount++) = "미약 한 방 놓아주니 바로 뒷구멍을 벌름거림. 덕분에 즐기고 갑니다."
-				elseif RAND:3 == 0 && BASE:MASTER:혈중미약농도 > 200
-					reports:(reportCount++) = "이미 미약에 쩔어있는 몸이라 저급해 보이지만 뒷보지는 나름 괜찮았음."
-				elseif RAND:3 == 0 && ABL:MASTER:약물중독
-					BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 15 + RAND:15, 0, MAXBASE:MASTER:혈중미약농도)
-					reports:(reportCount++) = "눈앞에 주사바늘을 흔들어주면 바로 다리를 벌릴정도. 이미 중독 증세가 심각함. 물론 준다는데 안 먹었을리가."
-				else
-					BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 15 + RAND:15, 0, MAXBASE:MASTER:혈중미약농도)
-					reports:(reportCount++) = "자꾸 앙앙대길래 귀찮아서 약으로 보내버리고 즐김. 의식이 없는 상태에서도 몸을 움찔거리는건 좀 꼴렸음."
-				endif
-				
-			elseif RAND:3 == 0
-				printFormW \@ RAND:2 ? 실눈 뜬 # 미소짓는 \@ 신관이 당신의 후장을 사용하고 지나갔다.
-
-				if !TALENT:MASTER:처녀
-					reports:(reportCount++) = "몸을 함부로 놀리기 때문에 천벌받은 자매님과 뒷구멍으로 참회하는 시간을 가졌습니다."
-				elseif RAND:3 == 0 && TALENT:MASTER:세로애널
-					reports:(reportCount++) = "주께서는 오직 쾌락만을 좇는 것은 큰 죄라 하였으니, 그 구멍에 쾌락이 아닌 꾸짖음을 새겨주었습니다."
-				elseif RAND:2 == 0
-					reports:(reportCount++) = "부정한 구멍에서의 쾌락에 사람의 말조차 잊는 것이 딱 한 마리의 암퇘지와 같다."
-				else
-					reports:(reportCount++) = "여기 주를 모르는 불쌍한 어린 양에게 천국을 보여드렸습니다."
-				endif
-			elseif RAND:2 == 0
-				printFormW \@ RAND:2 ? 비열한 # 더러운 \@ 애송이가 당신의 뒷보지를 사용하고 지나갔다.
-				cumAmount /= 2
-				BASE:MASTER:애널상태 = LIMIT(BASE:MASTER:애널상태  - (5 + RAND:5), 0, MAXBASE:MASTER:애널상태)
-
-				if RAND:3 == 0 && EXP:MASTER:애널경험 > 50
-					reports:(reportCount++) = "구멍이 새까맣고 고약한 냄새가 나서 이상함."
-				elseif RAND:3 == 0 && TALENT:MASTER:세로애널
-					reports:(reportCount++) = "엉덩이에 주먹 넣어는데 다 들어감."
-				elseif RAND:3 == 0 && isMasterInserted(123, 3)
-					reports:(reportCount++) = "뒷구멍에 슬라임 들어있어서 수분감 최고."
-				elseif RAND:3 == 0
-					reports:(reportCount++) = "입구는 꽉 조이고 안쪽은 부드럽게 감싸줘서 그야말로 극상의 애널."
-				elseif RAND:2 == 0
-					reports:(reportCount++) = "자지 넣으면 아첨하듯 달라붙는 애널. 이 기회에 경험하지 않으면 손해봄."
-				else
-					reports:(reportCount++) = "화장실이 급해서 잠깐 엉덩이 좀 빌렸어요."
-				endif
+		elseif RAND:2 == 0
+			if EXP:MASTER:insertInto > 100 && ABL:MASTER:insertInto > 3
+				reports:(reportCount++) = "%"★" * 5%. 훌륭합니다."
+			elseif EXP:MASTER:insertInto > 100
+				reports:(reportCount++) = "%"★" * (3 + RAND:2)%. 부족한 피지컬을 스킬로 때우려는 것이 눈에 보여서 아쉬움."
+			elseif ABL:MASTER:insertInto > 3
+				reports:(reportCount++) = "%"★" * (3 + RAND:2)%. 능숙해지기 시작한 구멍과 그에 대비되는 감촉이 언밸런스함."
 			else
-				fatherType = 4
-				if RAND:2 == 0
-					printFormW \@ RAND:2 ? 복실복실한 # 털뭉치 \@ 들개가 당신의 뒷보지를 사용하고 지나갔다.
-					reports:(reportCount++) = "범죄자 신분으로 변기형에 처해진 %kr(CALLNAME:MASTER, "이", "가")% 대로변을 지나던 개와 항문성교를 하는 장면이 목격됨."
-				elseif RAND:2 == 0
-					printFormW \@ RAND:2 ? 흥분한 # 성난 \@ 말이 당신의 뒷보지를 사용하고 지나갔다.
-					cumAmount *= 2
-					penisSize = 50 + RAND:10
-					if TALENT:MASTER:세로애널
-						reports:(reportCount++) = "뒷구멍이 세로로 벌어진건 처음 봐서 말이랑 교미시켜봤는데 그게 다 들어가는걸 보고 충격받음."
-					else
-						
-						reports:(reportCount++) = "혹시나 해서 말 자지를 넣어봤는데 다 들어가진 않았음. 좀 찢어진 것 같은데 다음에 사용하는 사람은 유의할것."
-					endif
-				else
-					printFormW \@ RAND:2 ? 다 큰 # 교미용 \@ 수퇘지가 당신의 뒷보지를 사용하고 지나갔다.
-					cumAmount *= 10
-					penisSize /= 2
-					reports:(reportCount++) = "커다란 돼지가 교미하려고 달라붙는데, 글쎄 보지를 못 찾고 뒷구멍에 넣지 뭐야."
-				endif
+				reports:(reportCount++) = "%"★" * (1 + RAND:2)%. 평가 불가. 상태가 나빠 조금 버릇을 고쳐 줄 필요가 있음."
 			endif
-			
-			FLAG:육변기항내사정량 += cumAmount
-			call checkTight(2, penisSize)
-		;질
 		else
-			insertInto = 121
-			if RAND:5 == 0
-				printFormW \@ RAND:2 ? 건장한 # 실실 웃는 \@ \@ RAND:2 ? 모험가가# 용병이\@ 당신의 보지를 사용하고 지나갔다.
-				if TALENT:MASTER:허벌보지
-					reports:(reportCount++) = "조이는 감각이 부족하다. 싸구려 창녀도 이것보다는 박는 맛이 있었는데."
-				elseif EXP:MASTER:질경험 > 100 && ABL:MASTER:질감도 < 5
-					reports:(reportCount++) = "감촉은 싸구려. 기술은 뛰어남. 딱 창녀 보지 이상도 이하도 아닌 것 같다."
-				elseif EXP:MASTER:질경험 < 100 && ABL:MASTER:질감도 > 5
-					reports:(reportCount++) = "서툰 것을 보면 경험은 부족한 것 같은데 보지는 쫄깃하게 감싸는 감촉이 뛰어나다."
-				elseif EXP:MASTER:질경험 < 100
-					reports:(reportCount++) = "보지 상태가 새것이나 다름없음. 사람들 몰리기 전에 빨리 즐기는 것을 추천함."
-				else
-					reports:(reportCount++) = "평범함. 조이는 맛이나 기술 모두 무난하긴 한데 돈 받는 거였으면 좀 고민할 것 같다."
-				endif
-			elseif RAND:4 == 0
-				printFormW \@ RAND:2 ? 다부진 # 탄탄한 \@ \@ RAND:2 ? 전사가# 기사가\@ 당신의 보지를 사용하고 지나갔다.
-				
-				if ABL:MASTER:질감도 > 8 && EXP:MASTER:질경험 < 100
-					reports:(reportCount++) = "{9 + RAND:2}점. 끈적하게 달라붙는 보지가 일품. 자지가 빠져나갈 때마다 아첨하듯 딸려나오면서 사정을 졸라대는 것이 포인트."
-				elseif ABL:MASTER:질감도 > 6 || EXP:MASTER:질경험 > 100
-					reports:(reportCount++) = "이정도면 {7 + RAND:2}점 정도. 따지고 보면 상급이긴 한데 너무 많이 써서 그런지 좀 느낌이 부족함."
-				elseif ABL:MASTER:질감도 > 4
-					reports:(reportCount++) = "그럭저럭 {5 + RAND:2}점? 맛있긴 한데, 이 정도 보지는 사실 창관에서도 찾으면 찾을 수 있음."
-				elseif EXP:MASTER:질경험 < 100
-					reports:(reportCount++) = "{5 + RAND:2}점. 그렇지만 오히려 좋다. 아직 경험이 부족해서 자지 모양으로 딱 맞게 감싸오는 느낌이 발전할 여지가 있음."
-				else
-					reports:(reportCount++) = "{RAND:2}점. 아니, 그냥 0점. 그냥 허공에 대고 좆질하는게 이거보다 기분 좋을듯. 뭐 이런 쓰레기같은 보지가 다 있나 싶을정도."
-				endif
-			elseif RAND:3 == 0
-				; todo 성병구상
-			elseif RAND:2 == 0
-				printFormW \@ RAND:2 ? 비열한 # 더러운 \@ 꼬맹이가 당신의 보지를 사용하고 지나갔다.
-				cumAmount /= 2
-				penisSize /= 2
-				BASE:MASTER:질상태 = LIMIT(BASE:MASTER:질상태  - (5 + RAND:5), 0, MAXBASE:MASTER:질상태)
-
-				if RAND:3 == 0 && EXP:MASTER:질경험 > 100
-					reports:(reportCount++) = "구멍이 새까맣고 고약한 냄새가 나서 별로."
-				elseif RAND:3 == 0 && TALENT:MASTER:허벌보지
-					reports:(reportCount++) = "주먹 한번 넣어봤는데 보지에 다 들어갔어."
-				elseif RAND:3 == 0 && FLAG:육변기사용횟수 > 50
-					reports:(reportCount++) = "괜찮긴 한데 닭장 냄새가 남. 좀 깨끗하게 써요."
-				elseif RAND:3 == 0 && TALENT:MASTER:임신
-					reports:(reportCount++) = "이거 살 찐게 아니라 임신한 거 맞죠?"
-				elseif RAND:3 == 0 && BASE:MASTER:자궁내정액1 > 5
-					BASE:MASTER:자궁내정액1 /= 2
-					reports:(reportCount++) = "박아주려고 보지 벌렸는데 이미 찐득하게 정액 흘러나오길래 물로 한 번 헹구고 썼음. 뒷 사람들도 써야되니까 뒷처리 잘하세요."
-				else
-					reports:(reportCount++) = "화장실이 급해서 잠깐 보지 좀 빌렸는데 나쁘지 않았음."
-				endif
+			if RAND:3 == 0
+				BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 10 + RAND:10, 0, MAXBASE:MASTER:혈중미약농도)
+				reports:(reportCount++) = "미약 한 방 놓아주니 바로 뒷구멍을 벌름거림. 덕분에 즐기고 갑니다."
+			elseif RAND:3 == 0 && BASE:MASTER:혈중미약농도 > 200
+				reports:(reportCount++) = "이미 미약에 쩔어있는 몸이라 저급해 보였지만 나름 괜찮았음."
+			elseif RAND:3 == 0 && ABL:MASTER:약물중독
+				BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 15 + RAND:15, 0, MAXBASE:MASTER:혈중미약농도)
+				reports:(reportCount++) = "눈앞에 주사바늘을 흔들어주면 바로 다리를 벌릴정도. 이미 중독 증세가 심각함. 물론 준다는데 안 먹었을리가."
 			else
-				fatherType = 4
-				if RAND:2 == 0
-					printFormW \@ RAND:2 ? 발기한 # 헐떡이는 \@ 대형견이 당신의 보지를 사용하고 지나갔다.
-					if isMasterLewd() && TALENT:MASTER:임신
-						reports:(reportCount++) = "임신해서 배가 불러와도 개 자지만 보면 보지 벌리는 걸 보면 이미 사람 취급은 받고 싶지도 않은가 봄."
-					elseif isMasterLewd() && !TALENT:MASTER:임신
-						reports:(reportCount++) = "짐승이 다가오는걸 보면 저절로 다리를 벌리는데다가 개랑 뒹굴며 헐떡이는 꼴이 딱 암캐."
-					elseif !isMasterLewd() && TALENT:MASTER:임신
-						reports:(reportCount++) = "저번에 발정난 개가 덮치던데 임신 중이어서 아기 다칠까봐 그만 하라고 밀어내는데 그래봐야 개가 막 짖으면서 다가오니까 결국 허락해주던 것도 봄."
-					else
-						reports:(reportCount++) = "개들이 으르렁거리면서 다가오는데 그냥 짐승들한테도 쉬운 암컷으로 낙인찍힌 모양."
-					endif
-				elseif RAND:2 == 0
-					printFormW \@ RAND:2 ? 흥분한 # 성난 \@ 종마가 당신의 암컷구멍을 사용하고 지나갔다.
-					cumAmount *= 2
-					penisSize = 50 + RAND:10
-					reports:(reportCount++) = "살다살다 말의 씨받이를 하는 사람은 또 처음 봄. 그거 다 안 긁어내면 분명 임신할 텐데."
-				else
-					printFormW \@ RAND:2 ? 다 큰 # 교미용 \@ 돼지가 당신의 보지를 사용하고 지나갔다.
-					cumAmount *= 10
-					penisSize /= 2
-					if isMasterLewd()
-						reports:(reportCount++) = "한참을 돼지랑 붙어먹더니, 나중에 보니까 무슨 정액으로 배가 산처럼 불러서 핵핵대는게 이미 암퇘지가 다 된듯."
-					else
-						reports:(reportCount++) = "돼지한테 사정당하고 나서 정액이 안 빠져나오는거 보고 울먹이는데 그거 보고 좀 꼴렸음. 물론 더러워서 박지는 않음."
-					endif
-
-					call insertIntoMaster(116, 1)
-					call outFromMaster(116, 1)
-				endif
+				BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 15 + RAND:15, 0, MAXBASE:MASTER:혈중미약농도)
+				reports:(reportCount++) = "자꾸 앙앙대길래 귀찮아서 약으로 보내버리고 즐김. 의식이 없는 상태에서도 몸을 움찔거리는건 좀 꼴렸음."
 			endif
-			FLAG:육변기질내사정량 += cumAmount
-			call checkTight(1, penisSize)
 		endif
 
 		call insertIntoMaster(insertInto, 1)
-		call cumIntoMaster(insertInto, cumAmount, fatherType)
+		call cumIntoMaster(insertInto)
 		call outFromMaster(insertInto, 1)
 		
-		FLAG:육변기사정량 += cumAmount
+		FLAG:육변기사정량 += CFLAG:MASTER:최근피사정량
+		
+		if insertInto == 115 || insertInto == 116 || insertInto == 121
+			FLAG:육변기질내사정량 += CFLAG:MASTER:최근피사정량
+		elseif insertInto == 123
+			FLAG:육변기항내사정량 += CFLAG:MASTER:최근피사정량
+		elseif insertInto == 102
+			FLAG:육변기정음량 += CFLAG:MASTER:최근피사정량
+		endif
+		
+		if RAND:3 == 0
+			breakableEquipCount = 0
+			for equipSlotIdx, 11, 19
+				if equipSlotIdx != 16 && EQUIP:MASTER:equipSlotIdx != 0
+					breakableEquips:(breakableEquipCount++) = equipSlotIdx
+				endif
+			next
+
+			if breakableEquipCount
+				printFormW 검은 손이 등 뒤에서 나타나, 순간 %CALLNAME:MASTER%의 옷을 벗겨버렸다!
+				call unequipMasterEquips(breakableEquips:(RAND:breakableEquipCount))
+			endif
+		endif
 		
 		if RAND:50 == 0
 			printFormW 잠시 쉬고 있던 %CALLNAME:MASTER%의 뒷편에서 부스럭거리는 소리가 나더니, 순간 따끔한 느낌이 들었다.
@@ -281,13 +190,15 @@
 			BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 10 + RAND:10, 0, MAXBASE:MASTER:혈중미약농도)
 		endif
 		
+		call delCharaAtPos(2)
+		
 		FLAG:육변기사용인원수++
 		FLAG:육변기사용횟수 += 1 + RAND:3
-		printL
 	next
 	
 	CSTR:MASTER:육변기형소감문 = %strJoin(reports, "\n", 0, reportCount)%
 	CFLAG:MASTER:악명 = MAX(CFLAG:MASTER:악명 - FLAG:육변기최근이용자수 / 2, 0)
+	CFLAG:MASTER:성적명성 = MIN(CFLAG:MASTER:성적명성 + FLAG:육변기최근이용자수 / 2, 100)
 	
 	if CFLAG:MASTER:악명 == 0
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 드디어 육변기형에서 풀려났다...

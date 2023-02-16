@@ -1,20 +1,11 @@
 ﻿@checkCum
-#dim dynamic cumAmount
 
 	if TALENT:TARGET:여성
 		return
 	endif
 
 	if PALAM:TARGET:사정 >= 10000
-		cumAmount = 1 + RAND:2
-		if TALENT:TARGET:대량사정 == 1
-			cumAmount *= (2 + RAND:4)
-		endif
-		
-		call cumIntoMaster(TCVAR:TARGET:성희롱부위, cumAmount, CFLAG:TARGET:종족)
+		call cumIntoMaster(TCVAR:TARGET:성희롱부위)
 
 		PALAM:TARGET:사정 -= 10000
-
-		call onEnemyCum_m(TCVAR:TARGET:성희롱부위)
-		call onEnemyCum_e(TCVAR:TARGET:성희롱부위)
 	endif

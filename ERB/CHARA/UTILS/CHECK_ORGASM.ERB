@@ -9,7 +9,7 @@
 	for partIdx, 101, 200
 		if PALAM:MASTER:partIdx >= orgasmThres
 			; todo 절정구상
-			printFormL %CSTR:MASTER:partIdx% 절정
+			printFormL %partStrRaw(partIdx)% 절정
 			orgasmParts:(orgasmCount++) = partIdx - 400
 			DOWN:partIdx = PALAM:MASTER:partIdx - PALAM:MASTER:partIdx % orgasmThres
 

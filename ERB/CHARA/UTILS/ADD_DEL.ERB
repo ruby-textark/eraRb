@@ -1,0 +1,50 @@
+﻿@addCharaAtPos(charaIdx, charaPos)
+#dim dynamic charaIdx
+#dim dynamic charaPos
+
+	; 새로 추가할 캐릭터
+	addChara charaIdx
+
+	; 존재하던 placeholder와 바꿈
+	swapChara getChara(charaIdx), charaPos
+	delChara getChara(1000 + charaPos)
+
+@delCharaAtPos(charaPos)
+#dim dynamic charaIdx
+#dim dynamic charaPos
+
+	charaIdx = CFLAG:charaPos:캐릭터번호
+
+	; placholder를 해당 위치에 삽입
+	addchara (1000 + charaPos)
+	swapChara getChara(1000 + charaPos), charaPos
+
+	; 밀려난 캐릭터 삭제
+	delchara getChara(charaIdx)
+
+@addMonster(charaIdx)
+#dim dynamic charaIdx
+
+	call addCharaAtPos(charaIdx, 1)
+	TARGET = 1
+
+@addMobChara(charaIdx)
+#dim dynamic charaIdx
+
+	call addCharaAtPos(charaIdx, 2)
+	TARGET = 2
+
+@addParasite(charaIdx)
+#dim dynamic charaIdx
+
+	call addCharaAtPos(charaIdx, 3)
+	TARGET = 2
+
+@delMonster()
+	call delCharaAtPos(1)
+
+@delMobChara()
+	call delCharaAtPos(2)
+
+@delParasite()
+	call delCharaAtPos(3)

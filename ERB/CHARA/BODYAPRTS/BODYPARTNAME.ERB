@@ -1,4 +1,10 @@
-﻿@bodyPartStr(partIdx)
+﻿@partStrRaw(partIdx)
+#functions
+#dim dynamic partIdx
+
+	returnf CSTR:MASTER:partIdx
+
+@partStr(partIdx)
 #functions
 #dim dynamic partIdx
 #dim dynamic retStrCnt
@@ -69,6 +75,8 @@
 			retStr:(retStrCnt++) = 어느새 음란한 구멍이 되어버린
 		elseif ABL:MASTER:입감도 > 3
 			retStr:(retStrCnt++) = 성감대로 개발된
+		elseif EXP:MASTER:입경험 > 50
+			retStr:(retStrCnt++) = 음탕한 혀놀림을 자랑하는
 		else
 			retStr:(retStrCnt++) = 성감대로 개발되지 않은
 		endif
@@ -98,6 +106,8 @@
 				retStr:(retStrCnt++) = 무의식중에 주물러지기를 소망하는
 			elseif ABL:MASTER:가슴감도 > 3
 				retStr:(retStrCnt++) = 만져질 때마다 몸이 달아오르는
+			elseif EXP:MASTER:가슴경험 > 50
+				retStr:(retStrCnt++) = 꽉 쥐어지면 음란한 생각에 심장이 쿵쿵 뛰는
 			else
 				retStr:(retStrCnt++) = 경험 부족한
 			endif
@@ -127,6 +137,8 @@
 			retStr:(retStrCnt++) = 볼록 튀어나와 추잡한 욕망을 숨기려 하지도 않는
 		elseif ABL:MASTER:유두감도 > 3
 			retStr:(retStrCnt++) = 꼿꼿이 선 채로 도발하는
+		elseif EXP:MASTER:유두경험 > 50
+			retStr:(retStrCnt++) = 살살 간질여주면 저절로 다리에 힘이 풀리는
 		else
 			retStr:(retStrCnt++) = 아직 경험이 부족한
 		endif
@@ -158,6 +170,8 @@
 			retStr:(retStrCnt++) = 아기를 낳고 싶어 안달난
 		elseif ABL:MASTER:난소감도 > 3
 			retStr:(retStrCnt++) = 느껴서는 안 될 쾌락을 알아버린
+		elseif EXP:MASTER:난소경험 > 50
+			retStr:(retStrCnt++) = 언어도단의 성벽을 깨우친
 		else
 			retStr:(retStrCnt++) = 성적인 자극에 익숙하지 않은
 		endif
@@ -171,6 +185,8 @@
 			retStr:(retStrCnt++) = 괴롭혀지면 두근거리며 기대하는
 		elseif ABL:MASTER:자궁감도 > 3
 			retStr:(retStrCnt++) = 꾸욱 눌릴때마다 행복을 느끼는
+		elseif EXP:MASTER:자궁경험 > 50
+			retStr:(retStrCnt++) = 깊은 구석을 노크하면 묵직하게 절정해버리는
 		else
 			retStr:(retStrCnt++) = 아직은 경험이 부족한
 		endif
@@ -195,6 +211,8 @@
 			retStr:(retStrCnt++) = 완전히 암컷구멍으로 개발된
 		elseif ABL:MASTER:질감도 > 4
 			retStr:(retStrCnt++) = 음란하게 거듭난
+		elseif EXP:MASTER:질경험 > 50
+			retStr:(retStrCnt++) = 자지를 무는 법을 배우기 시작한
 		else
 			retStr:(retStrCnt++) = 경험 부족의 미숙한
 		endif
@@ -205,6 +223,8 @@
 			retStr:(retStrCnt++) = 꾸짖어주는 것을 즐기는
 		elseif ABL:MASTER:클리감도 > 4
 			retStr:(retStrCnt++) = 귀엽게 튀어나온
+		elseif EXP:MASTER:클리경험 > 50
+			retStr:(retStrCnt++) = 앙증맞게 자기주장을 하는
 		else
 			retStr:(retStrCnt++) = 몇 번 만져보지 않은
 		endif
@@ -213,7 +233,7 @@
 			retStr:(retStrCnt++) = 한계 이상으로 늘어나버려
 		endif
 		
-		if EXP:MASTER:애널경험 > 2 * EXP:MASTER:질경험
+		if EXP:MASTER:애널경험 > 2 * EXP:MASTER:질경험 && EXP:MASTER:애널경험 > 50
 			if TALENT:MASTER:처녀질
 				retStr:(retStrCnt++) = 처녀인 주제에 이쪽은 완전히 개발되어
 			else
@@ -227,6 +247,8 @@
 			retStr:(retStrCnt++) = 
 		elseif ABL:MASTER:애널감도 > 3
 			retStr:(retStrCnt++) = 꾸물거리며 삽입된 물건을 조이길 좋아하는
+		elseif EXP:MASTER:애널경험 > 50
+			retStr:(retStrCnt++) = 자지에게 아양떠는 법을 알게 된
 		else
 			retStr:(retStrCnt++) = 경험 부족의 미숙한
 		endif
@@ -237,6 +259,8 @@
 			retStr:(retStrCnt++) = 구석구석 꼼꼼히 개발된
 		elseif ABL:MASTER:방광감도 > 3
 			retStr:(retStrCnt++) = 사용감이 오르기 시작한
+		elseif EXP:MASTER:방광경험 > 50
+			retStr:(retStrCnt++) = 아랫배를 꾹 눌러주면 떨려오는
 		else
 			retStr:(retStrCnt++) = 신품이나 다름없는
 		endif
@@ -247,6 +271,8 @@
 			retStr:(retStrCnt++) = 화장실에 갈 떄마다 느껴버리는
 		elseif ABL:MASTER:요도감도 > 3
 			retStr:(retStrCnt++) = 이물감에 적응하기 시작한
+		elseif EXP:MASTER:요도경험 > 50
+			retStr:(retStrCnt++) = 금단의 쾌락을 익히기 시작한
 		else
 			retStr:(retStrCnt++) = 성적인 자극에 익숙하지 않은
 		endif

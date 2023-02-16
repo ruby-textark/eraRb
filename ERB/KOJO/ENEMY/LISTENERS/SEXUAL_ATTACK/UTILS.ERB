@@ -44,13 +44,14 @@
 	returnf 1
 
 @getSexualAtkBodyPart
+#function
 #dim dynamic partIdx
 #dim dynamic partsCount
 #dim dynamic availableParts, 100
 
 	if TCVAR:TARGET:성희롱부위 && isAttackableBodyPart(TCVAR:TARGET:성희롱부위)
 		if RAND:5 < 4
-			return TCVAR:TARGET:성희롱부위
+			returnf TCVAR:TARGET:성희롱부위
 		endif
 	endif
 
@@ -61,4 +62,4 @@
 		endif
 	next
 
-	return availableParts:(RAND:partsCount)
+	returnf availableParts:(RAND:partsCount)

@@ -1,11 +1,19 @@
-﻿@cumIntoMaster(partIdx, amount, fatherType)
+﻿@cumIntoMaster(partIdx)
 #dim dynamic partIdx
-#dim dynamic amount
-#dim dynamic fatherType
+#dim dynamic cumAmount
 
-	EXP:MASTER:정액경험++
+	cumAmount = 1 + RAND:2
+	if TALENT:TARGET:대량사정
+		cumAmount *= 2 * TALENT:TARGET:대량사정 + RAND:2
+	endif
+	
+	CSTR:MASTER:최근피사정자 = %NAME:TARGET% %CALLNAME:TARGET%
+	CFLAG:MASTER:최근피사정량 = cumAmount
+
+	EXP:MASTER:정액경험 += 1 + ((cumAmount - 1) / 2)
 	if partIdx == 115 || partIdx == 116 || partIdx == 121
 		EXP:MASTER:질내사정경험++
+
 	elseif partIdx == 123
 		EXP:MASTER:항내사정경험++
 	elseif partIdx == 102
@@ -18,48 +26,53 @@
 	endif
 
 	if TALENT:MASTER:피임결계
-		printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 피임의 마법으로 보호되고 있다
+		printFormW %CALLNAME:MASTER%의 %kr(partStr(116), "은", "는")% 피임의 마법으로 보호되고 있다
 		
-		if BASE:MASTER:마력 < amount * 50
+		if BASE:MASTER:마력 < cumAmount * 50
 			if RAND:3 == 0
 				printFormW 그러나 바닥나버린 마력에 의해 얇아진 방벽은 더 이상 자궁을 지켜줄 수 없었다
 			elseif RAND:2 == 0
-				printFormW 방심하고 있던 %kr(bodyPartStr(116), "이", "가")% 꿈틀거리던 찰나, 곧 바닥나버린 마력에 당황한 기색을 감추지 못했다
+				printFormW 방심하고 있던 %kr(partStr(116), "이", "가")% 꿈틀거리던 찰나, 곧 바닥나버린 마력에 당황한 기색을 감추지 못했다
 			else
 				printFormW 하지만 밀려들어오는 정자를 막기에는 역부족이었다...
 			endif
 
-			printForm %CALLNAME:MASTER%의
-			call colorPrint(0xff3399, "[피임결계]")
-			printW 가 해제되었다
-			
-			TALENT:MASTER:피임결계 = 0
+			call loseTalent("피임결계")
 			
 			if RAND:3 == 0
-				printFormW 그동안 정액에 갈증을 느끼던 %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "이", "가")% 무너진 결계 사이로 들어오는 정자에 환희하고 있다
+				printFormW 그동안 정액에 갈증을 느끼던 %CALLNAME:MASTER%의 %kr(partStr(116), "이", "가")% 무너진 결계 사이로 들어오는 정자에 환희하고 있다
 			elseif RAND:2 == 0
-				printFormW 얄팍한 마법 하나를 믿고 안심하던 %CALLNAME:MASTER%의 %bodyPartStr(116)%에 새하얀 국물이 따라진다
+				printFormW 얄팍한 마법 하나를 믿고 안심하던 %CALLNAME:MASTER%의 %partStr(116)%에 새하얀 국물이 따라진다
 			else
-				printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 밀물처럼 쏟아져 들어오는 정액을 막을 생각조차 못하고 그저 받아들이고 있다
+				printFormW %CALLNAME:MASTER%의 %kr(partStr(116), "은", "는")% 밀물처럼 쏟아져 들어오는 정액을 막을 생각조차 못하고 그저 받아들이고 있다
 			endif
 		else
-			BASE:MASTER:마력 -= amount * 50
-			if BASE:MASTER:마력 < 100
-				printFormW 
+			BASE:MASTER:마력 -= cumAmount * 50
+
+			if BASE:MASTER:마력 < 350
+				call colorPrint(0x33cc33, "마력이 떨어지고 있다... 마력이 고갈되면 피임결계가 해제되고 말 것이다.")
+			elseif BASE:MASTER:마력 < 250
+				call colorPrint(0xcccc00, "마력이 상당히 낮다... 주의하지 않으면 피임결계가 해제될지도 모른다.")
+			elseif BASE:MASTER:마력 < 150
+				call colorPrint(0xcc0000, "마력이 거의 바닥났다... 아마 다음번에는 반드시 수정하고 말 것이다.")
 			endif
+
 			return
 		endif
 	endif
 	
 	if TALENT:MASTER:교미배란 && !TALENT:MASTER:임신
-		printFormW %bodyPartStr(121)% 안으로 들어온 정액에 %CALLNAME:MASTER%의 %kr(bodyPartStr(115), "은", "는")% 환희하며 배란하고 있다.
+		printFormW %partStr(121)% 안으로 들어온 정액에 %CALLNAME:MASTER%의 %kr(partStr(115), "은", "는")% 환희하며 배란하고 있다.
 		BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2
 		TALENT:MASTER:생리중 = 0
 		TALENT:MASTER:가임기 = 1
 	endif
 
-	BASE:MASTER:자궁내정액1 += amount
-	BASE:MASTER:(320 + fatherType) += amount
+	BASE:MASTER:자궁내정액1 += cumAmount
+	BASE:MASTER:(320 + CFLAG:TARGET:종족) += cumAmount
 
 	; 전투중일경우 필요함
-	TFLAG:이번사정량 += amount
+	TFLAG:이번사정량 += cumAmount
+
+	call onEnemyCum_m(partIdx)
+	call onEnemyCum_e(partIdx)

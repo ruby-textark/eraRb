@@ -6,10 +6,15 @@
 	if partIdx == 121
 		if FLAG:성교합의
 			if isMasterLewd() && isMasterSubmissive()
-				
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 기쁘게 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 바쳤다
 			elseif isMasterLewd() && !isMasterSubmissive()
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃었다
 			elseif !isMasterLewd() && isMasterSubmissive()
+				; 비교적 일반적인 상황
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 어리둥절하며 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 주었다
 			elseif !isMasterLewd() && !isMasterSubmissive()
+				; 이 끔찍한 기억을 하루빨리 잊고싶음
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃게 되었다
 			endif
 		endif
 	endif

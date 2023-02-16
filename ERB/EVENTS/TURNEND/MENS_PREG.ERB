@@ -74,11 +74,11 @@
 	
 	; 사후피임약 복용시 24-72시간 이내일 경우 95% / 80% / 50% 확률로 피임
 	; talent 있을경우 이미 확정되었으므로 돌이킬 수 없음
-	if RAND:20 < 19 && (DAY == CFLAG:MASTER:사후피임약복용 + 1) && !TALENT:MASTER:임신
+	if RAND:20 < 19 && CFLAG:MASTER:사후피임약복용 && (DAY == CFLAG:MASTER:사후피임약복용 + 1) && !TALENT:MASTER:임신
 		BASE:MASTER:임신일수 = 0
-	elseif RAND:5 < 4 && (DAY == CFLAG:MASTER:사후피임약복용 + 2) && !TALENT:MASTER:임신
+	elseif RAND:5 < 4 && CFLAG:MASTER:사후피임약복용 && (DAY == CFLAG:MASTER:사후피임약복용 + 2) && !TALENT:MASTER:임신
 		BASE:MASTER:임신일수 = 0
-	elseif RAND:2 == 0 && (DAY == CFLAG:MASTER:사후피임약복용 + 3) && !TALENT:MASTER:임신
+	elseif RAND:2 == 0 && CFLAG:MASTER:사후피임약복용 && (DAY == CFLAG:MASTER:사후피임약복용 + 3) && !TALENT:MASTER:임신
 		BASE:MASTER:임신일수 = 0
 	endif
 	
@@ -103,10 +103,19 @@
 	BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도, 0, MAXBASE:MASTER:자궁침식도)
 
 	; 임신자각
-	if BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수 / 10
+	if !TALENT:MASTER:임신 && BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수 / 10
 		; 임신자각처리
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 최근 생리주기가 이상한 것을 알아챘다...
 		printFormW 아무래도 %kr(CALLNAME:MASTER, "은", "는")% 임신한 모양이다
+
+		call getTalent("임신")
+		EXP:MASTER:임신경험++
+		if CFLAG:MASTER:아이아버지 > 1
+			EXP:MASTER:이종임신경험++
+		endif
+	elseif FLAG:자궁대여료 && BASE:MASTER:임신일수 && !TALENT:MASTER:임신
+		printFormW %kr(CALLNAME:MASTER, "은", "는")% 자는 동안 아랫배에서 올라오는 열기에 쉽사리 잠들지 못하고 몸을 계속해서 뒤척이고 있다
+		printFormW %CALLNAME:MASTER%의 자궁대여는 오늘부터 시작이다
 
 		call getTalent("임신")
 		EXP:MASTER:임신경험++
@@ -144,7 +153,7 @@
 			; 인간임신실패 - 낙태
 			; 자궁침식도 감소
 			call colorPrintW(0xcc0000, @"%kr(CALLNAME:MASTER, "은", "는")% 배에서 격통을 느꼈다")
-			printFormW 이미 이종의 정액에 수 차례 범해진 %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 사람의 아이를 무의식중에 거부해버렸다...
+			printFormW 이미 이종의 정액에 수 차례 범해진 %CALLNAME:MASTER%의 %kr(partStr(116), "은", "는")% 사람의 아이를 무의식중에 거부해버렸다...
 			
 			BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도 - (1 + RAND:4), 0, MAXBASE:MASTER:자궁침식도)
 
@@ -153,7 +162,7 @@
 			; 이종임신실패 - 낙태
 			; 자궁침식도 증가
 			call colorPrintW(0xcc0000, @"%kr(CALLNAME:MASTER, "은", "는")% 갑자기 다리 사이로 대량의 피를 흘렸다")
-			printFormW %CALLNAME:MASTER%의 %kr(bodyPartStr(116), "은", "는")% 아직 사림이기를 포기하지 않은 듯 안간힘을 쓰며 이종의 아이를 쫓아내버렸다...
+			printFormW %CALLNAME:MASTER%의 %kr(partStr(116), "은", "는")% 아직 사림이기를 포기하지 않은 듯 안간힘을 쓰며 이종의 아이를 쫓아내버렸다...
 			
 			BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도 + (1 + RAND:4), 0, MAXBASE:MASTER:자궁침식도)
 
@@ -202,9 +211,9 @@
 
 @abort
 
-	call colorPrintW(0xcc0000, @"%kr(CALLNAME:MASTER, "은", "는")% 낙태하여 [임신]을 잃었다")
-
-	TALENT:MASTER:임신 = 0
+	call colorPrintW(0xcc0000, @"%kr(CALLNAME:MASTER, "은", "는")% 낙태하고 말았다")
+	
+	call loseTalent("임신")
 	BASE:MASTER:임신일수 = 0
 	EXP:MASTER:낙태경험++
 	
