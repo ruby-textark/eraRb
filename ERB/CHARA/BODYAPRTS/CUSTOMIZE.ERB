@@ -25,7 +25,7 @@ $inputLoop
 		inputs
 		if strlens(results)
 			CSTR:MASTER:partIdx = %results%
-			printFormL %substring(BASENAME:partIdx, 0, strlensu(BASENAME:partIdx) - 2)%을 앞으로 %CSTR:MASTER:partIdx%로 부르도록 합니다.
+			printFormL %substring(BASENAME:partIdx, 0, strlensu(BASENAME:partIdx) - 2)%을 앞으로 %kr(CSTR:MASTER:partIdx, "으로", "로")% 부르도록 합니다.
 		endif
 	elseif result == 999
 		return

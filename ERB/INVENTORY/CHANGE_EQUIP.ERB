@@ -19,7 +19,7 @@
 	EQUIP:MASTER:equipSlotIdx = equipItemIdx
 	callForm onEquip{EQUIP:MASTER:equipSlotIdx}
 
-	printFormL %EQUIPNAME:equipSlotIdx% 장비를 %ITEMNAME:equipItemIdx%로 교체했습니다
+	printFormL %EQUIPNAME:equipSlotIdx% 장비를 %kr(ITEMNAME:equipItemIdx, "으로", "로")% 교체했습니다
 	
 	return 1
 

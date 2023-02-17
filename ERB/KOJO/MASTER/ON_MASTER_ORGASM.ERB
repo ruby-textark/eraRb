@@ -9,34 +9,53 @@
 	
 	; todo 이쪽 추가작성
 	if isMasterLewd() && isMasterSubmissive()
-		if CFLAG:MASTER:targetPart >= 2 * orgasmThres
-			if RAND:5 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 참다 못해 %partStr(targetPart)%의 쾌감으로 가버렸다
-			elseif RAND:4 == 0
-				printFormW 상상을 뛰어넘는 %partStr(targetPart)%의 쾌락에 %kr(CALLNAME:MASTER, "은", "는")% 눈을 까뒤집고 바들바들 떨었다
-			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 척추를 관통하는 듯한 쾌감에 %partStr(targetPart)%를 마구 떨어대며 절정했다
-			elseif RAND:2 == 0
-				printFormW 한심한 울부짖음과 함꼐 %kr(CALLNAME:MASTER, "은", "는")% 몸을 가누지 못할 정도로 심하게 절정했다
-			else
-				printFormW 눈앞이 새하얘지는듯한 착각과 함께 %kr(CALLNAME:MASTER, "은", "는")% %partStr(targetPart)%로 크게 가버렸다
-			endif
+		if RAND:5 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 허리를 크게 꺾으며 %partStr(targetPart)%의 쾌감으로 가버렸다
+		elseif RAND:4 == 0
+			printFormW 상상을 뛰어넘는 %partStr(targetPart)%의 쾌락에 %kr(CALLNAME:MASTER, "은", "는")% 눈을 까뒤집고 바들바들 떨었다
+		elseif RAND:3 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 척추를 관통하는 듯한 쾌감에 %partStr(targetPart)%를 마구 떨어대며 절정했다
+		elseif RAND:2 == 0
+			printFormW 한심한 울부짖음과 함꼐 %kr(CALLNAME:MASTER, "은", "는")% 몸을 가누지 못할 정도로 심하게 절정했다
 		else
-			if RAND:5 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% %partStr(targetPart)%로 가버렸다
-			elseif RAND:4 == 0
-				printFormW %partStr(targetPart)%에서 주어지는 쾌락에 %kr(CALLNAME:MASTER, "은", "는")% 절정을 느꼈다
-			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 숨을 헐떡이며 %partStr(targetPart)%에서 느껴지는 쾌락의 파도에 몸을 맡기고 있다
-			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 꼴사납게 신음소리를 내며 %partStr(targetPart)%로 가버렸다
-			else
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 허리를 꺾으며 %partStr(targetPart)%의 쾌락에 굴복했다
-			endif
+			printFormW 눈앞이 새하얘지는듯한 착각과 함께 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStr(targetPart), "으로", "로")% 크게 가버렸다
 		endif
 	elseif isMasterLewd() && !isMasterSubmissive()
+		if RAND:5 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 결국 쾌감을 참지 못하고 %kr(partStr(targetPart), "으로", "로")% 가버렸다
+		elseif RAND:4 == 0
+			printFormW 집요하게 %kr(partStr(targetPart), "을", "를")% 파고드는 쾌락에 %kr(CALLNAME:MASTER, "은", "는")% 절정을 느꼈다
+		elseif RAND:3 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 숨을 헐떡이며 %partStr(targetPart)%에서 느껴지는 쾌락의 파도에 몸을 맡기고 있다
+		elseif RAND:2 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 꼴사납게 신음소리를 내며 %partStr(targetPart)%의 쾌락에 무너졌다
+		else
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 몸을 부르르 떨며 %kr(partStr(targetPart), "으로", "로")% 절정했다
+		endif
 	elseif !isMasterLewd() && isMasterSubmissive()
+		if RAND:5 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 숨을 가쁘게 내쉬며 %partStr(targetPart)% 절정의 여운을 느끼고 있다
+		elseif RAND:4 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 달콤한 교성을 흘리면서 행복감에 젖어있다
+		elseif RAND:3 == 0
+			printFormW 오르가즘을 느낀 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStr(targetPart), "으로", "로")% 가 버린 것이 부끄러운지 얼굴을 붉게 물들였다
+		elseif RAND:2 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 간드러지는 비명을 내며 오르가즘을 만끽하고 있다
+		else
+			printFormW 머릿속을 가득 채우는 행복감에 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStr(targetPart), "으로", "로")%부터 느껴지는 쾌감에 거역하지 못하고 있다
+		endif
 	elseif !isMasterLewd() && !isMasterSubmissive()
+		if RAND:5 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 절정하면서도 이를 악물고 신음소리를 참고 있다
+		elseif RAND:4 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(partStr(targetPart), "을", "를")% 휘몰아치는 쾌락에 굴복했다
+		elseif RAND:3 == 0
+			printFormW %partStr(targetPart)% 절정을 참는데 실패한 %kr(CALLNAME:MASTER, "은", "는")% 덜덜 떨면서 절정하고 있다
+		elseif RAND:2 == 0
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 강요된 쾌감에 %kr(partStr(targetPart), "으로", "로")% 절정당했다
+		else
+			printFormW 억지로 당하던 %kr(CALLNAME:MASTER, "은", "는")% 어느새 달뜬 신음소리와 함께 몸을 배배 꼬면서 절정했다
+		endif
 	endif
 
 
