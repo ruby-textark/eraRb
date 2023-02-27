@@ -1,8 +1,32 @@
-﻿@newQuest(mobIdx, retryCount)
+﻿@newQuest(questIdx)
+#dim dynamic questIdx
+
+	FLAG:퀘스트진행중 = 1
+	FLAG:퀘스트만기일 = FLAG:(questIdx * 10 + 1)
+	FLAG:퀘스트종류 = FLAG:(questIdx * 10 + 2)
+	FLAG:퀘스트대상 = FLAG:(questIdx * 10 + 3)
+	FLAG:퀘스트값 = FLAG:(questIdx * 10 + 4)
+	FLAG:퀘스트보수 = FLAG:(questIdx * 10 + 5)
+
+	; 토벌퀘스트
+	if FLAG:(questIdx * 10 + 2) == 0
+		call newHuntQuest(FLAG:(questIdx * 10 + 3), FLAG:(questIdx * 10 + 4))
+	; 납품퀘스트
+	elseif FLAG:(questIdx * 10 + 2) == 1
+		call newDeliverQuest(FLAG:(questIdx * 10 + 3), FLAG:(questIdx * 10 + 4))
+	endif
+
+
+@newHuntQuest(mobIdx, retryCount)
 #dim dynamic mobIdx
 #dim dynamic retryCount
 
 	call addMonster(mobIdx)
-	FLAG:퀘스트재시도 = retryCount
 	
+	return 1
+
+@newDeliverQuest(itemIdx, itemCount)
+#dim dynamic itemIdx
+#dim dynamic itemCount
+
 	return 1

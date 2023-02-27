@@ -5,9 +5,38 @@
 	for questIdx, 11, 16
 		; invalidate the expired quest
 		if DAY >= FLAG:(questIdx * 10 +  1)
+			; 퀘스트만기일
 			FLAG:(questIdx * 10 +  1) = DAY + 1 + (RAND:6)
-			FLAG:(questIdx * 10 +  2) = (questIdx - 10) * 100 + 1 + RAND:(FLAG:(questIdx * 10))
-			FLAG:(questIdx * 10 +  3) = RAND:3
+			; 퀘스트종류
+			FLAG:(questIdx * 10 +  2) = RAND:2
+			
+			; 토벌 퀘스트
+			if FLAG:(questIdx * 10 +  2) == 0
+				; 토벌대상
+				FLAG:(questIdx * 10 +  3) = (questIdx - 10) * 100 + 1 + RAND:(FLAG:(questIdx * 10))
+				; 퀘스트 성공 보수
+				FLAG:(questIdx * 10 +  5) = 100 * questIdx + 10 * RAND:5
+			else
+				; 대상 아이템
+				
+				; 잡화 / 1단계 드랍중에서 선택
+				if questIdx == 11
+					; 잡화
+					if RAND:3 == 0
+						FLAG:(questIdx * 10 +  3) = 1 + RAND:4
+					; 1단계 드랍템
+					else
+						FLAG:(questIdx * 10 +  3) = 501 + RAND:3
+					endif
+				else
+					FLAG:(questIdx * 10 +  3) = 501 + RAND:3
+				endif
+
+				; 납품 개수
+				FLAG:(questIdx * 10 +  4) = (questIdx - 10) * 25 * (1 + RAND:5)
+				; 퀘스트 성공 보수
+				FLAG:(questIdx * 10 +  5) = 100 * questIdx + 10 * RAND:5
+			endif
 		endif
 	next
 
@@ -17,7 +46,15 @@ $showQuest
 	drawLine
 
 	for questIdx, 11, 16
-		printFormL [{questIdx - 10}] %kr(CSVCALLNAME(FLAG:(questIdx * 10 +  2)), "을", "를")% 토벌할것(앞으로 {FLAG:(questIdx * 10 +  1) - DAY}일/재도전{FLAG:(questIdx * 10 +  3)}회)【%"★" * (questIdx - 10)%】
+		; 토벌퀘스트
+		if FLAG:(questIdx * 10 + 2) == 0
+			printForm [{questIdx - 10}] %kr(CSVCALLNAME(FLAG:(questIdx * 10 + 3)), "을", "를")% 토벌할것
+			printFormL (앞으로 {FLAG:(questIdx * 10 +  1) - DAY}일【%"★" * (questIdx - 10)%】
+		; 납품퀘스트
+		elseif FLAG:(questIdx * 10 + 2) == 1
+			printForm [{questIdx - 10}] %kr(ITEMNAME:(FLAG:(questIdx * 10 + 3)), "을", "를")% {FLAG:(questIdx * 10 + 4)}개 납품할것
+			printFormL (앞으로 {FLAG:(questIdx * 10 +  1) - DAY}일)【%"★" * (questIdx - 10)%】
+		endif
 	next
 	
 	printL [0] 돌아가기
@@ -26,9 +63,8 @@ $showQuest
 	input
 
 	if 0 < result && result < 6
-		questNumber = (10 + result) * 10
-		printFormW %CSVCALLNAME(FLAG:(questNumber + 2))% 토벌 의뢰를 수락했습니다.
-		call newQuest(FLAG:(questNumber + 2), FLAG:(questNumber + 3))
+		questNumber = (10 + result)
+		call newQuest(questNumber)
 
 		return 1
 	else

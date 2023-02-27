@@ -1,0 +1,6 @@
+﻿@questExpire
+
+	if FLAG:퀘스트진행중 && FLAG:퀘스트만기일 < DAY
+		printFormW 수주했던 퀘스트의 만기일이 지났다
+		call cancelQuest
+	endif

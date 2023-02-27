@@ -1,7 +1,8 @@
 ﻿@cancelQuest
 #dim dynamic decreasedFame
 
-	printFormW %NAME:TARGET% %CALLNAME:TARGET%의 토벌을 취소했다.
+	FLAG:퀘스트진행중 = 0
+	printFormW 퀘스트를 취소합니다
 
 	call delMonster
 	
@@ -9,7 +10,7 @@
 	
 	printFormW 명성이 {decreasedFame} 감소했다.
 
-	if !CFLAG:MASTER:기본명성
+	if CFLAG:MASTER:기본명성 < 20
 		printFormW 더 나아가, 실력도 없는 것이 분수도 모른다며 악명이 쌓이고 말았다.
 		CFLAG:MASTER:악명 = LIMIT(CFLAG:MASTER:악명 + RAND:5, 0, 100)
 	endif

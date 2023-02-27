@@ -1,0 +1,11 @@
+﻿@finishQuest()
+	FLAG:퀘스트진행중 = 0
+	
+	if FLAG:퀘스트종류 == 1
+		printFormW %csvCallname(FLAG:퀘스트대상)%의 토벌에 성공했습니다.
+	elseif FLAG:퀘스트종류 == 2
+		printFormW %ITEMNAME:(FLAG:퀘스트대상)%의 납품을 완료했습니다.
+	endif
+
+	printFormW 보수로 {FLAG:퀘스트보수}원 받았습니다.
+	MONEY += FLAG:퀘스트보수

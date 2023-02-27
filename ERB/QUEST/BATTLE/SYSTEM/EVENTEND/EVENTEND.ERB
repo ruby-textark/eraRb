@@ -9,10 +9,10 @@
 
 	; killed the monster
 	if BASE:TARGET:체력 <= 0
-		printFormL %NAME:TARGET% %CALLNAME:TARGET%의 토벌에 성공했습니다.
+	
+		call finishQuest()
 		
 		; Looting
-		
 		MONEY += CFLAG:TARGET:드랍골드최소
 		if CFLAG:TARGET:드랍골드최소 != CFLAG:TARGET:드랍골드최대
 			MONEY += RAND:(CFLAG:TARGET:드랍골드최대 - CFLAG:TARGET:드랍골드최소)
@@ -21,9 +21,9 @@
 		mobDrop = 1 + RAND:3
 		if mobDrop == 1 && CFLAG:TARGET:드랍재료1 > 0
 			ITEM:(CFLAG:TARGET:드랍재료1) += 1
-		elseif mobDrop == 2 && CFLAG:TARGET:드랍재료1 > 0
+		elseif mobDrop == 2 && CFLAG:TARGET:드랍재료2 > 0
 			ITEM:(CFLAG:TARGET:드랍재료2) += 1
-		elseif mobDrop == 3 && CFLAG:TARGET:드랍재료1 > 0
+		elseif mobDrop == 3 && CFLAG:TARGET:드랍재료3 > 0
 			ITEM:(CFLAG:TARGET:드랍재료3) += 1
 		endif
 		
@@ -43,14 +43,7 @@
 		endif
 
 		; Check if cancel this quest or keep going with the wounded monster.
-		if FLAG:퀘스트재시도 > 0
-			printFormL 이번에는 실패했지만, 다음에는 충분히 준비해서 다시 도전하도록 합시다.
-			FLAG:퀘스트재시도 -= 1
-			printFormL 남은 도전 횟수 : {FLAG:퀘스트재시도}
-		else
-			printFormL 제한 조건을 만족하지 못하여 퀘스트는 자동으로 취소됩니다.
-			call cancelQuest
-		endif
+		printFormL 이번에는 실패했지만, 다음에는 충분히 준비해서 다시 도전하도록 합시다.
 	endif
 	
 	call afterAction
