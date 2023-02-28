@@ -1,0 +1,17 @@
+﻿@checkStd
+#dim dynamic partIdx
+
+	; 상대가 성병보균자가 아닐 경우 무시
+	if !CFLAG:TARGET:성병보균자
+		return
+	endif
+
+	for partIdx, 101, 200
+		; 보균자가 삽입시 매 턴마다 확률굴림
+		if isMasterInserted(partIdx, 1)
+			; 콘돔 착용시 2.5%, 미착용시 5% 확률로 감염
+			if CFLAG:TARGET:콘돔착용중 && RAND:40 < 1
+				call infectStd(MASTER, partIdx)
+			endif
+		endif
+	next

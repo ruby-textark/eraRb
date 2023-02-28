@@ -28,6 +28,10 @@
 		elseif isMasterInserted(partIdx, 4)
 			print [기생중(벌레)]
 		endif
+		
+		if isMasterInserted(partIdx, 6)
+			call colorPrint(0xcccccc, "[성병감염중]")
+		endif
 
 		printL
 

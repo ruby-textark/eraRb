@@ -2,7 +2,7 @@
 #function
 #dim dynamic partIdx
 
-	returnf getBit(CFLAG:MASTER:(200 + partIdx), 3) || getBit(CFLAG:MASTER:(200 + partIdx), 4)
+	returnf isMasterInserted(partIdx, 3) || isMasterInserted(partIdx, 4)
 
 @clearParasite(partIdx)
 #dim dynamic partIdx

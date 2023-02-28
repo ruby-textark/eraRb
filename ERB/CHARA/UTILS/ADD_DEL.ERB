@@ -1,6 +1,7 @@
 ﻿@addCharaAtPos(charaIdx, charaPos)
 #dim dynamic charaIdx
 #dim dynamic charaPos
+#dim dynamic stdRate
 
 	; 새로 추가할 캐릭터
 	addChara charaIdx
@@ -8,6 +9,19 @@
 	; 존재하던 placeholder와 바꿈
 	swapChara getChara(charaIdx), charaPos
 	delChara getChara(1000 + charaPos)
+	
+	; 성병 처리
+	; 성병 기본 비율 0.5%
+	stdRate = 5
+	
+	; 인간이 아닐 경우 2배 증가
+	if CFLAG:charaPos:종족 != 1
+		stdRate *= 2
+	endif
+
+	if RAND:1000 < stdRate
+		CFLAG:charaPos:성병보균자 = 1
+	endif
 
 @delCharaAtPos(charaPos)
 #dim dynamic charaIdx

@@ -6,7 +6,8 @@
 	
 	EXP:MASTER:partIdx++
 	EXP:MASTER:삽입경험++
-	
+
+	call checkStd
 	call checkVirgin
 	call checkVirginParasite
 	call increaseArousal(partIdx, 100 * (ABL:MASTER:partIdx + 1) * (90 + RAND:20))

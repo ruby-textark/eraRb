@@ -1,0 +1,57 @@
+﻿@stdRealize
+#dim dynamic partIdx
+
+	for partIdx, 101, 200
+		; 잠복기중에 10% 확률로 활동
+		if isMasterInserted(partIdx, 5) && !RAND:10
+			
+			if RAND:3 == 0
+				print 최근
+			elseif RAND:2 == 0
+				print 요즘들어
+			else
+				print 어쩐지
+			endif
+			
+			printFormW %" "%%kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "이 ", "가 ")%
+			
+			if RAND:3 == 0
+				printFormW 가려운 듯 하다
+			elseif RAND:2 == 0
+				printFormW 욱신거리는 것 같다
+			else
+				printFormW 따끔따끔한 느낌이다
+			endif
+
+			printFormW 아무래도 %partStrRaw(partIdx)%에 성병이 옮은 것 같다...
+
+			if !TALENT:MASTER:성병감염
+				call getTalent("성병감염")
+			endif
+		endif
+	next
+
+@stdStep
+#dim dynamic partIdx
+
+	for partIdx, 101, 200
+		; 감염시
+		if isMasterInserted(partIdx, 6)
+		
+			; 10% 확률로 상태 나빠짐
+			if !RAND:10
+
+				if RAND:3 == 0
+					printFormW %kr(CALLNAME:MASTER, "은", "는")% %partStrRaw(partIdx)%의 통증에 한밤중에도 잠을 이루지 못하고 있다
+				elseif RAND:2 == 0
+					printFormW 잠을 자던 %kr(CALLNAME:MASTER, "은", "는")% 몸을 뒤척이며 가려움을 느꼈는지 무의식중에 %kr(partStrRaw(partIdx), "을", "를")% 긁고 있다
+				else
+					printFormW 한밤중에 %kr(CALLNAME:MASTER, "은", "는")% 알 수 없는 답답함에 잠에서 깨어났다
+					printFormW 살펴보니 %kr(partStrRaw(partIdx), "이", "가")% 시뻘겋게 부어올라 있었다
+				endif
+			
+				BASE:MASTER:partIdx = LIMIT(BASE:MASTER:partIdx - (5 + RAND:5), 0, MAXBASE:MASTER:partIdx)
+			endif
+
+		endif
+	next

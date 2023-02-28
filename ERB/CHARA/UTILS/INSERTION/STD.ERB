@@ -1,0 +1,17 @@
+﻿@hasStd(partIdx)
+#function
+#dim dynamic partIdx
+
+	returnf isMasterInserted(partIdx, 5) || isMasterInserted(partIdx, 6)
+
+@infectStd(charaIdx, partIdx)
+#dim dynamic charaIdx
+#dim dynamic partIdx
+
+	setBit CFLAG:charaIdx:(200 + partIdx), 5
+
+@cureStd(charaIdx, partIdx)
+#dim dynamic charaIdx
+#dim dynamic partIdx
+
+	clearBit CFLAG:charaIdx:(200 + partIdx), 5
