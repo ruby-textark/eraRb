@@ -49,24 +49,32 @@
 			; 임신처리
 			BASE:MASTER:임신일수 = 1
 			
-			if RAND:(BASE:MASTER:자궁내인간정액+BASE:MASTER:자궁내몬스터정액+BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액) < BASE:MASTER:자궁내인간정액
+			if RAND:(BASE:MASTER:자궁내인간정액+BASE:MASTER:자궁내몬스터정액+BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액+BASE:MASTER:자궁내마족정액) < BASE:MASTER:자궁내인간정액
 				; 인간임신
 				CFLAG:MASTER:아이아버지 = 1
-			elseif RAND:(BASE:MASTER:자궁내몬스터정액+BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액) < BASE:MASTER:자궁내몬스터정액
+			elseif RAND:(BASE:MASTER:자궁내몬스터정액+BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액+BASE:MASTER:자궁내마족정액) < BASE:MASTER:자궁내몬스터정액
 				; 몬스터임신
 				CFLAG:MASTER:아이아버지 = 2
-			elseif RAND:(BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액) < BASE:MASTER:자궁내벌레정액
+			elseif RAND:(BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액+BASE:MASTER:자궁내마족정액) < BASE:MASTER:자궁내벌레정액
 				; 벌레임신
 				CFLAG:MASTER:아이아버지 = 3
-			else
+			elseif RAND:(BASE:MASTER:자궁내짐승정액+BASE:MASTER:자궁내마족정액) < BASE:MASTER:자궁내짐승정액
 				; 짐승임신
 				CFLAG:MASTER:아이아버지 = 4
+			else
+				; 마족임신
+				CFLAG:MASTER:아이아버지 = 5
 			endif
 			
 			if CFLAG:MASTER:아이아버지 == 1
 				BASE:MASTER:자궁침식도 -= 1 + RAND:4
 			else
 				BASE:MASTER:자궁침식도 += 1 + RAND:4
+
+				; 마족일 경우 침식도 추가 상승
+				if CFLAG:MASTER:아이아버지 == 5
+					BASE:MASTER:자궁침식도 += 1 + RAND:2
+				endif
 			endif
 			BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도, 0, MAXBASE:MASTER:자궁침식도)
 		endif
@@ -92,12 +100,13 @@
 	BASE:MASTER:자궁내몬스터정액 = BASE:MASTER:자궁내몬스터정액 / 2
 	BASE:MASTER:자궁내벌레정액 = BASE:MASTER:자궁내벌레정액 / 2
 	BASE:MASTER:자궁내짐승정액 = BASE:MASTER:자궁내짐승정액 / 2
+	BASE:MASTER:자궁내마족정액 = BASE:MASTER:자궁내마족정액 / 2
 	
 	; 몬스터 혹은 벌레 정액이 인간 정액보다 많을 경우 침식도 증가
-	if BASE:MASTER:자궁내몬스터정액 + BASE:MASTER:자궁내벌레정액 > BASE:MASTER:자궁내인간정액
+	if BASE:MASTER:자궁내몬스터정액 + BASE:MASTER:자궁내벌레정액 + BASE:MASTER:자궁내마족정액 > BASE:MASTER:자궁내인간정액
 		BASE:MASTER:자궁침식도 += 1 + RAND:2
 	; 반대면 감소
-	elseif BASE:MASTER:자궁내인간정액 > BASE:MASTER:자궁내몬스터정액 + BASE:MASTER:자궁내벌레정액
+	elseif BASE:MASTER:자궁내인간정액 > BASE:MASTER:자궁내몬스터정액 + BASE:MASTER:자궁내벌레정액 + BASE:MASTER:자궁내마족정액
 		BASE:MASTER:자궁침식도 -= 1 + RAND:2
 	endif
 	BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도, 0, MAXBASE:MASTER:자궁침식도)

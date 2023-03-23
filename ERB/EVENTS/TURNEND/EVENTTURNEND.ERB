@@ -6,16 +6,20 @@
 	BASE:MASTER:마력 = LIMIT(BASE:MASTER:마력 + MAXBASE:MASTER:마력 / 20, 0, MAXBASE:MASTER:마력)
 
 	DAY++
-	
+
 	call parasite
 	call stdStep
 	call stdRealize
 	call mensAndPreg
+
+	CFLAG:MASTER:의식있음 = 0
+
 	call holeTight
 	call addiction
 	call tattoo
-	call arrest
 	call arousal
 	call questExpire
+	
+	CFLAG:MASTER:의식있음 = 1
 
 	begin shop

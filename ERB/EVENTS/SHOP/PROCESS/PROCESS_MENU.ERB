@@ -10,7 +10,7 @@
 	; QUEST MENU
 	if hasHuntQuest() && FLAG:자궁대여료 == 0 && RESULT == 101
 		call startQuest
-		result = 0
+		RESULT = 0
 	elseif !hasHuntQuest() && RESULT == 102
 		call newQuestList
 	elseif TARGET != 0 && RESULT == 103
@@ -19,16 +19,16 @@
 	; CHARACTER MENU
 	elseif RESULT == 201
 		call showMasterInfo
-		result = 0
+		RESULT = 0
 	elseif RESULT == 202
 		call showInventory
-		result = 0
+		RESULT = 0
 	elseif RESULT == 203
 		call showMasterEquips
-		result = 0
+		RESULT = 0
 	elseif RESULT == 204
 		call reincarnation
-		result = 0
+		RESULT = 0
 
 	; SHOP MENU
 	elseif RESULT == 301
@@ -42,6 +42,9 @@
 		RESULT = 0
 	elseif RESULT == 802
 		loadGame
+	elseif RESULT == 803
+		call configMenu
+		RESULT = 0
 
 	; TURN END
 	elseif RESULT == 900

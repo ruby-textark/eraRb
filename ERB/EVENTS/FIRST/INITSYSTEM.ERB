@@ -2,6 +2,8 @@
 #dim dynamic mobIdx
 
 	FLAG:고정난수시드 = RAND:__INT_MAX__
+	
+	FLAG:성병보균율 = 150
 
 	; placeholder 캐릭터 추가
 	addChara 1001
@@ -11,7 +13,7 @@
 	; 난이도별 몬스터 
 	for mobIdx, 100, 1000
 		existCsv mobIdx
-		if result
+		if RESULT
 			FLAG:(100 + (mobIdx / 100) * 10)++
 		endif
 	next

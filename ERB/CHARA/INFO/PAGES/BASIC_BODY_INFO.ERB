@@ -12,11 +12,11 @@
 
 		barstr BASE:MASTER:partIdx, MAX(MAXBASE:MASTER:partIdx, 1), 10
 		if BASE:MASTER:partIdx > 67
-			call colorPrint(0x00ff00, results)
+			call colorPrint(0x00ff00, RESULTS)
 		elseif BASE:MASTER:partIdx > 33
-			call colorPrint(0xffff00, results)
+			call colorPrint(0xffff00, RESULTS)
 		else
-			call colorPrint(0xff0000, results)
+			call colorPrint(0xff0000, RESULTS)
 		endif
 		
 		if isMasterInserted(partIdx, 1)

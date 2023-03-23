@@ -2,10 +2,19 @@
 #dim dynamic orgasmParts, 100
 #dim dynamic orgasmCounts
 #dim dynamic targetPart
-#dim dynamic orgasmThres
+#dim dynamic test
 
 	targetPart = orgasmParts:(RAND:orgasmCounts)
-	orgasmThres = masterOrgasmThres()
+
+	if getBit(CFLAG:MASTER:무의식중사건, 1)
+		if orgasmCounts < 3
+			printFormW 눈에 빛이 돌아온 %kr(CALLNAME:MASTER, "은", "는")% 인식하지 못한 사이에 쌓인 쾌감에 %kr(partStr(targetPart), "을", "를")% 떨며 절정했다
+		else
+			printFormW 뒤늦게 정신을 차린 %kr(CALLNAME:MASTER, "은", "는")% 갑작스레 터질듯이 쌓인 쾌감에 금방 눈을 까뒤집고 온몸을 떨며 절정했다
+		endif
+
+		return
+	endif
 	
 	; todo 이쪽 추가작성
 	if isMasterLewd() && isMasterSubmissive()

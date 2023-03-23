@@ -9,7 +9,7 @@
 			FLAG:(questIdx * 10 +  1) = DAY + 1 + (RAND:6)
 			; 퀘스트종류
 			FLAG:(questIdx * 10 +  2) = RAND:2
-			
+
 			; 토벌 퀘스트
 			if FLAG:(questIdx * 10 +  2) == 0
 				; 토벌대상
@@ -18,7 +18,7 @@
 				FLAG:(questIdx * 10 +  5) = 100 * questIdx + 10 * RAND:5
 			else
 				; 대상 아이템
-				
+
 				; 잡화 / 1단계 드랍중에서 선택
 				if questIdx == 11
 					; 잡화
@@ -62,8 +62,8 @@ $showQuest
 	drawLine
 	input
 
-	if 0 < result && result < 6
-		questNumber = (10 + result)
+	if 0 < RESULT && RESULT < 6
+		questNumber = (10 + RESULT)
 		call newQuest(questNumber)
 
 		return 1

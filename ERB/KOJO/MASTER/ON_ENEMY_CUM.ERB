@@ -1,6 +1,10 @@
 ﻿@onEnemyCum_m(partIdx)
 #dim dynamic partIdx
 
+	if !CFLAG:MASTER:의식있음
+		return
+	endif
+
 	if ABL:MASTER:흡정
 		printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 착정당하고 있다
 
@@ -18,7 +22,7 @@
 	endif
 
 	if isMasterLewd() && isMasterSubmissive()
-		if isHole(partIdx)
+		if isInsertablePart(partIdx)
 			if RAND:3 == 0
 				printFormW 몸을 흔들며 %kr(CALLNAME:MASTER, "은", "는")% 정액이 구멍을 가득 채우는 감각을 즐겼다
 			elseif RAND:2 == 0
@@ -37,7 +41,7 @@
 
 		endif
 	elseif isMasterLewd() && !isMasterSubmissive()
-		if isHole(partIdx)
+		if isInsertablePart(partIdx)
 			if RAND:3 == 0
 				printFormW %kr(CALLNAME:MASTER, "은", "는")% 이를 악물고 반항하지만 구멍 안에 따라지는 정액에 몸이 저절로 반응하는 것을 참을 수는 없었다
 			elseif RAND:2 == 0
@@ -56,7 +60,7 @@
 
 		endif
 	elseif !isMasterLewd() && isMasterSubmissive()
-		if isHole(partIdx)
+		if isInsertablePart(partIdx)
 			if RAND:3 == 0
 				printFormW %kr(CALLNAME:MASTER, "은", "는")% 딱히 거부하지는 않았지만 사정당한 것에 대해 이질감을 느끼고 있는 것 같다
 			elseif RAND:2 == 0
@@ -75,7 +79,7 @@
 
 		endif
 	elseif !isMasterLewd() && !isMasterSubmissive()
-		if isHole(partIdx)
+		if isInsertablePart(partIdx)
 			if RAND:3 == 0
 				printFormW %kr(CALLNAME:MASTER, "은", "는")% 몸 안에 정액이 부어지는 것에 참을 수 없는 치욕을 느끼는 듯하다
 			elseif RAND:2 == 0

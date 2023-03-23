@@ -1,0 +1,21 @@
+﻿@sleepMaster()
+	CFLAG:MASTER:의식있음 = 0
+	CFLAG:MASTER:무의식중사건 = 0
+
+@wakeupMaster()
+	CFLAG:MASTER:의식있음 = 1
+
+	; 미뤄 둔 체크 실행
+	if getBit(CFLAG:MASTER:무의식중사건, 0)
+		call checkVirgin()
+	endif
+
+	if getBit(CFLAG:MASTER:무의식중사건, 1)
+		call checkOrgasm()
+	endif
+
+	if getBit(CFLAG:MASTER:무의식중사건, 2)
+		call checkTight()
+	endif
+
+	CFLAG:MASTER:무의식중사건 = 0

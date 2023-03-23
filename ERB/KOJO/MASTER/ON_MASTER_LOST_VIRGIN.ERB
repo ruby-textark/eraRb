@@ -1,6 +1,14 @@
 ﻿@onMasterLostVirgin_m(partIdx)
 #dim dynamic partIdx
 
+	if getBit(CFLAG:MASTER:무의식중사건, 0)
+		if partIdx == 121
+			printFormW 정신을 차린 %kr(CALLNAME:MASTER, "이", "가")% 갑작스레 찾아온 통증에 얼굴을 찌푸렸다
+		endif
+
+		return
+	endif
+
 	; todo 처녀상실구상
 	
 	if partIdx == 121
@@ -18,4 +26,3 @@
 			endif
 		endif
 	endif
-

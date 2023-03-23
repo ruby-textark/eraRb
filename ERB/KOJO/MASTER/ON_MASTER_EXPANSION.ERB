@@ -1,5 +1,19 @@
 ﻿@onMasterExpansion_m(partIdx)
 #dim dynamic partIdx
+	
+	if !CFLAG:MASTER:의식있음
+		return
+	endif
+
+	if getBit(CFLAG:MASTER:무의식중사건, 2)
+		if partIdx == getNum(BASE, "보지조임")
+			printFormW %CALLNAME:MASTER%의 %kr(partStrRaw(121), "이", "가")% 느슨해진 것 같다
+		elseif partIdx == getNum(BASE, "애널조임")
+			printFormW %CALLNAME:MASTER%의 %kr(partStrRaw(123), "이", "가")% 느슨해진 것 같다
+		endif
+
+		return
+	endif
 
 	if !RAND:2
 		return
@@ -8,69 +22,69 @@
 	if partIdx == getNum(BASE, "보지조임")
 		if isMasterLewd() && TALENT:MASTER:허벌보지
 			if RAND:3 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 이미 익숙한 %kr(CSTR:MASTER:121, "이", "가")% 늘어나는 감각을 차분히 즐기고 있다...
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 이미 익숙한 %kr(partStrRaw(121), "이", "가")% 늘어나는 감각을 차분히 즐기고 있다...
 			elseif RAND:2 == 0
-				printFormW 몇번이나 늘어난 %kr(CSTR:MASTER:121, "이지만", "지만")% %kr(CALLNAME:MASTER, "은", "는")% 그럼에도 여전히 확장의 쾌락을 느끼고 있다
+				printFormW 몇번이나 늘어난 %kr(partStrRaw(121), "이지만", "지만")% %kr(CALLNAME:MASTER, "은", "는")% 그럼에도 여전히 확장의 쾌락을 느끼고 있다
 			else
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 이미 주먹도 더 들어갈법한 %CSTR:MASTER:121%에서 다시금 확장의 쾌락을 찾아낸 듯 하다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 이미 주먹도 더 들어갈법한 %partStrRaw(121)%에서 다시금 확장의 쾌락을 찾아낸 듯 하다
 			endif
 		elseif isMasterLewd()
 			if RAND:3 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 쫄깃한 %kr(CSTR:MASTER:121, "이", "가")% 점점 헐렁해지는 것에 배덕적인 쾌감을 느꼈다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 쫄깃한 %kr(partStrRaw(121), "이", "가")% 점점 헐렁해지는 것에 배덕적인 쾌감을 느꼈다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(CSTR:MASTER:121, "이", "가")% 늘어나며 찾아오는 고통 사이에서 뜨거운 욕망이 피어나는 것을 즐기고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(121), "이", "가")% 늘어나며 찾아오는 고통 사이에서 뜨거운 욕망이 피어나는 것을 즐기고 있다
 			else
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 야무진 %kr(CSTR:MASTER:121, "을", "를")% 억지로 망가뜨리는 감각에 중독되어가고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 야무진 %kr(partStrRaw(121), "을", "를")% 억지로 망가뜨리는 감각에 중독되어가고 있다
 			endif
 		elseif TALENT:MASTER:허벌보지
 			if RAND:3 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 늘어나버린 %kr(CSTR:MASTER:121, "이", "가")% 또 다시 찢어지는 감각에 괴로움과 기쁨이 섞인 모순적인 감정을 느끼고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 늘어나버린 %kr(partStrRaw(121), "이", "가")% 또 다시 찢어지는 감각에 괴로움과 기쁨이 섞인 모순적인 감정을 느끼고 있다
 			elseif RAND:2 == 0
-				printFormW 이래선 안 된다는 것을 알면서도 %kr(CALLNAME:MASTER, "은", "는")% %kr(CSTR:MASTER:121, "을", "를")% 늘려가는 감각에 몸을 맡기고 있다
+				printFormW 이래선 안 된다는 것을 알면서도 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(121), "을", "를")% 늘려가는 감각에 몸을 맡기고 있다
 			else
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 온 몸을 뒤틀며 %kr(CSTR:MASTER:121, "이", "가")% 망가지면서 남긴 쾌감에 빠져 허우적대고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 온 몸을 뒤틀며 %kr(partStrRaw(121), "이", "가")% 망가지면서 남긴 쾌감에 빠져 허우적대고 있다
 			endif
 		else
 			if RAND:3 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 표정을 찌푸려가며 %kr(CSTR:MASTER:121, "이", "가")% 늘어나는 고통을 견디고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 표정을 찌푸려가며 %kr(partStrRaw(121), "이", "가")% 늘어나는 고통을 견디고 있다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(CSTR:MASTER:121, "이", "가")% 찢어지는 아픔을 이를 악물고 참았다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(121), "이", "가")% 찢어지는 아픔을 이를 악물고 참았다
 			else
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 야무진 %kr(CSTR:MASTER:121, "을", "를")% 늘리는 고통에 눈을 질끈 감으며 손에 힘을 주었다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 야무진 %kr(partStrRaw(121), "을", "를")% 늘리는 고통에 눈을 질끈 감으며 손에 힘을 주었다
 			endif
 		endif
 	elseif partIdx == getNum(BASE, "애널조임")
 		if isMasterLewd() && TALENT:MASTER:세로애널
 			if RAND:3 == 0
-				printFormW 여러 차례 늘어난 %CALLNAME:MASTER%의 %kr(CSTR:MASTER:123, "은", "는")% 반대 방향에서의 쾌락을 알게 되어버렸다
+				printFormW 여러 차례 늘어난 %CALLNAME:MASTER%의 %kr(partStrRaw(123), "은", "는")% 반대 방향에서의 쾌락을 알게 되어버렸다
 			elseif RAND:2 == 0
-				printFormW 몇번이나 늘어난 %kr(CSTR:MASTER:123, "이지만", "지만")% %kr(CALLNAME:MASTER, "은", "는")% 그럼에도 여전히 확장의 쾌락을 느끼고 있다
+				printFormW 몇번이나 늘어난 %kr(partStrRaw(123), "이지만", "지만")% %kr(CALLNAME:MASTER, "은", "는")% 그럼에도 여전히 확장의 쾌락을 느끼고 있다
 			else
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 힘을 풀면 변을 흘리고 마는데도 또 %kr(CSTR:MASTER:123, "을", "를")% 확장하는 나쁜 버릇을 들이고 말았다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 힘을 풀면 변을 흘리고 마는데도 또 %kr(partStrRaw(123), "을", "를")% 확장하는 나쁜 버릇을 들이고 말았다
 			endif
 		elseif isMasterLewd()
 			if RAND:3 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 숨을 헐떡이며 %kr(CSTR:MASTER:123, "이", "가")% 찢어지는 감각을 오히려 즐기고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 숨을 헐떡이며 %kr(partStrRaw(123), "이", "가")% 찢어지는 감각을 오히려 즐기고 있다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 괴로워 하면서도 %kr(CSTR:MASTER:123, "을", "를")% 비집고 들어와 확장시키는 감각에 집중했다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 괴로워 하면서도 %kr(partStrRaw(123), "을", "를")% 비집고 들어와 확장시키는 감각에 집중했다
 			else
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 안타까운 신음을 흘리면서도 %CSTR:MASTER:123%의 힘을 풀며 스스로 넓혀지는 것을 바라고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 안타까운 신음을 흘리면서도 %partStrRaw(123)%의 힘을 풀며 스스로 넓혀지는 것을 바라고 있다
 			endif
 		elseif TALENT:MASTER:세로애널
 			if RAND:3 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 세로로 길게 늘어난 %kr(CSTR:MASTER:123, "을", "를")% 아랑곳않고 가득 채우는 감각에 호흡을 흐트러뜨리고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 세로로 길게 늘어난 %kr(partStrRaw(123), "을", "를")% 아랑곳않고 가득 채우는 감각에 호흡을 흐트러뜨리고 있다
 			elseif RAND:2 == 0
-				printFormW 이래선 안 된다는 것을 알면서도 %kr(CALLNAME:MASTER, "은", "는")% %kr(CSTR:MASTER:123, "을", "를")% 늘려가는 감각에 몸을 맡기고 있다
+				printFormW 이래선 안 된다는 것을 알면서도 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(123), "을", "를")% 늘려가는 감각에 몸을 맡기고 있다
 			else
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 버릇대로 %kr(CSTR:MASTER:123, "을", "를")% 양손으로 쭉 벌렸다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 버릇대로 %kr(partStrRaw(123), "을", "를")% 양손으로 쭉 벌렸다
 			endif
 		else
 			if RAND:3 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 표정을 찌푸려가며 %kr(CSTR:MASTER:123, "이", "가")% 늘어나는 고통을 견디고 있다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 표정을 찌푸려가며 %kr(partStrRaw(123), "이", "가")% 늘어나는 고통을 견디고 있다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(CSTR:MASTER:123, "이", "가")% 찢어지는 아픔을 이를 악물고 참았다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(123), "이", "가")% 찢어지는 아픔을 이를 악물고 참았다
 			else
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 야무진 %kr(CSTR:MASTER:123, "을", "를")% 늘리는 고통에 눈을 질끈 감으며 손에 힘을 주었다
+				printFormW %kr(CALLNAME:MASTER, "은", "는")% 야무진 %kr(partStrRaw(123), "을", "를")% 늘리는 고통에 눈을 질끈 감으며 손에 힘을 주었다
 			endif
 		endif
 	endif

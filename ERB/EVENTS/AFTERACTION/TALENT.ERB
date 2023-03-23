@@ -1,4 +1,5 @@
 ﻿@talentCheck
+#dim dynamic partIdx
 
 	; 습득체크
 	if MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 >= 30
@@ -21,3 +22,11 @@
 		printFormL 집요하게 공략된 끝에 %CALLNAME:MASTER%의 %partStr(116)% 입구는 완전히 풀어져 벌름거리고 있다
 		call getTalent("자궁")
 	endif
+
+	for partIdx, 101, 200
+		; 부위별 절정경험으로 약점 생성
+		if EXP:MASTER:partIdx > 500 && !TALENT:MASTER:partIdx
+			printFormW 끊임없이 노려진 나머지 %CALLNAME:MASTER%의 %kr(partStrRaw(partIdx), "은", "는")% 어느새 약점으로 개발되어버렸다
+			call getTalent(TALENTNAME:partIdx)
+		endif
+	next

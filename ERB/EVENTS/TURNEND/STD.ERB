@@ -13,7 +13,7 @@
 				print 어쩐지
 			endif
 			
-			printFormW %" "%%kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "이 ", "가 ")%
+			printForm %" "%%kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "이 ", "가 ")%
 			
 			if RAND:3 == 0
 				printFormW 가려운 듯 하다
@@ -28,6 +28,7 @@
 			if !TALENT:MASTER:성병감염
 				call getTalent("성병감염")
 			endif
+			call outFromMaster(partIdx, 5)
 		endif
 	next
 
@@ -49,7 +50,7 @@
 					printFormW 한밤중에 %kr(CALLNAME:MASTER, "은", "는")% 알 수 없는 답답함에 잠에서 깨어났다
 					printFormW 살펴보니 %kr(partStrRaw(partIdx), "이", "가")% 시뻘겋게 부어올라 있었다
 				endif
-			
+
 				BASE:MASTER:partIdx = LIMIT(BASE:MASTER:partIdx - (5 + RAND:5), 0, MAXBASE:MASTER:partIdx)
 			endif
 

@@ -36,7 +36,7 @@
 	if !isMasterFree()
 		setColor 0x777777
 	endif
-	printLC [301] - 아이템 거래
+	printLC [301] - 상가
 	printLC [302] - 뒷골목
 	resetColor
 	printL
@@ -45,11 +45,12 @@
 
 	printLC [801] - 저장
 	printLC [802] - 불러오기
+	printLC [803] - CONFIG
 	printL
 	
 	printLC [900] - 눈을 붙인다
-	if !isMasterFree() || MONEY >= 2000
+	if !isMasterFree() || MONEY < 2000
 		setColor 0x777777
 	endif
-	printLC [901] - 푹 쉰다(\\2000 소모)
+	printLC [901] - 푹 쉰다(\2000 소모)
 	resetColor

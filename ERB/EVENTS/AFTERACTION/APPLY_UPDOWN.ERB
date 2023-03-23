@@ -1,0 +1,9 @@
+﻿@applyUpDown
+#dim dynamic palamIdx
+
+	for palamIdx, 0, varSize("PALAM")
+		PALAM:MASTER:palamIdx += UP:palamIdx - DOWN:palamIdx
+
+		UP:palamIdx = 0
+		DOWN:palamIdx = 0
+	next

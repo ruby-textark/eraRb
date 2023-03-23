@@ -6,7 +6,7 @@ $charaInfoLoop
 
 	page = LIMIT(page, 0, 3)
 
-	clearline 99999
+	clearline 999
 	printForm 이름 : %NAME:MASTER%
 
 	if TALENT:MASTER:남성 == 1
@@ -17,10 +17,10 @@ $charaInfoLoop
 	printL
 
 	barstr BASE:MASTER:체력, MAXBASE:MASTER:체력, 10
-	printFormL 체력 : %results% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
+	printFormL 체력 : %RESULTS% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
 
 	barstr BASE:MASTER:마력, MAXBASE:MASTER:마력, 10
-	printFormL 마력 : %results% ({BASE:MASTER:마력}/{MAXBASE:MASTER:마력})
+	printFormL 마력 : %RESULTS% ({BASE:MASTER:마력}/{MAXBASE:MASTER:마력})
 
 	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
 
@@ -31,6 +31,7 @@ $charaInfoLoop
 		call showFameInfo
 	elseif page == 1
 		call showExperiences
+		call showHypnosisInfo
 	elseif page == 2
 		call showBasicBodyInfo
 	elseif page == 3
@@ -47,15 +48,15 @@ $charaInfoLoop
 	
 	input
 	
-	if result == 901
+	if RESULT == 901
 		page--
-	elseif result == 902
+	elseif RESULT == 902
 		page++
-	elseif result == 910
+	elseif RESULT == 910
 		call customizeName
-	elseif result == 911
+	elseif RESULT == 911
 		call customizeBodyParts
-	elseif result == 900
+	elseif RESULT == 900
 		return 1
 	endif
 

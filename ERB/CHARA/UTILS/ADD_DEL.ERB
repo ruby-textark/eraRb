@@ -11,8 +11,8 @@
 	delChara getChara(1000 + charaPos)
 	
 	; 성병 처리
-	; 성병 기본 비율 0.5%
-	stdRate = 5
+	; 성병 기본 비율 15%
+	stdRate = FLAG:성병보균율
 	
 	; 인간이 아닐 경우 2배 증가
 	if CFLAG:charaPos:종족 != 1
@@ -52,7 +52,7 @@
 #dim dynamic charaIdx
 
 	call addCharaAtPos(charaIdx, 3)
-	TARGET = 2
+	TARGET = 3
 
 @delMonster()
 	call delCharaAtPos(1)

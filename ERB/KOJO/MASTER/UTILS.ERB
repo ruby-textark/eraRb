@@ -18,8 +18,12 @@
 	endif
 
 	parameter += isWeaknessAttacked()
+
+	if BASE:MASTER:최면심도 > 50
+		parameter += 5
+	endif
 	
-	returnf parameter > 20
+	returnf parameter > 25
 
 @isMasterSubmissive()
 #function
@@ -45,7 +49,11 @@
 		parameter += 99
 	endif
 
-	returnf parameter > 20
+	if BASE:MASTER:최면심도 > 25
+		parameter += 5
+	endif
+
+	returnf parameter > 25
 
 @isWeaknessAttacked()
 #function
@@ -60,8 +68,3 @@
 	next
 	
 	returnf parameter
-
-@isHole(partIdx)
-#dim dynamic partIdx
-#function
-	returnf partIdx == 101 || partIdx == 102 || partIdx == 115 || partIdx == 116 || partIdx == 121 || partIdx == 123 || partIdx == 124 || partIdx == 125

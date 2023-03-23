@@ -18,16 +18,16 @@ $inputLoop
 
 	input
 	
-	if 101 <= result && result <= 199
-		partIdx = result
-		printFormL 새 이름을 입력하세요(현재: %CSTR:MASTER:result%) - 입력하지 않을 경우 돌아갑니다
+	if 101 <= RESULT && RESULT <= 199
+		partIdx = RESULT
+		printFormL 새 이름을 입력하세요(현재: %CSTR:MASTER:RESULT%) - 입력하지 않을 경우 돌아갑니다
 		
 		inputs
-		if strlens(results)
-			CSTR:MASTER:partIdx = %results%
+		if strlens(RESULTS)
+			CSTR:MASTER:partIdx = %RESULTS%
 			printFormL %substring(BASENAME:partIdx, 0, strlensu(BASENAME:partIdx) - 2)%을 앞으로 %kr(CSTR:MASTER:partIdx, "으로", "로")% 부르도록 합니다.
 		endif
-	elseif result == 999
+	elseif RESULT == 999
 		return
 	endif
 

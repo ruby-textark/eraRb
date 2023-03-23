@@ -6,7 +6,7 @@
 #dim dynamic isItemEquipable
 
 $inputLoop
-	clearLine 999
+	clearLine 1
 	printL =인벤토리=
 	printL 사용할 아이템을 선택해주세요
 
@@ -23,7 +23,7 @@ $inputLoop
 		endif
 
 		tryccallform isUsable{itemIdx}(MASTER)
-			isItemUsable = result
+			isItemUsable = RESULT
 		catch
 			isItemUsable = 0
 		endcatch
@@ -48,10 +48,10 @@ $inputLoop
 	printL [0] - 돌아가기
 
 	input
-	selectedItem = result
+	selectedItem = RESULT
 	
 	tryccallform isUsable{selectedItem}(MASTER)
-		isItemUsable = result
+		isItemUsable = RESULT
 	catch
 		isItemUsable = 0
 	endcatch

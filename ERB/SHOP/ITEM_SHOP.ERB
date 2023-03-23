@@ -1,8 +1,10 @@
 ﻿@itemShop
 
-	printL 구매를 원하는 아이템 종류를 입력하세요
-	printFormL [1] - 잡화
-	printFormL [2] - 장비
+	printL 어디로 갈까?
+	printFormL [1] - 잡화점
+	printFormL [2] - 장비점
+	printFormL [3] - 도매상
+	; printFormL [4] - 경매장
 	printFormL [0] - 돌아가기
 
 $inputLoop
@@ -12,6 +14,10 @@ $inputLoop
 		call itemShopMenu(0, 99)
 	elseif RESULT == 2
 		call itemShopMenu(1000, 1999)
+	elseif RESULT == 3
+		call wholesale
+	; elseif RESULT == 4
+		; call wholesale
 	elseif RESULT == 0
 		return
 	else
@@ -49,7 +55,7 @@ $itemLoop
 	printL [0] - 돌아가기
 
 	input
-	itemIdx = result
+	itemIdx = RESULT
 	
 	if strlens(ITEMNAME:itemIdx) > 0
 		if MONEY >= ITEMPRICE:itemIdx
@@ -67,12 +73,12 @@ $itemLoop
 			
 $amountLoop
 			input
-			if MONEY < result * ITEMPRICE:itemIdx
+			if MONEY < RESULT * ITEMPRICE:itemIdx
 				printW 돈이 부족합니다
 				goto amountLoop
-			elseif result > 0
-				MONEY -= result * ITEMPRICE:itemIdx
-				ITEM:itemIdx += result
+			elseif RESULT > 0
+				MONEY -= RESULT * ITEMPRICE:itemIdx
+				ITEM:itemIdx += RESULT
 				printFormW %kr(ITEMNAME:itemIdx, "을", "를")% 구입했습니다
 			endif
 		else

@@ -12,14 +12,14 @@
 $choiceLoop
 		input
 		
-		if result == 1
+		if RESULT == 1
 			printFormW 화려한 갑옷으로 무장한 사람들이 어느새 양옆에 서 있었고, 반항하는 것은 의미가 없음을 확인한 %kr(CALLNAME:MASTER, "은", "는")% 가만히 서서 천천히 뒤를 돌아보았다
 			printFormW %CALLNAME:MASTER%에게 말을 건 기사가 말했다
 			call colorPrintW(0x008080, @"「제보와 일치하는군. 너, %kr(CALLNAME:MASTER, "이", "가")% 맞나?」")
 			printFormW %kr(CALLNAME:MASTER, "이", "가")% 두려움이 섞인 얼굴로 천천히 고개를 끄덕이자 양옆에서 차가운 금속의 기운이 느껴졌다
 			call colorPrintW(0x008080, "「좋아. 조사가 필요하니 따라와 줘야겠어.」")
 			printFormW %kr(CALLNAME:MASTER, "은", "는")% 그대로 구속된 채 끌려갔다
-		elseif result == 2
+		elseif RESULT == 2
 			printFormW 큰 일이 난 것을 직감한 %kr(CALLNAME:MASTER, "은", "는")% 멈춰서서 뒤돌아보는 척을 하다가, 순간 손을 쳐내고 도망치기 시작했다
 			call colorPrintW(0x008080, @"「%CALLNAME:MASTER%! 저 녀석이 %kr(CALLNAME:MASTER, "이다", "다")%! 잡아라!」")
 			

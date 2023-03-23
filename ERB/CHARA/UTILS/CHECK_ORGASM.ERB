@@ -5,12 +5,16 @@
 #dim dynamic orgasmParts, 100
 #dim dynamic insuffOrgasm
 
+	if !CFLAG:MASTER:의식있음
+		setBit CFLAG:MASTER:무의식중사건, 1
+		return
+	endif
+
 	orgasmThres = masterOrgasmThres()
 	for partIdx, 101, 200
 		if PALAM:MASTER:partIdx >= orgasmThres
 			; todo 절정구상
 			printFormL %partStrRaw(partIdx)% 절정
-			orgasmParts:(orgasmCount++) = partIdx - 400
 			DOWN:partIdx = PALAM:MASTER:partIdx - PALAM:MASTER:partIdx % orgasmThres
 
 			; 욕정 증가
@@ -56,6 +60,7 @@
 				DOWNBASE:MASTER:체력 = MIN(orgasmCount, 3) * MAXBASE:MASTER:체력 / 50
 			endif
 		endif
+
 		; todo 절정구상
 		call onMasterOrgasm_m(orgasmParts, orgasmCount)
 		call onMasterOrgasm_e(orgasmParts, orgasmCount)

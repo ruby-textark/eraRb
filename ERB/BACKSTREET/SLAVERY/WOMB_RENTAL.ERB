@@ -61,9 +61,9 @@ $drugLoop
 	printL [2] - 거절한다
 	input
 	
-	if result == 0
+	if RESULT == 0
 		goto drugLoop
-	elseif result ==2
+	elseif RESULT ==2
 		return
 	endif
 	
@@ -152,6 +152,7 @@ $drugLoop
 		BASE:MASTER:자궁내몬스터정액 = 0
 		BASE:MASTER:자궁내벌레정액 = 0
 		BASE:MASTER:자궁내짐승정액 = 0
+		BASE:MASTER:자궁내마족정액 = 0
 		
 		call colorPrintW(0xd0936d, "「좋아, 다음.」")
 	endif

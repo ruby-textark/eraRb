@@ -16,24 +16,22 @@
 	printFormW %kr(CALLNAME:MASTER, "은", "는")% 육변기로 전시되어 사람들에게 사용되고 있다...
 
 	for eachUser, 0, FLAG:육변기최근이용자수
-	
+
 		call addMobChara(1101 + RAND:10)
 		insertInto = getSexualAtkBodyPart()
-		
+
 		printFormW %NAME:TARGET% %kr(CALLNAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 %kr(partStrRaw(insertInto), "을", "를")% 사용했다
-		
-		if isHole(insertInto)
+
+		if isInsertablePart(insertInto)
 			call insertIntoMaster(insertInto, 1)
 		endif
-		
+
 		call cumIntoMaster(insertInto)
-		
-		if isHole(insertInto)
+
+		if isInsertablePart(insertInto)
 			call outFromMaster(insertInto, 1)
 		endif
-		
-		; reports:(reportCount++) = "최근 소문의 %CALLNAME:MASTER%의 %kr(partStrRaw(insertInto), "을", "를")% 사용해 보았는데, 과연 나쁘지 않은 사용감이라 만족했습니다."
-		
+
 		; 짐승
 		if CFLAG:TARGET:종족 != 1
 			if isMasterLewd() && TALENT:MASTER:임신
@@ -93,7 +91,7 @@
 				reports:(reportCount++) = "다들 %CALLNAME:MASTER% 애널이 평가가 좋대서 와봤는데 그냥 평범하고 딱히 특출난 점은 없었음."
 			endif
 		; 일반 구멍구상
-		elseif RAND:5 == 0 && isHole(insertInto)
+		elseif RAND:5 == 0 && isInsertablePart(insertInto)
 			if RAND:3 == 0 && EXP:MASTER:insertInto > 50
 				reports:(reportCount++) = "구멍이 새까맣고 고약한 냄새가 나서 이상함."
 			elseif RAND:3 == 0 && isMasterInserted(insertInto, 3)
@@ -190,7 +188,7 @@
 			BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 10 + RAND:10, 0, MAXBASE:MASTER:혈중미약농도)
 		endif
 		
-		call delCharaAtPos(2)
+		call delMobChara
 		
 		FLAG:육변기사용인원수++
 		FLAG:육변기사용횟수 += 1 + RAND:3

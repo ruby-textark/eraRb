@@ -8,7 +8,7 @@ $wrapper
 	
 	printL [900] - 돌아가기
 	input
-	equipSlotIdx = result
+	equipSlotIdx = RESULT
 	
 	if 11 <= equipSlotIdx && equipSlotIdx <= 19
 		if strlens(EQUIPNAME:equipSlotIdx) == 0
@@ -30,20 +30,20 @@ $wrapper
 		printL [1000] - 해제
 		input
 		
-		if result == 1000
+		if RESULT == 1000
 			call unequipMasterEquips(equipSlotIdx)
-			if !result
+			if !RESULT
 				goto equipChange
 			endif
 		else
-			call changeMasterEquips(equipSlotIdx, result)
-			if !result
+			call changeMasterEquips(equipSlotIdx, RESULT)
+			if !RESULT
 				goto equipChange
 			endif
 		endif
 	endif
 
-	if result != 900
+	if RESULT != 900
 		goto wrapper
 	endif
 
@@ -52,7 +52,7 @@ $wrapper
 @showCharaEquips
 #dim dynamic equipSlotIdx
 
-	clearline 99999
+	clearline 999
 	
 	printFormL %NAME:MASTER%의 현재 장비 상태
 	drawLine

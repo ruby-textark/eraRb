@@ -1,0 +1,39 @@
+﻿@ablCheck
+#dim dynamic partIdx
+#dim dynamic ablLevel
+
+	for partIdx, 101, 200
+		ablLevel = 0
+
+		; 부위별 절정경험으로 약점 생성
+		if EXP:MASTER:(partIdx + 100) > 20000
+			ablLevel = 12
+		elseif EXP:MASTER:(partIdx + 100) > 10000
+			ablLevel = 11
+		elseif EXP:MASTER:(partIdx + 100) > 8000
+			ablLevel = 10
+		elseif EXP:MASTER:(partIdx + 100) > 4000
+			ablLevel = 9
+		elseif EXP:MASTER:(partIdx + 100) > 2000
+			ablLevel = 8
+		elseif EXP:MASTER:(partIdx + 100) > 1000
+			ablLevel = 7
+		elseif EXP:MASTER:(partIdx + 100) > 500
+			ablLevel = 6
+		elseif EXP:MASTER:(partIdx + 100) > 250
+			ablLevel = 5
+		elseif EXP:MASTER:(partIdx + 100) > 100
+			ablLevel = 4
+		elseif EXP:MASTER:(partIdx + 100) > 50
+			ablLevel = 3
+		elseif EXP:MASTER:(partIdx + 100) > 25
+			ablLevel = 2
+		elseif EXP:MASTER:(partIdx + 100) > 10
+			ablLevel = 1
+		endif
+		
+		if ABL:MASTER:partIdx < ablLevel
+			printFormW %partStrRaw(partIdx)%의 감도가 상승했다.
+			ABL:MASTER:partIdx = ablLevel
+		endif
+	next

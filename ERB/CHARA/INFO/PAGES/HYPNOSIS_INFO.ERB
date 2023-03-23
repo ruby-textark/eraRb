@@ -1,0 +1,37 @@
+﻿@showHypnosisInfo
+
+	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
+	printL 최면상태에 대해
+	
+	printForm %NAME:MASTER%의 최면심도 : {BASE:MASTER:최면심도}
+	
+	if BASE:MASTER:최면심도 < 5
+		printForm (이상없음)
+	elseif BASE:MASTER:최면심도 < 40
+		printForm (약한 최면)
+	elseif BASE:MASTER:최면심도 < 80
+		printForm (최면)
+	elseif BASE:MASTER:최면심도 < 95
+		printForm (심각한 최면)
+	else
+		call colorPrint(0xff3333, "(이상없음)")
+	endif
+	printL
+
+	printL
+	if BASE:MASTER:최면심도 < 5
+		printFormL %NAME:MASTER%의 정신은 매우 맑은 상태입니다.
+	elseif BASE:MASTER:최면심도 < 10
+		printFormL %kr(NAME:MASTER, "은", "는")% 알 수 없는 암시를 받은 적이 있습니다.
+	elseif BASE:MASTER:최면심도 < 20
+		printFormL %kr(NAME:MASTER, "은", "는")% 약한 최면에 걸려있는 것 같습니다.
+	elseif BASE:MASTER:최면심도 < 40
+		printFormL %kr(NAME:MASTER, "은", "는")% 어느새 최면에 빠져버렸습니다.
+	elseif BASE:MASTER:최면심도 < 60
+		printFormL %NAME:MASTER%의 최면은 조금 심각한 상태입니다.
+	elseif BASE:MASTER:최면심도 < 95
+		printFormL %kr(NAME:MASTER, "은", "는")% ※주 깊● 최§▦ 빠져 즉♬적인 조치가 필요합니다.
+	else
+		call colorPrint(0xff3333, @"%kr(NAME:MASTER, "은", "는")% 아무런 문제가 없습니다.")
+		printL
+	endif

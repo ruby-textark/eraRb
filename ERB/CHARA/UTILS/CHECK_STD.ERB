@@ -9,8 +9,10 @@
 	for partIdx, 101, 200
 		; 보균자가 삽입시 매 턴마다 확률굴림
 		if isMasterInserted(partIdx, 1)
-			; 콘돔 착용시 2.5%, 미착용시 5% 확률로 감염
-			if CFLAG:TARGET:콘돔착용중 && RAND:40 < 1
+			; 콘돔 착용시 5%, 미착용시 25% 확률로 감염
+			if CFLAG:TARGET:콘돔착용중 && RAND:20 < 1
+				call infectStd(MASTER, partIdx)
+			elseif RAND:4 < 1
 				call infectStd(MASTER, partIdx)
 			endif
 		endif

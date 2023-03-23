@@ -1,6 +1,13 @@
 ﻿@backStreet
 
-	printFormL %kr(CALLNAME:MASTER, "은", "는")% 뒷골목에 발을 들였다
+	if checkBackstreetCourage() < 5
+		printFormW 이런 위험한 곳에 발을 들이기엔 %CALLNAME:MASTER%의 용기가 부족하다
+		printFormW %kr(CALLNAME:MASTER, "은", "는")% 발걸음을 되돌려 나가기로 했다...
+		return
+	endif
+
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 뒷골목에 발을 들였다
+	
 	printL 어디로 갈까
 	printFormL [1] - 암거래상
 	printFormL [2] - 매음굴
@@ -9,16 +16,35 @@
 
 $inputLoop
 	input
-	
+
 	if RESULT == 1
 		call itemShopMenu(900, 1000)
 	elseif RESULT == 2
-		call brothel
+		if checkBackstreetCourage() < 10
+			printFormW 그러나 역시 %CALLNAME:MASTER%에게는 이런 곳까지 갈 정도의 자신은 없었다.
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 되돌아가기로 했다
+		else
+			call brothel
+		endif
 	elseif RESULT == 3
-		call slavery
+		if checkBackstreetCourage() < 20
+			printFormW 그러나 역시 %CALLNAME:MASTER%에게는 이런 곳까지 갈 정도의 자신은 없었다.
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 되돌아가기로 했다
+		else
+			call slavery
+		endif
 	elseif RESULT == 0
 		return
-	else
-		clearLine 1
-		goto inputLoop
 	endif
+	
+	clearLine 1
+	goto inputLoop
+
+@checkBackstreetCourage
+#function
+#dim dynamic val
+
+	val += ABL:MASTER:담력
+	val += ABL:MASTER:욕망 * 2
+	
+	returnf val

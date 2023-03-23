@@ -2,6 +2,10 @@
 #dim dynamic partIdx
 #dim dynamic insertType
 
+	if !CFLAG:MASTER:의식있음
+		setBit CFLAG:MASTER:무의식중사건, 3
+	endif
+
 	setBit CFLAG:MASTER:(200 + partIdx), insertType
 	
 	EXP:MASTER:partIdx++
@@ -36,3 +40,9 @@
 #dim dynamic insertType
 
 	returnf getBit(CFLAG:MASTER:(200 + partIdx), insertType)
+
+@isInsertablePart(partIdx)
+#function
+#dim dynamic partIdx
+
+	returnf partIdx == 101 || partIdx == 102 || partIdx == 115 || partIdx == 116 || partIdx == 121 || partIdx == 123 || partIdx == 124 || partIdx == 125

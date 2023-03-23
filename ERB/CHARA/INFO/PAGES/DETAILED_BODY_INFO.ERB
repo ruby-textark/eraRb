@@ -12,15 +12,7 @@
 		printFormL %kr(CALLNAME:MASTER, "은", "는")% 임신 {BASE:MASTER:임신일수}일입니다.
 		print 현재 
 		setColor 0xff8c00
-		if CFLAG:MASTER:아이아버지 == 1
-			print 인간 
-		elseif CFLAG:MASTER:아이아버지 == 2
-			print 몬스터 
-		elseif CFLAG:MASTER:아이아버지 == 3
-			print 벌레 
-		elseif CFLAG:MASTER:아이아버지 == 4
-			print 짐승 
-		endif
+		printForm %STR:(300 + CFLAG:MASTER:아이아버지)%
 		resetColor
 		printL 의 아이를 임신중입니다.
 	else
