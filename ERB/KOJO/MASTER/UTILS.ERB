@@ -1,9 +1,9 @@
-﻿@isMasterLewd()
+﻿@lewdParam()
 #function
 #dim dynamic parameter
 
 	parameter += ABL:MASTER:욕망 * 3
-	if TALENT:MASTER:음란 || TALENT:MASTER:발정
+	if TALENT:MASTER:발정
 		parameter += 15 * (MAXBASE:MASTER:이성 - BASE:MASTER:이성) / MAXBASE:MASTER:이성
 	endif
 	
@@ -13,7 +13,13 @@
 	
 	if FLAG:성교합의
 		parameter += 5
-	else
+	endif
+	
+	if TALENT:MASTER:음란
+		parameter += 10
+	endif
+	
+	if TALENT:MASTER:절제
 		parameter -= 5
 	endif
 
@@ -23,9 +29,13 @@
 		parameter += 5
 	endif
 	
-	returnf parameter > 25
+	returnf parameter
 
-@isMasterSubmissive()
+@isMasterLewd()
+#function
+	returnf lewdParam() > 25
+
+@submissiveParam()
 #function
 #dim dynamic parameter
 
@@ -35,25 +45,32 @@
 		parameter += ABL:TARGET:전투기술
 	endif
 	
-	if TALENT:MASTER:패배자
+	if TALENT:MASTER:겁쟁이
 		parameter += 15 * (MAXBASE:MASTER:체력 - BASE:MASTER:체력) / MAXBASE:MASTER:체력
 	endif
 	
 	if FLAG:성교합의
 		parameter += 10
-	else
-		parameter -= 10
+	endif
+	
+	if TALENT:MASTER:겁쟁이
+		parameter += 6
 	endif
 	
 	if TALENT:MASTER:육변기
 		parameter += 99
 	endif
 
-	if BASE:MASTER:최면심도 > 25
-		parameter += 5
+	if BASE:MASTER:최면심도 > 10
+		parameter += (BASE:MASTER:최면심도 / 5)
 	endif
+	
+	returnf parameter
 
-	returnf parameter > 25
+@isMasterSubmissive()
+#function
+
+	returnf submissiveParam() > 25
 
 @isWeaknessAttacked()
 #function

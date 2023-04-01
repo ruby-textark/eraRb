@@ -1,0 +1,26 @@
+﻿@COM_ABLE502
+
+	; 붉은보석지팡이 장착시 사용가능
+	return EQUIP:MASTER:16 == 1606
+
+@COM502
+#dim dynamic damageBase
+
+	printW 마력 폭탄을 쏘아보냈다!
+	
+	if BASE:MASTER:마력 < 24
+		printFormW 하지만 마력이 부족하여 실패했다...
+		return 0
+	endif
+	BASE:MASTER:마력 -= 24
+	
+	; 거리에 따라 실패확률 존재
+	if RAND:20 < inBattleDistance()
+		printFormW 빗나갔다!
+		return 1
+	endif
+	
+	damageBase = 20 * MAX(2, getActualMatk(MASTER) * 3 - getActualMdef(TARGET))
+	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)	
+
+	return 1

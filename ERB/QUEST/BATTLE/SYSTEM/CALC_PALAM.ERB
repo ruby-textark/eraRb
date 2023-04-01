@@ -1,7 +1,12 @@
 ﻿@calcPalam
 #dim dynamic partIdx
+	
+	; 굴복
+	if submissiveParam() > 0
+		UP:굴복 += SOURCE:MASTER:피격
+	endif
 
-	; 성감
+	; 성감 / 욕정
 	for partIdx, 101, 200
 		if strlens(BASENAME:partIdx) == 0
 			continue
@@ -16,9 +21,21 @@
 		UP:욕정 += PALAM:MASTER:partIdx / 100
 	next
 
+	; 순종
+	UP:순종 += power(2, min(submissiveParam() / 2, 20))
+	if TALENT:MASTER:겁쟁이
+		UP:순종 += SOURCE:MASTER:피격
+	endif
+
 	; 기본 사정감 증가
 	if TFLAG:이번턴성공격
-		PALAM:TARGET:사정 += 900 + RAND:200
+		; 부위 경험 반영
+		if isBodyPart(TFLAG:이번턴성공격)
+			PALAM:TARGET:사정 += 900 + MIN(2000, EXP:MASTER:(TFLAG:이번턴성공격))
+		; fallback
+		else
+			PALAM:TARGET:사정 += 900
+		endif
 	endif
 
 	; 삽입체크
@@ -52,4 +69,9 @@
 			UP:고통 += 100 * (BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50)
 			PALAM:TARGET:사정 += 400 * (BASE:MASTER:애널조임 + BASE:TARGET:자지크기 - 50)
 		endif
+	endif
+
+	; 조루 처리
+	if TALENT:TARGET:조루
+		TIMES PALAM:TARGET:사정, 1.5 
 	endif

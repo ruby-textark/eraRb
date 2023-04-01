@@ -31,7 +31,7 @@ $inputLoop
 		if !isItemUsable
 			call colorPrint(0x888888, @"[{itemIdx, 4, RIGHT}] ")
 		else
-			printForm [{itemIdx, 4, RIGHT}]%" "%
+			printForm [{itemIdx, 4, RIGHT}]\ 
 		endif
 
 		printFormLC %ITEMNAME:itemIdx, 14, RIGHT%x{ITEM:itemIdx, 3, LEFT}

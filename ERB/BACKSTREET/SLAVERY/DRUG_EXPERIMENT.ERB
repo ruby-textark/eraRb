@@ -14,7 +14,7 @@ $drugLoop
 	
 	call colorPrint(0xff8c00, "「이건 어떤가?」")
 	printL
-	printForm 그의 손에 들린 주사는%" "%
+	printForm 그의 손에 들린 주사는\ 
 	
 	if sideEffect1 == 0
 		; 아무 효과 없음
@@ -41,7 +41,7 @@ $drugLoop
 		print 검은색의
 	endif
 	
-	printForm %" "%
+	printForm \ 
 	
 	if sideEffect2 == 0
 		; 생리불순
@@ -54,7 +54,7 @@ $drugLoop
 		print 얼어붙은
 	endif
 	
-	printFormL %" "%액체를 담고 있었다.
+	printFormL \ 액체를 담고 있었다.
 	call colorPrint(0xff8c00, @"「보수는 {reward}. 선택은 자네 몫이야.」")
 	printL
 	

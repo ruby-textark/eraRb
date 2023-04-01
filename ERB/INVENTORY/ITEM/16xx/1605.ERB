@@ -1,0 +1,18 @@
+﻿; 활
+@isUsable1605(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1605(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1605()
+	return 1
+@isUnequipable1605()
+	return 1
+
+@onEquip1605
+	ABL:MASTER:마법공격 += 5
+
+@onUnequip1605
+	ABL:MASTER:마법공격 -= 5

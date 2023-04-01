@@ -1,0 +1,58 @@
+﻿@ablCheck
+#dim dynamic partIdx
+#dim dynamic ablLevel
+
+	; 부위별 감도 상승
+	for partIdx, 101, 200
+		call ablUpLoop(partIdx, partIdx, partIdx)
+	next
+
+	; 순종
+	call ablUpLoopByStr("순종", "순종", "")
+	; 욕망
+	call ablUpLoopByStr("욕망", "욕정", "")
+	; 기교
+	call ablUpLoopByStr("기교", "습득", "")
+	; 화술
+	call ablUpLoopByStr("화술", "습득", "대화경험")
+
+@ablUpLoop(ablIdx, juelIdx, expIdx)
+#dim dynamic ablIdx
+#dim dynamic juelIdx
+#dim dynamic expIdx
+
+	while 1
+		if juelIdx && JUEL:MASTER:juelIdx < JuelReq:(ABL:MASTER:ablIdx + 1)
+			break
+		endif
+		if expIdx && EXP:MASTER:expIdx < ExpReq:(ABL:MASTER:expIdx + 1)
+			break
+		endif
+
+		ABL:MASTER:ablIdx++
+		call colorPrint(0xcccc00, CALLNAME:MASTER)
+		printForm 의\ 
+		call colorPrint(0x880044, ABLNAME:ablIdx)
+		printFormL 이 Lv {ABL:MASTER:ablIdx}로 상승
+	wend
+	
+@ablUpLoopByStr(ablStr, juelStr, expStr)
+#dims dynamic ablStr
+#dims dynamic juelStr
+#dims dynamic expStr
+
+	while 1
+		if strlens(juelStr) && JUEL:MASTER:juelStr < JuelReq:(ABL:MASTER:ablStr + 1)
+			break
+		endif
+		if strlens(expStr) && EXP:MASTER:expStr < ExpReq:(ABL:MASTER:expStr + 1)
+			break
+		endif
+
+		ABL:MASTER:ablStr++
+		call colorPrint(0xcccc00, CALLNAME:MASTER)
+		printForm 의\ 
+		call colorPrint(0x880044, ablStr)
+		printFormL 이 Lv {ABL:MASTER:ablStr}로 상승
+	wend
+	

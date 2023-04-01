@@ -5,7 +5,7 @@
 	endif
 
 	; 최면심도에 비례하여 0-5% 확률로 최면술사 출현
-	if RAND:2000 < BASE:MASTER:최면심도
+	if RAND:10000 < FLAG:최면이벤트확률 * BASE:MASTER:최면심도
 		forceWait
 
 		printFormW 길을 걷던 %CALLNAME:MASTER% 곁을 꾀죄죄한 차림을 한 사람이 알 수 없는 혼잣말을 웅얼거리며 스쳐지나간다

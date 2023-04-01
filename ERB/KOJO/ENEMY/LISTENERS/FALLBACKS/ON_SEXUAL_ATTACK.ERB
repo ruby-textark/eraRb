@@ -4,6 +4,8 @@
 #dims dynamic attackedName
 
 	attackedIdx = getSexualAtkBodyPart()
+	TFLAG:이번턴성공격 = attackedIdx
+
 	attackedName = %STR:attackedIdx%
 	
 	printFormL 성희롱:%attackedName%
@@ -19,7 +21,7 @@
 		endif
 	endif
 
-	printForm %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의%" "%
+	printForm %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의\ 
 
 	; Hole
 	if attackedName == "질" || attackedName == "애널"

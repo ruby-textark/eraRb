@@ -15,6 +15,10 @@
 		call newQuestList
 	elseif TARGET != 0 && RESULT == 103
 		call cancelQuest
+	elseif hasDeliverQuest() && hasDeliveryItems()
+	
+		ITEM:(FLAG:퀘스트대상) -= (FLAG:퀘스트값)
+		call finishQuest
 
 	; CHARACTER MENU
 	elseif RESULT == 201

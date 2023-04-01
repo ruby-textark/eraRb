@@ -27,9 +27,9 @@ $inputLoop
 
 	
 @itemShopMenu(startIdx, endIdx)
-#dims dynamic itemString
 #dim dynamic startIdx
 #dim dynamic endIdx
+#dims dynamic itemString
 #dim dynamic showCount
 #dim dynamic itemIdx
 #dim dynamic availableCount
@@ -38,6 +38,10 @@ $itemLoop
 	showCount = 0
 	clearLine 999
 	for itemIdx, startIdx, endIdx
+		if itemIdx % 100 == 0
+			continue
+		endif
+
 		if strlens(ITEMNAME:itemIdx) == 0
 			continue
 		endif

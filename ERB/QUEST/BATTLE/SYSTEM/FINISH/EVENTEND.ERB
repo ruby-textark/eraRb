@@ -6,11 +6,15 @@
 	for partIdx, 101, 200
 		call outFromMaster(partIdx, 1)
 	next
+	
+	EXP:MASTER:전투경험++
 
 	; killed the monster
 	if BASE:TARGET:체력 <= 0
 	
-		call finishQuest()
+		EXP:MASTER:전투승리경험++
+		CFLAG:MASTER:전투결과++
+		call finishQuest
 		
 		; Looting
 		MONEY += CFLAG:TARGET:드랍골드최소
@@ -35,17 +39,19 @@
 		printFormL %NAME:TARGET% %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 기생해버렸습니다...
 		printFormL 토벌은 자동으로 취소됩니다.
 		
+		EXP:MASTER:전투패배경험++
+		CFLAG:MASTER:전투결과++
 		call cancelQuest
 	; Quest fail
 	else
-		if TALENT:MASTER:패배자
-			call reincarnation
-		endif
+		EXP:MASTER:전투패배경험++
+		CFLAG:MASTER:전투결과--
 
 		; Check if cancel this quest or keep going with the wounded monster.
 		printFormL 이번에는 실패했지만, 다음에는 충분히 준비해서 다시 도전하도록 합시다.
 	endif
 	
-	call afterAction
+	CFLAG:MASTER:전투결과 = LIMIT(CFLAG:MASTER:전투결과, -10, 10)
 
+	call afterAction
 	begin shop

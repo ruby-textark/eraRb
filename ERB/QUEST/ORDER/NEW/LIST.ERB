@@ -66,6 +66,9 @@ $showQuest
 		questNumber = (10 + RESULT)
 		call newQuest(questNumber)
 
+		; 수락한 퀘스트를 지움 - 우려먹기 방지
+		FLAG:(questNumber * 10 +  1) = DAY - 1
+
 		return 1
 	else
 		return 0

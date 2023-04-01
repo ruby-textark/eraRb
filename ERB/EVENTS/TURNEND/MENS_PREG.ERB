@@ -180,7 +180,7 @@
 	endif
 	
 	if TALENT:MASTER:임신 && BASE:MASTER:임신일수 == 2 * MAXBASE:MASTER:임신일수 / 5
-		if !RAND:10 && TALENT:MASTER:벌어진자궁
+		if !RAND:10 && TALENT:MASTER:자궁벌어짐
 			; 자궁경관무력증
 			printFormW %CALLNAME:MASTER%의 상태가 이상하다...
 			call colorPrintW(0xcc0000, @"%kr(CALLNAME:MASTER, "은", "는")% 불길한 예감을 느끼자마자 순간 아랫배에 위화감을 느꼈다")
@@ -198,7 +198,7 @@
 		printFormW .
 		printFormW .
 
-		printForm %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%STR:(300 + CFLAG:MASTER:아이아버지)%]의%" "%
+		printForm %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%STR:(300 + CFLAG:MASTER:아이아버지)%]의\ 
 		if CFLAG:MASTER:아이아버지 == 1
 			printW 아이를 출산했습니다
 		else

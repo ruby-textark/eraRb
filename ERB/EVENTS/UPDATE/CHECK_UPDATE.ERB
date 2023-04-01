@@ -1,0 +1,18 @@
+﻿@checkUpdate
+
+	if LASTLOAD_VERSION < 7
+		call colorPrintW(0xcc0000, "※이전 버전의 세이브 데이터를 감지했습니다※")
+		printW 이후 세이브 파일을 다시 저장하면 이후 이 메시지는 표시되지 않습니다.
+		printW 이하의 내용을 반드시 확인하는 것을 권장합니다
+		
+		printL
+
+		forceWait
+	endif
+
+	if LASTLOAD_VERSION < 7
+		if !FLAG:최면이벤트확률
+			printW 최면 이벤트 확률이 추가되었으니 설정에서 조정해주세요
+			FLAG:최면이벤트확률 = 5
+		endif
+	endif

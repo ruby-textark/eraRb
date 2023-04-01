@@ -10,18 +10,27 @@
 	swapChara getChara(charaIdx), charaPos
 	delChara getChara(1000 + charaPos)
 	
-	; 성병 처리
-	; 성병 기본 비율 15%
-	stdRate = FLAG:성병보균율
+	; 재능 처리
 	
-	; 인간이 아닐 경우 2배 증가
-	if CFLAG:charaPos:종족 != 1
-		stdRate *= 2
-	endif
+		;조루
+		if RAND:100 < 25
+			TALENT:charaPos:조루 = 1
+		endif
+	
+	; CFLAG 처리
+	
+		; 성병 처리
+		; 성병 기본 비율 15%
+		stdRate = FLAG:성병보균율
+		
+		; 인간이 아닐 경우 2배 증가
+		if CFLAG:charaPos:종족 != 1
+			stdRate *= 2
+		endif
 
-	if RAND:1000 < stdRate
-		CFLAG:charaPos:성병보균자 = 1
-	endif
+		if RAND:1000 < stdRate
+			CFLAG:charaPos:성병보균자 = 1
+		endif
 
 @delCharaAtPos(charaPos)
 #dim dynamic charaIdx

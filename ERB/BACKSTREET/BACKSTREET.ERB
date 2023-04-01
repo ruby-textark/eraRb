@@ -44,7 +44,7 @@ $inputLoop
 #function
 #dim dynamic val
 
-	val += ABL:MASTER:담력
+	val += (TALENT:MASTER:대범함 - TALENT:MASTER:겁쟁이) * 5
 	val += ABL:MASTER:욕망 * 2
 	
 	returnf val

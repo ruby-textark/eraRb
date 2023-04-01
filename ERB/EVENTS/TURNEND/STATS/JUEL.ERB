@@ -1,0 +1,19 @@
+﻿@juelCheck
+#dim dynamic ablIdx
+#dim dynamic palamIdx
+#dim dynamic charaIdx
+#dim dynamic pLevel
+
+	; 구슬체크
+	for palamIdx, 0, varSize("PALAM")
+		for charaIdx, 0, CHARANUM
+		
+			for pLevel, 0, 11
+				if PALAM:charaIdx:palamIdx >= PALAMLV:(10 - pLevel)
+					JUEL:charaIdx:palamIdx += PALAMLV:(10 - pLevel) / 10
+				endif
+			next
+		
+			PALAM:charaIdx:palamIdx = 0
+		next
+	next

@@ -22,6 +22,14 @@
 	endif
 	printLC [103] - 의뢰 취소
 	resetcolor
+
+	if hasDeliverQuest()
+		if !isMasterFree() || !hasDeliveryItems()
+			setcolor 0x777777
+		endif
+		printLC [104] - 납품
+		resetcolor
+	endif
 	printL
 
 	printLC [201] - 상태창

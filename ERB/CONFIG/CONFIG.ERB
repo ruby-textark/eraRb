@@ -4,6 +4,7 @@
 
 $inputLoop
 	printFormL [1] - 성병 보균율을 설정한다(현재 : {FLAG:성병보균율 / 10}.{FLAG:성병보균율 % 10}\%)
+	printFormL [2] - 최면 이벤트 확률을 설정한다(현재 : {FLAG:최면이벤트확률}\%)
 	printL
 	printFormL [0] - 돌아간다
 
@@ -11,6 +12,8 @@ $inputLoop
 	
 	if RESULT == 1
 		call stdConfig
+	elseif RESULT == 2
+		call hypnoConfig
 	elseif RESULT == 0
 		return
 	endif
@@ -30,6 +33,25 @@ $inputLoop
 
 	if 0 <= RESULT && RESULT <= 1000
 		FLAG:성병보균율 = RESULT
+
+		printW 변경이 완료되었습니다
+	else
+		printW 잘못된 값입니다
+		goto inputLoop
+	endif
+
+@hypnoConfig
+
+	printW 최면 이벤트의 발생 확률을 설정합니다.
+	printW 최면 심도에 정비례하여 발생 확률이 증가하며, 최대치를 설정하는 것이기 때문에 체감 확률이 낮아질 수 있습니다.
+	printFormL 새 값을 입력해주세요(현재 : {FLAG:최면이벤트확률} 단위 : 1\%)
+	
+$inputLoop
+
+	input
+
+	if 0 <= RESULT && RESULT <= 1000
+		FLAG:최면이벤트확률 = RESULT
 
 		printW 변경이 완료되었습니다
 	else
