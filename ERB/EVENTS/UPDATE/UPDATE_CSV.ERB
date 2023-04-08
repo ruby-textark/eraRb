@@ -1,0 +1,17 @@
+﻿@updateCsv
+#dim dynamic mobIdx
+
+	; 난이도별 몬스터 
+
+	FLAG:110 = 0
+	FLAG:120 = 0
+	FLAG:130 = 0
+	FLAG:140 = 0
+	FLAG:150 = 0
+
+	for mobIdx, 100, 1000
+		existCsv mobIdx
+		if RESULT
+			FLAG:(100 + (mobIdx / 100) * 10)++
+		endif
+	next

@@ -1,0 +1,36 @@
+﻿@showFavorites
+#dim dynamic partIdx
+
+	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
+	printFormL %kr(CALLNAME:MASTER, "이", "가")% 좋아하는 것들
+	
+	; 일반적인 경험은 1레벨당 exp 100
+	call printEachFavorites("섹스", EXP:MASTER:삽입경험, 100)
+	call printEachFavorites("자위", EXP:MASTER:자위경험, 100)
+	call printEachFavorites("보지", EXP:MASTER:질경험, 100)
+	call printEachFavorites("애널", EXP:MASTER:애널경험, 100)
+	; 특수한 경험은 1레벨당 exp 50
+	call printEachFavorites("유두절정", EXP:MASTER:유두절정경험, 50)
+	call printEachFavorites("자궁절정", EXP:MASTER:자궁절정경험, 50)
+	call printEachFavorites("요도절정", EXP:MASTER:요도절정경험, 50)
+	
+	call printEachFavorites("노출", EXP:MASTER:노출경험, 50)
+	call printEachFavorites("약물", EXP:MASTER:약물경험, 50)
+	call printEachFavorites("질식", EXP:MASTER:질식경험, 50)
+	call printEachFavorites("몬스터", EXP:MASTER:몬스터성경험, 50)
+	call printEachFavorites("벌레", EXP:MASTER:벌레성경험, 50)
+	call printEachFavorites("짐승", EXP:MASTER:짐승성경험, 50)
+	call printEachFavorites("마족", EXP:MASTER:마족성경험, 50)
+
+	printL
+
+@printEachFavorites(favorite, expCount, interval)
+#dims dynamic favorite
+#dim dynamic expCount
+#dim dynamic interval
+
+	if expCount / interval < 1
+		return
+	endif
+
+	printForm %favorite%%"♥"*LIMIT(expCount / interval - 1, 0, 5), 12, LEFT%

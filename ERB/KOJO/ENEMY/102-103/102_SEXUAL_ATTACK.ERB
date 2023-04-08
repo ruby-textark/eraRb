@@ -43,7 +43,7 @@
 	endif
 	
 	; Hole
-	if attackedName == "질" || attackedName == "애널"
+	if attackedIdx == 121 || attackedIdx == 123
 		; Already inserted
 		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
@@ -73,7 +73,7 @@
 				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
 			endif
 		endif
-	elseif attackedName == "자궁" || attackedName == "난소"
+	elseif attackedIdx == 116 || attackedIdx == 115
 		; Already inserted
 		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
@@ -103,7 +103,7 @@
 				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
 			endif
 		endif
-	elseif attackedName == "방광" || attackedName == "요도"
+	elseif attackedIdx == 124 || attackedIdx == 125
 		; todo 방광요도구상
 		; Already inserted
 		if isMasterInserted(attackedIdx, 1)
@@ -134,7 +134,7 @@
 				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
 			endif
 		endif
-	elseif attackedName == "유두"
+	elseif attackedIdx == 113
 		; nipplefuck check
 		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
@@ -191,7 +191,7 @@
 	endif
 
 	TCVAR:TARGET:성희롱부위 = attackedIdx
-	SOURCE:MASTER:attackedIdx = 90 + RAND:20
+	SOURCE:MASTER:attackedIdx += 90 + RAND:20
 
 	; exp 가산
 	EXP:MASTER:attackedIdx++

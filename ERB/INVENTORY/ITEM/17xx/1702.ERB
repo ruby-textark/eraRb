@@ -1,0 +1,18 @@
+﻿; 음마의반지
+@isUsable1702(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1702(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1702()
+	return 1
+@isUnequipable1702()
+	return 1
+
+@onEquip1702
+	ABL:MASTER:마법공격 += 1
+
+@onUnequip1702
+	ABL:MASTER:마법공격 -= 1

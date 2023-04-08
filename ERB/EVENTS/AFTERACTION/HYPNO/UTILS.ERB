@@ -25,7 +25,7 @@
 		expResult:partIdx += (1 + RAND:2)
 	rend
 	
-	for partIdx, 100, 200
+	for partIdx, 101, 200
 		if !expResult:partIdx
 			continue
 		endif
@@ -34,7 +34,7 @@
 		printFormW %EXPNAME:partIdx%+{expResult:partIdx}
 	next
 	
-	for partIdx, 100, 200
+	for partIdx, 101, 200
 		call increaseArousal(partIdx, expResult:partIdx * 100)
 
 		if isInsertablePart(partIdx) && RAND:5 < 4

@@ -1,0 +1,9 @@
+﻿@checkMilk
+
+	if SOURCE:MASTER:쾌가슴 || SOURCE:MASTER:쾌유두
+		if BASE:MASTER:모유 > 0
+			; 매턴 모유 분비
+			BASE:MASTER:모유 = LIMIT(BASE:MASTER:모유 - (5 + RAND:5), 0, MAXBASE:MASTER:모유)
+			EXP:MASTER:착유경험++
+		endif
+	endif

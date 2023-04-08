@@ -1,18 +1,18 @@
 ﻿@COM_ABLE501
 
 	; 나무지팡이 장착시 사용가능
-	return EQUIP:MASTER:16 == 1605
+	return EQUIP:MASTER:무기 == 1605
 
 @COM501
 #dim dynamic damageBase
 
 	printW 마법 화살을 발사했다!
 	
-	if BASE:MASTER:마력 < 10
+	if BASE:MASTER:마력 < 40
 		printFormW 하지만 마력이 부족하여 실패했다...
 		return 0
 	endif
-	BASE:MASTER:마력 -= 10
+	BASE:MASTER:마력 -= 40
 	
 	damageBase = 20 * MAX(2, getActualMatk(MASTER) - getActualMdef(TARGET))
 	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)	

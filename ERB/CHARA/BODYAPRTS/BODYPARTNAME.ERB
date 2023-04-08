@@ -95,7 +95,7 @@
 			retStr:(retStrCnt++) = 모유가 가득차
 		elseif !RAND:3 && BASE:MASTER:모유 > MAXBASE:MASTER:모유 / 3
 			retStr:(retStrCnt++) = 모유가 담겨
-		else
+		elseif MAXBASE:MASTER:모유 > 0
 			retStr:(retStrCnt++) = 모유가 바닥난 채
 		endif
 

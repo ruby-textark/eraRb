@@ -1,0 +1,137 @@
+﻿@c105ClothDestroy
+#dim dynamic equipSlotIdx
+#dim dynamic breakableEquipCount
+#dim dynamic breakableEquips, 10
+
+	for equipSlotIdx, 11, 19
+		if equipSlotIdx != 16 && EQUIP:MASTER:equipSlotIdx != 0
+			breakableEquips:(breakableEquipCount++) = equipSlotIdx
+		endif
+	next
+
+	if breakableEquipCount
+		printFormW %kr(CALLNAME:TARGET, "은", "는")% 거칠게 %CALLNAME:MASTER%의 옷을 벗겼다
+		printFormW 해제된 장비는 이번 전투 중에서는 사용할 수 없을 것 같다...
+		call unequipMasterEquips(breakableEquips:(RAND:breakableEquipCount))
+		
+		return 1
+	endif
+	
+	return 0
+
+
+@c105onSexualAttack
+#dim dynamic attackedIdx
+#dims dynamic attackedName
+
+	call c105ClothDestroy
+	if RESULT
+		return
+	endif
+
+	attackedIdx = getOrdinarySexualAtkBodyPart()
+	
+	TFLAG:이번턴성공격 = attackedIdx
+	attackedName = %STR:attackedIdx%
+	
+	printFormL 성희롱:%attackedName%
+	
+	if TCVAR:TARGET:성희롱부위 && TCVAR:TARGET:성희롱부위 != attackedIdx
+		call outFromMaster(TCVAR:TARGET:성희롱부위, 1)
+		if RAND:3 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에 흥미를 잃은 것 같다
+		elseif RAND:2 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% 꾸물거리며 %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에서 떨어져나왔다
+		else
+			printFormW 무언가 마음에 들지 않은 것인지 %kr(CALLNAME:TARGET, "은", "는")% 붙들고 있던 %CALLNAME:MASTER%의 %kr(CSTR:MASTER:(TCVAR:TARGET:성희롱부위), "을", "를")% 놓아주었다
+		endif
+	endif
+	
+	; Hole
+	if attackedIdx == 121 || attackedIdx == 123
+		; Already inserted
+		if isMasterInserted(attackedIdx, 1)
+			if RAND:5 == 0
+				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 마구 쑤시고 있다
+			elseif RAND:4 == 0
+				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 좋을대로 사용하는 중이다
+			elseif RAND:3 == 0
+				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속주름을 즐기고 있다
+			elseif RAND:2 == 0
+				printFormW %kr(CALLNAME:TARGET, "은", "는")% 몸을 부풀려 %CALLNAME:MASTER%의 %partStr(attackedIdx)%을 가득 채우고 있다
+			else
+				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 구석구석을 탐하고 있다
+			endif
+		; Insert
+		else
+			call insertIntoMaster(attackedIdx, 1)
+
+			if RAND:5 == 0
+				printFormW %kr(CALLNAME:TARGET, "은", "는")% 킬킬 웃으며 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 
+			elseif RAND:4 == 0
+				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "으로", "로")% 자지를 밀어넣었다
+			elseif RAND:3 == 0
+				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 단숨에 꿰뚫었다
+			elseif RAND:2 == 0
+				printFormW %kr(CALLNAME:TARGET, "은", "는")% 껄떡거리는 자지를 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속에 삽입했다
+			else
+				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
+			endif
+		endif
+	elseif attackedIdx == 116
+		EXP:MASTER:자궁구개발경험++
+
+		if RAND:5 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 입구를 살살 주무르고 있다
+		elseif RAND:4 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% 자지를 깊숙히 찌르며 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 문을 노크하고 있다
+		elseif RAND:3 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%의 앙다문 구멍에 키스하듯 자극을 주고 있다
+		elseif RAND:2 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%의 좁은 틈에 자지를 밀어붙여 억지로 벌리고 있다
+		else
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 비집고 삽입하려 했지만 잘 되지 않은 모양이다
+		endif
+	elseif attackedIdx == 113
+		if RAND:5 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 쿡쿡 찌르고 있다
+		elseif RAND:4 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%의 근처를 자극하며 의도적으로 %kr(CALLNAME:MASTER, "이", "가")% %kr(partStr(attackedIdx), "을", "를")% 만져주길 기대하게 만든다
+		elseif RAND:3 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 끝을 핥고 있다
+		elseif RAND:2 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 살살 간지럽히며 반응을 살피고 있다
+		else
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 조금씩 꼬집으며 자극하고 있다
+		endif
+	elseif attackedIdx == 102
+		if RAND:5 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 벌려 혀를 밀어넣었다
+		elseif RAND:4 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 숨이 막히도록 집요하게 키스했다
+		elseif RAND:3 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% 거친 숨결로 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 틀어막았다
+		elseif RAND:2 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 구석구석을 혀로 농락했다
+		else
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% 추잡한 혓놀림으로 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 탐했다
+		endif
+	else
+		if RAND:5 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 노렸다
+		elseif RAND:4 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 부드럽게 쓰다듬었다
+		elseif RAND:3 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 꽉 조였다
+		elseif RAND:2 == 0
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 격렬하게 자극했다
+		else
+			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 근처를 쓰다듬었다
+		endif
+	endif
+
+	TCVAR:TARGET:성희롱부위 = attackedIdx
+	SOURCE:MASTER:attackedIdx += 90 + RAND:20
+
+	; exp 가산
+	EXP:MASTER:attackedIdx++

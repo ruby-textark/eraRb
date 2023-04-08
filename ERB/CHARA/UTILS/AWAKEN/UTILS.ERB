@@ -7,15 +7,15 @@
 
 	; 미뤄 둔 체크 실행
 	if getBit(CFLAG:MASTER:무의식중사건, 0)
-		call checkVirgin()
+		call checkVirgin
 	endif
 
 	if getBit(CFLAG:MASTER:무의식중사건, 1)
-		call checkOrgasm()
+		call checkOrgasm
 	endif
 
 	if getBit(CFLAG:MASTER:무의식중사건, 2)
-		call checkTight()
+		call checkTight
 	endif
 
 	CFLAG:MASTER:무의식중사건 = 0

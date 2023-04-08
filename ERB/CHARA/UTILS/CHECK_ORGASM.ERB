@@ -50,14 +50,14 @@
 
 			; 최대 마력의 5%를 강탈 / 최대 15%
 			if BASE:MASTER:마력 >= MIN(orgasmCount, 3) * MAXBASE:MASTER:마력 / 20
-				DOWNBASE:MASTER:마력 += MIN(orgasmCount, 3) * MAXBASE:MASTER:마력 / 20
+				BASE:MASTER:마력 -= MIN(orgasmCount, 3) * MAXBASE:MASTER:마력 / 20
 			; 무족하면 패널티
 			; 최대 체력의 2% / 최대 6%
 			else
 				printFormL 하지만 %CALLNAME:MASTER%의 마력은 이미 바닥이었고, 대신해서 체력을 흡수당했다
 
-				DOWNBASE:MASTER:마력 = BASE:MASTER:마력
-				DOWNBASE:MASTER:체력 = MIN(orgasmCount, 3) * MAXBASE:MASTER:체력 / 50
+				BASE:MASTER:마력 = 0
+				BASE:MASTER:체력 -= MIN(orgasmCount, 3) * MAXBASE:MASTER:체력 / 50
 			endif
 		endif
 

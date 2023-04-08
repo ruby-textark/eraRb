@@ -1,0 +1,12 @@
+﻿@expCheck
+	
+	; 노출경험
+	
+	if !EQUIP:MASTER:12 || !EQUIP:MASTER:13
+		EXP:MASTER:노출경험++
+	endif
+	
+	; 속옷을 입지 않았을 경우 추가로 노출경험 상승
+	if !EQUIP:MASTER:15
+		EXP:MASTER:노출경험++
+	endif

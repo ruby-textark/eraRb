@@ -63,3 +63,27 @@
 	next
 
 	returnf availableParts:(RAND:partsCount)
+
+@getOrdinarySexualAtkBodyPart
+#function
+#dim dynamic partIdx
+#dim dynamic partsCount
+#dim dynamic availableParts, 100
+
+	if TCVAR:TARGET:성희롱부위 && isAttackableBodyPart(TCVAR:TARGET:성희롱부위)
+		if RAND:5 < 4
+			returnf TCVAR:TARGET:성희롱부위
+		endif
+	endif
+
+	partsCount = 0
+	for partIdx, 101, 200
+		if partIdx == 101 || partIdx == 111 || partIdx == 114 || partIdx == 115 || partIdx == 116 || partIdx == 124 || partIdx == 125 || partIdx == 126
+			continue
+		endif
+		if isAttackableBodyPart(partIdx)
+			availableParts:(partsCount++) = partIdx
+		endif
+	next
+
+	returnf availableParts:(RAND:partsCount)

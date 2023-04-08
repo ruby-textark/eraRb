@@ -21,7 +21,7 @@
 @getAmmoName()
 #functions
 
-	if EQUIP:MASTER:16 == 1604
+	if EQUIP:MASTER:무기 == 1604
 		returnf "화살"
 	else
 		returnf ""
@@ -30,7 +30,7 @@
 @getAmmoAtk()
 #function
 
-	if EQUIP:MASTER:16 == 1604
+	if EQUIP:MASTER:무기 == 1604
 		returnf 2
 	else
 		returnf 0
@@ -38,7 +38,7 @@
 
 @useAmmo()
 
-	if EQUIP:MASTER:16 == 1604
+	if EQUIP:MASTER:무기 == 1604
 		ITEM:화살--
 	else
 	endif
