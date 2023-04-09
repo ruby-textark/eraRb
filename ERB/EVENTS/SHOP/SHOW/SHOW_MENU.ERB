@@ -1,6 +1,6 @@
 ﻿@showMenu
 	; Target does not exist
-	if !isMasterFree() || !hasHuntQuest()
+	if !isMasterFree() || !hasQuest()
 		setcolor 0x777777
 	; 자궁대여중
 	elseif FLAG:자궁대여료
@@ -10,14 +10,14 @@
 	resetcolor
 
 	; Target already exists
-	if !isMasterFree() || hasHuntQuest()
+	if !isMasterFree() || hasQuest()
 		setcolor 0x777777
 	endif
 	printLC [102] - 의뢰 수주
 	resetcolor
 
 	; Target does not exist
-	if !isMasterFree() || !hasHuntQuest()
+	if !isMasterFree() || !hasQuest()
 		setcolor 0x777777
 	endif
 	printLC [103] - 의뢰 취소

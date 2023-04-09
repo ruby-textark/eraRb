@@ -5,7 +5,7 @@
 
 	; 새로 추가할 캐릭터
 	addChara charaIdx
-
+	
 	; 존재하던 placeholder와 바꿈
 	swapChara getChara(charaIdx), charaPos
 	delChara getChara(1000 + charaPos)
@@ -35,7 +35,7 @@
 @delCharaAtPos(charaPos)
 #dim dynamic charaIdx
 #dim dynamic charaPos
-
+	
 	charaIdx = CFLAG:charaPos:캐릭터번호
 
 	; placholder를 해당 위치에 삽입

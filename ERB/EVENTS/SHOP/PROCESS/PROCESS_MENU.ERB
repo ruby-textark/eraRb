@@ -16,7 +16,6 @@
 	elseif TARGET != 0 && RESULT == 103
 		call cancelQuest
 	elseif hasDeliverQuest() && hasDeliveryItems()
-	
 		ITEM:(FLAG:퀘스트대상) -= (FLAG:퀘스트값)
 		call finishQuest
 
@@ -31,7 +30,7 @@
 		call showMasterEquips
 		RESULT = 0
 	elseif RESULT == 204
-		call reincarnation
+		; call reincarnation
 		RESULT = 0
 
 	; SHOP MENU

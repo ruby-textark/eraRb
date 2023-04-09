@@ -4,7 +4,9 @@
 	FLAG:퀘스트진행중 = 0
 	printFormW 퀘스트를 취소합니다
 
-	call delMonster
+	if CFLAG:1:캐릭터번호 != 1001
+		call delMonster
+	endif
 	
 	decreasedFame = RAND:5
 	
