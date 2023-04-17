@@ -10,8 +10,8 @@
 	next
 
 	if breakableEquipCount
-		printFormW %CALLNAME:TARGET%의 점액이 장비를 망가뜨린다
-		printFormW 망가진 장비는 이번 전투 중에서는 사용할 수 없을 것 같다...
+		printFormL %CALLNAME:TARGET%의 점액이 장비를 망가뜨린다
+		printFormL 망가진 장비는 이번 전투 중에서는 사용할 수 없을 것 같다...
 		call unequipMasterEquips(breakableEquips:(RAND:breakableEquipCount))
 	endif
 
@@ -29,16 +29,14 @@
 	TFLAG:이번턴성공격 = attackedIdx
 	attackedName = %STR:attackedIdx%
 	
-	printFormL 성희롱:%attackedName%
-	
 	if TCVAR:TARGET:성희롱부위 && TCVAR:TARGET:성희롱부위 != attackedIdx
 		call outFromMaster(TCVAR:TARGET:성희롱부위, 1)
 		if RAND:3 == 0
-			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에 흥미를 잃은 것 같다
+			printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에 흥미를 잃은 것 같다
 		elseif RAND:2 == 0
-			printFormW %kr(CALLNAME:TARGET, "은", "는")% 꾸물거리며 %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에서 떨어져나왔다
+			printFormL %kr(CALLNAME:TARGET, "은", "는")% 꾸물거리며 %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에서 떨어져나왔다
 		else
-			printFormW 무언가 마음에 들지 않은 것인지 %kr(CALLNAME:TARGET, "은", "는")% 붙들고 있던 %CALLNAME:MASTER%의 %kr(CSTR:MASTER:(TCVAR:TARGET:성희롱부위), "을", "를")% 놓아주었다
+			printFormL 무언가 마음에 들지 않은 것인지 %kr(CALLNAME:TARGET, "은", "는")% 붙들고 있던 %CALLNAME:MASTER%의 %kr(CSTR:MASTER:(TCVAR:TARGET:성희롱부위), "을", "를")% 놓아주었다
 		endif
 	endif
 	
@@ -47,60 +45,60 @@
 		; Already inserted
 		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 가득 채우고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 가득 채우고 있다
 			elseif RAND:4 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 계속해서 사용했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 계속해서 사용했다
 			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안을 미끄러지듯 기어다니고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안을 미끄러지듯 기어다니고 있다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% 몸을 부풀려 %CALLNAME:MASTER%의 %partStr(attackedIdx)%을 가득 채우고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% 몸을 부풀려 %CALLNAME:MASTER%의 %partStr(attackedIdx)%을 가득 채우고 있다
 			else
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안 깊은곳까지 파고들고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안 깊은곳까지 파고들고 있다
 			endif
 		; Insert
 		else
 			call insertIntoMaster(attackedIdx, 1)
 
 			if RAND:5 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 향해 기어들어갔다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 향해 기어들어갔다
 			elseif RAND:4 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안으로 스며들어갔다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안으로 스며들어갔다
 			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 아프게 꿰뚫었다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 아프게 꿰뚫었다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속에 삽입했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속에 삽입했다
 			else
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
 			endif
 		endif
 	elseif attackedIdx == 116 || attackedIdx == 115
 		; Already inserted
 		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 가장 소중한 장소마저 범하고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 가장 소중한 장소마저 범하고 있다
 			elseif RAND:4 == 0
-				printFormW %kr(CALLNAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 절대 들키면 안되는 깊은 약점까지 낱낱이 파헤치기 시작했다
+				printFormL %kr(CALLNAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 절대 들키면 안되는 깊은 약점까지 낱낱이 파헤치기 시작했다
 			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% 오나홀을 씻듯이 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속을 긁어냈다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% 오나홀을 씻듯이 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속을 긁어냈다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "이", "가")% 아프도록 맥동했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "이", "가")% 아프도록 맥동했다
 			else
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안 깊은곳까지 스며들었다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안 깊은곳까지 스며들었다
 			endif
 		; Insert
 		else
 			call insertIntoMaster(attackedIdx, 1)
 
 			if RAND:5 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 향해 거침없이 나아갔다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 향해 거침없이 나아갔다
 			elseif RAND:4 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%마저 정복하고자 좁은 길목을 사정없이 벌렸다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%마저 정복하고자 좁은 길목을 사정없이 벌렸다
 			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 아프게 꿰뚫었다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 아프게 꿰뚫었다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%의 좁은 틈을 비집어 삽입했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%의 좁은 틈을 비집어 삽입했다
 			else
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
 			endif
 		endif
 	elseif attackedIdx == 124 || attackedIdx == 125
@@ -108,85 +106,85 @@
 		; Already inserted
 		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 수치스러운 장소를 낱낱이 파헤치고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 수치스러운 장소를 낱낱이 파헤치고 있다
 			elseif RAND:4 == 0
-				printFormW %kr(CALLNAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 절대 들키면 안되는 깊은 약점까지 낱낱이 파헤치기 시작했다
+				printFormL %kr(CALLNAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 절대 들키면 안되는 깊은 약점까지 낱낱이 파헤치기 시작했다
 			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% 오나홀을 씻듯이 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속을 긁어냈다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% 오나홀을 씻듯이 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속을 긁어냈다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "이", "가")% 아프도록 맥동했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "이", "가")% 아프도록 맥동했다
 			else
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안 깊은곳까지 스며들었다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안 깊은곳까지 스며들었다
 			endif
 		; Insert
 		else
 			call insertIntoMaster(attackedIdx, 1)
 
 			if RAND:5 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 향해 거침없이 나아갔다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 향해 거침없이 나아갔다
 			elseif RAND:4 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%마저 정복하고자 좁은 길목을 사정없이 벌렸다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%마저 정복하고자 좁은 길목을 사정없이 벌렸다
 			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 아프게 꿰뚫었다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 아프게 꿰뚫었다
 			elseif RAND:2 == 0
-				printFormW 오줌을 배출하던 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "이", "가")% %CALLNAME:TARGET%에게 반대로 희롱당하며 평소에는 느낄 수 없던 쾌감을 주고 있다
+				printFormL 오줌을 배출하던 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "이", "가")% %CALLNAME:TARGET%에게 반대로 희롱당하며 평소에는 느낄 수 없던 쾌감을 주고 있다
 			else
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
 			endif
 		endif
 	elseif attackedIdx == 113
 		; nipplefuck check
 		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 가슴 안쪽 깊숙한 곳을 핥듯이 탐하고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 가슴 안쪽 깊숙한 곳을 핥듯이 탐하고 있다
 			elseif RAND:4 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 유선 안쪽을 차근차근 다지듯이 희롱하고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 유선 안쪽을 차근차근 다지듯이 희롱하고 있다
 			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 젖가슴이 불타는 느낌을 받을 정도로 격렬하게 왕복운동을 반복했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 젖가슴이 불타는 느낌을 받을 정도로 격렬하게 왕복운동을 반복했다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "이", "가")% 헐거워질 정도로 빠르게 비벼대고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "이", "가")% 헐거워질 정도로 빠르게 비벼대고 있다
 			else
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 마구 찔러 찔꺽거리는 소리가 나는 것을 즐기고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 마구 찔러 찔꺽거리는 소리가 나는 것을 즐기고 있다
 			endif
 		
 		elseif RAND:5 == 0 && ABL:attackedIdx > 3
 			call insertIntoMaster(attackedIdx, 1)
 
 			if RAND:5 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속으로 부드럽게 삽입했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속으로 부드럽게 삽입했다
 			elseif RAND:4 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%의 끝부분을 찔러, 그 안쪽을 탐하기 시작했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%의 끝부분을 찔러, 그 안쪽을 탐하기 시작했다
 			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 살살 건드려 보더니 그대로 그 안으로 삽입했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 살살 건드려 보더니 그대로 그 안으로 삽입했다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 사이를 억지로 비집고 들어가 단번에 끝을 찔렀다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 사이를 억지로 비집고 들어가 단번에 끝을 찔렀다
 			else
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 한껏 약올리다가 푹 찔러 깊숙한 곳까지 음미하기 시작했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 한껏 약올리다가 푹 찔러 깊숙한 곳까지 음미하기 시작했다
 			endif
 		else
 			if RAND:5 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 쿡쿡 건드리며 자극하고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 쿡쿡 건드리며 자극하고 있다
 			elseif RAND:4 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%의 근처를 자극하며 의도적으로 %kr(CALLNAME:MASTER, "이", "가")% %kr(partStr(attackedIdx), "을", "를")% 만져주길 기대하게 만든다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%의 근처를 자극하며 의도적으로 %kr(CALLNAME:MASTER, "이", "가")% %kr(partStr(attackedIdx), "을", "를")% 만져주길 기대하게 만든다
 			elseif RAND:3 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 끝을 살살 약올리고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 끝을 살살 약올리고 있다
 			elseif RAND:2 == 0
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 살살 간지럽히고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 살살 간지럽히고 있다
 			else
-				printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 조금씩 꼬집으며 자극하고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 조금씩 꼬집으며 자극하고 있다
 			endif
 		endif
 	else
 		if RAND:5 == 0
-			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 노렸다
+			printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 노렸다
 		elseif RAND:4 == 0
-			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 부드럽게 쓰다듬었다
+			printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 부드럽게 쓰다듬었다
 		elseif RAND:3 == 0
-			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 꽉 조였다
+			printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 꽉 조였다
 		elseif RAND:2 == 0
-			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 격렬하게 자극했다
+			printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 격렬하게 자극했다
 		else
-			printFormW %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 근처를 기어다녔다
+			printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 근처를 기어다녔다
 		endif
 	endif
 

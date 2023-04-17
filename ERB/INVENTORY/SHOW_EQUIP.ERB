@@ -15,8 +15,6 @@ $wrapper
 			goto wrapper
 		endif
 
-		$equipChange
-
 		printFormL %EQUIPNAME:equipSlotIdx% 장비 목록
 		printL 교체할 장비를 아래에서 선택해주세요
 		drawLine
@@ -32,14 +30,8 @@ $wrapper
 		
 		if RESULT == 1000
 			call unequipMasterEquips(equipSlotIdx)
-			if !RESULT
-				goto equipChange
-			endif
 		else
 			call changeMasterEquips(equipSlotIdx, RESULT)
-			if !RESULT
-				goto equipChange
-			endif
 		endif
 	endif
 

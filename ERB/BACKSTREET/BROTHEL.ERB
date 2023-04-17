@@ -1,10 +1,10 @@
 ﻿@brothel
 
+$inputLoop
 	printFormL %kr(CALLNAME:MASTER, "은", "는")% 매음굴로 발걸음을 옮겼다
 	printFormL [1] - 미구현
 	printFormL [0] - 돌아가기
 
-$inputLoop
 	input
 	
 	if RESULT == 1
@@ -12,6 +12,6 @@ $inputLoop
 	elseif RESULT == 0
 		return
 	else
-		clearLine 1
+		clearLine 4
 		goto inputLoop
 	endif

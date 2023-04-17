@@ -1,0 +1,24 @@
+﻿@COM_ABLE1007
+
+	; 윙부츠 착용시 사용가능
+	return isSkillAvailable(1007, "신발", 1402)
+
+@COM1007
+
+	printFormL %kr(CALLNAME:MASTER, "은", "는")% 신비한 장화의 힘으로 빠르게 날아갔다
+	
+	if BASE:MASTER:마력 < 80
+		printL 하지만 마력이 부족하여 실패했다...
+		return 0
+	endif
+
+	BASE:MASTER:마력 -= 80
+	
+	; 자신의 이동뱡행대로 끝까지 전진
+	TCVAR:MASTER:상하 += 5 * TFLAG:전턴상하이동
+	TCVAR:MASTER:좌우 += 5 * TFLAG:전턴좌우이동
+	
+	TCVAR:MASTER:상하 = LIMIT(TCVAR:MASTER:상하, -4, 4)
+	TCVAR:MASTER:좌우 = LIMIT(TCVAR:MASTER:좌우, -4, 4)
+
+	return 1

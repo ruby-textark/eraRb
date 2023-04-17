@@ -1,7 +1,21 @@
-﻿@increaseArousal(partIdx, amount)
+﻿
+@calcArousalValue(partIdx, amount)
+#function
 #dim dynamic partIdx
 #dim dynamic amount
 
-	PALAM:MASTER:(partIdx + 400) += amount
-	
+	returnf amount * (ABL:MASTER:partIdx + 1) * (ABL:TARGET:성교기술 + 1)
+
+@increaseArousal(partIdx, amount)
+#dim dynamic partIdx
+#dim dynamic amount
+
+	PALAM:MASTER:partIdx += calcArousalValue(partIdx, amount)
+
 	call checkOrgasm
+
+@increaseArousalToUp(partIdx, amount)
+#dim dynamic partIdx
+#dim dynamic amount
+
+	UP:partIdx += calcArousalValue(partIdx, amount)

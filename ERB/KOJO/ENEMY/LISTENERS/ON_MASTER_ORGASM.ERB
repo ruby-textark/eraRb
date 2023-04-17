@@ -1,5 +1,5 @@
 ﻿@onMasterOrgasm_e(orgasmParts, orgasmCounts)
-#dim dynamic orgasmParts, 100
+#dim ref orgasmParts, 0
 #dim dynamic orgasmCounts
 
 	tryccallform c{CFLAG:TARGET:캐릭터번호}onMasterOrgasm(orgasmParts, orgasmCounts)
@@ -9,7 +9,7 @@
 	endcatch
 
 
-@onMasterInsuffOrgasm_e()
+@onMasterInsuffOrgasm_e
 
 	tryccallform c{CFLAG:TARGET:캐릭터번호}onMasterInsuffOrgasm()
 		;

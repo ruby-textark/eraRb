@@ -3,7 +3,7 @@
 
 	if getBit(CFLAG:MASTER:무의식중사건, 0)
 		if partIdx == 121
-			printFormW 정신을 차린 %kr(CALLNAME:MASTER, "이", "가")% 갑작스레 찾아온 통증에 얼굴을 찌푸렸다
+			printFormL 정신을 차린 %kr(CALLNAME:MASTER, "이", "가")% 갑작스레 찾아온 통증에 얼굴을 찌푸렸다
 		endif
 
 		return
@@ -14,15 +14,15 @@
 	if partIdx == 121
 		if FLAG:성교합의
 			if isMasterLewd() && isMasterSubmissive()
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 기쁘게 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 바쳤다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% 기쁘게 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 바쳤다
 			elseif isMasterLewd() && !isMasterSubmissive()
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃었다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃었다
 			elseif !isMasterLewd() && isMasterSubmissive()
 				; 비교적 일반적인 상황
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% 어리둥절하며 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 주었다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% 어리둥절하며 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 주었다
 			elseif !isMasterLewd() && !isMasterSubmissive()
 				; 이 끔찍한 기억을 하루빨리 잊고싶음
-				printFormW %kr(CALLNAME:MASTER, "은", "는")% %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃게 되었다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃게 되었다
 			endif
 		endif
 	endif

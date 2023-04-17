@@ -1,0 +1,18 @@
+﻿; 붉은보석지팡이
+@isUsable1606(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1606(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1606
+	return 1
+@isUnequipable1606
+	return 1
+
+@onEquip1605
+	ABL:MASTER:마법공격 += 8
+
+@onUnequip1605
+	ABL:MASTER:마법공격 -= 8

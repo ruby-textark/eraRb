@@ -14,7 +14,12 @@
 #dims dynamic string
 
 	setColor color
-	printFormW %string%
+	if FLAG:전투중
+		printFormL %string%
+		twait 1000, 0
+	else
+		printFormW %string%
+	endif
 	resetColor
 
 	; RESULT sideeffect때문에

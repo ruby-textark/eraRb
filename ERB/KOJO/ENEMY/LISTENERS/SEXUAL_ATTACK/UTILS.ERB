@@ -6,7 +6,7 @@
 		returnf 0
 	endif
 	
-	if CFLAG:(200 + partIdx) == 2 && !ABL:TARGET:도구사용
+	if CFLAG:(200 + partIdx) == 2 && !CFLAG:TARGET:성기구사용
 		returnf 0
 	elseif CFLAG:(200 + partIdx) > 2
 		returnf 0

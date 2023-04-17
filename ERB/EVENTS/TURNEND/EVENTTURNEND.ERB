@@ -1,16 +1,10 @@
 ﻿@EVENTTURNEND
 
 	printFormL 하루가 끝났습니다
-	
-	BASE:MASTER:체력 = LIMIT(BASE:MASTER:체력 + MAXBASE:MASTER:체력 / 10, 0, MAXBASE:MASTER:체력)
-	BASE:MASTER:마력 = LIMIT(BASE:MASTER:마력 + MAXBASE:MASTER:마력 / 20, 0, MAXBASE:MASTER:마력)
 
 	DAY++
-	
-	call expCheck
-	call juelCheck
-	call ablCheck
-	call talentCheck
+
+	call statsUpgrade
 
 	call parasite
 	call stdStep

@@ -2,6 +2,8 @@
 #dim dynamic partIdx
 #dim dynamic mobDrop
 
+	FLAG:전투중 = 0
+
 	; 삽입상태초기화
 	for partIdx, 101, 200
 		call outFromMaster(partIdx, 1)
@@ -53,5 +55,7 @@
 	
 	CFLAG:MASTER:전투결과 = LIMIT(CFLAG:MASTER:전투결과, -10, 10)
 
+	call statsUpgrade
 	call afterAction
+
 	begin shop

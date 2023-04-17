@@ -11,10 +11,6 @@
 	call ablUpLoopByStr("순종", "순종", "")
 	; 욕망
 	call ablUpLoopByStr("욕망", "욕정", "")
-	; 기교
-	call ablUpLoopByStr("기교", "습득", "")
-	; 화술
-	call ablUpLoopByStr("화술", "습득", "대화경험")
 
 @ablUpLoop(ablIdx, juelIdx, expIdx)
 #dim dynamic ablIdx
@@ -41,7 +37,7 @@
 #dims dynamic juelStr
 #dims dynamic expStr
 
-	while 1
+	while ABL:MASTER:ablStr < MaxAblLevel
 		if strlens(juelStr) && JUEL:MASTER:juelStr < JuelReq:(ABL:MASTER:ablStr + 1)
 			break
 		endif

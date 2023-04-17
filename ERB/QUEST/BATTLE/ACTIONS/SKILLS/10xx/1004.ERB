@@ -1,0 +1,13 @@
+﻿@COM_ABLE1004
+
+	; 집중의서클릿 장착시 사용가능
+	
+	return isSkillAvailable(1004, "모자", 1104) && !hasBuff(MASTER, "숨고르기")
+
+@COM1004
+
+	printFormL %kr(CALLNAME:MASTER, "은", "는")% 잠시 숨을 고른다
+	
+	call applyBuffTo(MASTER, "숨고르기", 1)
+
+	return 1

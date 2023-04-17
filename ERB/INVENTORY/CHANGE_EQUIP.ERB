@@ -3,35 +3,65 @@
 #dim dynamic equipItemIdx
 
 	if equipSlotIdx < 11 || 19 < equipSlotIdx
-		printL 잘못된 장비 위치입니다
+		printW 잘못된 장비 위치입니다
 		return 0
 	endif
 
 	if ITEM:equipItemIdx == 0
-		printL 해당 장비 아이템을 소지하고 있지 않습니다
+		printW 해당 장비 아이템을 소지하고 있지 않습니다
 		return 0
 	endif
 	
-	if EQUIP:MASTER:equipSlotIdx
-		callForm onUnequip{EQUIP:MASTER:equipSlotIdx}
-	endif
 	
-	EQUIP:MASTER:equipSlotIdx = equipItemIdx
+	if EQUIP:MASTER:equipSlotIdx
+		tryccallform isUnequipable{equipItemIdx}
+			if RESULT
+				callForm onUnequip{EQUIP:MASTER:equipSlotIdx}
+			else
+				printW 해당 위치에 장착된 아이템을 해제할 수 없습니다
+				return 0
+			endif
+		catch
+			printW 해당 위치에 장착된 아이템을 해제할 수 없습니다
+			return 0
+		endcatch
+	endif
+	EQUIP:MASTER:equipSlotIdx = 0
+	
+	tryccallform isEquipable{equipItemIdx}
+		if RESULT
+			EQUIP:MASTER:equipSlotIdx = equipItemIdx
+		else
+			printW 해당 아이템을 장비할 수 없습니다
+			return 0
+		endif
+	catch
+		printW 해당 아이템을 장비할 수 없습니다
+		return 0
+	endcatch
+
 	callForm onEquip{EQUIP:MASTER:equipSlotIdx}
 
-	printFormL %EQUIPNAME:equipSlotIdx% 장비를 %kr(ITEMNAME:equipItemIdx, "으로", "로")% 교체했습니다
+	printFormW %EQUIPNAME:equipSlotIdx% 장비를 %kr(ITEMNAME:equipItemIdx, "으로", "로")% 교체했습니다
 	
 	return 1
 
 @unequipMasterEquips(equipSlotIdx)
 #dim dynamic equipSlotIdx
 
-	if EQUIP:MASTER:equipSlotIdx
-		callForm onUnequip{EQUIP:MASTER:equipSlotIdx}
-	endif
+	tryccallform isUnequipable{EQUIP:MASTER:equipSlotIdx}
+		if RESULT
+			callForm onUnequip{EQUIP:MASTER:equipSlotIdx}
+		else
+			printW 해당 위치에 장착된 아이템을 해제할 수 없습니다
+			return 0
+		endif
+	catch
+		printW 해당 위치에 장착된 아이템을 해제할 수 없습니다
+		return 0
+	endcatch
 
 	EQUIP:MASTER:equipSlotIdx = 0
-
-	printFormL %EQUIPNAME:equipSlotIdx% 장비를 해제했습니다
+	printFormW %EQUIPNAME:equipSlotIdx% 장비를 해제했습니다
 	
 	return 1

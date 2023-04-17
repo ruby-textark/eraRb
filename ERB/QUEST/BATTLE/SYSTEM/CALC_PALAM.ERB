@@ -13,19 +13,25 @@
 		endif
 
 		; 기본적으로 SOURCE를 받아옴
-		; ABL 적용
-		UP:partIdx += (SOURCE:MASTER:partIdx) * (ABL:MASTER:partIdx + 1)
-		
-		UP:partIdx *= (ABL:TARGET:기교 + 1)
-		
-		UP:욕정 += PALAM:MASTER:partIdx / 100
+		call increaseArousalToUp(partIdx, SOURCE:MASTER:partIdx)
+
+		UP:욕정 += PALAM:MASTER:partIdx / 500
 	next
+	
+	; 사정당할 경우 욕정 증가. 발정일 경우 3배 효과적임
+	UP:욕정 += (SOURCE:MASTER:피사정) * (2 * TALENT:MASTER:발정 + 1)
 
 	; 순종
 	UP:순종 += power(2, min(submissiveParam() / 2, 20))
+	; 피격시 순종 증가
+	UP:순종 += SOURCE:MASTER:피격
+
 	if TALENT:MASTER:겁쟁이
-		UP:순종 += SOURCE:MASTER:피격
+		TIMES UP:순종, 2
 	endif
+	
+	; 공격 시 순종 차감
+	UP:순종 -= SOURCE:MASTER:공격
 
 	; 기본 사정감 증가
 	if TFLAG:이번턴성공격
@@ -37,6 +43,9 @@
 			PALAM:TARGET:사정 += 900
 		endif
 	endif
+
+	; 피격시 고통 증가
+	UP:고통 += SOURCE:MASTER:피격
 
 	; 삽입체크
 	if CFLAG:MASTER:삽입질 == 1

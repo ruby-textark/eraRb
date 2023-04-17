@@ -7,13 +7,18 @@
 	; 구슬체크
 	for palamIdx, 0, varSize("PALAM")
 		for charaIdx, 0, CHARANUM
-		
+
+			; 일단 GOTJUEL이 남아있으면 이쪽부터 인계
+			JUEL:charaIdx:palamIdx += GOTJUEL:charaIdx:palamIdx
+			GOTJUEL:charaIdx:palamIdx = 0
+
+			; 낭비되는 파라미터 없도록 주의
 			for pLevel, 0, 11
 				if PALAM:charaIdx:palamIdx >= PALAMLV:(10 - pLevel)
 					JUEL:charaIdx:palamIdx += PALAMLV:(10 - pLevel) / 10
 				endif
 			next
-		
+
 			PALAM:charaIdx:palamIdx = 0
 		next
 	next

@@ -1,0 +1,7 @@
+﻿@isSkillAvailable(skillIdx, equipSlotStr, itemIdx)
+#function
+#dim dynamic skillIdx
+#dims dynamic equipSlotStr
+#dim dynamic itemIdx
+
+	returnf SkillMastery:skillIdx >= 501 || EQUIP:MASTER:equipSlotStr == itemIdx

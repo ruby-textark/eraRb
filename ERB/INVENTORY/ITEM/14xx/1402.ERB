@@ -1,0 +1,20 @@
+﻿; 윙부츠
+@isUsable1402(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1402(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1402
+	return 1
+@isUnequipable1402
+	return 1
+
+@onEquip1402
+	ABL:MASTER:방어력 += 1
+	ABL:MASTER:마법내성 += 1
+
+@onUnequip1402
+	ABL:MASTER:방어력 -= 1
+	ABL:MASTER:마법내성 -= 1

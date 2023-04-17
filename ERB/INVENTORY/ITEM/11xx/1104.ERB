@@ -1,0 +1,18 @@
+﻿; 집중의서클릿
+@isUsable1104(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1104(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1104
+	return 1
+@isUnequipable1104
+	return 1
+
+@onEquip1104
+	ABL:MASTER:마법내성 += 1
+
+@onUnequip1104
+	ABL:MASTER:마법내성 -= 1

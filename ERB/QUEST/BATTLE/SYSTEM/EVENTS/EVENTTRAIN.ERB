@@ -4,6 +4,8 @@
 	printFormW %NAME:TARGET% %kr(CALLNAME:TARGET, "을", "를")% 발견. 전투를 개시합니다.
 	printL
 	
+	FLAG:전투중 = 1
+	
 	; CFLAG -> PALAM 인계
 	for partIdx, 101, 200
 		PALAM:MASTER:partIdx = CFLAG:MASTER:(partIdx + 400)

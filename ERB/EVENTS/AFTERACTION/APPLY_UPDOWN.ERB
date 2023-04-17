@@ -1,5 +1,13 @@
 ﻿@applyUpDown
+#dim dynamic sourceIdx
+#dim dynamic charaIdx
 #dim dynamic palamIdx
+
+	for sourceIdx, 0, varSize("SOURCE")
+		for charaIdx, 0, CHARANUM
+			SOURCE:charaIdx:sourceIdx = 0
+		next
+	next
 
 	for palamIdx, 0, varSize("PALAM")
 		PALAM:MASTER:palamIdx += UP:palamIdx - DOWN:palamIdx

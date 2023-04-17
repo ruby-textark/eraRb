@@ -1,19 +1,19 @@
-﻿@COM_ABLE101
+﻿@COM_ABLE21
 
 	return isTargetInRange()
 
-@COM101
+@COM21
 #dim dynamic damageBase
 
-	printW 급소를 노렸다!
+	printL 급소를 노렸다!
 	
 	if !checkAmmo() && !isSameLocation()
-		printFormW 하지만 %kr(getAmmoName(), "이", "가")% 부족하여 실패했다...
+		printFormL 하지만 %kr(getAmmoName(), "이", "가")% 부족하여 실패했다...
 		return 0
 	endif
 
 	if RAND:10 < 6
-		printW 빗나갔다!
+		printL 빗나갔다!
 		return 1
 	endif
 	

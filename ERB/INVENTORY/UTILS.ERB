@@ -1,4 +1,4 @@
-﻿@getAttackRange()
+﻿@getAttackRange
 #function
 
 	if EQUIP:MASTER:16 == 1603
@@ -9,7 +9,7 @@
 		returnf 0
 	endif
 
-@checkAmmo()
+@checkAmmo
 #function
 
 	if EQUIP:MASTER:16 == 1604
@@ -18,7 +18,7 @@
 		returnf 1
 	endif
 
-@getAmmoName()
+@getAmmoName
 #functions
 
 	if EQUIP:MASTER:무기 == 1604
@@ -27,7 +27,7 @@
 		returnf ""
 	endif
 	
-@getAmmoAtk()
+@getAmmoAtk
 #function
 
 	if EQUIP:MASTER:무기 == 1604
@@ -36,7 +36,7 @@
 		returnf 0
 	endif
 
-@useAmmo()
+@useAmmo
 
 	if EQUIP:MASTER:무기 == 1604
 		ITEM:화살--

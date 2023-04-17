@@ -20,22 +20,20 @@
 		endif
 	endif
 
-	printForm %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의\ 
-
 	; Hole
 	if attackedIdx == 121 || attackedIdx == 123
 		; Already inserted
 		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
-				printFormL %kr(attackedName, "을", "를")% 쉴틈없이 쑤셔댔다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "을", "를")% 쉴틈없이 쑤셔댔다
 			elseif RAND:4 == 0
-				printFormL %kr(attackedName, "을", "를")% 계속해서 사용했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "을", "를")% 계속해서 사용했다
 			elseif RAND:3 == 0
-				printFormL %kr(attackedName, "을", "를")% 장난감처럼 다루고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "을", "를")% 장난감처럼 다루고 있다
 			elseif RAND:2 == 0
-				printFormL %kr(attackedName, "이", "가")% 아프도록 바벼댔다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "이", "가")% 아프도록 바벼댔다
 			else
-				printFormL %attackedName% 안 깊은곳까지 찌르고 있다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %attackedName% 안 깊은곳까지 찌르고 있다
 			endif
 		; Insert
 		else

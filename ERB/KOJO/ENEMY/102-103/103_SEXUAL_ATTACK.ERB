@@ -18,8 +18,8 @@
 	attackedIdx = availableParts:(RAND:partsCount)
 	TFLAG:이번턴성공격 = attackedIdx
 	
-	printFormW %kr(CALLNAME:TARGET, "이", "가")% 꾸물거리며 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안으로 기어들어간다
-	printFormW %kr(CALLNAME:MASTER, "은", "는")% [기생]상태가 되었다.
+	printFormL %kr(CALLNAME:TARGET, "이", "가")% 꾸물거리며 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안으로 기어들어간다
+	printFormL %kr(CALLNAME:MASTER, "은", "는")% [기생]상태가 되었다.
 	call insertIntoMaster(attackedIdx, 3)
 	CFLAG:TARGET:기생성공 = 1
 	

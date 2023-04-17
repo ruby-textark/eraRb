@@ -1,21 +1,28 @@
 ﻿@startHypno
 	
-	printW
+	printL
+	twait 500, 0
 
 	setBgColor 0xffffff
 	resetBgColor
 	
 	call sleepMaster
 	
+	EXP:MASTER:최면경험++
+	
 @endHypno
 	
-	printW .
-	printW .
-	printW .
+	twait 1000, 0
+	printL .
+	twait 1000, 0
+	printL .
+	twait 1000, 0
+	printL .
+	twait 1000, 0
 	
 	call wakeupMaster
 
-@hypnoSex()
+@hypnoSex
 #dim dynamic partIdx
 #dim dynamic expResult, 200
 
@@ -31,7 +38,7 @@
 		endif
 
 		EXP:MASTER:partIdx += expResult:partIdx
-		printFormW %EXPNAME:partIdx%+{expResult:partIdx}
+		printFormL %EXPNAME:partIdx%+{expResult:partIdx}
 	next
 	
 	for partIdx, 101, 200
@@ -46,4 +53,28 @@
 			call outFromMaster(partIdx, 1)
 			call delMobChara
 		endif
+	next
+
+@hypnoMasturbate
+#dim dynamic partIdx
+#dim dynamic expResult, 200
+
+	repeat BASE:MASTER:최면심도
+		partIdx = getOrdinarySexualAtkBodyPart()
+
+		expResult:partIdx += (1 + RAND:2)
+	rend
+	
+	for partIdx, 101, 200
+		if !expResult:partIdx
+			continue
+		endif
+
+		EXP:MASTER:partIdx += expResult:partIdx
+		EXP:MASTER:자위경험++
+		printFormL %EXPNAME:partIdx%+{expResult:partIdx}
+	next
+	
+	for partIdx, 101, 200
+		call increaseArousal(partIdx, expResult:partIdx * 100)
 	next

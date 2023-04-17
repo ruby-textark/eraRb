@@ -1,15 +1,15 @@
-﻿@COM_ABLE501
+﻿@COM_ABLE1001
 
 	; 나무지팡이 장착시 사용가능
-	return EQUIP:MASTER:무기 == 1605
+	return isSkillAvailable(1001, "무기", 1605)
 
-@COM501
+@COM1001
 #dim dynamic damageBase
 
-	printW 마법 화살을 발사했다!
+	printL 마법 화살을 발사했다!
 	
 	if BASE:MASTER:마력 < 40
-		printFormW 하지만 마력이 부족하여 실패했다...
+		printL 하지만 마력이 부족하여 실패했다...
 		return 0
 	endif
 	BASE:MASTER:마력 -= 40

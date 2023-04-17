@@ -1,0 +1,15 @@
+﻿
+@checkSkillMastery
+
+	; 기본 커맨드 사용시 스킬 마스터리가 증가하지 않음
+	if SELECTCOM < 1000
+		; 단계별로 습득 파라미터 차등 획득
+		PALAM:MASTER:습득 += power(2, CFLAG:TARGET:캐릭터번호 / 100) * (40 + RAND:10)
+	endif
+
+	; 100이 되면 스킬 마스터리를 통하여 원본 아이템 없이 해당 스킬 사용 가능
+	if SkillMastery:SELECTCOM < 500
+
+		; 단계별로 경험 차등 상승
+		SkillMastery:SELECTCOM += (CFLAG:TARGET:캐릭터번호 / 100)
+	endif

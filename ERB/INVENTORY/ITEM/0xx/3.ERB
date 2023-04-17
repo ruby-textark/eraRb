@@ -1,10 +1,10 @@
 ﻿; 화염병
-@isUsable1(targetIdx)
+@isUsable3(targetIdx)
 #dim dynamic targetIdx
 
 	return 1
 
-@onUseItem1(targetIdx)
+@onUseItem3(targetIdx)
 #dim dynamic targetIdx
 
 	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:2, "을", "를")% 사용했다.
@@ -12,10 +12,10 @@
 
 	return 1
 
-@isEquipable1()
+@isEquipable3
 	return 0
-@isUnequipable1()
+@isUnequipable3
 	return 0
 
-@onEquip1()
-@onUnequip1()
+@onEquip3
+@onUnequip3

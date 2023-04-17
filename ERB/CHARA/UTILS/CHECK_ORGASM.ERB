@@ -13,9 +13,11 @@
 	orgasmThres = masterOrgasmThres()
 	for partIdx, 101, 200
 		if PALAM:MASTER:partIdx >= orgasmThres
-			; todo 절정구상
+			orgasmParts:(orgasmCount++) = partIdx
 			printFormL %partStrRaw(partIdx)% 절정
 			DOWN:partIdx = PALAM:MASTER:partIdx - PALAM:MASTER:partIdx % orgasmThres
+			GOTJUEL:partIdx += 10
+			TIMES GOTJUEL:partIdx, 1.8
 
 			; 욕정 증가
 			; 약절정
@@ -38,9 +40,12 @@
 				EXP:MASTER:미약절정경험 += CFLAG:MASTER:partIdx / orgasmThres
 			endif
 			EXP:MASTER:(partIdx + 100) += PALAM:MASTER:partIdx / orgasmThres
-		elseif PALAM:MASTER:partIdx >= 10000
+
+		elseif PALAM:MASTER:partIdx >= orgasmThres / (1 + MARK:MASTER:절정봉인)
 			; 절정봉인 적용중
 			insuffOrgasm++
+			UP:굴복 += PALAM:MASTER:partIdx / 100
+			UP:욕정 *= 2 * orgasmThres / PALAM:MASTER:partIdx
 		endif
 	next
 
@@ -60,6 +65,8 @@
 				BASE:MASTER:체력 -= MIN(orgasmCount, 3) * MAXBASE:MASTER:체력 / 50
 			endif
 		endif
+
+		BASE:MASTER:체력 = MAX(BASE:MASTER:체력 - MAXBASE:MASTER:체력 / 20, 0)
 
 		; todo 절정구상
 		call onMasterOrgasm_m(orgasmParts, orgasmCount)
