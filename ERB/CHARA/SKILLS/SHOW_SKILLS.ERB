@@ -36,8 +36,18 @@ $skillLoop
 		wait
 	elseif RESULT == SkillNumber + 1
 		return 0
-	elseif SkillNumberStart < RESULT && RESULT < SkillNumber && SkillMastery:RESULT == 500
-		
+	elseif SkillNumberStart < RESULT && RESULT < SkillNumber
+		if SkillMastery:RESULT < 500
+			printFormW 아직 %TRAINNAME:RESULT% 스킬의 숙련도가 부족합니다
+		elseif SkillMastery:RESULT > 500
+			printFormW %TRAINNAME:RESULT% 스킬은 이미 마스터가 끝난 상태입니다
+		elseif JUEL:MASTER:습득 < 100
+			printFormW 습득의 구슬이 부족하여 %TRAINNAME:RESULT% 스킬을 마스터할 수 없습니다
+		else
+			JUEL:MASTER:습득 -= 100
+			printFormW %TRAINNAME:RESULT% 스킬을 마스터했습니다.
+			printFormW 앞으로는 해당 스킬이 귀속된 장비를 착용하지 않아도 스킬을 사용할 수 있습니다
+		endif
 	endif
 	
 	goto skillLoop
