@@ -1,4 +1,7 @@
 ﻿; 붉은보석지팡이
+@itemExpl1606()
+	return "{마법공격+8}\n{마력폭탄}\n단단한 나무 재질에 끝을 붉은 보석으로 장식한 지팡이다."
+
 @isUsable1606(targetIdx)
 #dim dynamic targetIdx
 	return 0
@@ -11,8 +14,8 @@
 @isUnequipable1606
 	return 1
 
-@onEquip1605
+@onEquip1606
 	ABL:MASTER:마법공격 += 8
 
-@onUnequip1605
+@onUnequip1606
 	ABL:MASTER:마법공격 -= 8

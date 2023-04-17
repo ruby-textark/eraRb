@@ -1,4 +1,7 @@
 ﻿; 모유체질약
+@itemExpl908()
+	return "사용시 모유체질을 얻어, 임신 중이 아니어도 모유를 낼 수 있게 된다."
+
 @isUsable908(targetIdx)
 #dim dynamic targetIdx
 
@@ -16,6 +19,8 @@
 	else
 		printFormW %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 잃었다.
 	endif
+	
+	MAXBASE:MASTER:모유 = MAX(1, MAXBASE:MASTER:모유)
 	
 	return 1
 

@@ -1,18 +1,21 @@
 ﻿; 너클
-@isUsable1605(targetIdx)
+@itemExpl1607()
+	return "{공격력+2}{조건:전투기술>=1}\n{넉백}\n무난한 너클이다. 사용에 주의가 필요하다."
+
+@isUsable1607(targetIdx)
 #dim dynamic targetIdx
 	return 0
 
-@onUseItem1605(targetIdx)
+@onUseItem1607(targetIdx)
 #dim dynamic targetIdx
 
-@isEquipable1605
-	return 1
-@isUnequipable1605
+@isEquipable1607
+	return ABL:MASTER:전투기술 > 0
+@isUnequipable1607
 	return 1
 
-@onEquip1605
+@onEquip1607
 	ABL:MASTER:공격력 += 2
 
-@onUnequip1605
+@onUnequip1607
 	ABL:MASTER:공격력 -= 2

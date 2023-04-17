@@ -1,14 +1,17 @@
 ﻿; 가죽갑옷상의
-@isUsable1102(targetIdx)
+@itemExpl1202()
+	return "{방어력+5}\n손질된 가죽으로 만들어진 가죽 갑옷이다."
+
+@isUsable1202(targetIdx)
 #dim dynamic targetIdx
 	return 0
 
-@onUseItem1102(targetIdx)
+@onUseItem1202(targetIdx)
 #dim dynamic targetIdx
 
-@isEquipable1102
+@isEquipable1202
 	return 1
-@isUnequipable1102
+@isUnequipable1202
 	return 1
 
 @onEquip1202
