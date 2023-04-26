@@ -1,7 +1,7 @@
 ﻿@COM_ABLE1001
 
 	; 나무지팡이 장착시 사용가능
-	return isSkillAvailable(1001, "무기", 1605)
+	return !isMasterDown() && isSkillAvailable(1001, "무기", 1605)
 
 @COM1001
 #dim dynamic damageBase

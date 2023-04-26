@@ -23,7 +23,11 @@ $moveLoop
 	
 	printL
 	printL [w] 상 [s] 하 [a] 좌 [d] 우 이동
-	printL [q] 행동 [e] 상태창
+	printL [q] 행동 [e] 상태창 [r] 대기
+	
+	if shouldMasterDown()
+		return
+	endif
 	
 	oneinputs
 	
@@ -63,9 +67,11 @@ $moveLoop
 		return
 	elseif RESULTS == "e" || RESULTS == "E"
 		call showMasterInfo
+	elseif RESULTS == "r" || RESULTS == "R"
+		call afterBattleAction(1)
 	endif
 
-	clearLine (LINECOUNT - savedLineCount)
+	; clearLine (LINECOUNT - savedLineCount)
 	goto moveLoop
 
 @showPosition

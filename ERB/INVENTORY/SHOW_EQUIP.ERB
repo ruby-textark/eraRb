@@ -25,11 +25,22 @@ $wrapper
 			endif
 		next
 		
-		printL [1000] - 해제
+		print [1000] - 
+
+		if EQUIP:MASTER:equipSlotIdx == 0
+			printL 돌아가기
+		else
+			printL 해제
+		endif
+
 		input
 		
 		if RESULT == 1000
-			call unequipMasterEquips(equipSlotIdx)
+			if EQUIP:MASTER:equipSlotIdx == 0
+				RESULT = 1
+			else
+				call unequipMasterEquips(equipSlotIdx)
+			endif
 		else
 			call changeMasterEquips(equipSlotIdx, RESULT)
 		endif

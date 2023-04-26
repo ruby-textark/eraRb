@@ -1,7 +1,7 @@
 ﻿@COM_ABLE1003
 
 	; 음마의반지 장착시 범위 내 존재할 경우 사용가능
-	return isSkillAvailable(1003, "장신구", 1702) && isTargetInRange()
+	return !isMasterDown() &&  isSkillAvailable(1003, "장신구", 1702) && isTargetInRange()
 
 @COM1003
 #dim dynamic damageBase

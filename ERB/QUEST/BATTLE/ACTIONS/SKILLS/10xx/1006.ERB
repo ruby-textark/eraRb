@@ -1,7 +1,7 @@
 ﻿@COM_ABLE1006
 
 	; 단검 착용시 사용가능
-	return isSkillAvailable(1006, "무기", 1601) && isTargetInRange()
+	return !isMasterDown() &&  isSkillAvailable(1006, "무기", 1601) && isTargetInRange()
 
 @COM1006
 #dim dynamic damageBase

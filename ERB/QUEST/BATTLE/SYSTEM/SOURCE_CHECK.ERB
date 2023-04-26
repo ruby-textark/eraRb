@@ -9,16 +9,22 @@
 	BASE:TARGET:체력 -= LOSEBASE:0
 	BASE:TARGET:마력 -= LOSEBASE:1
 
-	; Check if killed
-	if BASE:TARGET:체력 <= 0
-		begin aftertrain
-		return
-	endif
-
 	LOSEBASE:0 = 0
 	LOSEBASE:1 = 0
 
 $enemyTurn
+
+	; Check if killed
+	if isTargetDown()
+		if !forceAblUp
+			begin aftertrain
+		endif
+
+		if forceAblUp
+			callEvent EVENTCOMEND
+		endif
+		return
+	endif
 	
 	call onEnemyTurn
 
@@ -30,13 +36,7 @@ $enemyTurn
 	elseif TCVAR:MASTER:추가행동 && TCVAR:TARGET:추가행동
 		printFormL 서로에게 추가 행동권이 있기 떄문에 정상적으로 %CALLNAME:MASTER%의 차례가 돌아옵니다
 	endif
-
-	; Parasite!
-	if CFLAG:TARGET:기생성공
-		begin aftertrain
-		return
-	endif
-
+	
 	SOURCE:MASTER:피격 = 1000 * (LOSEBASE:체력 / MAXBASE:MASTER:체력)
 	BASE:MASTER:체력 -= LOSEBASE:체력
 	BASE:MASTER:마력 -= LOSEBASE:마력
@@ -47,11 +47,17 @@ $enemyTurn
 	call calcPalam
 
 	; Check battle end
-	if BASE:MASTER:체력 <= 0
-		begin aftertrain
+	if isBattleOver()
+		if !forceAblUp
+			begin aftertrain
+		endif
+		
+		if forceAblUp
+			callEvent EVENTCOMEND
+		endif
 		return
 	endif
-	
+
 	if forceAblUp
 		callEvent EVENTCOMEND
 	endif

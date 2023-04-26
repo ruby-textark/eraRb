@@ -51,10 +51,10 @@
 		elseif BASE:TARGET:마력 > 200
 			BASE:TARGET:마력 -= 200
 			
-			call colorPrintW(0xcc0044, @"%kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 음탕한 마력을 쏘아보냈다")
+			call colorPrint(0xcc0044, @"%kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 음탕한 마력을 쏘아보냈다\n")
 
 			if RAND:20 < ABL:TARGET:마법공격 - ABL:MASTER:마법내성
-				call colorPrintW(0xcc0044, @"%kr(CALLNAME:MASTER, "은", "는")% 아랫배에 [음문각인]이 새겨졌다")
+				call colorPrint(0xcc0044, @"%kr(CALLNAME:MASTER, "은", "는")% 아랫배에 [음문각인]이 새겨졌다\n")
 				MARK:MASTER:음문각인 = 1
 			else
 				printFormL 하지만 %kr(CALLNAME:MASTER, "은", "는")% 저항해냈다

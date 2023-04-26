@@ -1,7 +1,7 @@
 ﻿@COM_ABLE1005
 
 	; 너클 착용시 사용가능
-	return isSkillAvailable(1005, "무기", 1607) && isTargetInRange()
+	return !isMasterDown() &&  isSkillAvailable(1005, "무기", 1607) && isTargetInRange()
 
 @COM1005
 #dim dynamic damageBase
