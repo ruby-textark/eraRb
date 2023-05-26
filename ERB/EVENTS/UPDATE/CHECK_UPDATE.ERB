@@ -18,9 +18,21 @@
 		printW 수동으로 업데이트 처리를 진행합니다
 	endif
 
+	; 업데이트는 버전에 따라 순차적으로 진행해야 됨
 	if LASTLOAD_VERSION < 7
 		if !FLAG:최면이벤트확률
 			printW 최면 이벤트 확률이 추가되었으니 설정에서 조정해주세요
 			FLAG:최면이벤트확률 = 5
+		endif
+	endif
+
+	if LASTLOAD_VERSION < 8
+		; FLAG 위치 변경됨
+		FLAG:성병보균율 = FLAG:10
+		FLAG:최면이벤트확률 = FLAG:11
+
+		if !FLAG:성희롱확률
+			printW 성희롱 확률이 추가되었으니 설정에서 조정해주세요
+			FLAG:성희롱확률 = 10
 		endif
 	endif

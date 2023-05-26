@@ -1,0 +1,44 @@
+﻿@sexualHarassment
+#dim dynamic harrasmentRate
+#dim dynamic partIdx
+
+	; 육변기형에 처해있으면 일단 발생하지 않음
+	; todo 발생 금지 대신 특별구상 적용할것
+	if FLAG:육변기형시작일
+		return
+	endif
+	
+	; todo 성희롱 구상 완료할것
+	return
+
+	harrasmentRate = FLAG:성희롱확률
+	
+	; 성적 명성에 따라 성희롱 확률 최대 2배 상승
+	harrasmentRate = harrasmentRate * (100 + CFLAG:MASTER:성적명성) / 100
+	
+	; 매혹이면 성희롱 확률 상승
+	if TALENT:MASTER:매혹
+		times harrasmentRate, 1.25
+	endif
+
+	; 만만해보이면 성희롱 확률 상승
+	if TALENT:MASTER:겁쟁이
+		times harrasmentRate, 1.1
+	endif
+	
+	; 강해보이면 성희롱 확률 감소
+	if TALENT:MASTER:대범함
+		times harrasmentRate, 0.9
+	endif
+
+	if RAND:100 >= harrasmentRate
+		return
+	endif
+
+	partIdx = getOrdinarySexualAtkBodyPart()
+	
+	EXP:MASTER:성희롱경험++
+	EXP:MASTER:partIdx++
+
+	call onSexualHarassment_m(partIdx)
+	call onAfterSexualHarassment_m(partIdx)

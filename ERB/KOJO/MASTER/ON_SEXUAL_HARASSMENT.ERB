@@ -1,0 +1,31 @@
+﻿@onSexualHarassment_m(partIdx)
+#dim dynamic partIdx
+
+	if !CFLAG:MASTER:의식있음
+		return
+	endif
+
+	if RAND:5 == 0
+		printFormW "저기, 잠시만요!"
+		printFormW 거리를 걷던 중 우연히 누군가가 자신을 부르는 목소리에 %kr(CALLNAME:MASTER, "은", "는")% 뒤를 돌아보았다.
+	elseif RAND:4 == 0
+		printFormW 오늘따라 거리에서 무슨 큰 장이 열렸는지, 사람들이 몰려있는 모습이 보인다.
+		printFormW 저 너머로 가야만 하는데... %kr(CALLNAME:MASTER, "은", "는")% 보기만 해도 땀내나는 사람들 무리로 비집고 들어갈 생각에 한숨을 푹 쉬었다.
+	elseif RAND:3 == 0
+		printFormW 평소와 같은 거리를 둘러보던 %CALLNAME:MASTER%의 눈에 무언가 이상한 낌새가 보인다.
+		printFormW 별 다를 것 없어 보이는 사람들 사이에서, 몇몇 무리가 수군거리며 %kr(CALLNAME:MASTER, "을", "를")% 쳐다보고 있었다.
+	elseif RAND:2 == 0
+	else
+	endif
+
+	if RAND:5 == 0
+	endif
+
+	; todo 여기 채워야됨
+	if partIdx == 102
+	elseif partIdx == 112
+	elseif partIdx == 113
+	elseif partIdx == 121
+	elseif partIdx == 122
+	elseif partIdx == 123
+	endif

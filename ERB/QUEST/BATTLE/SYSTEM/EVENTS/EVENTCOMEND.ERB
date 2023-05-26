@@ -1,9 +1,20 @@
 ﻿
 @EVENTCOMEND
-	
+
+	call clearSource
 	call checkSkillMastery
 	call onBattleTurnEnd
 
 	TARGET = MASTER
 	upCheck
 	TARGET = 1
+
+@clearSource
+#dim dynamic varIdx
+#dim dynamic charaIdx
+
+	for charaIdx, 0, CHARANUM
+		for varIdx, 0, varSize("SOURCE")
+			SOURCE:charaIdx:varIdx = 0
+		next
+	next

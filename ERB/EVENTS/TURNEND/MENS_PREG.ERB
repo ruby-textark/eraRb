@@ -205,10 +205,11 @@
 			printW 새끼를 출산했습니다
 		endif
 		
-		TALENT:MASTER:임신 = 0
+		call loseTalent("임신")
 		BASE:MASTER:임신일수 = 0
-		BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2 + 1
+		CFLAG:MASTER:아이아버지 = 0
 		EXP:MASTER:출산경험++
+		BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2 + 1
 		
 		BASE:MASTER:질상태 = LIMIT(BASE:MASTER:질상태 - (1 + RAND:3), 0, MAXBASE:MASTER:질상태)
 
@@ -224,6 +225,7 @@
 	
 	call loseTalent("임신")
 	BASE:MASTER:임신일수 = 0
+	CFLAG:MASTER:아이아버지 = 0
 	EXP:MASTER:낙태경험++
 	
 	BASE:MASTER:자궁상태 = LIMIT(BASE:MASTER:자궁상태 - (5 + RAND:10), 0, MAXBASE:MASTER:자궁상태)

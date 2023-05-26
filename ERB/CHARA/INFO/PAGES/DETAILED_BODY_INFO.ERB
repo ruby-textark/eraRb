@@ -30,6 +30,34 @@
 		printFormL 마지막 사정 : %CSTR:MASTER:최근피사정자%에게 {CFLAG:MASTER:최근피사정량}mL 당했다
 	endif
 	
+	if TALENT:MASTER:임신
+		if CFLAG:MASTER:아이아버지 == 1
+			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
+				printFormL %CALLNAME:MASTER%의 자궁은 소중한 수정란을 품고 있다
+			else
+				printFormL %CALLNAME:MASTER%의 자궁은 인간의 아이를 품고 있다
+			endif
+		elseif CFLAG:MASTER:아이아버지 == 2
+			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
+				printFormL %CALLNAME:MASTER%의 자궁은 요사스러운 수정란을 감싸고 있다
+			else
+				printFormL %CALLNAME:MASTER%의 자궁에는 괴물의 새끼가 머물고 있다
+			endif
+		elseif CFLAG:MASTER:아이아버지 == 3
+			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
+				printFormL %CALLNAME:MASTER%의 자궁 벽에는 찐득한 벌레의 알이 붙어있다
+			else
+				printFormL %CALLNAME:MASTER%의 자궁에는 징그러운 벌레가 제 집인것처럼 똬리를 틀고 있다
+			endif
+		elseif CFLAG:MASTER:아이아버지 == 4
+			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
+				printFormL %CALLNAME:MASTER%의 자궁은 꺼림찍한 수정란을 감싸고 있다
+			else
+				printFormL %CALLNAME:MASTER%의 자궁에는 털 난 짐승의 새끼가 잠들어 있다
+			endif
+		endif
+	endif
+	
 	if BASE:MASTER:자궁침식도
 		if BASE:MASTER:자궁침식도 > 75
 			printFormL %CALLNAME:MASTER%의 %kr(partStr(116), "은", "는")% 인간의 아이를 완강히 거부하고 있다

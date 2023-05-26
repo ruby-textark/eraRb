@@ -18,25 +18,43 @@
 			else
 				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속을 손가락으로 마구 휘젓고 있다
 			endif
+			
+			if RAND:2 == 0
+				call colorPrint(0xcc0044, "어때, 기분 좋아? 그럼 좀 더 깊게 쑤셔줄게.\n")
+			else
+				call colorPrint(0xcc0044, "그래. 좀 더 사랑스럽게 울어 봐.\n")
+			endif
 		; Insert
 		elseif RAND:3 == 0
 			call insertIntoMaster(attackedIdx, 1)
 
 			if RAND:3 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 아프게 꿰뚫었다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 깊숙히 손가락을 밀어넣었다
 			elseif RAND:2 == 0
 				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속에 삽입했다
 			else
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% 새하얀 손가락을 밀어넣어 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
+			endif
+			
+			if RAND:2 == 0
+				call colorPrint(0xcc0044, "자, 내가 여자만 느낄 수 있는 즐거움을 가르쳐 줄게.\n")
+			else
+				call colorPrint(0xcc0044, "인생 손해 보고 살았네. 이쪽 구멍을 쓰는 법을 다시 알려줘야겠는걸?\n")
 			endif
 		; Tease
 		else
 			if RAND:3 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 아프게 꿰뚫었다
+				printFormL %CALLNAME:TARGET%의 손가락이 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 스칠 때마다 짜릿한 쾌감이 등골을 타고 흐른다
 			elseif RAND:2 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속에 삽입했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 근처를 닿을 듯 말듯 약올리고 있다
 			else
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
+				printFormL %kr(CALLNAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 어루만지자 머릿속이 하얘지는 듯한 쾌감이 밀려온다
+			endif
+			
+			if RAND:2 == 0
+				call colorPrint(0xcc0044, "후후, 귀여워라. 몇 번을 놀려도 사랑스러운 반응인걸.\n")
+			else
+				call colorPrint(0xcc0044, "어머, 아직 아무것도 안 했는데, 벌써부터 속으로는 기대하고 있나 봐?\n")
 			endif
 		endif
 	elseif attackedIdx == 116 || attackedIdx == 115 || attackedIdx == 114
@@ -70,32 +88,34 @@
 		; todo 방광요도구상
 		; Already inserted
 		if isMasterInserted(attackedIdx, 1)
-			if RAND:5 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 수치스러운 장소를 낱낱이 파헤치고 있다
-			elseif RAND:4 == 0
-				printFormL %kr(CALLNAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 절대 들키면 안되는 깊은 약점까지 낱낱이 파헤치기 시작했다
-			elseif RAND:3 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% 오나홀을 씻듯이 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속을 긁어냈다
+			if RAND:3 == 0
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% 꼬리를 움직여 %CALLNAME:MASTER%의 수치스러운 장소를 낱낱이 파헤치고 있다
 			elseif RAND:2 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "이", "가")% 아프도록 맥동했다
+				printFormL %kr(CALLNAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 절대 들키면 안되는 깊은 약점까지 낱낱이 파헤치기 시작했다
 			else
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안 깊은곳까지 스며들었다
+				printFormL %CALLNAME:TARGET%의 꼬리가 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 벽을 톡톡 두드리며 반응을 즐기고 있다
+			endif
+			
+			if RAND:2 == 0
+				call colorPrint(0xcc0044, "이런. 이렇게까지 좋아해 줄 줄이야. 정말 최악의 변태잖아?\n")
+			else
+				call colorPrint(0xcc0044, "그 많은 음마들 중에서도 이 정도로 느끼는 사람은 없었는데. 이 음란한 몸뚱이는 참 타고난 것 같아. 안 그래?\n")
 			endif
 		; Insert
 		else
 			call insertIntoMaster(attackedIdx, 1)
 
-			if RAND:5 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 향해 거침없이 나아갔다
-			elseif RAND:4 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)%마저 정복하고자 좁은 길목을 사정없이 벌렸다
+			if RAND:4 == 0
+				printFormL %CALLNAME:TARGET%의 꼬리가 %CALLNAME:MASTER%의 %partStr(attackedIdx)%의 좁은 구멍 사이를 비집고 들어갔다
 			elseif RAND:3 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 아프게 꿰뚫었다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% 꼬리를 휘둘러 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 구멍을 조준하더니 그대로 스윽 밀어넣었다
 			elseif RAND:2 == 0
-				printFormL 오줌을 배출하던 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "이", "가")% %CALLNAME:TARGET%에게 반대로 희롱당하며 평소에는 느낄 수 없던 쾌감을 주고 있다
+				printFormL 오줌을 배출하던 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "은", "는")% 한순간에 %CALLNAME:TARGET%의 꼬리를 받아들이게 되어 이물감을 느꼈지만, 그마저도 곧 쾌락으로 받아들였다
 			else
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 범했다
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% 길다란 꼬리를 내밀어 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 속으로 밀어넣었다
 			endif
+			
+			call colorPrint(0xcc0044, "여기로 즐기는 법도 보여줄게. 한 번 빠지면 못 빠져나올 걸?\n")
 		endif
 	elseif attackedIdx == 113
 		if RAND:5 == 0 && MAXBASE:MASTER:모유 > 0
@@ -127,6 +147,7 @@
 				BASE:MASTER:최면심도++
 			else
 				; 최면자위
+				; todo 최면자위구상
 				EXP:MASTER:자위경험++
 			endif
 			
