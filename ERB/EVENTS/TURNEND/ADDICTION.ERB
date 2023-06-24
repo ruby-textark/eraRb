@@ -1,5 +1,9 @@
 ﻿@addiction
 
+	call drugAddiction
+
+@drugAddiction
+
 	BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도, 0, MAXBASE:MASTER:혈중미약농도)
 
 	if BASE:MASTER:혈중미약농도 >= (1 + ABL:MASTER:약물중독) * MAXBASE:MASTER:혈중미약농도 / 6
@@ -16,8 +20,18 @@
 		else
 			printFormW 다행히도 %kr(CALLNAME:MASTER, "은", "는")% [약물중독]이 나았다.
 		endif
-	elseif ABL:MASTER:약물중독 && BASE:MASTER:혈중미약농도 <= (ABL:MASTER:약물중독) * MAXBASE:MASTER:혈중미약농도 / 6
-		; todo 금단증상
+	elseif ABL:MASTER:약물중독 && BASE:MASTER:혈중미약농도 <= ABL:MASTER:약물중독 * MAXBASE:MASTER:혈중미약농도 / 6
+		call drugDependency
 	endif
-	
+
 	BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 - RAND:3, 0, MAXBASE:MASTER:혈중미약농도)
+
+@drugDependency
+#dim dynamic amount
+
+	amount = 1000 - 1000 * BASE:MASTER:혈중미약농도 / (ABL:MASTER:약물중독 * MAXBASE:MASTER:혈중미약농도)
+
+	PALAM:MASTER:불쾌 += amount
+	PALAM:MASTER:욕정 += amount / 5
+	
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 약물이 모자라 금단증세를 겪고 있다.

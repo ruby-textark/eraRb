@@ -13,7 +13,12 @@
 	endif
 	
 	if MARK:MASTER:음문각인 >= 2
-		if !RAND:10 && MAXBASE:MASTER:자궁크기
+		if !RAND:10 && ABL:MASTER:자궁감도 < 3
+			printFormW %CALLNAME:MASTER%에게 새겨진 음문이 붉게 빛나며 아랫배가 간질거리는 감각이 밀려온다...
+			printFormW 아랫베에 피가 몰리는 것이 생생하게 느껴지고, %CALLNAME:MASTER%의 %partStrRaw(116)%에서 두근거림이 온몸으로 퍼져나간다.
+
+			printFormW %CALLNAME:MASTER%의 %partStr(116)% 감도가 상승했다.
+			ABL:MASTER:자궁감도 += 1
 		endif
 	endif
 	
@@ -23,4 +28,13 @@
 			printFormW 음문의 힘으로 %kr(CALLNAME:MASTER, "은", "는")% 강제로 몸이 뜨거워지고 있다...
 			call getTalent("발정")
 		endif
+	endif
+
+	; 정액량 조건을 만족시켰을 경우 낮은 확률로 음문 레벨 상승
+	if RAND:10 == 0 && BASE:MASTER:자궁내정액1 >= BASE:MASTER:자궁크기 / 2
+		printFormW %CALLNAME:MASTER%에게 새겨진 음문이 스스로 복잡한 무늬를 새기며 더욱 커지고 있다...
+		printFormW %CALLNAME:MASTER%의 음문은 %partStrRaw(116)% 안에 가득 따라진 정액을 흡수해 힘이 더욱 강해졌다.
+		
+		MARK:MASTER:음문각인 += 1
+		call colorPrint(0xcc0044, @"음문이 Lv{MARK:MASTER:음문각인}으로 성장했다.\n")
 	endif

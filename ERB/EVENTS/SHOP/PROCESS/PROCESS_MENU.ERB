@@ -51,9 +51,6 @@
 
 	; TURN END
 	elseif RESULT == 900
-		BASE:MASTER:체력 = LIMIT(BASE:MASTER:체력 + MAXBASE:MASTER:체력 / 10, 0, MAXBASE:MASTER:체력)
-		BASE:MASTER:마력 = LIMIT(BASE:MASTER:마력 + MAXBASE:MASTER:마력 / 20, 0, MAXBASE:MASTER:마력)
-
 		begin turnend
 	elseif RESULT == 901 && MONEY >= 2000
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 푹 쉬었다

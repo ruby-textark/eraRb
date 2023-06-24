@@ -16,6 +16,9 @@
 
 	SOURCE:MASTER:피사정 = 10 * cumAmount
 	EXP:MASTER:정액경험 += 1 + ((cumAmount - 1) / 2)
+	
+	SOURCE:MASTER:욕정 += 100 * cumAmount * (ABL:MASTER:정액중독)
+
 	if partIdx == 115 || partIdx == 116 || partIdx == 121
 		EXP:MASTER:질내사정경험++
 

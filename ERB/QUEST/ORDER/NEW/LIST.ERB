@@ -49,11 +49,11 @@ $showQuest
 		; 토벌퀘스트
 		if FLAG:(questIdx * 10 + 2) == 0
 			printForm [{questIdx - 10}] %kr(CSVCALLNAME(FLAG:(questIdx * 10 + 3)), "을", "를")% 토벌할것
-			printFormL (앞으로 {FLAG:(questIdx * 10 +  1) - DAY}일【%"★" * (questIdx - 10)%】
+			printFormL (앞으로 {FLAG:(questIdx * 10 +  1) - DAY}일【%"★" * (questIdx - 10)%】)
 		; 납품퀘스트
 		elseif FLAG:(questIdx * 10 + 2) == 1
 			printForm [{questIdx - 10}] %kr(ITEMNAME:(FLAG:(questIdx * 10 + 3)), "을", "를")% {FLAG:(questIdx * 10 + 4)}개 납품할것
-			printFormL (앞으로 {FLAG:(questIdx * 10 +  1) - DAY}일)【%"★" * (questIdx - 10)%】
+			printFormL (앞으로 {FLAG:(questIdx * 10 +  1) - DAY}일)【%"★" * (questIdx - 10)%】)
 		endif
 	next
 	
@@ -66,7 +66,7 @@ $showQuest
 		questNumber = (10 + RESULT)
 		call newQuest(questNumber)
 
-		; 수락한 퀘스트를 지움 - 우려먹기 방지
+		; 수락한 퀘스트를 지움
 		FLAG:(questNumber * 10 +  1) = DAY - 1
 
 		return 1

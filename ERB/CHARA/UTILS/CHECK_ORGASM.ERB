@@ -17,6 +17,7 @@
 			printFormL %partStrRaw(partIdx)% 절정
 			DOWN:partIdx = PALAM:MASTER:partIdx - PALAM:MASTER:partIdx % orgasmThres
 			GOTJUEL:partIdx += 10
+			UP:만족 += 100
 			TIMES GOTJUEL:partIdx, 1.8
 
 			; 욕정 증가
@@ -26,12 +27,15 @@
 			; 2배절정
 			elseif PALAM:MASTER:partIdx / orgasmThres == 2
 				TIMES UP:욕정, 1.5
+				TIMES UP:만족, 1.25
 			; 3배절정
 			elseif PALAM:MASTER:partIdx / orgasmThres == 3
 				TIMES UP:욕정, 2
+				TIMES UP:만족, 1.5
 			; 그외
 			elseif PALAM:MASTER:partIdx / orgasmThres > 3
 				TIMES UP:욕정, 3
+				TIMES UP:만족, 2
 			endif
 
 			; 절정경험 증가

@@ -12,6 +12,19 @@
 	; 욕망
 	call ablUpLoopByStr("욕망", "욕정", "")
 
+	; todo 이쪽 경험 처리 추가
+	call ablUpLoopByStr("성교중독", "", "삽입경험")
+	call ablUpLoopByStr("자위중독", "", "자위경험")
+	call ablUpLoopByStr("정액중독", "", "정액경험")
+	; call ablUpLoopByStr("레즈중독", "", "정액경험")
+	call ablUpLoopByStr("착유중독", "", "착유경험")
+	call ablUpLoopByStr("방뇨중독", "", "실금경험")
+	call ablUpLoopByStr("매춘중독", "", "매춘경험")
+	call ablUpLoopByStr("절정중독", "", "절정경험")
+	; call ablUpLoopByStr("중독", "", "")
+	; call ablUpLoopByStr("이종간중독", "", "")
+	call ablUpLoopByStr("약물중독", "", "약물경험")
+
 @ablUpLoop(ablIdx, juelIdx, expIdx)
 #dim dynamic ablIdx
 #dim dynamic juelIdx
@@ -21,7 +34,7 @@
 		if juelIdx && JUEL:MASTER:juelIdx < JuelReq:(ABL:MASTER:ablIdx + 1)
 			break
 		endif
-		if expIdx && EXP:MASTER:expIdx < ExpReq:(ABL:MASTER:expIdx + 1)
+		if expIdx && EXP:MASTER:expIdx < ExpReq:(ABL:MASTER:ablIdx + 1)
 			break
 		endif
 
@@ -31,7 +44,7 @@
 		call colorPrint(0x880044, ABLNAME:ablIdx)
 		printFormL 이 Lv {ABL:MASTER:ablIdx}로 상승
 	wend
-	
+
 @ablUpLoopByStr(ablStr, juelStr, expStr)
 #dims dynamic ablStr
 #dims dynamic juelStr
@@ -41,7 +54,7 @@
 		if strlens(juelStr) && JUEL:MASTER:juelStr < JuelReq:(ABL:MASTER:ablStr + 1)
 			break
 		endif
-		if strlens(expStr) && EXP:MASTER:expStr < ExpReq:(ABL:MASTER:expStr + 1)
+		if strlens(expStr) && EXP:MASTER:expStr < ExpReq:(ABL:MASTER:ablStr + 1)
 			break
 		endif
 
@@ -51,4 +64,3 @@
 		call colorPrint(0x880044, ablStr)
 		printFormL 이 Lv {ABL:MASTER:ablStr}로 상승
 	wend
-	
