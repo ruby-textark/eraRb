@@ -137,7 +137,11 @@
 	if BASE:MASTER:혈중미약농도
 		printFormL 혈중 미약 농도는 {BASE:MASTER:혈중미약농도/100}.{BASE:MASTER:혈중미약농도%100}%"%"%입니다
 		print 일반인보다 쾌감에
-		call colorPrint(0xff8c00, @"{1000000 / (10000 - 19 * BASE:MASTER:혈중미약농도) - 100}%"%"%")
+		if (10000 - 19 * BASE:MASTER:혈중미약농도) > 5000
+			call colorPrint(0xff8c00, @"{1000000 / (10000 - 19 * BASE:MASTER:혈중미약농도) - 100}\% ")
+		else
+			call colorPrint(0xff8c00, @"{10000 / (10000 - 19 * BASE:MASTER:혈중미약농도)}.{(100000 / (10000 - 19 * BASE:MASTER:혈중미약농도)) % 10}배 ")
+		endif
 		printL 더 민감합니다.
 	else
 		printFormL 혈관 속에 미약이 감지되지 않고 있습니다

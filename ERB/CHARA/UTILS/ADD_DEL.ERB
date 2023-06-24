@@ -10,8 +10,15 @@
 	swapChara getChara(charaIdx), charaPos
 	delChara getChara(1000 + charaPos)
 	
-	; 재능 처리
+	; 기술 처리
+
+		; 성교능숙
+		if RAND:100 < 50
+			ABL:charaPos:성교기술 += 1 + (RAND:3)
+		endif
 	
+	; 재능 처리
+
 		;조루
 		if RAND:100 < 25
 			TALENT:charaPos:조루 = 1

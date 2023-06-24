@@ -1,0 +1,8 @@
+﻿@onSexualHarassment_e(partIdx)
+#dim dynamic partIdx
+
+	tryccallform c{CFLAG:TARGET:캐릭터번호}onSexualHarassment(partIdx)
+		;
+	catch
+		call fallbackOnSexualHarassment_e(partIdx)
+	endcatch

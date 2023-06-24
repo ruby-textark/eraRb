@@ -7,9 +7,6 @@
 	if FLAG:육변기형시작일
 		return
 	endif
-	
-	; todo 성희롱 구상 완료할것
-	return
 
 	harrasmentRate = FLAG:성희롱확률
 	
@@ -36,9 +33,41 @@
 	endif
 
 	partIdx = getOrdinarySexualAtkBodyPart()
+
+	if RAND:4 == 0
+		printFormW "저기, 잠시만!"
+		printFormW 거리를 걷던 중 우연히 누군가가 %kr(CALLNAME:MASTER, "을", "를")% 부르는 목소리가 들려왔다.
+
+		call addMobChara(1101 + RAND:7)
+		printFormW 뒤를 돌아본 %CALLNAME:MASTER%의 눈에 들어온 것은 %CALLNAME:TARGET% %kr(NAME:TARGET, "이었", "였")%다.
+	elseif RAND:3 == 0
+		printFormW 오늘따라 거리에서 무슨 큰 장이 열렸는지, 사람들이 몰려있는 모습이 보인다.
+		printFormW 저 너머로 가야만 하는데... %kr(CALLNAME:MASTER, "은", "는")% 보기만 해도 땀내나는 사람들 무리로 비집고 들어갈 생각에 한숨을 푹 쉬었다.
+
+		printFormW 하는 수 없이 사람들 사이로 끼어들어간 %CALLNAME:MASTER%의 곁에서 불쑥 누군가가 튀어나왔다.
+		call addMobChara(1101 + RAND:7)
+	elseif RAND:2 == 0
+		printFormW 평소와 같은 거리를 둘러보던 %CALLNAME:MASTER%의 눈에 무언가 이상한 낌새가 보인다.
+		printFormW 별 다를 것 없어 보이는 사람들 사이에서, 몇몇 무리가 수군거리며 %kr(CALLNAME:MASTER, "을", "를")% 쳐다보고 있었다.
+
+		call addMobChara(1101 + RAND:7)
+		printFormW 별로 얽히면 좋지 않을 것이 뻔해서, 그냥 모른 척 지나치던 %kr(CALLNAME:MASTER, "을", "를")% 그 중의 한 명이 나서서 붙잡았다.
+		printFormW 대놓고 싫다는 표정을 지어봤지만 머릿수로 밀어붙이며 은근한 협박을 해오는 탓에 하는 수 없이 그들을 따라갈 수밖에 없었다.
+	else
+		printFormW 어쩐지 눈에 띄게 신이 난 %kr(CALLNAME:MASTER, "은", "는")% 통통 튀는 발걸음으로 거리를 활보했다.
+		printFormW 그런 %CALLNAME:MASTER%의 모습에 음침한 시선이 점차 모이는것을 정작 본인은 모르는 듯 했다.
+
+		call addMobChara(1101 + RAND:7)
+		printFormW 뒤늦게 %kr(CALLNAME:MASTER, "은", "는")% 무언가 눈치챈 모양이지만 이미 %kr(CALLNAME:TARGET, "은", "는")% 바로 옆까지 다가온 뒤였다.
+	endif
 	
 	EXP:MASTER:성희롱경험++
 	EXP:MASTER:partIdx++
 
 	call onSexualHarassment_m(partIdx)
+	call onSexualHarassment_e(partIdx)
 	call onAfterSexualHarassment_m(partIdx)
+
+	call increaseArousal(partIdx, 100)
+
+	call delMobChara
