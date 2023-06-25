@@ -1,0 +1,77 @@
+﻿@showDetailedBodyInfoMisc
+
+	printL 신체정보(상세) - 2
+	
+	printL
+	printL 가슴
+	; 가슴상태
+	print 가슴의 크기는 
+	
+	setColor 0xcccc00
+	printForm {((BASE:MASTER:가슴둘레+24) - (BASE:MASTER:가슴둘레+24) % 50) / 10}
+	
+	if BASE:MASTER:가슴크기 < 50
+		print AAA
+	elseif BASE:MASTER:가슴크기 < 75
+		print AA
+	else
+		printForm %UNICODE(65 + (BASE:MASTER:가슴크기 - 100) / 25)%
+	endif
+	
+	resetColor
+	printL 입니다
+
+	if !MAXBASE:MASTER:모유
+		printFormL %NAME:MASTER%의 가슴은 아직 젖이 나오지 않습니다
+	elseif BASE:MASTER:모유 < 200
+		printFormL %NAME:MASTER%의 가슴에는 모유가 얼마 남지 않았습니다
+	elseif BASE:MASTER:모유 < 400
+		printFormL %NAME:MASTER%의 가슴에는 모유가 꽤 쌓여있다
+	elseif BASE:MASTER:모유 < 600
+		printFormL %NAME:MASTER%의 가슴은 언제든지 젖을 낼 준비가 되었습니다
+	elseif BASE:MASTER:모유 < 800
+		printFormL %NAME:MASTER%의 가슴은 모유가 한가득 담겨있습니다
+	else
+		printFormL %NAME:MASTER%의 가슴은 모유가 새어나올 정도로 가득 차 있습니다
+	endif
+	
+	printL
+	printL 혈중약품농도
+	; 혈중농도
+	printForm 혈중 알코올 농도는 0.{BASE:MASTER:혈중알코올농도}%"%"%이며, 
+	if BASE:MASTER:혈중알코올농도 > 30
+		printL 만취해서 완전히 이성을 상실한 상태입니다.
+	elseif BASE:MASTER:혈중알코올농도 > 20
+		printL 심하게 취해서 몸을 제대로 가누지 못할 정도입니다.
+	elseif BASE:MASTER:혈중알코올농도 > 10
+		printL 상당히 들뜬 상태입니다.
+	elseif BASE:MASTER:혈중알코올농도 > 5
+		printL 꽤 기분이 좋아보입니다.
+	else
+		printL 취하지 않은 상태입니다.
+	endif
+
+	if BASE:MASTER:혈중미약농도
+		printFormL 혈중 미약 농도는 {BASE:MASTER:혈중미약농도/100}.{BASE:MASTER:혈중미약농도%100}%"%"%입니다
+		print 일반인보다 쾌감에
+		if (10000 - 19 * BASE:MASTER:혈중미약농도) > 5000
+			call colorPrint(0xff8c00, @"{1000000 / (10000 - 19 * BASE:MASTER:혈중미약농도) - 100}\% ")
+		else
+			call colorPrint(0xff8c00, @"{10000 / (10000 - 19 * BASE:MASTER:혈중미약농도)}.{(100000 / (10000 - 19 * BASE:MASTER:혈중미약농도)) % 10}배 ")
+		endif
+		printL 더 민감합니다.
+	else
+		printFormL 혈관 속에 미약이 감지되지 않고 있습니다
+	endif
+
+	if ABL:MASTER:약물중독 == 5
+		printFormL 지냐친 약물 복용으로 완전히 중독되어버렸습니다. 상태를 지켜보며 기도할 수밖에 없습니다
+	elseif ABL:MASTER:약물중독 == 4
+		printFormL 심각한 약물 중독 상태입니다. 더 이상의 조치는 큰 의미를 갖기 힘들 것 같습니다 
+	elseif ABL:MASTER:약물중독 == 2
+		printFormL 중증의 약물 중독 증상을 나타냅니다. 아직 돌이킬 수 있는 수준이나 특단의 대책이 필요합니다
+	elseif ABL:MASTER:약물중독 == 3
+		printFormL 뚜렷한 약물 중독 증세가 보이고, 약물 농도가 낮아질때마다 금단 증상이 보입니다. 빠르게 조치할 필요가 있습니다
+	elseif ABL:MASTER:약물중독 == 1
+		printFormL 경미한 약물 중독 증세가 보입니다. 유의가 필요합니다
+	endif

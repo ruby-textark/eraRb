@@ -7,12 +7,14 @@
 	mental = 100 * ((PALAM:MASTER:순종 + PALAM:MASTER:만족 + PALAM:MASTER:욕정) - (PALAM:MASTER:공포 + PALAM:MASTER:불쾌 + PALAM:MASTER:억울))
 	mental = LIMIT(mental, -500, 500)
 	
-	if mental == 500 || mental == -500
+	if !TALENT:MASTER:조울증 && (mental == 500 || mental == -500) 
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 급격한 감정의 변화로 마음이 불안해졌다
 		call getTalent("조울증")
 	endif
 
 	BASE:MASTER:이성 = LIMIT(BASE:MASTER:이성 + mental, 0, MAXBASE:MASTER:이성)
+	
+	BASE:MASTER:모유 = MAXBASE:MASTER:모유
 
 	call relaxPalams
 

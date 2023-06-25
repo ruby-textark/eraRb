@@ -1,0 +1,119 @@
+﻿@showDetailedBodyInfoGenital
+
+	printL 신체정보(상세) - 1
+	
+	printL
+	printL 생리/임신정보
+	if TALENT:MASTER:생리중
+		printFormL %kr(NAME:MASTER, "은", "는")% 현재 생리중입니다
+	elseif TALENT:MASTER:가임기
+		printFormL %kr(NAME:MASTER, "은", "는")% 지금 가임기입니다
+	elseif TALENT:MASTER:임신
+		printFormL %kr(NAME:MASTER, "은", "는")% 임신 {BASE:MASTER:임신일수}일입니다.
+		print 현재 
+		setColor 0xff8c00
+		printForm %STR:(300 + CFLAG:MASTER:아이아버지)%
+		resetColor
+		printL 의 아이를 임신중입니다.
+	else
+		printFormL %NAME:MASTER%의 다음 생리 예정일은 {MAXBASE:MASTER:생리주기 - BASE:MASTER:생리주기}일 뒤입니다
+	endif
+	if TALENT:MASTER:교미배란
+		printFormL 수상한 개조에 의해 %NAME:MASTER%의 %kr(partStr(116), "은", "는")% 자극을 받으면 배란해버리게 되었다
+	endif
+
+	printL
+	printL 자궁상태
+	printFormL 자궁 내 정액량 : {BASE:MASTER:자궁내정액1+BASE:MASTER:자궁내정액2+BASE:MASTER:자궁내정액3+BASE:MASTER:자궁내정액4}mL
+	
+	if CFLAG:MASTER:최근피사정량
+		printFormL 마지막 사정 : %CSTR:MASTER:최근피사정자%에게 {CFLAG:MASTER:최근피사정량}mL 당했다
+	endif
+	
+	if TALENT:MASTER:임신
+		if CFLAG:MASTER:아이아버지 == 1
+			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
+				printFormL %NAME:MASTER%의 자궁은 소중한 수정란을 품고 있다
+			else
+				printFormL %NAME:MASTER%의 자궁은 인간의 아이를 품고 있다
+			endif
+		elseif CFLAG:MASTER:아이아버지 == 2
+			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
+				printFormL %NAME:MASTER%의 자궁은 요사스러운 수정란을 감싸고 있다
+			else
+				printFormL %NAME:MASTER%의 자궁에는 괴물의 새끼가 머물고 있다
+			endif
+		elseif CFLAG:MASTER:아이아버지 == 3
+			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
+				printFormL %NAME:MASTER%의 자궁 벽에는 찐득한 벌레의 알이 붙어있다
+			else
+				printFormL %NAME:MASTER%의 자궁에는 징그러운 벌레가 제 집인것처럼 똬리를 틀고 있다
+			endif
+		elseif CFLAG:MASTER:아이아버지 == 4
+			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
+				printFormL %NAME:MASTER%의 자궁은 꺼림찍한 수정란을 감싸고 있다
+			else
+				printFormL %NAME:MASTER%의 자궁에는 털 난 짐승의 새끼가 잠들어 있다
+			endif
+		endif
+	endif
+	
+	if BASE:MASTER:자궁침식도
+		if BASE:MASTER:자궁침식도 > 75
+			printFormL %NAME:MASTER%의 %kr(partStr(116), "은", "는")% 인간의 아이를 완강히 거부하고 있다
+		elseif BASE:MASTER:자궁침식도 > 50
+			printFormL 이형의 정액에 푹 적셔진 %NAME:MASTER%의 %kr(partStr(116), "을", "를")% 돌이키기엔 이미 늦었는지도 모른다
+		elseif BASE:MASTER:자궁침식도 > 25
+			printFormL 끊임없이 들어오는 이종의 정자에 의해 %NAME:MASTER%의 %kr(partStr(116), "은", "는")% 점점 침식되고 있다
+		endif
+		printFormL 자궁침식도 : {BASE:MASTER:자궁침식도}%"%"%
+	endif
+
+	if TALENT:MASTER:피임결계
+		printFormL %NAME:MASTER%의 %kr(partStr(116), "은", "는")% 임신하지 않도록 마력으로 보호되고 있다
+	endif
+	
+	if EXP:MASTER:자궁구개발경험 > 30
+		printFormL 집요하게 공략된 끝에 %NAME:MASTER%의 %partStr(116)% 입구는 완전히 풀어져 벌름거리고 있다
+	endif
+	
+	printL
+	printL 성기상태
+	if TALENT:MASTER:허벌보지
+		if RAND:2 == 0
+			printFormL 쓰레기통처럼 다루어진 %partStr(121)% 입구는 완전히 벌어져 그 안쪽의 %partStr(116)%까지도 훤히 드러내고 있다
+		else
+			printFormL 험하게 사용된 끝네 %kr(partStr(121), "은", "는")% 침입자를 막으려는 생각은 완전히 잊어버린 듯 크게 벌린 채다
+		endif
+	else
+		if MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 < 5
+			printFormL %kr(partStr(121), "은", "는")% 꽉 닫혀있어 흠뻑 젖지 않으면 삽입하기 힘들다
+		elseif MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 < 10
+			printFormL %kr(partStr(121), "은", "는")% 잘 쪼여준다
+		elseif MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 < 15
+			printFormL %kr(partStr(121), "은", "는")% 자지가 들어오면 부드럽게 감싸안는다
+		elseif MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 < 20
+			printFormL %kr(partStr(121), "은", "는")% 풀어져서 큰 자지도 쉽게 삼킨다
+		elseif MAXBASE:MASTER:보지조임 - BASE:MASTER:보지조임 < 25
+			printFormL %kr(partStr(121), "은", "는")% 꽤 벌어져서 주먹도 들어갈 것 같다
+		endif
+	endif
+	if TALENT:MASTER:세로애널
+		if RAND:2 == 0
+			printFormL 지나치게 큰 물건을 받아들인 %kr(partStr(123), "이", "가")% 한계에 도달해 세로로 길게 갈라져있다
+		else
+			printFormL 넓게 벌어진 입구를 자랑하는 %kr(partStr(123), "이", "가")% 수시로 꿈틀거리며 그 안을 채워주기를 바라고 있다
+		endif
+	else
+		if MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 < 5
+			printFormL %kr(partStr(123), "은", "는")% 꽉 닫혀있어 흠뻑 젖지 않으면 삽입하기 힘들다
+		elseif MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 < 10
+			printFormL %kr(partStr(123), "은", "는")% 잘 쪼여준다
+		elseif MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 < 15
+			printFormL %kr(partStr(123), "은", "는")% 자지가 들어오면 부드럽게 감싸안는다
+		elseif MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 < 20
+			printFormL %kr(partStr(123), "은", "는")% 풀어져서 큰 자지도 쉽게 삼킨다
+		elseif MAXBASE:MASTER:애널조임 - BASE:MASTER:애널조임 < 25
+			printFormL %kr(partStr(123), "은", "는")% 꽤 벌어져서 주먹도 들어갈 것 같다
+		endif
+	endif

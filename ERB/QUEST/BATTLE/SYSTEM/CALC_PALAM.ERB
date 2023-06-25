@@ -23,7 +23,8 @@
 
 	; 순종
 	UP:순종 += power(2, min(submissiveParam() / 2, 20))
-	; 피격시 순종 증가
+	; 피격시 고통/순종 증가
+	UP:고통 += SOURCE:MASTER:피격 * 5
 	UP:순종 += SOURCE:MASTER:피격
 
 	if TALENT:MASTER:겁쟁이
