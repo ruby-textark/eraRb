@@ -2,13 +2,20 @@
 #dim dynamic itemIdx
 #dim dynamic showCount
 #dim dynamic selectedItem
-#dim dynamic isItemUsable
-#dim dynamic isItemEquipable
+#dim dynamic inventoryMode
+#dim dynamic isItemSelectable
 
 $inputLoop
-	clearLine 1
+	clearLine 99999
 	printL =인벤토리=
-	printL 사용할 아이템을 선택해주세요
+	printL
+	
+	if inventoryMode == 0
+		printL 조사할 아이템을 선택해주세요
+	elseif inventoryMode == 1
+		printL 사용할 아이템을 선택해주세요
+	endif
+	printL
 
 	showCount = 0
 	for itemIdx, 1, 1500
@@ -21,14 +28,21 @@ $inputLoop
 		if strlens(ITEMNAME:itemIdx) == 0
 			continue
 		endif
-
-		tryccallform isUsable{itemIdx}(MASTER)
-			isItemUsable = RESULT
-		catch
-			isItemUsable = 0
-		endcatch
 		
-		if !isItemUsable
+		; selectable check
+		if inventoryMode == 0
+			; every item is examinable
+			isItemSelectable = 1
+		elseif inventoryMode == 1
+			tryccallform isUsable{itemIdx}(MASTER)
+				isItemSelectable = RESULT
+			catch
+				isItemSelectable = 0
+			endcatch
+			
+		endif
+
+		if !isItemSelectable
 			call colorPrint(0x888888, @"[{itemIdx, 4, RIGHT}] ")
 		else
 			printForm [{itemIdx, 4, RIGHT}]\ 
@@ -45,24 +59,70 @@ $inputLoop
 	next
 
 	printL
-	printL [0] - 돌아가기
+	printL
+	print [0] - 돌아가기 [99999] - 
+	if inventoryMode == 0
+		call colorPrint(0x888888, "조회 / ")
+		printL 사용
+	elseif inventoryMode == 1
+		print 조회 / 
+		call colorPrint(0x888888, "사용\n")
+	endif
 
 	input
 	selectedItem = RESULT
 	
-	tryccallform isUsable{selectedItem}(MASTER)
-		isItemUsable = RESULT
-	catch
-		isItemUsable = 0
-	endcatch
-
-	if ITEM:selectedItem > 0 && isItemUsable
-		tryccallform onUseItem{selectedItem}(MASTER)
-			ITEM:selectedItem--
-		catch
-		endcatch
-	elseif selectedItem == 0
+	if selectedItem == 0
 		return
+	elseif selectedItem == 99999
+		inventoryMode = (inventoryMode + 1) % 2
+		goto inputLoop
+	endif
+	
+	; deal with selected item
+	if inventoryMode == 0
+		call examineItem(selectedItem)
+	elseif inventoryMode == 1
+		call useInventory(selectedItem)
 	endif
 
 	goto inputLoop
+
+@examineItem(itemIdx)
+#dim dynamic itemIdx
+#dims dynamic itemExpl
+
+	printL
+	drawLine
+	call colorPrint(0xcccc00, @"%ITEMNAME:itemIdx%\n")
+	drawLine
+
+	tryccallform itemOption{itemIdx}
+		call colorPrint(0x88cccc, RESULTS)
+	catch
+		call colorPrint(0x888888, @" - 옵션 없음 - ")
+	endcatch
+	printL
+	
+	tryccallform itemExpl{itemIdx}
+		printFormL %RESULTS%
+	catch
+		call colorPrint(0x888888, @"이 아이템에 대한 상세 설명이 없습니다.")
+	endcatch
+	
+	wait
+
+@useInventory(itemIdx)
+#dim dynamic itemIdx
+
+	tryccallform isUsable{itemIdx}(MASTER)
+		if RESULT
+			tryccallform onUseItem{itemIdx}(MASTER)
+				ITEM:itemIdx--
+			catch
+			endcatch
+		endif
+	catch
+		; cannot use this item
+	endcatch
+
