@@ -1,0 +1,22 @@
+﻿; 골렘의 패턴용 변수
+; TCVAR:TARGET:10 = 광폭화
+; TCVAR:TARGET:11 = 속박
+@c203onNormalAttack
+#dim dynamic damageBase
+
+	if BASE:TARGET:체력 < MAXBASE:TARGET:체력 / 2 && !TCVAR:TARGET:10
+		printFormL %CALLNAME:TARGET%의 눈이 붉게 빛난다...
+
+		call applyBuffTo(TARGET, "광분", 9999)
+		TCVAR:TARGET:10 = 1
+	elseif BASE:TARGET:체력 < MAXBASE:TARGET:체력 / 3 && !TCVAR:TARGET:11
+		printFormL %kr(CALLNAME:TARGET, "이", "가")% 땅을 크게 울려, %kr(CALLNAME:MASTER, "은", "는")% 균형감각을 잃었다
+		printFormL %CALLNAME:MASTER%에게 3턴간 이동불가 적용
+
+		call applyBuffTo(MASTER, "속박", 3)
+		TCVAR:TARGET:11 = 1
+	else
+		printFormL %CALLNAME:TARGET%의 공격
+		damageBase = 10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER))
+		LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+	endif

@@ -1,23 +1,23 @@
-﻿@COM_ABLE21
+﻿@COM_ABLE23
 
-	return !isMasterDown() && isTargetInRange()
+	return !isMasterDown() && isSameLocation()
 
-@COM21
+@COM23
 #dim dynamic damageBase
 
-	printL 적을 공격한다
+	printL 적에게 마구잡이로 주먹질했다
 	
-	if !checkAmmo() && !isSameLocation()
+	if !isSameLocation()
 		printFormL 하지만 %kr(getAmmoName(), "이", "가")% 부족하여 실패했다...
 		return 0
 	endif
 
-	if RAND:10 < 1
+	if RAND:10 < 2
 		printL 빗나갔다!
 		return 1
 	endif
 	
-	damageBase = 20 * MAX(2, getActualAtk(MASTER) - getActualDef(TARGET))
+	damageBase = 10 * MAX(2, getActualAtk(MASTER) / 2 - getActualDef(TARGET))
 	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
 	
 	call useAmmo()

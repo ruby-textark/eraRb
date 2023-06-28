@@ -1,0 +1,27 @@
+﻿; 벌레떼의 패턴용 변수
+; TCVAR:TARGET:10 = 능력치 3x
+; TCVAR:TARGET:11 = 능력치 2x
+@c104onNormalAttack
+#dim dynamic damageBase
+
+	if (BASE:TARGET:체력 > 2 * MAXBASE:TARGET:체력 / 3) && !TCVAR:TARGET:10
+		printFormL %kr(CALLNAME:TARGET, "이", "가")% 시끄럽게 날아다니면서 무리를 모으고 있다...
+
+		call applyBuffTo(TARGET, "초거대화", 9999)
+		TCVAR:TARGET:10 = 1
+	elseif (BASE:TARGET:체력 < 2 * MAXBASE:TARGET:체력 / 3) && !TCVAR:TARGET:11
+		printFormL %kr(CALLNAME:TARGET, "이", "가")% 날아다니면서 무리를 모으고 있다...
+
+		call clearBuff(TARGET, "초거대화")
+		call applyBuffTo(TARGET, "거대화", 9999)
+		TCVAR:TARGET:11 = 1
+	elseif (BASE:TARGET:체력 < 3) && hasBuff(TARGET, "초거대화") || hasBuff(TARGET, "거대화")
+		printFormL %CALLNAME:TARGET%의 무리가 거의 떨어져나갔다
+
+		call clearBuff(TARGET, "초거대화")
+		call clearBuff(TARGET, "거대화")
+	else
+		printFormL %CALLNAME:TARGET%의 공격
+		damageBase = 10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER))
+		LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+	endif

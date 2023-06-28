@@ -1,14 +1,23 @@
-﻿@applyBuffTo(charIdx, buffStr, buffTurn)
-#dim dynamic charIdx
+﻿@applyBuffTo(charaIdx, buffStr, buffTurn)
+#dim dynamic charaIdx
 #dims dynamic buffStr
 #dim dynamic buffTurn
 
-	TCVAR:charIdx:buffStr += buffTurn
-	callForm onBuff{getNum(TCVAR, buffStr)}(charIdx)
+	TCVAR:charaIdx:buffStr += buffTurn
+	callForm onBuff{getNum(TCVAR, buffStr)}(charaIdx)
 
-@hasBuff(charIdx, buffStr)
-#function
-#dim dynamic charIdx
+@clearBuff(charaIdx, buffStr)
+#dim dynamic charaIdx
 #dims dynamic buffStr
 
-	returnf TCVAR:charIdx:buffStr > 0
+	if hasBuff(charaIdx, buffStr)
+		TCVAR:charaIdx:buffStr = 0
+		callForm offBuff{getNum(TCVAR, buffStr)}(charaIdx)
+	endif
+
+@hasBuff(charaIdx, buffStr)
+#function
+#dim dynamic charaIdx
+#dims dynamic buffStr
+
+	returnf TCVAR:charaIdx:buffStr > 0

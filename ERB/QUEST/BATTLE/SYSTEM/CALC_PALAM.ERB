@@ -23,8 +23,7 @@
 
 	; 순종
 	UP:순종 += power(2, min(submissiveParam() / 2, 20))
-	; 피격시 고통/순종 증가
-	UP:고통 += SOURCE:MASTER:피격 * 5
+	; 피격시 순종 증가
 	UP:순종 += SOURCE:MASTER:피격
 
 	if TALENT:MASTER:겁쟁이
@@ -46,12 +45,12 @@
 	endif
 
 	; 피격시 고통 증가
-	UP:고통 += SOURCE:MASTER:피격
+	UP:고통 += SOURCE:MASTER:피격 * 5
 	
 	; 성행위 부위 상태에 따라 고통 증가
 	if isBodyPart(TFLAG:이번턴성공격)
-		if BASE:(TFLAG:이번턴성공격) < 60
-			UP:고통 += 10 * power(2, (100 - BASE:(TFLAG:이번턴성공격)) / 10 - 2)
+		if BASE:MASTER:(TFLAG:이번턴성공격) < 60
+			UP:고통 += 10 * power(2, (100 - BASE:MASTER:(TFLAG:이번턴성공격)) / 10 - 2)
 		endif
 	endif
 

@@ -1,17 +1,22 @@
 ﻿@checkBuffs
 #dim dynamic buffIdx
 
-	for buffIdx, 101, 200
+	for buffIdx, 1001, 2000
 		if TCVAR:MASTER:buffIdx
 			TCVAR:MASTER:buffIdx--
 			
+			callForm progressBuff{buffIdx}(MASTER)
+
 			if TCVAR:MASTER:buffIdx == 0
 				callForm offBuff{buffIdx}(MASTER)
 			endif
 		endif
+
 		if TCVAR:TARGET:buffIdx
 			TCVAR:TARGET:buffIdx--
 			
+			callForm progressBuff{buffIdx}(TARGET)
+
 			if TCVAR:TARGET:buffIdx == 0
 				callForm offBuff{buffIdx}(TARGET)
 			endif

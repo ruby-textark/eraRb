@@ -75,11 +75,6 @@
 
 	actualDef = TCVAR:charaIdx:방어력
 	
-	; 몸을 웅크렸을 경우 방어력 + 10%
-	if TCVAR:MASTER:방어중
-		TIMES actualDef, 1.1
-	endif
-	
 	; 전투기술 적용시 1레벨당 기본 방어력 + 2
 	actualDef += ABL:charaIdx:전투기술 * 2
 

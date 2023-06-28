@@ -1,5 +1,6 @@
-﻿@fallbackOnNormalAttack_e
+﻿@fallbackOnNormalAttack
 #dim dynamic damageBase
 
+	printFormL %CALLNAME:TARGET%의 공격
 	damageBase = 10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER))
 	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)

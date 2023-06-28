@@ -1,0 +1,13 @@
+﻿@onBuff1003(charaIdx)
+#dim dynamic charaIdx
+
+	printFormL %kr(CALLNAME:charaIdx, "은", "는")% 피를 흘리며 지속적으로 피해를 입는다
+
+@progressBuff1003(charaIdx)
+#dim dynamic charaIdx
+
+	; 매턴 현재 체력의 2% 피해
+	TIMES BASE:charaIdx:체력, 0.98
+
+@offBuff1003(charaIdx)
+#dim dynamic charaIdx

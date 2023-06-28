@@ -1,4 +1,4 @@
-﻿@fallbackOnSexualAttack_e
+﻿@fallbackOnSexualAttack
 #dim dynamic attackedIdx
 #dims dynamic attackedName
 
@@ -7,7 +7,7 @@
 
 	attackedName = %STR:attackedIdx%
 	
-	printFormL 성희롱:%attackedName%
+	printFormL %CALLNAME:TARGET%의 성희롱
 	
 	if TCVAR:TARGET:성희롱부위 && TCVAR:TARGET:성희롱부위 != attackedIdx
 		call outFromMaster(TCVAR:TARGET:성희롱부위, 1)

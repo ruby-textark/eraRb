@@ -1,0 +1,16 @@
+﻿@onBuff1004(charaIdx)
+#dim dynamic charaIdx
+
+	printFormL %kr(CALLNAME:charaIdx, "은", "는")% 이성을 잃고 날뛰기 시작했다
+
+	TCVAR:charaIdx:공격력 += ABL:charaIdx:공격력 / 2
+	TCVAR:charaIdx:방어력 -= ABL:charaIdx:방어력 / 2
+
+@progressBuff1004(charaIdx)
+#dim dynamic charaIdx
+
+@offBuff1004(charaIdx)
+#dim dynamic charaIdx
+
+	TCVAR:charaIdx:공격력 -= ABL:charaIdx:공격력 / 2
+	TCVAR:charaIdx:방어력 += ABL:charaIdx:방어력 / 2

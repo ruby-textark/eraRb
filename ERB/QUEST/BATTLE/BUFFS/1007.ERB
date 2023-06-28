@@ -1,0 +1,15 @@
+﻿@onBuff1007(charaIdx)
+#dim dynamic charaIdx
+
+	printFormL %CALLNAME:charaIdx%의 모습이 크게 부풀었다
+	TCVAR:charaIdx:공격력 += 2 * ABL:charaIdx:공격력
+	TCVAR:charaIdx:방어력 += 2 * ABL:charaIdx:방어력
+
+@progressBuff1007(charaIdx)
+#dim dynamic charaIdx
+
+@offBuff1007(charaIdx)
+#dim dynamic charaIdx
+
+	TCVAR:charaIdx:공격력 -= 2 * ABL:charaIdx:공격력
+	TCVAR:charaIdx:방어력 -= 2 * ABL:charaIdx:방어력

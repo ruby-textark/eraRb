@@ -8,7 +8,7 @@
 			; 퀘스트만기일
 			FLAG:(questIdx * 10 +  1) = DAY + 1 + (RAND:6)
 			; 퀘스트종류
-			FLAG:(questIdx * 10 +  2) = RAND:2
+			FLAG:(questIdx * 10 +  2) = (RAND:3) % 2
 
 			; 토벌 퀘스트
 			if FLAG:(questIdx * 10 +  2) == 0

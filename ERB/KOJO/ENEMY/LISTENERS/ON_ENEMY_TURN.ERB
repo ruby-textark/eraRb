@@ -12,26 +12,8 @@
 
 	printFormL %CALLNAME:TARGET%의 차례
 
-	; 같은 위치에 있는 경우
-	if isMasterInRange()
-		if RAND:100 < CFLAG:TARGET:성공격빈도
-			printFormL %CALLNAME:TARGET%의 성희롱
-			TFLAG:이번턴성공격 = 1
-			tryccallform c{CFLAG:TARGET:캐릭터번호}onSexualAttack
-				;
-			catch
-				call fallbackOnSexualAttack_e
-			endcatch
-		else
-			printFormL %CALLNAME:TARGET%의 공격
-			TFLAG:이번턴성공격 = 0
-			tryccallform c{CFLAG:TARGET:캐릭터번호}onNormalAttack
-				;
-			catch
-				call fallbackOnNormalAttack_e
-			endcatch
-		endif
-	; 다른 위치에 있을 경우
-	else
-		call processMoveEnemy
-	endif
+	tryccallform c{CFLAG:TARGET:캐릭터번호}onEnemyTurn
+		;
+	catch
+		call fallbackOnEnemyTurn
+	endcatch

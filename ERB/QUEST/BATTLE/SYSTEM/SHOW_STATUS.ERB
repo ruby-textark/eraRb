@@ -21,7 +21,13 @@ $moveLoop
 	call showPosition
 	
 	printL
-	printL [w] 상 [s] 하 [a] 좌 [d] 우 이동
+	
+	if !hasBuff(MASTER, "속박")
+		printL [w] 상 [s] 하 [a] 좌 [d] 우 이동
+	else
+		printL  - 속박되어 움직일 수 없다... - 
+	endif
+	
 	printL [q] 행동 [e] 상태창 [r] 대기
 	
 	if shouldMasterDown()
@@ -29,40 +35,44 @@ $moveLoop
 	endif
 	
 	oneinputs
-	
-	if RESULTS == "w" || RESULTS == "W"
-		if TCVAR:MASTER:상하 != -4
-			TFLAG:전턴상하이동 = -1
-			TFLAG:전턴좌우이동 = 0
-			TCVAR:MASTER:상하--
-			TCVAR:MASTER:이번턴이동 = 1
-			call afterBattleAction(1)
+
+	if !hasBuff(MASTER, "속박")
+		if RESULTS == "w" || RESULTS == "W"
+			if TCVAR:MASTER:상하 != -4
+				TFLAG:전턴상하이동 = -1
+				TFLAG:전턴좌우이동 = 0
+				TCVAR:MASTER:상하--
+				TCVAR:MASTER:이번턴이동 = 1
+				call afterBattleAction(1)
+			endif
+		elseif RESULTS == "a" || RESULTS == "A"
+			if TCVAR:MASTER:좌우 != -4
+				TFLAG:전턴상하이동 = 0
+				TFLAG:전턴좌우이동 = -1
+				TCVAR:MASTER:좌우--
+				TCVAR:MASTER:이번턴이동 = 1
+				call afterBattleAction(1)
+			endif
+		elseif RESULTS == "s" || RESULTS == "S"
+			if TCVAR:MASTER:상하 != 4
+				TFLAG:전턴상하이동 = 1
+				TFLAG:전턴좌우이동 = 0
+				TCVAR:MASTER:상하++
+				TCVAR:MASTER:이번턴이동 = 1
+				call afterBattleAction(1)
+			endif
+		elseif RESULTS == "d" || RESULTS == "D"
+			if TCVAR:MASTER:좌우 != 4
+				TFLAG:전턴상하이동 = 0
+				TFLAG:전턴좌우이동 = 1
+				TCVAR:MASTER:좌우++
+				TCVAR:MASTER:이번턴이동 = 1
+				call afterBattleAction(1)
+			endif
 		endif
-	elseif RESULTS == "a" || RESULTS == "A"
-		if TCVAR:MASTER:좌우 != -4
-			TFLAG:전턴상하이동 = 0
-			TFLAG:전턴좌우이동 = -1
-			TCVAR:MASTER:좌우--
-			TCVAR:MASTER:이번턴이동 = 1
-			call afterBattleAction(1)
-		endif
-	elseif RESULTS == "s" || RESULTS == "S"
-		if TCVAR:MASTER:상하 != 4
-			TFLAG:전턴상하이동 = 1
-			TFLAG:전턴좌우이동 = 0
-			TCVAR:MASTER:상하++
-			TCVAR:MASTER:이번턴이동 = 1
-			call afterBattleAction(1)
-		endif
-	elseif RESULTS == "d" || RESULTS == "D"
-		if TCVAR:MASTER:좌우 != 4
-			TFLAG:전턴상하이동 = 0
-			TFLAG:전턴좌우이동 = 1
-			TCVAR:MASTER:좌우++
-			TCVAR:MASTER:이번턴이동 = 1
-			call afterBattleAction(1)
-		endif
-	elseif RESULTS == "q" || RESULTS == "Q"
+	endif
+
+	if RESULTS == "q" || RESULTS == "Q"
 		return
 	elseif RESULTS == "e" || RESULTS == "E"
 		call showMasterInfo
