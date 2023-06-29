@@ -2,9 +2,6 @@
 # Savefiles
 sav/*
 
-# Executables
-*.exe
-
 # Emuera debug
 debug/*
 emuera.log
