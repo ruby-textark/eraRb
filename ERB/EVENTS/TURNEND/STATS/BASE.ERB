@@ -1,0 +1,6 @@
+﻿@baseCheck
+	
+	; 모유 : 열심히 짜내면 더 많이 나옴
+	if MAXBASE:MASTER:모유 > 0 && BASE:MASTER:모유 < MAXBASE:MASTER:모유 / 5
+		MAXBASE:MASTER:모유 += 10 + RAND:(MAXBASE:MASTER:모유 / 50)
+	endif

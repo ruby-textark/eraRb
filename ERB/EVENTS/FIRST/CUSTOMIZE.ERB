@@ -1,36 +1,16 @@
 ﻿@startCustomization
-#dim dynamic partIdx
 
 	call customizeName
 	call customizeHistory
-
-	printL 복장 선택
-	printL [1] - 평상복 스타트
-	printL [2] - 그 외의 입력은 전부 속옷만 입고 시작함 ㅅㄱ
-
-	input
-	
-	if RESULT == 1
-		printL 정상적으로 옷 입고 스타트
-		ITEM:1201 = 1
-		ITEM:1301 = 1
-		ITEM:1401 = 1
-	
-		call changeMasterEquips(12, 1201) ; 하얀셔츠
-		call changeMasterEquips(13, 1301) ; 스커트
-		call changeMasterEquips(14, 1401) ; 운동화
-	else
-		printL 옷이 없는 대신 돈 500원을 추가
-		MONEY += 500
-	endif
-
-	ITEM:1501 = 1
-	call changeMasterEquips(15, 1501) ; 보통속옷
+	call customizeClothes
 	
 	printW 설정 완료
 
 @customizeName
 
+	clearLine 99999
+	printL 플레이어의 이름을 설정합니다
+	printL
 	printL 이름을 입력(기본: 당신)
 	inputs
 	
@@ -44,12 +24,15 @@
 	if strlens(RESULTS)
 		CALLNAME:MASTER = %RESULTS%
 	endif
+	
+	printFormW %NAME:MASTER%(%CALLNAME:MASTER%)%krPost(NAME:MASTER, "으로", "로")% 진행합니다.
 
 @customizeHistory
 #dim dynamic partIdx
 
+	clearLine 99999
 	printL 태생 선택
-	printL [1] - 마탑 졸업생 마녀
+	printL [1] - 마탑의 천재 마법사
 	printL       마력++ 마법공격++
 	printL       체력-- 약물중독
 	printL
@@ -146,3 +129,30 @@ $inputHistory
 		clearLine 1
 		goto inputHistory
 	endif
+
+@customizeClothes
+
+	clearLine 99999
+
+	printL 복장 선택
+	printL [1] - 평상복 스타트
+	printL [2] - 그 외의 입력은 전부 속옷만 입고 시작함 ㅅㄱ
+
+	input
+	
+	if RESULT == 1
+		printL 정상적으로 옷 입고 스타트
+		ITEM:1201 = 1
+		ITEM:1301 = 1
+		ITEM:1401 = 1
+	
+		call changeMasterEquips(12, 1201) ; 하얀셔츠
+		call changeMasterEquips(13, 1301) ; 스커트
+		call changeMasterEquips(14, 1401) ; 운동화
+	else
+		printL 옷이 없는 대신 돈 500원을 추가
+		MONEY += 500
+	endif
+
+	ITEM:1501 = 1
+	call changeMasterEquips(15, 1501) ; 보통속옷

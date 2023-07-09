@@ -140,9 +140,9 @@
 		; 점차 모유최대량 증가
 		; 모유체질일 경우 최대량 제한 없어짐
 		if TALENT:MASTER:모유체질
-			MAXBASE:MASTER:모유 = MAXBASE:MASTER:모유 + 10 + RAND:20
+			MAXBASE:MASTER:모유 = MAXBASE:MASTER:모유 + 30 + RAND:20
 		else
-			MAXBASE:MASTER:모유 = LIMIT(MAXBASE:MASTER:모유 + 10 + RAND:20, 0, 1500)
+			MAXBASE:MASTER:모유 = LIMIT(MAXBASE:MASTER:모유 + 30 + RAND:20, 0, 1500)
 		endif
 	endif
 
@@ -152,8 +152,12 @@
 		BASE:MASTER:자궁크기 = LIMIT(BASE:MASTER:자궁크기 - ((10000 * (BASE:MASTER:자궁크기 / MAXBASE:MASTER:자궁크기)) + RAND:100), 100, MAXBASE:MASTER:자궁크기)
 		; 점차 모유최대량 감소
 		; 단 모유체질일 경우 감소하지 않음
-		if !TALENT:MASTER:모유체질
-			MAXBASE:MASTER:모유 = LIMIT(MAXBASE:MASTER:모유 - (5 + RAND:10), 0, 1500)
+		if !TALENT:MASTER:모유체질 && MAXBASE:MASTER:모유
+			MAXBASE:MASTER:모유 = LIMIT(MAXBASE:MASTER:모유 - (10 + RAND:20), 0, 1500)
+
+			if MAXBASE:MASTER:모유 == 0
+				printFormW 임신이 끝나 %CALLNAME:MASTER%의 %kr(partStrRaw(112), "은", "는")% 더 이상 모유를 내지 않게 되었다
+			endif
 		endif
 	endif
 

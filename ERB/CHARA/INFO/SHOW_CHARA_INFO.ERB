@@ -4,7 +4,7 @@
 
 $charaInfoLoop
 
-	page = LIMIT(page, 0, 5)
+	page = LIMIT(page, 0, 6)
 
 	clearline 999
 	printForm 이름 : %NAME:MASTER%
@@ -25,23 +25,23 @@ $charaInfoLoop
 	printL ‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥‥
 
 	if page == 0
-		call showTalents
-		printL
-		call showMarks
-		printL
-		call showAbilities
-		call showFameInfo
+		call showDiary
 	elseif page == 1
-		call showExperiences
+		call showTalents
+		call showMarks
+		call showAbilities
 	elseif page == 2
+		call showExperiences
+		call showFameInfo
+	elseif page == 3
 		call showMentalInfo
 		call showHypnosisInfo
 		call showFavorites
-	elseif page == 3
-		call showBasicBodyInfo
 	elseif page == 4
-		call showDetailedBodyInfoGenital
+		call showBasicBodyInfo
 	elseif page == 5
+		call showDetailedBodyInfoGenital
+	elseif page == 6
 		call showDetailedBodyInfoMisc
 	endif
 
@@ -50,7 +50,7 @@ $charaInfoLoop
 	printFormLC [901] - 이전 페이지로
 	printFormL [902] - 다음 페이지로
 	printFormLC [910] - 이름 변경
-	printFOrmL [911] - 신체 부위명 설정
+	printFormL [911] - 신체 부위명 설정
 	printL [900] - 돌아가기
 	
 	input

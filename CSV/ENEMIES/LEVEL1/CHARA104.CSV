@@ -23,5 +23,5 @@ CFLAG,드랍재료1,503
 CFLAG,드랍재료2,-1
 CFLAG,드랍재료3,-1
 
-CFLAG,성공격빈도,33
+CFLAG,성공격빈도,0
 CFLAG,종족,3

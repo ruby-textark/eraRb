@@ -1,0 +1,66 @@
+﻿@showDiary
+
+	; todo 태생 설명 좀 더 추가
+	if CFLAG:MASTER:태생 == 1
+		printFormL %NAME:MASTER%입니다. 얼마 전에 마탑을 졸업했어요.
+	elseif CFLAG:MASTER:태생 == 2
+		printFormL %NAME:MASTER%. 프리랜서 용병이다. 지명할 때는 %kr(CALLNAME:MASTER, "이라고", "라고")% 부르면 된다.
+	elseif CFLAG:MASTER:태생 == 3
+		printFormL 으응, %kr(CALLNAME:MASTER, "이야", "야")%.
+	elseif CFLAG:MASTER:태생 == 4
+		printFormL 어. %kr(CALLNAME:MASTER, "이라고", "라고")% 해. 전생에는 %kr(NAME:MASTER, "이라는", "라는")% 이름이었지.
+	endif
+
+	if TALENT:MASTER:허벌보지
+		call showDiaryItem("허벌보지", @"조금 부끄러운 얘기지만, 요즘들어 %partStrRaw(121)%의 조임이 예전같지 않달까, 좀 느슨하달까...")
+	endif
+	
+	if TALENT:MASTER:세로애널
+		call showDiaryItem("세로애널", @"이런 말 해도 되나 모르겠는데, %partStrRaw(123)%에 의식적으로 힘을 주지 않으면 가끔 살짝 샐 때가 있어서 불편하네.")
+	endif
+	
+	if BASE:MASTER:가슴크기 < 100
+		call showDiaryItem("빈유", "아니, 뭐 좀 작을 수도 있지. 애초에 크기에 관계없이 그렇게 뚫어져라 쳐다보는건 예의가 아니지 않나?")
+	elseif BASE:MASTER:가슴크기 > 170
+		call showDiaryItem("거유", "하여튼간에 남자란 것들은 다 똑같아서.")
+	endif
+
+	if MAXBASE:MASTER:모유 > 200
+		call showDiaryItem("모유분지", "가슴이 눌리는 옷을 입기만 해도 자꾸 신경이 쓰이네. 나도 모르는 새 새어나올 때도 있어서 말이야.")
+	endif
+	
+	if BASE:MASTER:혈중알코올농도 > 25
+		call showDiaryItem("만취", "으헤에...")
+	elseif BASE:MASTER:혈중알코올농도 > 15
+		call showDiaryItem("취함", "히히. 좀 어지러운 것도 같고. 그냥 아무 이유 없이 신나!")
+	endif
+	
+	if BASE:MASTER:요의 > MAXBASE:MASTER:요의 / 2
+		call showDiaryItem("요의", "어, 저기. 근처에 화장실이 어디 있더라...?")
+	endif
+	
+	if TALENT:MASTER:발정
+		if TALENT:MASTER:절제
+			call showDiaryItem("억누른 발정", @"(%kr(CALLNAME:MASTER, "은", "는")% 고개를 푹 숙인 채 입술을 깨물고 달콤한 숨을 뱉고 있다...)")
+		else
+			call showDiaryItem("발정", @"(%kr(CALLNAME:MASTER, "은", "는")% 물기에 젖은 눈빛으로 주위를 살피며 다리를 배배 꼬고 있다...)")
+		endif
+	endif
+
+	if TALENT:MASTER:음란
+		call showDiaryItem("음란", "으응? 뭐야. 너도 여기에 관심이 있는거야? 후후...")
+	endif
+	
+	if TALENT:MASTER:대범함
+		call showDiaryItem("대범함", "뭐 의뢰라면 얼마든지 맡겨. 대신 시시한 잡일은 안 받을거야.")
+	endif
+	if TALENT:MASTER:겁쟁이
+		call showDiaryItem("겁쟁이", "와악! 까, 깜짝이야... 갑자기 불러서 놀랐잖아. 뭐? 의뢰? 좀 무서운데...")
+	endif
+
+@showDiaryItem(tag, text)
+#dims dynamic tag
+#dims dynamic text
+
+	call colorPrint(0xff8000, @"[%tag%] ")
+	printFormL %text%

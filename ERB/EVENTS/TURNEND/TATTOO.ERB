@@ -8,6 +8,9 @@
 			if BASE:MASTER:이성 == 0 && !TALENT:MASTER:발정
 				printFormW 결국 이성이 바닥나버린 %kr(CALLNAME:MASTER, "은", "는")% 필사적으로 정기를 갈구하고 있다...
 				call getTalent("발정")
+			elseif TALENT:MASTER:발정 && BASE:MASTER:이성 > MAXBASE:MASTER:이성 / 2
+				printFormW 어느 정도 정신을 차린 %kr(CALLNAME:MASTER, "은", "는")% 음문의 유혹을 뿌리치고 이성을 되찾았다
+				call getTalent("발정")
 			endif
 		endif
 	endif

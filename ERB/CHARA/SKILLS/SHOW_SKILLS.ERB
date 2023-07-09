@@ -23,6 +23,10 @@ $skillLoop
 		skillIdx++
 	wend
 	
+	if showSkillCount == 0
+		call colorPrint(0x999999, "현재 단련중인 스킬이 없습니다\n")
+	endif
+	
 	drawLine
 	printFormL [{SkillNumber}] 도움말
 	printFormL [{SkillNumber + 1}] 돌아가기

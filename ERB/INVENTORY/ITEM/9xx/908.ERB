@@ -23,8 +23,8 @@
 		printFormW %kr(CALLNAME:targetIdx, "은", "는")% [모유체질]을 잃었다.
 	endif
 	
-	MAXBASE:MASTER:모유 = MAX(1, MAXBASE:MASTER:모유)
-	
+	MAXBASE:MASTER:모유 = MAX(100, MAXBASE:MASTER:모유)
+
 	return 1
 
 @isEquipable908
