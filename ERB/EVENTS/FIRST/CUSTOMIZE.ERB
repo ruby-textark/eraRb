@@ -1,14 +1,16 @@
 ﻿@startCustomization
 
+	clearLine 99999
 	call customizeName
 	call customizeHistory
+	call customizeCharacteristics
 	call customizeClothes
 	
 	printW 설정 완료
 
 @customizeName
 
-	clearLine 99999
+	printL
 	printL 플레이어의 이름을 설정합니다
 	printL
 	printL 이름을 입력(기본: 당신)
@@ -30,7 +32,7 @@
 @customizeHistory
 #dim dynamic partIdx
 
-	clearLine 99999
+	printL
 	printL 태생 선택
 	printL [1] - 마탑의 천재 마법사
 	printL       마력++ 마법공격++
@@ -130,10 +132,36 @@ $inputHistory
 		goto inputHistory
 	endif
 
+@customizeCharacteristics
+
+	printL
+	printL 성격 선택(대사와 일부 게임플레이에 영향을 미칩니다)
+	printL [1] - 순진한 성격
+	printL [2] - 발랄한 성격
+	printL [3] - 요염한 성격
+	printL [4] - 음침한 성격
+	printL [5] - 쿨한 성격
+
+$inputCharacteristics
+
+	input
+
+	if 1 <= RESULT && RESULT <= 5
+		CFLAG:MASTER:성격 = RESULT
+
+		if CFLAG:MASTER:태생 == 2 && (RESULT == 1 || RESULT == 2)
+			printW 주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.
+		elseif CFLAG:MASTER:태생 == 3 && RESULT == 1
+			printW 주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.
+		endif
+	else
+		clearLine 1
+		goto inputCharacteristics
+	endif
+
 @customizeClothes
 
-	clearLine 99999
-
+	printL
 	printL 복장 선택
 	printL [1] - 평상복 스타트
 	printL [2] - 그 외의 입력은 전부 속옷만 입고 시작함 ㅅㄱ
