@@ -4,13 +4,13 @@
 	LOSEBASE:마력 = 0
 	
 	if TCVAR:MASTER:추가행동 && !TCVAR:TARGET:추가행동
-		printFormL ! 추가 행동권이 남아있어 %CALLNAME:TARGET%의 차례를 스킵합니다\n
+		printFormL ! 추가 행동권이 남아있어 %NAME:TARGET%의 차례를 스킵합니다\n
 		return
 	elseif TCVAR:MASTER:추가행동 && TCVAR:TARGET:추가행동
-		printFormL ! 서로에게 추가 행동권이 있기 떄문에 정상적으로 %CALLNAME:TARGET%의 차례가 돌아옵니다\n
+		printFormL ! 서로에게 추가 행동권이 있기 떄문에 정상적으로 %NAME:TARGET%의 차례가 돌아옵니다\n
 	endif
 
-	printFormL %CALLNAME:TARGET%의 차례
+	printFormL %NAME:TARGET%의 차례
 
 	tryccallform c{CFLAG:TARGET:캐릭터번호}onEnemyTurn
 		;

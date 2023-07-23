@@ -39,7 +39,7 @@
 
 	; 기생
 	elseif CFLAG:TARGET:기생성공
-		printFormL %NAME:TARGET% %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 기생해버렸습니다...
+		printFormL %CALLNAME:TARGET% %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 기생해버렸습니다...
 		printFormL 토벌은 자동으로 취소됩니다.
 		
 		EXP:MASTER:전투패배경험++

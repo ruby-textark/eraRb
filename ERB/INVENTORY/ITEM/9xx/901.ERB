@@ -13,7 +13,7 @@
 @onUseItem901(targetIdx)
 #dim dynamic targetIdx
 
-	printFormW %CALLNAME:targetIdx%에게 %kr(ITEMNAME:901, "을", "를")% 사용했다.
+	printFormW %NAME:targetIdx%에게 %kr(ITEMNAME:901, "을", "를")% 사용했다.
 	EXP:targetIdx:약물경험++
 	BASE:targetIdx:혈중미약농도 += 20
 	BASE:targetIdx:혈중미약농도 = LIMIT(BASE:targetIdx:혈중미약농도, 0, MAXBASE:targetIdx:혈중미약농도)

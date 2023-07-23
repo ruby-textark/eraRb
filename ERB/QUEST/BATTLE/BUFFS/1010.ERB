@@ -1,0 +1,13 @@
+﻿@onBuff1010(charaIdx)
+#dim dynamic charaIdx
+
+	printFormL %kr(CALLNAME:charaIdx, "은", "는")% 의혹에 빠져 나아갈 길을 잃었다
+	TCVAR:charaIdx:공격력 -= ABL:charaIdx:공격력 / 2
+
+@progressBuff1010(charaIdx)
+#dim dynamic charaIdx
+
+@offBuff1010(charaIdx)
+#dim dynamic charaIdx
+
+	TCVAR:charaIdx:공격력 += ABL:charaIdx:공격력 / 2

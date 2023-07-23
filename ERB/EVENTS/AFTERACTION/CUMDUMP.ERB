@@ -20,7 +20,7 @@
 		call addMobChara(1101 + RAND:10)
 		insertInto = getSexualAtkBodyPart()
 
-		printFormW %NAME:TARGET% %kr(CALLNAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 %kr(partStrRaw(insertInto), "을", "를")% 사용했다
+		printFormW %CALLNAME:TARGET% %kr(NAME:TARGET, "이", "가")% %CALLNAME:MASTER%의 %kr(partStrRaw(insertInto), "을", "를")% 사용했다
 
 		if isInsertablePart(insertInto)
 			call insertIntoMaster(insertInto, 1)

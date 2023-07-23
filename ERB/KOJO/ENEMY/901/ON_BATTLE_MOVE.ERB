@@ -1,19 +1,4 @@
-﻿@processMoveEnemy
-
-	if hasBuff(TARGET, "속박")
-		printFormL %kr(NAME:TARGET, "은", "는")% 속박되어 이동할 수 없다
-		return
-	endif
-
-	printFormL %kr(NAME:TARGET, "이", "가")% %kr(CALLNAME:MASTER, "을", "를")% 따라서 이동한다
-
-	tryccallform c{CFLAG:TARGET:캐릭터번호}onBattleMove
-		;
-	catch
-		call fallbackOnBattleMove
-	endcatch
-
-@fallbackOnBattleMove
+﻿@c___onBattleMove
 
 	TCVAR:TARGET:이번턴이동 = 1
 

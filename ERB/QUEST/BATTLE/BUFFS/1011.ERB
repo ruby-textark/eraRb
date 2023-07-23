@@ -1,0 +1,13 @@
+﻿@onBuff1011(charaIdx)
+#dim dynamic charaIdx
+
+	printFormL %kr(CALLNAME:charaIdx, "은", "는")% 거짓된 환상에 눈이 멀어버렸다
+	TCVAR:charaIdx:마법공격 -= ABL:charaIdx:마법공격 / 2
+
+@progressBuff1011(charaIdx)
+#dim dynamic charaIdx
+
+@offBuff1011(charaIdx)
+#dim dynamic charaIdx
+
+	TCVAR:charaIdx:마법공격 += ABL:charaIdx:마법공격 / 2

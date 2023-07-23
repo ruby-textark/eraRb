@@ -12,7 +12,7 @@ $moveLoop
 	printFormL /마력 : %RESULTS% ({BASE:MASTER:마력}/{MAXBASE:MASTER:마력})
 
 	barstr BASE:TARGET:체력, MAXBASE:TARGET:체력, 10
-	printForm %CALLNAME:TARGET%의 체력 : %RESULTS% ({BASE:TARGET:체력}/{MAXBASE:TARGET:체력})
+	printForm %NAME:TARGET%의 체력 : %RESULTS% ({BASE:TARGET:체력}/{MAXBASE:TARGET:체력})
 	barstr BASE:TARGET:마력, MAX(MAXBASE:TARGET:마력, 1), 10
 	printFormL /마력 : %RESULTS% ({BASE:TARGET:마력}/{MAXBASE:TARGET:마력})
 	
@@ -125,6 +125,6 @@ $moveLoop
 	next
 
 	call colorPrint(0x00cc00, @"★ %CALLNAME:MASTER% ")
-	call colorPrint(0xcc0000, @"★ %CALLNAME:TARGET% ")
+	call colorPrint(0xcc0000, @"★ %NAME:TARGET% ")
 	call colorPrint(0xcccc00, "※ 교전중")
 	printL

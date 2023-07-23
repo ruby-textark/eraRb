@@ -1,7 +1,7 @@
 ﻿@EVENTTRAIN
 #dim dynamic partIdx
 
-	printFormW %NAME:TARGET% %kr(CALLNAME:TARGET, "을", "를")% 발견. 전투를 개시합니다.
+	printFormW %CALLNAME:TARGET% %kr(NAME:TARGET, "을", "를")% 발견. 전투를 개시합니다.
 	printL
 	
 	FLAG:전투중 = 1

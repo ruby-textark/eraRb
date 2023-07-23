@@ -7,16 +7,16 @@
 
 	attackedName = %STR:attackedIdx%
 	
-	printFormL %CALLNAME:TARGET%의 성희롱
+	printFormL %NAME:TARGET%의 성희롱
 	
 	if TCVAR:TARGET:성희롱부위 && TCVAR:TARGET:성희롱부위 != attackedIdx
 		call outFromMaster(TCVAR:TARGET:성희롱부위, 1)
 		if RAND:3 == 0
-			printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에 흥미를 잃은 것 같다
+			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에 흥미를 잃은 것 같다
 		elseif RAND:2 == 0
-			printFormL %kr(CALLNAME:TARGET, "은", "는")% 마지막으로 %CALLNAME:MASTER%의 %kr(CSTR:MASTER:(TCVAR:TARGET:성희롱부위), "을", "를")% 세게 괴롭히고는 다른 곳으로 눈을 돌렸다
+			printFormL %kr(NAME:TARGET, "은", "는")% 마지막으로 %CALLNAME:MASTER%의 %kr(CSTR:MASTER:(TCVAR:TARGET:성희롱부위), "을", "를")% 세게 괴롭히고는 다른 곳으로 눈을 돌렸다
 		else
-			printFormL 그만 다른 곳에 눈길이 갔는지 %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(CSTR:MASTER:(TCVAR:TARGET:성희롱부위), "을", "를")% 놓아주었다
+			printFormL 그만 다른 곳에 눈길이 갔는지 %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(CSTR:MASTER:(TCVAR:TARGET:성희롱부위), "을", "를")% 놓아주었다
 		endif
 	endif
 
@@ -25,15 +25,15 @@
 		; Already inserted
 		if isMasterInserted(attackedIdx, 1)
 			if RAND:5 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "을", "를")% 쉴틈없이 쑤셔댔다
+				printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "을", "를")% 쉴틈없이 쑤셔댔다
 			elseif RAND:4 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "을", "를")% 계속해서 사용했다
+				printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "을", "를")% 계속해서 사용했다
 			elseif RAND:3 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "을", "를")% 장난감처럼 다루고 있다
+				printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "을", "를")% 장난감처럼 다루고 있다
 			elseif RAND:2 == 0
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "이", "가")% 아프도록 바벼댔다
+				printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(attackedName, "이", "가")% 아프도록 바벼댔다
 			else
-				printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %attackedName% 안 깊은곳까지 찌르고 있다
+				printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %attackedName% 안 깊은곳까지 찌르고 있다
 			endif
 		; Insert
 		else

@@ -29,7 +29,7 @@ $enemyTurn
 	call onEnemyTurn
 
 	if TCVAR:TARGET:추가행동 && !TCVAR:MASTER:추가행동
-		printFormL 추가 행동권이 남아있어 %CALLNAME:TARGET%의 차례가 계속됩니다
+		printFormL 추가 행동권이 남아있어 %NAME:TARGET%의 차례가 계속됩니다
 		
 		call onBattleTurnEnd
 		goto enemyTurn

@@ -1,0 +1,26 @@
+﻿@onBuff1013(charaIdx)
+#dim dynamic charaIdx
+
+	if charaIdx == MASTER
+		printFormL %kr(NAME:MASTER, "은", "는")% 자신이 걸어온 길로 자격을 증명했다
+	else
+		printFormL %kr(NAME:TARGET, "은", "는")% 또다른 진리의 구도자를 인정했다
+	endif
+
+	BASE:charaIdx:체력 = MAXBASE:charaIdx:체력
+	BASE:charaIdx:마력 = MAXBASE:charaIdx:마력
+	
+	TCVAR:charaIdx:공격력 = 0
+	TCVAR:charaIdx:마법공격 = 0
+
+@progressBuff1013(charaIdx)
+#dim dynamic charaIdx
+
+	if charaIdx == TARGET
+		BASE:charaIdx:체력 = TCVAR:charaIdx:파도치는달빛 * MAXBASE:charaIdx:체력 / 10
+		BASE:charaIdx:마력 = TCVAR:charaIdx:파도치는달빛 * MAXBASE:charaIdx:체력 / 10
+	endif
+
+
+@offBuff1013(charaIdx)
+#dim dynamic charaIdx

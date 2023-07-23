@@ -1,7 +1,7 @@
 ﻿@COM_ABLE1002
 
 	; 붉은보석지팡이 장착시 사용가능
-	return !isMasterDown() &&  isSkillAvailable(1002, "무기", 1606)
+	return !isMasterDown() && isSkillAvailable(1002, "무기", 1606) && !hasBuff(MASTER, "침묵")
 
 @COM1002
 #dim dynamic damageBase

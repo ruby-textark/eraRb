@@ -1,9 +1,9 @@
 ﻿@c101onNormalAttack
 
 	if RAND:3 == 0
-		printFormL %CALLNAME:TARGET%의 강공격
+		printFormL %NAME:TARGET%의 강공격
 		LOSEBASE:체력 = 20 * RAND:(MAX(1, getActualAtk(TARGET) - getActualDef(MASTER)))
 	else
-		printFormL %CALLNAME:TARGET%의 돌진
+		printFormL %NAME:TARGET%의 돌진
 		LOSEBASE:체력 = 10 * RAND:(MAX(1, getActualAtk(TARGET) - getActualDef(MASTER)))
 	endif

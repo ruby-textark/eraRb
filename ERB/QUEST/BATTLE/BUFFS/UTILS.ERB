@@ -3,6 +3,12 @@
 #dims dynamic buffStr
 #dim dynamic buffTurn
 
+	if TCVAR:charaIdx:buffStr
+		printFormL %NAME:charaIdx%에게 부여된 [%buffStr%]의 효과가 연장되었다
+	else
+		printFormL %NAME:charaIdx%에게 [%buffStr%]의 효과가 부여되었다
+	endif
+
 	TCVAR:charaIdx:buffStr += buffTurn
 	callForm onBuff{getNum(TCVAR, buffStr)}(charaIdx)
 
@@ -11,6 +17,8 @@
 #dims dynamic buffStr
 
 	if hasBuff(charaIdx, buffStr)
+		printFormL %NAME:charaIdx%에게 부여된 [%buffStr%]의 효과가 만료되었다
+
 		TCVAR:charaIdx:buffStr = 0
 		callForm offBuff{getNum(TCVAR, buffStr)}(charaIdx)
 	endif

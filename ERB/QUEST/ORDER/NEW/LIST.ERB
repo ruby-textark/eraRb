@@ -48,7 +48,7 @@ $showQuest
 	for questIdx, 11, 16
 		; 토벌퀘스트
 		if FLAG:(questIdx * 10 + 2) == 0
-			printForm [{questIdx - 10}] %kr(CSVCALLNAME(FLAG:(questIdx * 10 + 3)), "을", "를")% 토벌할것
+			printForm [{questIdx - 10}] %kr(CSVNAME(FLAG:(questIdx * 10 + 3)), "을", "를")% 토벌할것
 			printFormL (앞으로 {FLAG:(questIdx * 10 +  1) - DAY}일【%"★" * (questIdx - 10)%】)
 		; 납품퀘스트
 		elseif FLAG:(questIdx * 10 + 2) == 1

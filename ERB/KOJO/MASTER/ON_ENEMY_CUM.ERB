@@ -6,7 +6,7 @@
 	endif
 
 	if ABL:MASTER:흡정
-		printFormL %kr(CALLNAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 착정당하고 있다
+		printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 착정당하고 있다
 
 		; 흡정 1레벨당 최대 마력의 1%를 강탈
 		if BASE:TARGET:마력 >= MAXBASE:TARGET:마력 * MIN(ABL:MASTER:흡정, 5) / 100
@@ -14,7 +14,7 @@
 		; 무족하면 패널티
 		; 흡정 1레벨당 최대 체력의 0.25%
 		else
-			printFormL 하지만 %CALLNAME:TARGET%의 마력은 이미 바닥이었고, 대신해서 체력을 흡수당했다
+			printFormL 하지만 %NAME:TARGET%의 마력은 이미 바닥이었고, 대신해서 체력을 흡수당했다
 
 			BASE:TARGET:마력 = 0
 			BASE:TARGET:체력 -= MAXBASE:TARGET:체력 * MIN(ABL:MASTER:흡정, 5) / 400

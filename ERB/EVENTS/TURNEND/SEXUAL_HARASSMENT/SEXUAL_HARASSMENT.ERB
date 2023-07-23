@@ -39,7 +39,7 @@
 		printFormW 거리를 걷던 중 우연히 누군가가 %kr(CALLNAME:MASTER, "을", "를")% 부르는 목소리가 들려왔다.
 
 		call addMobChara(1101 + RAND:7)
-		printFormW 뒤를 돌아본 %CALLNAME:MASTER%의 눈에 들어온 것은 %CALLNAME:TARGET% %kr(NAME:TARGET, "이었", "였")%다.
+		printFormW 뒤를 돌아본 %CALLNAME:MASTER%의 눈에 들어온 것은 %NAME:TARGET% %kr(CALLNAME:TARGET, "이었", "였")%다.
 	
 		PALAM:MASTER:억울 += 100
 	elseif RAND:3 == 0
@@ -47,7 +47,7 @@
 		printFormW 저 너머로 가야만 하는데... %kr(CALLNAME:MASTER, "은", "는")% 보기만 해도 땀내나는 사람들 무리로 비집고 들어갈 생각에 한숨을 푹 쉬었다.
 
 		printFormW 하는 수 없이 사람들 사이로 끼어들어간 %CALLNAME:MASTER%의 곁에서 불쑥 누군가가 튀어나왔다.
-		printFormW 불쾌한 냄새가 코를 찌르는 것과, %kr(CALLNAME:TARGET, "이", "가")% %kr(CALLNAME:MASTER, "을", "를")% 덮치는 것은 거의 동시였다.
+		printFormW 불쾌한 냄새가 코를 찌르는 것과, %kr(NAME:TARGET, "이", "가")% %kr(CALLNAME:MASTER, "을", "를")% 덮치는 것은 거의 동시였다.
 
 		call addMobChara(1101 + RAND:7)
 	
@@ -67,7 +67,7 @@
 		printFormW 그런 %CALLNAME:MASTER%의 모습에 음침한 시선이 점차 모이는것을 정작 본인은 모르는 듯 했다.
 
 		call addMobChara(1101 + RAND:7)
-		printFormW 뒤늦게 %kr(CALLNAME:MASTER, "은", "는")% 무언가 눈치챈 모양이지만 이미 %kr(CALLNAME:TARGET, "은", "는")% 바로 옆까지 다가온 뒤였다.
+		printFormW 뒤늦게 %kr(CALLNAME:MASTER, "은", "는")% 무언가 눈치챈 모양이지만 이미 %kr(NAME:TARGET, "은", "는")% 바로 옆까지 다가온 뒤였다.
 		printFormW 등뒤에서 느껴지는 서늘함에 고개를 돌아보려 하자, 우악스럽게 고개를 틀어 강요당하는 바람에 %kr(CALLNAME:MASTER, "은", "는")% 두려움에 그만 시키는 대로 하는 수밖에 없었다.
 	
 		PALAM:MASTER:공포 += 100

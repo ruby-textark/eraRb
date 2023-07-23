@@ -14,27 +14,27 @@
 	if partIdx == 121
 		if FLAG:성교합의
 			if isMasterLewd() && isMasterSubmissive()
-				printFormL %kr(CALLNAME:MASTER, "은", "는")% 기쁘게 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 바쳤다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% 기쁘게 %NAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 바쳤다
 			elseif isMasterLewd() && !isMasterSubmissive()
-				printFormL %kr(CALLNAME:MASTER, "은", "는")% %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃었다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% %NAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃었다
 			elseif !isMasterLewd() && isMasterSubmissive()
 				; 비교적 일반적인 상황
-				printFormL %kr(CALLNAME:MASTER, "은", "는")% 어리둥절하며 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 주었다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% 어리둥절하며 %NAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 주었다
 			elseif !isMasterLewd() && !isMasterSubmissive()
 				; 이 끔찍한 기억을 하루빨리 잊고싶음
-				printFormL %kr(CALLNAME:MASTER, "은", "는")% 결국 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃게 되었다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% 결국 %NAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃게 되었다
 			endif
 		else
 			if isMasterLewd() && isMasterSubmissive()
-				printFormL %kr(CALLNAME:MASTER, "은", "는")% 배덕감에 젖어 원하지도 않는 섹스로 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 바쳤다는 사실은 가볍게 넘겼다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% 배덕감에 젖어 원하지도 않는 섹스로 %NAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 바쳤다는 사실은 가볍게 넘겼다
 			elseif isMasterLewd() && !isMasterSubmissive()
-				printFormL %kr(CALLNAME:MASTER, "은", "는")% 내키지 않게 %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃으면서도 몸이 달아오르는 것을 감출 수 없었다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% 내키지 않게 %NAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃으면서도 몸이 달아오르는 것을 감출 수 없었다
 			elseif !isMasterLewd() && isMasterSubmissive()
 				; 비교적 일반적인 상황
-				printFormL %kr(CALLNAME:MASTER, "은", "는")% %kr(CALLNAME:TARGET, "이", "가")% 계속 밀어붙이자 속으로는 내키지 않으면서도 %partStrRaw(partIdx)%의 처녀를 주었다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% %kr(NAME:TARGET, "이", "가")% 계속 밀어붙이자 속으로는 내키지 않으면서도 %partStrRaw(partIdx)%의 처녀를 주었다
 			elseif !isMasterLewd() && !isMasterSubmissive()
 				; 이 끔찍한 기억을 하루빨리 잊고싶음
-				printFormL %kr(CALLNAME:MASTER, "은", "는")% %CALLNAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃게 되었다
+				printFormL %kr(CALLNAME:MASTER, "은", "는")% %NAME:TARGET%에게 %partStrRaw(partIdx)%의 처녀를 잃게 되었다
 			endif
 		endif
 	endif

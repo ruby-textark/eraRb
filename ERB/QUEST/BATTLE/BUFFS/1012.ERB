@@ -1,0 +1,13 @@
+﻿@onBuff1012(charaIdx)
+#dim dynamic charaIdx
+
+	printFormL %kr(CALLNAME:charaIdx, "은", "는")% 험난한 길을 걸어가기로 결심했다
+
+@progressBuff1012(charaIdx)
+#dim dynamic charaIdx
+
+	BASE:charaIdx:체력 -= MAXBASE:charaIdx:체력 / 100
+	BASE:charaIdx:마력 -= MAXBASE:charaIdx:마력 / 100
+
+@offBuff1012(charaIdx)
+#dim dynamic charaIdx

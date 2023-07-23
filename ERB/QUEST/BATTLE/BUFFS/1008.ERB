@@ -1,0 +1,15 @@
+﻿@onBuff1008(charaIdx)
+#dim dynamic charaIdx
+
+	printFormL 신비한 마력이 감돌며 %CALLNAME:charaIdx%의 주위를 별빛이 에워쌌다
+	TCVAR:charaIdx:방어력 += 300
+
+@progressBuff1008(charaIdx)
+#dim dynamic charaIdx
+	BASE:charaIdx:체력 += MAXBASE:charaIdx:체력 / 200
+	BASE:charaIdx:마력 += MAXBASE:charaIdx:마력 / 200
+
+@offBuff1008(charaIdx)
+#dim dynamic charaIdx
+
+	TCVAR:charaIdx:방어력 -= 300

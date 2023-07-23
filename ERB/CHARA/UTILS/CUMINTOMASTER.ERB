@@ -11,7 +11,7 @@
 		cumAmount *= 2 * TALENT:TARGET:대량사정 + RAND:2
 	endif
 	
-	CSTR:MASTER:최근피사정자 = %NAME:TARGET% %CALLNAME:TARGET%
+	CSTR:MASTER:최근피사정자 = %CALLNAME:TARGET% %NAME:TARGET%
 	CFLAG:MASTER:최근피사정량 = cumAmount
 
 	SOURCE:MASTER:피사정 = 10 * cumAmount
