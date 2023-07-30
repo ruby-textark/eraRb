@@ -1,9 +1,24 @@
-﻿@c___onNormalAttack
+﻿@c901onNormalAttack
 
-	if RAND:3 == 0
-		printFormL %NAME:TARGET%의 강공격
-		LOSEBASE:체력 = 20 * RAND:(MAX(1, getActualAtk(TARGET) - getActualDef(MASTER)))
-	else
-		printFormL %NAME:TARGET%의 돌진
-		LOSEBASE:체력 = 10 * RAND:(MAX(1, getActualAtk(TARGET) - getActualDef(MASTER)))
+	if TCVAR:TARGET:17 < 10
+		TCVAR:TARGET:17++
+		
+	elseif TCVAR:TARGET:17 == 8
+		TCVAR:TARGET:17++
+
+		fontBold
+		call bossPattern(@"%NAME:TARGET%의 별빛이 강해지고 있다.\n")
+		fontRegular
+	elseif TCVAR:TARGET:17 == 18
+		TCVAR:TARGET:17 = 0
+
+		call bossPattern(@"%NAME:TARGET%의 모습이 흐릿해지며 순식간에 다른 위치로 이동했다.\n")
+	endif
+
+	if TCVAR:TARGET:17 && TCVAR:TARGET:17 % 6 == 0
+		call bossPattern(@"%NAME:TARGET%의 손짓에 따라 은하수가 %kr(NAME:MASTER, "을", "를")% 덮친다.")
+		LOSEBASE:체력 = 25 * RAND:(MAX(1, getActualMatk(TARGET) - getActualDef(MASTER)))
+	elseif TCVAR:TARGET:17 && TCVAR:TARGET:17 % 3 == 0
+		call bossPattern(@"%NAME:TARGET%의 손짓에 따라 별빛이 휘몰아친다.")
+		LOSEBASE:체력 = 50 * RAND:(MAX(1, getActualMatk(TARGET) - getActualMdef(MASTER)))
 	endif

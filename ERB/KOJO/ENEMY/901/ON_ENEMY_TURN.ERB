@@ -7,9 +7,9 @@
 		BASE:TARGET:체력 = MAXBASE:TARGET:체력
 		BASE:TARGET:마력 = MAXBASE:TARGET:마력
 
-		call colorPrintW(0xa0a000, "「과연, 그대도 내가 미치광이라고 생각했던 건가. 안심해도 좋아. 나는 그리 미치지 않았으니까.」")
-		call colorPrintW(0xa0a000, "「나는 다만 진리를 행할 뿐이라네. 평생 두 발을 땅에 붙이고 살아온 이들은 하늘을 나는 상상을 하지 못하는 법이지.」")
-		call colorPrintW(0xa0a000, "「그대에게도 진리에 도달할 자격이 있는지 시험해보겠네.」")
+		call speak(TARGET, "「과연, 그대도 내가 미치광이라고 생각했던 건가. 안심해도 좋아. 나는 그리 미치지 않았으니까.」")
+		call speak(TARGET, "「나는 다만 진리를 행할 뿐이라네. 평생 두 발을 땅에 붙이고 살아온 이들은 하늘을 나는 상상을 하지 못하는 법이지.」")
+		call speak(TARGET, "「그대에게도 진리에 도달할 자격이 있는지 시험해보겠네.」")
 		
 		call applyBuffTo(TARGET, "별빛의수호", 9999)
 
@@ -17,64 +17,64 @@
 	endif
 
 	;
-	if !TCVAR:TARGET:15 && BASE:TARGET:체력 < 25000
-		TCVAR:TARGET:15 = 1
+	if !TCVAR:TARGET:11 && BASE:TARGET:체력 < 25000
+		TCVAR:TARGET:11 = 1
 
-		call colorPrintW(0xa0a000, "「대답해라. 지금까지 그대가 걸어온 길이, 그리고 앞으로 걷고자 하는 길은 과연 옳은 길이었는가.」")
-		call colorPrintW(0xa0a000, "「아니, 타인의 시선은 중요치 않다. 다만 그대가 옳다고 믿는 것을 행하라. 진리는 한 점 의혹 없는 자만이 손에 넣을 수 있다.」")
+		call speak(TARGET, "「대답해라. 지금까지 그대가 걸어온 길이, 그리고 앞으로 걷고자 하는 길은 과연 옳은 길이었는가.」")
+		call speak(TARGET, "「아니, 타인의 시선은 중요치 않다. 다만 그대가 옳다고 믿는 것을 행하라. 진리는 한 점 의혹 없는 자만이 손에 넣을 수 있다.」")
 
 		call applyBuffTo(MASTER, "번민", 9999)
 		return
 	endif
 
 	;
-	if !TCVAR:TARGET:16 && BASE:TARGET:체력 < 20000
-		TCVAR:TARGET:16 = 1
+	if !TCVAR:TARGET:12 && BASE:TARGET:체력 < 20000
+		TCVAR:TARGET:12 = 1
 		
 		call clearBuff(MASTER, "번민")
 
-		call colorPrintW(0xa0a000, "「모든 거짓은 절대적인 진실 앞에 무의미하다. 허상에 빠져 헤어나오지 못하던 이들을 나는 너무나도 많이 보았다.」")
-		call colorPrintW(0xa0a000, "「과연 그대는 안개를 뚫고 진리의 빛을 볼 수 있는 혜안이 있는가.」")
+		call speak(TARGET, "「모든 거짓은 절대적인 진실 앞에 무의미하다. 허상에 빠져 헤어나오지 못하던 이들을 나는 너무나도 많이 보았다.」")
+		call speak(TARGET, "「과연 그대는 안개를 뚫고 진리의 빛을 볼 수 있는 혜안이 있는가.」")
 
 		call applyBuffTo(MASTER, "환혹", 9999)
 		return
 	endif
 
 	;
-	if !TCVAR:TARGET:17 && BASE:TARGET:체력 < 15000
-		TCVAR:TARGET:17 = 1
+	if !TCVAR:TARGET:13 && BASE:TARGET:체력 < 15000
+		TCVAR:TARGET:13 = 1
 		
 		call clearBuff(MASTER, "환혹")
 
 		BASE:TARGET:체력 = MAXBASE:TARGET:체력
 		BASE:TARGET:마력 = MAXBASE:TARGET:마력
 
-		call colorPrintW(0xa0a000, "「모든 여정은 그 보상에 걸맞은 고난을 겪기 마련이다. 진리야말로 그 무엇과도 바꿀 수 없는 것이니, 그 여정 역시 힘들어야만 하겠지.」")
-		call colorPrintW(0xa0a000, "「그대는 이 기나긴 여정을 어떻게 헤쳐나갈지 지켜보겠네.」")
+		call speak(TARGET, "「모든 여정은 그 보상에 걸맞은 고난을 겪기 마련이다. 진리야말로 그 무엇과도 바꿀 수 없는 것이니, 그 여정 역시 힘들어야만 하겠지.」")
+		call speak(TARGET, "「그대는 이 기나긴 여정을 어떻게 헤쳐나갈지 지켜보겠네.」")
 		
 		call applyBuffTo(MASTER, "고행", 9999)
 		return
 	endif
 
-	if !TCVAR:TARGET:18 && BASE:TARGET:체력 < 10000
-		TCVAR:TARGET:18 = 1
+	if !TCVAR:TARGET:14 && BASE:TARGET:체력 < 10000
+		TCVAR:TARGET:14 = 1
 		
 		call clearBuff(MASTER, "고행")
 
-		call colorPrintW(0xa0a000, "「마법은 사다리와 같다. 정상에 오른 자에게 더 이상 사다리는 필요치 않으니, 진리에 도달하려는 자는 마법을 버려야 한다.」")
+		call speak(TARGET, "「마법은 사다리와 같다. 정상에 오른 자에게 더 이상 사다리는 필요치 않으니, 진리에 도달하려는 자는 마법을 버려야 한다.」")
 
 		call applyBuffTo(MASTER, "침묵", 9999)
 		return
 	endif
 
-	if !TCVAR:TARGET:19 && BASE:TARGET:체력 < 5000
-		TCVAR:TARGET:19 = 1
+	if !TCVAR:TARGET:15 && BASE:TARGET:체력 < 5000
+		TCVAR:TARGET:15 = 1
 		
 		call clearBuff(MASTER, "침묵")
 
-		call colorPrintW(0xa0a000, "「우리는 죽음조차 이해하고 있다. 경험하지 못했을 뿐, 죽음에 대해 무지한 것이 아니다.」")
-		call colorPrintW(0xa0a000, "「그렇기 때문에 나는 죽음이 두렵지 않다. 공포는 무지에서 나오고, 우리는 진리를 탐구하는 자들이니.」")
-		call colorPrintW(0xa0a000, "「다만 안타까울 뿐이지. 더 이상 진리를 탐구하지 못하는 것이 안타까울 뿐이다.」")
+		call speak(TARGET, "「우리는 죽음조차 이해하고 있다. 경험하지 못했을 뿐, 죽음에 대해 무지한 것이 아니다.」")
+		call speak(TARGET, "「그렇기 때문에 나는 죽음이 두렵지 않다. 공포는 무지에서 나오고, 우리는 진리를 탐구하는 자들이니.」")
+		call speak(TARGET, "「다만 안타까울 뿐이지. 더 이상 진리를 탐구하지 못하는 것이 안타까울 뿐이다.」")
 
 		call applyBuffTo(MASTER, "파도치는달빛", 10)
 		call applyBuffTo(TARGET, "파도치는달빛", 10)
@@ -82,23 +82,22 @@
 		return
 	endif
 
+	if TCVAR:TARGET:16 < 25
+		TCVAR:TARGET:16++
+	elseif TCVAR:TARGET:16 == 23
+		TCVAR:TARGET:16++
+		call bossPattern(@"%NAME:TARGET%의 주위로 별무리가 모이고 있다...\n")
+	elseif TCVAR:TARGET:16 == 25
+		TCVAR:TARGET:16 = 0
+		call bossPattern(@"%NAME:TARGET%의 모습이 흐릿해지며 순식간에 다른 위치로 이동했다.\n")
+
+		TCVAR:TARGET:상하 = (TCVAR:TARGET:상하 + 1 + RAND:9) % 10 - 4
+		TCVAR:TARGET:좌우 = (TCVAR:TARGET:좌우 + 1 + RAND:9) % 10 - 4
+	endif
+
 	; 같은 위치에 있는 경우
 	if isMasterInRange()
-		if RAND:100 < CFLAG:TARGET:성공격빈도
-			TFLAG:이번턴성공격 = 1
-			tryccallform c{CFLAG:TARGET:캐릭터번호}onSexualAttack
-				;
-			catch
-				call fallbackOnSexualAttack
-			endcatch
-		else
-			TFLAG:이번턴성공격 = 0
-			tryccallform c{CFLAG:TARGET:캐릭터번호}onNormalAttack
-				;
-			catch
-				call fallbackOnNormalAttack
-			endcatch
-		endif
+		call c901onNormalAttack
 	; 다른 위치에 있을 경우
 	else
 		call processMoveEnemy

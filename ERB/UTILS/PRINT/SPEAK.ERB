@@ -1,0 +1,10 @@
+﻿@speak(charaIdx, string)
+#dim dynamic charaIdx
+#dims dynamic string
+
+	setColor CFLAG:charaIdx:대사색상
+	printFormL %string%
+	resetColor
+
+	; RESULT sideeffect때문에
+	return RESULT
