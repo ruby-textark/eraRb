@@ -38,6 +38,14 @@
 		else
 			printFormL 어. %kr(CALLNAME:MASTER, "이라고", "라고")% 해. 전생에는 %kr(NAME:MASTER, "이라는", "라는")% 이름이었지.
 		endif
+	elseif CFLAG:MASTER:태생 == 5
+		if CFLAG:MASTER:성격 == 1 || CFLAG:MASTER:성격 == 2
+			printFormL 반가워요. %kr(CALLNAME:MASTER, "이라고", "라고")% 불러주시면 감사하겠어요.
+		elseif CFLAG:MASTER:성격 == 5
+			printFormL 성녀 %CALLNAME:MASTER%입니다. 하늘의 가르침을 전달하기 위해 왔습니다.
+		else
+			printFormL %kr(CALLNAME:MASTER, "이라고", "라고")% 해요. 후후.
+		endif
 	endif
 
 	if TALENT:MASTER:허벌보지

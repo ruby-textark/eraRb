@@ -49,6 +49,10 @@
 	printL [4] - TS 전생한 남자
 	printL       가슴크기+ 질감도+ 클리감도+
 	printL       자위중독
+	printL
+	printL [5] - 성녀
+	printL       가슴크기++ 명성+ 카리스마
+	printL       모유체질
 
 $inputHistory
 
@@ -127,6 +131,23 @@ $inputHistory
 
 		EXP:MASTER:자위경험 = 10
 		ABL:MASTER:자위중독 = 1
+	elseif RESULT == 5
+		CFLAG:MASTER:태생 = 5
+		printW [성녀]로 게임을 시작합니다.
+		printW
+		printW 하늘에서 내려온 듯 빼어난 용모를 가진 성녀님입니다.
+		printW 비단 외모뿐 아니라, 하늘이 내려준 카리스마 덕분에 구원을 찾는 이들이라면 그녀가 하는 말에 기꺼이 따를 것입니다.
+		printW 그런 높으신 분이 이곳에는 왜 왔냐 하니, 이 미궁도시는 전 대륙에서 사람들이 모이는 곳이다보니 교단에서 공격적으로 세력을 눌리기 위해 무려 성녀를 파견하는 강수를 둔 것이겠지요.
+		printFormW 하지만 조심해야 할 것입니다. %kr(NAME:MASTER, "이", "가")% 하늘의 가르침을 따르는 이들에게는 유명하다지만, 미궁도시에는 아직 그 이름을 들어보지도 못한 이들이 열에 두셋은 됩니다.
+		printW 카리스마와 명성을 떼어놓고 본다면, 그들에게 성녀는 그저 아름다운 한 명의 여성에 불과합니다.
+		printW 과연 교단 내에서 자라나 세상 물정을 잘 모르는 성녀님이 어떤 일을 겪게 될지는 모르는 일입니다.
+
+		BASE:MASTER:가슴둘레 += 100
+		BASE:MASTER:가슴크기 += 70
+		CFLAG:MASTER:기본명성 += 50
+		TALENT:MASTER:카리스마 = 1
+
+		TALENT:MASTER:모유체질 = 1
 	else
 		clearLine 1
 		goto inputHistory
@@ -152,6 +173,8 @@ $inputCharacteristics
 		if CFLAG:MASTER:태생 == 2 && (RESULT == 1 || RESULT == 2)
 			printW 주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.
 		elseif CFLAG:MASTER:태생 == 3 && RESULT == 1
+			printW 주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.
+		elseif CFLAG:MASTER:태생 == 5 && (RESULT == 3 || RESULT == 4)
 			printW 주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.
 		endif
 	else
