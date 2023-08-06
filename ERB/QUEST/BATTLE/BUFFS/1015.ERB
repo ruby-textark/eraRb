@@ -1,0 +1,12 @@
+﻿@onBuff1015(charaIdx)
+#dim dynamic charaIdx
+
+	printFormL %kr(NAME:charaIdx, "은", "는")% 넘쳐나는 신성력의 힘으로 매 턴 체력을 회복한다
+
+@progressBuff1015(charaIdx)
+#dim dynamic charaIdx
+
+	BASE:charaIdx:체력 += MAXBASE:charaIdx:체력 / 40
+
+@offBuff1015(charaIdx)
+#dim dynamic charaIdx

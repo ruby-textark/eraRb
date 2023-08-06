@@ -1,0 +1,73 @@
+﻿@pray
+
+	printL 눈을 감고 성상에 기도를 올린다...
+	printL
+
+	printFormL %NAME:MASTER%의 신앙심에 따라 이하의 축복 중 하나를 부여할 수 있습니다.
+	printFormL 현재 신성력 : {CFLAG:MASTER:신앙심}
+
+	if CFLAG:MASTER:신앙심 < 20
+		setColor 0x888888
+	endif
+	printL [1] - 『빛의 은총』을 받는다(요구 신앙심 : 20)
+	printL       (공격력/마법공격 + 10%, 해제불가)
+	resetColor
+
+	if CFLAG:MASTER:신앙심 < 40
+		setColor 0x888888
+	endif
+	printL [2] - 『천사의 가호』를 받는다(요구 신앙심 : 40)
+	printL       (방어력/마법내성 + 20%, 해제불가)
+	resetColor
+
+	if CFLAG:MASTER:신앙심 < 70
+		setColor 0x888888
+	endif
+	printL [3] - 『하늘의 부름』을 부여한다(요구 신앙심 : 60)
+	printL       (전투 시작시 10턴간 공격력/마법공격 + 30%)
+	resetColor
+
+	if CFLAG:MASTER:신앙심 < 80
+		setColor 0x888888
+	endif
+	printL [4] - 『천리안』을 부여한다(요구 신앙심 : 80)
+	printL       (사정거리 + 1, 해제불가)
+	resetColor
+
+	if CFLAG:MASTER:신앙심 < 100
+		setColor 0x888888
+	endif
+	printL [5] - 『축성』을 부여한다(요구 신앙심 : 100)
+	printL       (매 턴 체력의 2.5% 회복)
+	resetColor
+	
+	printL [0] - 나가기
+
+$inputLoop
+
+	input
+	
+	if 1 <= RESULT && RESULT <= 5 && CFLAG:MASTER:신앙심 < RESULT * 20
+		printFormW 그 축복을 받기에는 %NAME:MASTER%의 신앙심이 부족하다...
+	elseif 1 <= RESULT && RESULT <= 5
+		call setDivinePassive(RESULT)
+		printFormW %NAME:MASTER%에게 하늘의 축복이 깃든다...
+		return
+	elseif RESULT == 0
+		return
+	else
+		printW 잘못된 입력입니다
+	endif
+	
+	clearLine 2
+	goto inputLoop
+
+@setDivinePassive(passiveIdx)
+#dim dynamic passiveIdx
+
+	PassiveSkill:1 = 0
+	PassiveSkill:2 = 0
+	PassiveSkill:3 = 0
+	PassiveSkill:4 = 0
+	PassiveSkill:5 = 0
+	PassiveSkill:passiveIdx = 1

@@ -44,14 +44,14 @@
 	printL
 	printL [3] - 견습 음마
 	printL       성교기술++ 전신감도+ 흡정
-	printL       정액중독 자궁벌어짐 음문각인
+	printL       정액중독 신앙심- 음문각인
 	printL
 	printL [4] - TS 전생한 남자
 	printL       가슴크기+ 질감도+ 클리감도+
 	printL       자위중독
 	printL
 	printL [5] - 성녀
-	printL       가슴크기++ 명성+ 카리스마
+	printL       가슴크기++ 명성+ 신앙심+
 	printL       모유체질
 
 $inputHistory
@@ -113,7 +113,7 @@ $inputHistory
 		EXP:MASTER:정액경험 = 10
 		ABL:MASTER:정액중독 = 1
 		
-		TALENT:MASTER:자궁벌어짐 = 1
+		CFLAG:MASTER:신앙심 = -100
 		MARK:MASTER:음문각인 = 1
 	elseif RESULT == 4
 		CFLAG:MASTER:태생 = 4
@@ -145,7 +145,7 @@ $inputHistory
 		BASE:MASTER:가슴둘레 += 100
 		BASE:MASTER:가슴크기 += 70
 		CFLAG:MASTER:기본명성 += 50
-		TALENT:MASTER:카리스마 = 1
+		CFLAG:MASTER:신앙심 = 100
 
 		TALENT:MASTER:모유체질 = 1
 	else

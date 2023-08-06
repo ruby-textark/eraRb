@@ -1,0 +1,17 @@
+﻿@onBuff1014(charaIdx)
+#dim dynamic charaIdx
+
+	printFormL %kr(NAME:charaIdx, "은", "는")% 하늘의 부름을 받아 공격력과 마법공격이 상승했다
+	
+	TCVAR:charaIdx:공격력 += ABL:charaIdx:공격력 * 3 / 10
+	TCVAR:charaIdx:마법공격 += ABL:charaIdx:마법공격 * 3 / 10
+
+@progressBuff1014(charaIdx)
+#dim dynamic charaIdx
+
+
+@offBuff1014(charaIdx)
+#dim dynamic charaIdx
+
+	TCVAR:charaIdx:공격력 -= ABL:charaIdx:공격력 * 3 / 10
+	TCVAR:charaIdx:마법공격 -= ABL:charaIdx:마법공격 * 3 / 10

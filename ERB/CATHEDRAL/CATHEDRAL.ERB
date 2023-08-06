@@ -1,0 +1,32 @@
+﻿@cathedral
+
+	printL 성당에 도착했다.
+	printL 장엄한 분위기 속에서 몇몇 수도자들이 작은 목소리로 이야기하고 있다.
+	
+	if CFLAG:MASTER:신앙심 < 0
+		printFormL 신성한 기운이 %kr(NAME:MASTER, "을", "를")% 답답하게 짓누르는 느낌이 들었다.
+	endif
+	
+	printW
+
+$processInput
+
+	clearLine 99999
+	printL
+	printL [1] - 기도한다
+	printL [2] - 봉헌한다
+	printL [3] - 나가기
+
+	input
+
+	if RESULT == 1
+		call pray
+	elseif RESULT == 2
+		call dedicate
+	elseif RESULT == 3
+		return
+	else
+		clearLine 1
+	endif
+	
+	goto processInput

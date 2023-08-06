@@ -1,0 +1,3 @@
+﻿
+#dim const PassiveSkillNumber = 10000
+#dim savedata PassiveSkill, 10000

@@ -1,0 +1,23 @@
+﻿@dedicate
+
+	printL 낡은 봉헌함에 덮개가 놓여 있다.
+	printL
+	printL 소지금을 기부하여 신앙심을 증명할 수 있습니다.
+
+$inputLoop
+
+	printFormL 얼마나 기부하시겠습니까? (최소 1000원, 현재 소지금 {MONEY}원) / (현재 신앙심 :  {CFLAG:MASTER:신앙심})
+	printL [0] - 나가기
+	
+	input
+
+	if 1000 <= RESULT && RESULT <= MONEY
+		CFLAG:MASTER:신앙심 += MIN(RESULT / 1000, 1 + RESULT * 50 / MONEY)
+		MONEY -= RESULT
+	elseif RESULT == 0
+		return
+	else
+		printW 잘못된 값입니다
+	endif
+	
+	goto inputloop

@@ -1,0 +1,11 @@
+﻿@applyPassiveSkills
+#dim dynamic skillIdx
+
+	for skillIdx, 0, PassiveSkillNumber
+		if PassiveSkill:skillIdx
+			tryccallform onPassive{skillIdx}
+			catch
+			endcatch
+		endif
+	next
+

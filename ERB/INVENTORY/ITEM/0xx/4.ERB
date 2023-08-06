@@ -1,0 +1,26 @@
+﻿; 우유
+@itemOption4()
+	RESULTS '= "[체력회복+15]"
+@itemExpl4()
+	RESULTS '= "어미의 은혜를 가로챈 것.\n그 배덕적인 기원 때문인지 더욱 달다."
+
+@isUsable4(targetIdx)
+#dim dynamic targetIdx
+
+	return 1
+
+@onUseItem4(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %NAME:targetIdx%에게 %kr(ITEMNAME:2, "을", "를")% 사용했다.
+	BASE:targetIdx:체력 = LIMIT(BASE:targetIdx:체력 + 15, 0, MAXBASE:targetIdx:체력)
+
+	return 1
+
+@isEquipable4
+	return 0
+@isUnequipable4
+	return 0
+
+@onEquip4
+@onUnequip4

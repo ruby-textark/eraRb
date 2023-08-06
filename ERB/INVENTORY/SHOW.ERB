@@ -61,10 +61,10 @@ $inputLoop
 	printL
 	printL
 	print [0] - 돌아가기 [99999] - 
-	if inventoryMode == 0
+	if inventoryMode == 1
 		call colorPrint(0x888888, "조회 / ")
 		printL 사용
-	elseif inventoryMode == 1
+	elseif inventoryMode == 0
 		print 조회 / 
 		call colorPrint(0x888888, "사용\n")
 	endif
