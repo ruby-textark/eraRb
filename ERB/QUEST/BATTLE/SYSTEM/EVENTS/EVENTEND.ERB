@@ -24,14 +24,17 @@
 		
 		; Looting
 		mobDrop = CFLAG:TARGET:드랍골드최소
-		if CFLAG:TARGET:드랍골드최소 != CFLAG:TARGET:드랍골드최대
+		if CFLAG:TARGET:드랍골드최소 > CFLAG:TARGET:드랍골드최대
 			mobDrop += RAND:(CFLAG:TARGET:드랍골드최대 - CFLAG:TARGET:드랍골드최소)
 		endif
+
 		printFormL 돈을 {mobDrop}원 주웠다
 		MONEY += mobDrop
 		
 		mobDrop = CFLAG:TARGET:드랍마석최소
-		mobDrop += RAND:(CFLAG:TARGET:드랍마석최대 - CFLAG:TARGET:드랍마석최소)
+		if CFLAG:TARGET:드랍마석최대 > CFLAG:TARGET:드랍마석최소
+			mobDrop += RAND:(CFLAG:TARGET:드랍마석최대 - CFLAG:TARGET:드랍마석최소)
+		endif
 
 		printFormL 마석을 {mobDrop}개 주웠다
 		FLAG:마석 += mobDrop

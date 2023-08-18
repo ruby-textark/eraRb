@@ -4,6 +4,14 @@
 
 @SHOW_SHOP
 
+	if FLAG:원정중
+		printL
+		drawLine
+
+		call continueExpeditionShopMenu
+		return
+	endif
+
 	printL
 	drawline
 	printFormL {DAY}일차 소지금 : %TOSTR(MONEY,"#,###")%

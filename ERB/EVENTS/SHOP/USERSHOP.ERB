@@ -1,5 +1,11 @@
 ﻿@USERSHOP
 #dim dynamic menuResult
+
+	if FLAG:원정중
+		call continueExpeditionHandleResult
+		return
+	endif
+
 	call processMenu
 	menuResult = RESULT
 	
