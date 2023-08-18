@@ -1,14 +1,22 @@
-﻿@startQuest
+﻿@startExpedition		
+
+	printL 미궁으로 원정을 떠납니다.
+	printW 미궁의 입구에서부터 싸늘한 기운이 당신을 맞이합니다.
+
+	FLAG:원정중 = 1
+	FLAG:미궁위치 = 1
+	
+	call initCharFlags
+	
+	; Some misc events come here.
+
+
+	call startBattle
+
+@initCharFlags
 #dim dynamic partIdx
 
-	printFormL %kr(NAME:TARGET, "을", "를")% 토벌하기 위해 모험을 떠납니다.
-
-	TARGET = 1
 	; PALAM -> CFLAG 인계
 	for partIdx, 501, 600
 		CFLAG:MASTER:partIdx = PALAM:MASTER:(partIdx - 400)
 	next
-	
-	; Some misc events come here.
-
-	begin train

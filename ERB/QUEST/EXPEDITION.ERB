@@ -1,0 +1,33 @@
+﻿@expedition
+#dim dynamic randValue
+
+	randValue = frand(100)
+
+	if randValue < 60
+		; 전투(60%)
+		call startBattle
+	elseif randValue < 80
+		; 이로운방(20%)
+		call goodRoom
+	else
+		; 해로운방(20%)
+		call badRoom
+	endif
+
+@startBattle
+
+	call addMonster(FLAG:미궁위치 * 100 + 1 + RAND:(FLAG:(100 + FLAG:미궁위치 * 10)))
+	begin train
+	
+@goodRoom
+	; todo 여기 작업
+	call startBattle
+@badRoom
+	; todo 여기 작업
+	call startBattle
+	
+@bossBattle
+
+	;
+	printW 알 수 없는 검은 기운이 앞을 가로막고 있다.
+	printW 더 이상 진행할 수는 없을 것 같다.

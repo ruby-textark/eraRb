@@ -19,8 +19,10 @@ CFLAG,캐릭터번호,302
 素質,남성,1
 
 ; Mob Settings
-CFLAG,드랍골드최소,180
-CFLAG,드랍골드최대,230
+CFLAG,드랍골드최소,0
+CFLAG,드랍골드최대,0
+CFLAG,드랍마석최소,44
+CFLAG,드랍마석최대,44
 
 CFLAG,드랍재료1,-1
 CFLAG,드랍재료2,-1

@@ -1,0 +1,51 @@
+﻿@continueExpedition
+
+	printW
+
+	; todo create 3rd floor and more
+$inputLoop
+
+	clearLine 99999
+	printL 자, 다음은 어떻게 할까?
+	
+	if FLAG:미궁위치 == 1
+		printL (현재 위치 : 미궁의 입구)
+	elseif FLAG:미궁위치 == 2
+		printL (현재 위치 : 미궁의 상층부)
+	elseif FLAG:미궁위치 == 3
+		printL (현재 위치 : 미궁의 중층부)
+	elseif FLAG:미궁위치 == 4
+		printL (현재 위치 : 미궁의 하층부)
+	elseif FLAG:미궁위치 >= 5
+		printL (현재 위치 : 미궁의 심층부)
+	endif
+	
+	printL [0] - 미궁을 빠져나간다
+	printL [1] - 현재 위치에서 더 탐험한다
+	
+	if FLAG:미궁위치 > 2
+		setColor 0x777777
+	endif
+	printL [2] - 더 깊은 곳으로 나아간다
+	resetColor
+
+	input
+	
+	if RESULT == 0
+		if FLAG:미궁위치 == 1
+			FLAG:원정중 = 0
+			begin shop
+		else
+			FLAG:미궁위치 -= 1
+		endif
+	elseif RESULT == 1
+		; nop
+	elseif RESULT == 2
+		if FLAG:미궁위치 == 3
+			call bossBattle
+		else
+			FLAG:미궁위치 += 1
+		endif
+	else
+		goto inputLoop
+	endif

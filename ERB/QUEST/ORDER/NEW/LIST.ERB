@@ -14,8 +14,10 @@
 			if FLAG:(questIdx * 10 +  2) == 0
 				; 토벌대상
 				FLAG:(questIdx * 10 +  3) = (questIdx - 10) * 100 + 1 + RAND:(FLAG:(questIdx * 10))
+				; 토벌 마릿수
+				FLAG:(questIdx * 10 +  4) = (1 + RAND:10)
 				; 퀘스트 성공 보수
-				FLAG:(questIdx * 10 +  5) = 100 * questIdx + 10 * RAND:5
+				FLAG:(questIdx * 10 +  5) = FLAG:(questIdx * 10 +  4) * (50 * questIdx + 10 * RAND:5)
 			else
 				; 대상 아이템
 
@@ -48,7 +50,7 @@ $showQuest
 	for questIdx, 11, 16
 		; 토벌퀘스트
 		if FLAG:(questIdx * 10 + 2) == 0
-			printForm [{questIdx - 10}] %kr(CSVNAME(FLAG:(questIdx * 10 + 3)), "을", "를")% 토벌할것
+			printForm [{questIdx - 10}] %kr(CSVNAME(FLAG:(questIdx * 10 + 3)), "을", "를")% {FLAG:(questIdx * 10 + 4)} 마리 토벌할것
 			printFormL (앞으로 {FLAG:(questIdx * 10 +  1) - DAY}일【%"★" * (questIdx - 10)%】)
 		; 납품퀘스트
 		elseif FLAG:(questIdx * 10 + 2) == 1

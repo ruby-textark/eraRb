@@ -8,8 +8,8 @@
 	endif
 
 	; QUEST MENU
-	if hasHuntQuest() && FLAG:자궁대여료 == 0 && RESULT == 101
-		call startQuest
+	if FLAG:자궁대여료 == 0 && isMasterFree() && RESULT == 101
+		call startExpedition
 		RESULT = 0
 	elseif !hasHuntQuest() && RESULT == 102
 		call newQuestList
@@ -17,7 +17,7 @@
 		call cancelQuest
 	elseif hasDeliverQuest() && hasDeliveryItems()
 		ITEM:(FLAG:퀘스트대상) -= (FLAG:퀘스트값)
-		call finishQuest
+		call stepQuest
 
 	; CHARACTER MENU
 	elseif RESULT == 201

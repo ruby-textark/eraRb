@@ -27,26 +27,32 @@ $enemyTurn
 	endif
 	
 	call onEnemyTurn
-
-	if TCVAR:TARGET:추가행동 && !TCVAR:MASTER:추가행동
-		printFormL 추가 행동권이 남아있어 %NAME:TARGET%의 차례가 계속됩니다
-		
-		call onBattleTurnEnd
-		goto enemyTurn
-	elseif TCVAR:MASTER:추가행동 && TCVAR:TARGET:추가행동
-		printFormL 서로에게 추가 행동권이 있기 떄문에 정상적으로 %CALLNAME:MASTER%의 차례가 돌아옵니다
-	endif
 	
 	if BASE:MASTER:체력 > 0
 		SOURCE:MASTER:피격 = (1000 * LOSEBASE:체력) / MAXBASE:MASTER:체력
 	endif
+
 	BASE:MASTER:체력 -= LOSEBASE:체력
 	BASE:MASTER:마력 -= LOSEBASE:마력
+	
+	call onMasterAttacked(LOSEBASE:체력, LOSEBASE:마력)
 	
 	LOSEBASE:체력 = 0
 	LOSEBASE:마력 = 0
 
 	call calcPalam
+
+	if TCVAR:TARGET:추가행동 && !TCVAR:MASTER:추가행동
+		printFormL 추가 행동권이 남아있어 %NAME:TARGET%의 차례가 계속됩니다
+		TCVAR:TARGET:추가행동--
+		
+		call onBattleTurnEnd
+		goto enemyTurn
+	elseif TCVAR:MASTER:추가행동 && TCVAR:TARGET:추가행동
+		printFormL 서로에게 추가 행동권이 있기 떄문에 정상적으로 %CALLNAME:MASTER%의 차례가 돌아옵니다
+		TCVAR:MASTER:추가행동--
+		TCVAR:TARGET:추가행동--
+	endif
 
 	; Check battle end
 	if isBattleOver()

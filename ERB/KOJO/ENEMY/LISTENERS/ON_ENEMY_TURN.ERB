@@ -5,9 +5,12 @@
 	
 	if TCVAR:MASTER:추가행동 && !TCVAR:TARGET:추가행동
 		printFormL ! 추가 행동권이 남아있어 %NAME:TARGET%의 차례를 스킵합니다\n
+		TCVAR:MASTER:추가행동--
 		return
 	elseif TCVAR:MASTER:추가행동 && TCVAR:TARGET:추가행동
 		printFormL ! 서로에게 추가 행동권이 있기 떄문에 정상적으로 %NAME:TARGET%의 차례가 돌아옵니다\n
+		TCVAR:MASTER:추가행동--
+		TCVAR:TARGET:추가행동--
 	endif
 
 	printFormL %NAME:TARGET%의 차례

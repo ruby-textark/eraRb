@@ -1,0 +1,71 @@
+﻿@onMasterAttacked(lostHp, lostMp)
+#dim dynamic lostHp
+#dim dynamic lostMp
+
+	; 피격(약)
+	if lostHp < MAXBASE:MASTER:체력 / 10
+		if CFLAG:MASTER:성격 == 1
+			if RAND:2 == 0
+				call speak(MASTER, "앗! 깜짝이야.")
+			else
+				call speak(MASTER, "이크... 놀랐어요.")
+			endif
+		elseif CFLAG:MASTER:성격 == 2
+			if RAND:2 == 0
+				call speak(MASTER, "아얏, 아파.")
+			else
+				call speak(MASTER, "괜찮아. 이정도는 따끔한 정도야.")
+			endif
+		elseif CFLAG:MASTER:성격 == 3
+			if RAND:2 == 0
+				call speak(MASTER, "어머, 얘 좀 봐라?")
+			else
+				call speak(MASTER, "후후, 간지럽잖아.")
+			endif
+		elseif CFLAG:MASTER:성격 == 4
+			if RAND:2 == 0
+				call speak(MASTER, "으으... 때리지 마...")
+			else
+				call speak(MASTER, "자, 자꾸 그러면... 화낸다?")
+			endif
+		elseif CFLAG:MASTER:성격 == 5
+			if RAND:2 == 0
+				call speak(MASTER, "지금 해 보자 이거지?")
+			else
+				call speak(MASTER, "겨우 이 정도냐?")
+			endif
+		endif
+	; 피격(강)
+	else
+		if CFLAG:MASTER:성격 == 1
+			if RAND:2 == 0
+				call speak(MASTER, "아야! 아프잖아요.")
+			else
+				call speak(MASTER, "왜 이러시는거에요.")
+			endif
+		elseif CFLAG:MASTER:성격 == 2
+			if RAND:2 == 0
+				call speak(MASTER, "흥. 혼내줘야겠어.")
+			else
+				call speak(MASTER, "좀 아픈데?")
+			endif
+		elseif CFLAG:MASTER:성격 == 3
+			if RAND:2 == 0
+				call speak(MASTER, "이것봐라, 자꾸 기어오르네?")
+			else
+				call speak(MASTER, "좀 달아오르게 만드네.")
+			endif
+		elseif CFLAG:MASTER:성격 == 4
+			if RAND:2 == 0
+				call speak(MASTER, "하, 하지 말라고, 했잖아...")
+			else
+				call speak(MASTER, "이게 자꾸 신경을 긁네...?")
+			endif
+		elseif CFLAG:MASTER:성격 == 5
+			if RAND:2 == 0
+				call speak(MASTER, "지금 해 보자 이거지?")
+			else
+				call speak(MASTER, "겨우 이 정도냐?")
+			endif
+		endif
+	endif

@@ -17,46 +17,57 @@
 	
 		EXP:MASTER:전투승리경험++
 		CFLAG:MASTER:전투결과++
-		call finishQuest
+		
+		if CFLAG:TARGET:캐릭터번호 == FLAG:퀘스트대상
+			call stepQuest
+		endif
 		
 		; Looting
-		MONEY += CFLAG:TARGET:드랍골드최소
+		mobDrop = CFLAG:TARGET:드랍골드최소
 		if CFLAG:TARGET:드랍골드최소 != CFLAG:TARGET:드랍골드최대
-			MONEY += RAND:(CFLAG:TARGET:드랍골드최대 - CFLAG:TARGET:드랍골드최소)
+			mobDrop += RAND:(CFLAG:TARGET:드랍골드최대 - CFLAG:TARGET:드랍골드최소)
 		endif
+		printFormL 돈을 {mobDrop}원 주웠다
+		MONEY += mobDrop
+		
+		mobDrop = CFLAG:TARGET:드랍마석최소
+		mobDrop += RAND:(CFLAG:TARGET:드랍마석최대 - CFLAG:TARGET:드랍마석최소)
+
+		printFormL 마석을 {mobDrop}개 주웠다
+		FLAG:마석 += mobDrop
 		
 		mobDrop = 1 + RAND:3
 		if mobDrop == 1 && CFLAG:TARGET:드랍재료1 > 0
 			ITEM:(CFLAG:TARGET:드랍재료1) += 1
+			printFormL %kr(ITEMNAME:(CFLAG:TARGET:드랍재료1), "을", "를")% 얻었다
 		elseif mobDrop == 2 && CFLAG:TARGET:드랍재료2 > 0
 			ITEM:(CFLAG:TARGET:드랍재료2) += 1
+			printFormL %kr(ITEMNAME:(CFLAG:TARGET:드랍재료2), "을", "를")% 얻었다
 		elseif mobDrop == 3 && CFLAG:TARGET:드랍재료3 > 0
 			ITEM:(CFLAG:TARGET:드랍재료3) += 1
+			printFormL %kr(ITEMNAME:(CFLAG:TARGET:드랍재료3), "을", "를")% 얻었다
 		endif
-		
-		; Remove the monster
-		call delMonster
 
 	; 기생
 	elseif CFLAG:TARGET:기생성공
 		printFormL %CALLNAME:TARGET% %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 기생해버렸습니다...
-		printFormL 토벌은 자동으로 취소됩니다.
 		
 		EXP:MASTER:전투패배경험++
-		CFLAG:MASTER:전투결과++
-		call cancelQuest
-	; Quest fail
+	; 패배
 	else
 		EXP:MASTER:전투패배경험++
 		CFLAG:MASTER:전투결과--
 
 		; Check if cancel this quest or keep going with the wounded monster.
-		printFormL 이번에는 실패했지만, 다음에는 충분히 준비해서 다시 도전하도록 합시다.
+		printFormL %kr(NAME:TARGET, "과의", "와의")% 전투에서 힘이 다한 %kr(NAME:MASTER, "은", "는")% 눈앞이 깜깜해졌다...
+		call banishFromLabyrinth
 	endif
+
+	; Remove the monster
+	call delMonster
 	
 	CFLAG:MASTER:전투결과 = LIMIT(CFLAG:MASTER:전투결과, -10, 10)
 
 	call statsUpgrade
-	call afterAction
 
 	begin shop

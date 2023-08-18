@@ -20,6 +20,8 @@ CFLAG,캐릭터번호,501
 ; Mob Settings
 CFLAG,드랍골드최소,10
 CFLAG,드랍골드최대,10
+CFLAG,드랍마석최소,1
+CFLAG,드랍마석최대,3
 
 CFLAG,드랍재료1,-1
 CFLAG,드랍재료2,-1
