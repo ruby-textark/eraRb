@@ -9,12 +9,39 @@
 		drawLine
 
 		call continueExpeditionShopMenu
-		return
 	endif
 
 	printL
 	drawline
-	printFormL {DAY}일차 소지금 : %TOSTR(MONEY,"#,###")%
+
+	fontBold
+	setColor 0xffffff
+	printForm {DAY}
+	fontRegular
+	resetColor
+	
+	print 일차 소지금 〈
+
+	fontBold
+	setColor 0xcccc00
+	printForm %TOSTR(MONEY,"#,###")%
+	fontRegular
+	resetColor
+	
+	print 〉 마석 〈
+
+	fontBold
+	setColor 0x0077cc
+	printForm %TOSTR(FLAG:마석,"#,###")%
+	
+	if !FLAG:마석
+		print 없음
+	endif
+	fontRegular
+	resetColor
+
+	printL 〉
+	printL
 	
 	if FLAG:육변기형시작일
 		call showCumDump

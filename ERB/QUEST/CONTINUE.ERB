@@ -2,27 +2,46 @@
 
 	; todo create 3rd floor and more
 
-	printL 자, 다음은 어떻게 할까?
+	print 지금은 미궁을 탐험하는 중이다(
+	fontBold
+	setColor 0x777777
+	print 일부 메뉴 사용 불가
+	fontRegular
+	resetColor
+	printL )
+
+	print (현재 위치 : 
 	
+	fontBold
 	if FLAG:미궁위치 == 1
-		printL (현재 위치 : 미궁의 입구)
+		setColor 0x77cc77
+		print 미궁의 입구
 	elseif FLAG:미궁위치 == 2
-		printL (현재 위치 : 미궁의 상층부)
+		setColor 0x22cc44
+		print 미궁의 상층부
 	elseif FLAG:미궁위치 == 3
-		printL (현재 위치 : 미궁의 중층부)
+		setColor 0xcc44cc
+		print 미궁의 중층부
 	elseif FLAG:미궁위치 == 4
-		printL (현재 위치 : 미궁의 하층부)
+		setColor 0x770077
+		print 미궁의 하층부
 	elseif FLAG:미궁위치 >= 5
-		printL (현재 위치 : 미궁의 심층부)
+		setColor 0x770000
+		print 미궁의 심층부
 	endif
+	fontRegular
+	resetColor
 	
-	printL [0] - 미궁을 빠져나간다
-	printL [1] - 현재 위치에서 더 탐험한다
+	printL )
+	
+	printL
+	printLC [0] - 미궁을 빠져나간다
+	printLC [1] - 주변을 탐색한다
 	
 	if FLAG:미궁위치 > 2
 		setColor 0x777777
 	endif
-	printL [2] - 더 깊은 곳으로 나아간다
+	printLC [2] - 더 깊은 곳으로 나아간다
 	resetColor
 
 @continueExpeditionHandleResult
@@ -43,6 +62,8 @@
 			FLAG:미궁위치 += 1
 		endif
 	else
+		return 0
 	endif
 
 	call expedition
+	return 1

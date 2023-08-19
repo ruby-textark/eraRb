@@ -3,7 +3,10 @@
 
 	if FLAG:원정중
 		call continueExpeditionHandleResult
-		return
+
+		if RESULT
+			return
+		endif
 	endif
 
 	call processMenu

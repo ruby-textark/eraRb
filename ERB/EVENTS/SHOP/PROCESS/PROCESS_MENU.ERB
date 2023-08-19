@@ -8,14 +8,14 @@
 	endif
 
 	; QUEST MENU
-	if FLAG:자궁대여료 == 0 && isMasterFree() && RESULT == 101
+	if RESULT == 101 && FLAG:자궁대여료 == 0 && isMasterFree() && !FLAG:원정중
 		call startExpedition
 		RESULT = 0
-	elseif !hasHuntQuest() && RESULT == 102
+	elseif RESULT == 102 && !hasHuntQuest() && !FLAG:원정중
 		call newQuestList
-	elseif TARGET != 0 && RESULT == 103
+	elseif RESULT == 103 && isMasterFree() && hasQuest()
 		call cancelQuest
-	elseif hasDeliverQuest() && hasDeliveryItems()
+	elseif RESULT == 104 && hasDeliverQuest() && hasDeliveryItems()
 		ITEM:(FLAG:퀘스트대상) -= (FLAG:퀘스트값)
 		call stepQuest
 
@@ -34,11 +34,11 @@
 		RESULT = 0
 
 	; SHOP MENU
-	elseif RESULT == 301
+	elseif RESULT == 301 && isMasterFree() && !FLAG:원정중
 		call itemShop
-	elseif RESULT == 302
+	elseif RESULT == 302 && isMasterFree() && !FLAG:원정중
 		call backStreet
-	elseif RESULT == 303
+	elseif RESULT == 303 && isMasterFree() && !FLAG:원정중
 		call cathedral
 
 	; SYSTEM MENU
@@ -54,7 +54,7 @@
 	; TURN END
 	elseif RESULT == 900
 		begin turnend
-	elseif RESULT == 901 && MONEY >= 2000
+	elseif RESULT == 901 && !FLAG:원정중 && MONEY >= 2000
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 푹 쉬었다
 		printFormW 숙박비 \\2000 차감
 		
