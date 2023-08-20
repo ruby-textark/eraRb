@@ -1,12 +1,17 @@
 ﻿@USERSHOP
+#dim dynamic menuInput
 #dim dynamic menuResult
 
 	if FLAG:원정중
+		menuInput = RESULT
+
 		call continueExpeditionHandleResult
 
 		if RESULT
 			return
 		endif
+
+		RESULT = menuInput
 	endif
 
 	call processMenu

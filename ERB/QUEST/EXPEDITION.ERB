@@ -17,13 +17,28 @@
 @startBattle
 
 	call addMonster(FLAG:미궁위치 * 100 + 1 + RAND:(FLAG:(100 + FLAG:미궁위치 * 10)))
+	
+	printFormW %CALLNAME:TARGET% %kr(NAME:TARGET, "과", "와")% 마주쳤습니다. 전투를 개시합니다.
+	printL
+	
 	begin train
 
 	return
 
 @goodRoom
+#dim dynamic randValue
+
+
 	; todo 여기 작업
-	call startBattle
+	randValue = frand(100)
+	
+	if randValue < 33
+		; 상점(33%)
+	elseif randValue < 66
+		; 샘(33%)
+	else
+		; 보물상자(33%)
+	endif
 
 @badRoom
 	; todo 여기 작업
