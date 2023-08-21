@@ -23,12 +23,17 @@ $moveLoop
 	printL
 	
 	if !hasBuff(MASTER, "속박")
-		printL [w] 상 [s] 하 [a] 좌 [d] 우 이동
+		printL [w] 상 [s] 하 [a] 좌 [d] 우
 	else
 		printL  - 속박되어 움직일 수 없다... - 
 	endif
 	
-	printL [q] 행동 [e] 상태창 [r] 대기
+	printButton "[q] 행동", "q"
+	print  
+	printButton "[e] 상태창", "e"
+	print  
+	printButton "[r] 대기", "r"
+	printL
 	
 	if shouldMasterDown()
 		return
@@ -101,9 +106,9 @@ $moveLoop
 			
 			if TCVAR:MASTER:좌우 == xPos && TCVAR:MASTER:상하 == yPos
 				if TCVAR:TARGET:좌우 == xPos && TCVAR:TARGET:상하 == yPos
-					print ※
+					printButton "※", "※"
 				else
-					print ★
+					printButton "★", "★"
 				endif
 			elseif TCVAR:MASTER:좌우 - 1 == xPos && TCVAR:MASTER:상하 == yPos
 				printButton "←", "a"
@@ -113,6 +118,14 @@ $moveLoop
 				printButton "↑", "w"
 			elseif TCVAR:MASTER:좌우 == xPos && TCVAR:MASTER:상하 + 1 == yPos
 				printButton "↓", "s"
+			elseif TCVAR:MASTER:좌우 - 1 == xPos && TCVAR:MASTER:상하 - 1 == yPos
+				printButton "□", "​"
+			elseif TCVAR:MASTER:좌우 + 1 == xPos && TCVAR:MASTER:상하 - 1 == yPos
+				printButton "□", "​"
+			elseif TCVAR:MASTER:좌우 - 1 == xPos && TCVAR:MASTER:상하 + 1 == yPos
+				printButton "□", "​"
+			elseif TCVAR:MASTER:좌우 + 1 == xPos && TCVAR:MASTER:상하 + 1 == yPos
+				printButton "□", "​"
 			elseif TCVAR:TARGET:좌우 == xPos && TCVAR:TARGET:상하 == yPos
 				print ★
 			else
