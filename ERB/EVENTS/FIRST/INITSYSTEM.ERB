@@ -11,7 +11,9 @@
 	addChara 1001
 	addChara 1002
 	addChara 1003
-	
+
+	call initNPC
+
 	; 난이도별 몬스터 
 	for mobIdx, 100, 1000
 		existCsv mobIdx
@@ -19,3 +21,8 @@
 			FLAG:(100 + (mobIdx / 100) * 10)++
 		endif
 	next
+
+@initNPC
+
+	; 떠돌이 상인: 2001
+	addChara 2001

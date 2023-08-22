@@ -48,3 +48,12 @@
 
 		FLAG:퀘스트진행중 = 0
 	endif
+
+	if LASTLOAD_VERSION < 12
+		printL v0.012
+		printW 일부 NPC가 추가되었습니다
+		
+		addChara 2001
+		
+		FLAG:마석환율 = 75 + RAND:50
+	endif

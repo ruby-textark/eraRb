@@ -1,0 +1,39 @@
+﻿@goodRoomTreasureChest
+#dim dynamic treasureGold
+#dim dynamic treasureItem
+#dim dynamic treasureItemCount
+
+	printW 주변을 둘러보던 중, 저편에 화려한 장식의 상자가 놓여있는 것이 보인다.
+	printW 어떻게 할까?
+	
+	printL [0] - 지나친다
+	printL [1] - 열어본다
+
+$inputLoop
+
+	input
+	
+	if RESULT == 0
+		printW 진짜 보물이 담겨져 있더라도 누군가가 이미 챙겨갔겠지. 굳이 위험을 감수할 필요는 없다.
+	elseif RESULT == 1
+		if RAND:2 == 0
+			treasureGold = FLAG:미궁위치 * 2000 + RAND:1500
+
+			printW 상자 안에는 돈이 들어있었다
+			printW 돈을 {treasureGold}원 획득했다
+
+			MONEY += treasureGold
+		else
+			treasureItem = 1 + RAND:5
+			treasureItemCount = RAND:2 + 2 * FLAG:미궁위치
+			
+			printFormW 상자 안에는 %kr(ITEMNAME:treasureItem, "이", "가")% 들어있었다
+			printFormW %kr(ITEMNAME:treasureItem, "을", "를")% {treasureItemCount}개 얻었다.
+			
+			ITEM:treasureItem += treasureItemCount
+		endif
+	else
+		printW 잘못된 입력입니다
+		clearLine 1
+		goto inputLoop
+	endif

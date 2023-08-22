@@ -1,0 +1,17 @@
+﻿@goodRoom
+#dim dynamic randValue
+
+
+	; todo 여기 작업
+	randValue = frand(100)
+	
+	if randValue < 33
+		; 상점(33%)
+		call goodRoomMerchant
+	elseif randValue < 66
+		; 샘(33%)
+		call goodRoomFountain
+	else
+		; 보물상자(33%)
+		call goodRoomTreasureChest
+	endif

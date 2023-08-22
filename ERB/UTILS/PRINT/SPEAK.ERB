@@ -8,3 +8,16 @@
 
 	; RESULT sideeffect때문에
 	return RESULT
+
+@speakNPC(npcNo, string)
+#dim dynamic npcNo
+#dims dynamic string
+#dim dynamic charaIdx
+
+	charaIdx = getChara(npcNo)
+	
+	call speak(charaIdx, @"%CALLNAME:charaIdx% %NAME:charaIdx% : %string%")
+	wait
+
+	; RESULT sideeffect때문에
+	return RESULT

@@ -1,0 +1,27 @@
+﻿; 회복약
+@itemOption5()
+	RESULTS '= "[체력회복+20%]"
+
+@itemExpl5()
+	RESULTS '= "약초를 잘 가공해 마력수로 걸러낸 것.\n마실 때 조금 입에 걸릴 수도 있다."
+
+@isUsable5(targetIdx)
+#dim dynamic targetIdx
+
+	return 1
+
+@onUseItem5(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %NAME:targetIdx%에게 %kr(ITEMNAME:1, "을", "를")% 사용했다.
+	BASE:targetIdx:체력 = LIMIT(BASE:targetIdx:체력 + MAXBASE:targetIdx:체력 / 5, 0, MAXBASE:targetIdx:체력)
+
+	return 1
+
+@isEquipable5
+	return 0
+@isUnequipable5
+	return 0
+
+@onEquip5
+@onUnequip5

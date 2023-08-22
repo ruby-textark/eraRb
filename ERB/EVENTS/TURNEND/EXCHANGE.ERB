@@ -1,0 +1,5 @@
+﻿@updateExchangeRate
+
+	if frand(5) == 0
+		FLAG:마석환율 = LIMIT(FLAG:마석환율 + frand(20) - 10, 50, 200)
+	endif

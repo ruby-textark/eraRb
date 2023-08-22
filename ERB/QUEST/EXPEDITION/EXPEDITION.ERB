@@ -3,6 +3,8 @@
 
 	randValue = frand(100)
 
+	printFormW %kr(NAME:MASTER, "은", "는")% 주변을 둘러본다...
+
 	if randValue < 60
 		; 전투(60%)
 		call startBattle
@@ -25,25 +27,6 @@
 
 	return
 
-@goodRoom
-#dim dynamic randValue
-
-
-	; todo 여기 작업
-	randValue = frand(100)
-	
-	if randValue < 33
-		; 상점(33%)
-	elseif randValue < 66
-		; 샘(33%)
-	else
-		; 보물상자(33%)
-	endif
-
-@badRoom
-	; todo 여기 작업
-	call startBattle
-	
 @bossBattle
 
 	;
