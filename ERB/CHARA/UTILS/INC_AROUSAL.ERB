@@ -14,8 +14,13 @@
 
 	call checkOrgasm
 
+; 전투중에는 PALAM의 직접 조작 대신 UP을 통하여 가감산을 진행하는것이 용이함
 @increaseArousalToUp(partIdx, amount)
 #dim dynamic partIdx
 #dim dynamic amount
+
+	if FLAG:"음욕의 계약"
+		UP:partIdx += FLAG:"음욕의 계약" * calcArousalValue(partIdx, amount) / 5
+	endif
 
 	UP:partIdx += calcArousalValue(partIdx, amount)

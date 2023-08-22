@@ -1,0 +1,17 @@
+﻿@onBuff1016(charaIdx)
+#dim dynamic charaIdx
+
+	printFormL %kr(NAME:charaIdx, "은", "는")% 파도치는 만족감에 저항의 의지를 상실했다
+	printL 적의 공격에 매우 취약해진다
+
+	TCVAR:charaIdx:방어력 -= ABL:charaIdx:방어력
+	TCVAR:charaIdx:마법내성 -= ABL:charaIdx:마법내성
+
+@progressBuff1016(charaIdx)
+#dim dynamic charaIdx
+
+@offBuff1016(charaIdx)
+#dim dynamic charaIdx
+
+	TCVAR:charaIdx:방어력 += ABL:charaIdx:방어력
+	TCVAR:charaIdx:마법내성 += ABL:charaIdx:마법내성

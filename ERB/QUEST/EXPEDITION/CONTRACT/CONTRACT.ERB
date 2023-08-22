@@ -1,0 +1,93 @@
+﻿@labyrinthContract
+
+	clearLine 99999
+	printL 미궁에서 나오는 원초적인 마력의 기운은 마석의 형태로 응축된다.
+	printL 그렇게 결정화된 마석을 다시금 정련하여 발달한 문명이 바로 미궁도시의 근간이다.
+	printL 말할 것도 없다. 마석은 곧 물과 소금 다음으로 중요한 물자가 되었고, 더 많은 마석을 얻기 위한 노력이 『미궁의 계약』을 만들어냈다.
+	drawLine
+	printL
+	wait
+	
+	setColor 0xd40404
+	fontBold
+	printL 미궁의 계약
+	resetColor
+	fontRegular
+
+	printL 1. 미궁의 마력을 증폭시켜 획득하는 마석의 양을 늘릴 수 있습니다.
+	printL 2. 동시에 미궁의 힘이 더욱 강해져, 그만큼의 패널티가 발생합니다.
+	printL 3. 패널티는 3종류의 선택지로 제시되며, 여러 번 선택할 수록 점점 효과가 증폭됩니다.
+
+	fontBold
+	printL 4. 미궁을 벗어나면 모든 계약이 초기화됩니다.
+	fontRegular
+	
+	printL
+	printFormL 현재 마석 습득 배율 : ({FLAG:계약배율/100}.{FLAG:계약배율%100/10}{FLAG:계약배율%10}\배)
+	printL [1] - 현재 계약 상황을 확인한다
+	printL [2] - 새로운 계약을 진행한다
+	printL [0] - 돌아간다
+
+$inputLoop
+
+	input
+	
+	if RESULT == 0
+		return
+	elseif RESULT == 1
+		call listContracts
+	elseif RESULT == 2
+		call addContract
+	else
+		printW 잘못된 입력입니다
+		clearLine 1
+		goto inputLoop
+	endif
+
+@listContracts
+#dim dynamic hasAnyContract
+#dim dynamic contractIdx
+
+	drawLine
+	printL 현재 적용되어 있는 미궁의 계약:
+	printL
+
+	for contractIdx, 701, 800
+		if FLAG:contractIdx
+			hasAnyContract = 1
+
+			if FLAG:contractIdx < 3
+				setColor 0x00cc00
+			elseif FLAG:contractIdx < 5
+				setColor 0xffff00
+			else
+				setColor 0xcc0000
+			endif
+			printForm %FLAGNAME:contractIdx%
+			resetColor
+
+			print : 
+
+			if FLAG:contractIdx < 3
+				setColor 0x00cc00
+			elseif FLAG:contractIdx < 5
+				setColor 0xffff00
+			else
+				setColor 0xcc0000
+			endif
+			printForm {FLAG:contractIdx}
+			resetColor
+
+			printL 단계
+
+			printFormL > %STR:contractIdx%
+		endif
+	next
+	
+	if !hasAnyContract
+		setColor 0x777777
+		printL (적용된 미궁의 계약이 하나도 없습니다)
+		resetColor
+	endif
+	
+	wait

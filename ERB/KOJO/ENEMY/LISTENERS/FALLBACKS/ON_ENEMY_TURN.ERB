@@ -1,4 +1,11 @@
 ﻿@fallbackOnEnemyTurn
+#dim dynamic sexualAttackRate
+
+	sexualAttackRate = CFLAG:TARGET:성공격빈도
+
+	if FLAG:"유혹의 계약"
+		sexualAttackRate = sexualAttackRate * (10 + FLAG:"유혹의 계약") / 10
+	endif
 
 	; 같은 위치에 있는 경우
 	if isMasterInRange()

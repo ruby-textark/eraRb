@@ -1,0 +1,50 @@
+﻿@addContract
+#dim dynamic contractIdx
+#dim dynamic contractsCount
+#dim dynamic availableContracts, 100
+#dim dynamic shuffleIdx
+
+	for contractIdx, 701, 800
+		if strlens(FLAGNAME:contractIdx) > 0
+			availableContracts:(contractsCount++) = contractIdx
+		endif
+	next
+
+	for contractIdx, 0, contractsCount
+		shuffleIdx = (contractIdx + 1 + frand(contractsCount - 1)) % contractsCount
+
+		; A = A + B
+		availableContracts:contractIdx += availableContracts:shuffleIdx
+		; B = A' - B = (A + B) - B = A
+		availableContracts:shuffleIdx = availableContracts:contractIdx - availableContracts:shuffleIdx
+		; A' = A' - B = (A + B) - A = B
+		availableContracts:contractIdx = availableContracts:contractIdx - availableContracts:shuffleIdx
+	next
+
+	; availableContracts:0~2까지의 계약을 제시
+	
+	drawLine
+	printL
+	printL 미궁의 계약
+	printL 다음의 계약 중 하나를 선택해야 한다
+	printL
+
+	for contractIdx, 0, 3
+		printFormL [{contractIdx}] - %FLAGNAME:(availableContracts:contractIdx)%의 계약을 추가한다(현재 {FLAG:(availableContracts:contractIdx)}단계)
+	next
+
+$contractLoop
+
+	input
+	
+	if 0 <= RESULT && RESULT < 3
+		FLAG:(availableContracts:RESULT) += 1
+		printFormW %FLAGNAME:(availableContracts:RESULT)%의 계약이 체결되었다(현재 {FLAG:(availableContracts:RESULT)}단계)
+		
+		FLAG:계약배율 = FLAG:계약배율 * (10 + FLAG:(availableContracts:RESULT)) / 10
+		printFormW 계약의 힘으로 마석의 습득이 {FLAG:(availableContracts:RESULT) / 10}.{FLAG:(availableContracts:RESULT) % 10}배 증가하였다.
+	else
+		printW 잘못된 입력입니다. 계약을 시작한 이상 반드시 하나를 선택해야만 합니다.
+		clearLine 1
+		goto contractLoop
+	endif

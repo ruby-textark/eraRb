@@ -7,6 +7,7 @@
 	FLAG:미궁위치 = 1
 	
 	call initCharFlags
+	call initContracts
 	
 	; Some misc events come here.
 
@@ -18,4 +19,13 @@
 	; PALAM -> CFLAG 인계
 	for partIdx, 501, 600
 		CFLAG:MASTER:partIdx = PALAM:MASTER:(partIdx - 400)
+	next
+
+@initContracts
+#dim dynamic contractIdx
+
+	FLAG:계약배율 = 100
+
+	for contractIdx, 701, 800
+		FLAG:contractIdx = 0
 	next

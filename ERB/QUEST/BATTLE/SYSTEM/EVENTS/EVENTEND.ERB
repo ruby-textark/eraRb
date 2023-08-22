@@ -36,6 +36,7 @@
 			mobDrop += RAND:(CFLAG:TARGET:드랍마석최대 - CFLAG:TARGET:드랍마석최소)
 		endif
 
+		mobDrop = mobDrop * FLAG:계약배율 / 100
 		printFormL 마석을 {mobDrop}개 주웠다
 		FLAG:마석 += mobDrop
 		

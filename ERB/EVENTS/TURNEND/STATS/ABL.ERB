@@ -42,7 +42,7 @@
 		call colorPrint(0xcccc00, CALLNAME:MASTER)
 		printForm 의\ 
 		call colorPrint(0x880044, ABLNAME:ablIdx)
-		printFormL 이 Lv {ABL:MASTER:ablIdx}로 상승
+		printFormL %krPost(ABLNAME:ablIdx, "이", "가")% Lv {ABL:MASTER:ablIdx}로 상승
 	wend
 
 @ablUpLoopByStr(ablStr, juelStr, expStr)

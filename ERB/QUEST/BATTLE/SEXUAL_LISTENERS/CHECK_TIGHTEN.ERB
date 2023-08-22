@@ -21,18 +21,19 @@
 		return
 	endif
 
-	if BASE:MASTER:expansionBaseIdx + penisSize> MAXBASE:MASTER:expansionBaseIdx
+	if BASE:MASTER:expansionBaseIdx + penisSize > MAXBASE:MASTER:expansionBaseIdx
 		call onMasterExpansion_m(expansionBaseIdx)
 		call onMasterExpansion_e(expansionBaseIdx)
 	endif
 	
-	if BASE:MASTER:expansionBaseIdx + penisSize> MAXBASE:MASTER:expansionBaseIdx + 10
+	if BASE:MASTER:expansionBaseIdx + penisSize > MAXBASE:MASTER:expansionBaseIdx + 10
 		BASE:MASTER:partIdx -= 3
+		BASE:MASTER:expansionBaseIdx -= 2 + RAND:2
 		EXP:MASTER:expansionExpIdx++
 		
 		printFormW %CALLNAME:MASTER%의 %kr(partStr(partIdx), "이", "가")% 늘어나다 못해 일부 찢어진 것 같다
 	elseif BASE:MASTER:expansionBaseIdx + penisSize> MAXBASE:MASTER:expansionBaseIdx + 5
-		BASE:MASTER:expansionBaseIdx -= 1 + RAND:2
+		BASE:MASTER:expansionBaseIdx -= 1
 		EXP:MASTER:expansionExpIdx++
 		
 		printFormW %CALLNAME:MASTER%의 %kr(partStr(partIdx), "이", "가")% 무리한 삽입으로 늘어나고 있다...

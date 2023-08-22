@@ -54,6 +54,13 @@
 	next
 
 	if orgasmCount
+	
+		if FLAG:전투중
+			if FLAG:"복종의 계약"
+				call applyBuffTo(MASTER, "복종", FLAG:"복종의 계약")
+			endif
+		endif
+
 		if ABL:TARGET:흡정
 			printFormL %kr(CALLNAME:MASTER, "은", "는")% %NAME:TARGET%에게 착정당하고 있다
 

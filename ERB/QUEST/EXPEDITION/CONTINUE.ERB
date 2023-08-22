@@ -43,6 +43,9 @@
 	endif
 	printLC [2] - 더 깊은 곳으로 나아간다
 	resetColor
+	printL
+	
+	printLC [3] - 미궁의 계약
 
 @continueExpeditionHandleResult
 	
@@ -61,6 +64,10 @@
 		else
 			FLAG:미궁위치 += 1
 		endif
+	elseif RESULT == 3
+		; 계약 체결은 턴 소모 없음
+		call labyrinthContract
+		return 0
 	else
 		return 0
 	endif
