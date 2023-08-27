@@ -1,5 +1,5 @@
 ﻿@sexualHarassment
-#dim dynamic harrasmentRate
+#dim dynamic harassmentRate
 #dim dynamic partIdx
 
 	; 육변기형에 처해있으면 일단 발생하지 않음
@@ -8,27 +8,27 @@
 		return
 	endif
 
-	harrasmentRate = FLAG:성희롱확률
+	harassmentRate = FLAG:성희롱확률
 	
 	; 성적 명성에 따라 성희롱 확률 최대 2배 상승
-	harrasmentRate = harrasmentRate * (100 + CFLAG:MASTER:성적명성) / 100
+	harassmentRate = harassmentRate * (100 + CFLAG:MASTER:성적명성) / 100
 	
 	; 매혹이면 성희롱 확률 상승
 	if TALENT:MASTER:매혹
-		times harrasmentRate, 1.25
+		times harassmentRate, 1.25
 	endif
 
 	; 만만해보이면 성희롱 확률 상승
 	if TALENT:MASTER:겁쟁이
-		times harrasmentRate, 1.1
+		times harassmentRate, 1.1
 	endif
 	
 	; 강해보이면 성희롱 확률 감소
 	if TALENT:MASTER:대범함
-		times harrasmentRate, 0.9
+		times harassmentRate, 0.9
 	endif
 
-	if RAND:100 >= harrasmentRate
+	if RAND:100 >= harassmentRate
 		return
 	endif
 
@@ -39,17 +39,16 @@
 		printFormW 거리를 걷던 중 우연히 누군가가 %kr(CALLNAME:MASTER, "을", "를")% 부르는 목소리가 들려왔다.
 
 		call addMobChara(1101 + RAND:7)
-		printFormW 뒤를 돌아본 %CALLNAME:MASTER%의 눈에 들어온 것은 %NAME:TARGET% %kr(CALLNAME:TARGET, "이었", "였")%다.
+		printFormW 뒤를 돌아본 %CALLNAME:MASTER%의 눈에 들어온 것은 %CALLNAME:TARGET% %kr(NAME:TARGET, "이었", "였")%다.
 	
 		PALAM:MASTER:억울 += 100
 	elseif RAND:3 == 0
 		printFormW 오늘따라 거리에서 무슨 큰 장이 열렸는지, 사람들이 몰려있는 모습이 보인다.
 		printFormW 저 너머로 가야만 하는데... %kr(CALLNAME:MASTER, "은", "는")% 보기만 해도 땀내나는 사람들 무리로 비집고 들어갈 생각에 한숨을 푹 쉬었다.
 
+		call addMobChara(1101 + RAND:7)
 		printFormW 하는 수 없이 사람들 사이로 끼어들어간 %CALLNAME:MASTER%의 곁에서 불쑥 누군가가 튀어나왔다.
 		printFormW 불쾌한 냄새가 코를 찌르는 것과, %kr(NAME:TARGET, "이", "가")% %kr(CALLNAME:MASTER, "을", "를")% 덮치는 것은 거의 동시였다.
-
-		call addMobChara(1101 + RAND:7)
 	
 		PALAM:MASTER:불쾌 += 100
 	elseif RAND:2 == 0

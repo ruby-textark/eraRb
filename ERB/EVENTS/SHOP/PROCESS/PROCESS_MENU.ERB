@@ -52,7 +52,7 @@
 		RESULT = 0
 
 	; TURN END
-	elseif RESULT == 900
+	elseif RESULT == 900 && !FLAG:원정중
 		begin turnend
 	elseif RESULT == 901 && !FLAG:원정중 && MONEY >= 2000
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 푹 쉬었다

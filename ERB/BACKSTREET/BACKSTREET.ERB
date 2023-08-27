@@ -1,12 +1,7 @@
 ﻿@backStreet
 
-	if checkBackstreetCourage() < 3
-		printFormW 이런 위험한 곳에 발을 들이기엔 %CALLNAME:MASTER%의 용기가 부족하다
-		printFormW %kr(CALLNAME:MASTER, "은", "는")% 발걸음을 되돌려 나가기로 했다...
-		return
-	endif
-
 	printFormW %kr(CALLNAME:MASTER, "은", "는")% 뒷골목에 발을 들였다
+	call backStreetSexualHarassment
 
 $inputLoop
 	
@@ -20,31 +15,12 @@ $inputLoop
 	if RESULT == 1
 		call itemShopMenu(900, 1000)
 	elseif RESULT == 2
-		if checkBackstreetCourage() < 4
-			printFormW 그러나 역시 %CALLNAME:MASTER%에게는 이런 곳까지 갈 정도의 자신은 없었다.
-			printFormW %kr(CALLNAME:MASTER, "은", "는")% 되돌아가기로 했다
-		else
-			call brothel
-		endif
+		call brothel
 	elseif RESULT == 3
-		if checkBackstreetCourage() < 5
-			printFormW 그러나 역시 %CALLNAME:MASTER%에게는 이런 곳까지 갈 정도의 자신은 없었다.
-			printFormW %kr(CALLNAME:MASTER, "은", "는")% 되돌아가기로 했다
-		else
-			call slavery
-		endif
+		call slavery
 	elseif RESULT == 0
 		return
 	endif
 	
 	clearLine 1
 	goto inputLoop
-
-@checkBackstreetCourage
-#function
-#dim dynamic val
-
-	val += (TALENT:MASTER:대범함 - TALENT:MASTER:겁쟁이) * 5
-	val += ABL:MASTER:욕망 * 2
-	
-	returnf val

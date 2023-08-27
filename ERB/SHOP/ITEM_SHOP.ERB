@@ -95,7 +95,7 @@ $amountLoop
 				tryccallform isOnePiece{itemIdx}
 					if RESULT
 						ITEM:RESULT += buyAmount
-						printFormW %kr(ITEMNAME:itemIdx, "을", "를")% 구입했습니다
+						printFormW %kr(ITEMNAME:RESULT, "을", "를")% 구입했습니다
 					endif
 				catch
 				endcatch

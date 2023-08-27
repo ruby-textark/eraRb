@@ -1,6 +1,7 @@
 ﻿@changeMasterEquips(equipSlotIdx, equipItemIdx)
 #dim dynamic equipSlotIdx
 #dim dynamic equipItemIdx
+#dim dynamic onepieceIdx
 
 	if equipSlotIdx < 11 || 19 < equipSlotIdx
 		printW 잘못된 장비 위치입니다
@@ -40,6 +41,32 @@
 		return 0
 	endcatch
 
+	tryccallform isOnePiece{equipItemIdx}
+		; 한벌옷일 경우 반대쪽도 처리
+		onepieceIdx = RESULT
+		
+		; 반대쪽 옷을 벗길 수 있는지 확인
+		callForm isUnequipable{EQUIP:MASTER:(onepieceIdx / 100)}
+		if !RESULT
+			printW 한벌옷의 반대편 위치에 장착된 아이템을 해제할 수 없습니다
+		endif
+		
+		callForm isEquipable{onepieceIdx}
+		if !RESULT
+			printW 한벌옷의 반대편 옷을 장착할 수 없습니다
+		endif
+
+		; 반대쪽 옷 먼저 해제 후 장착
+		callForm onUnequip{EQUIP:MASTER:(onepieceIdx / 100)}
+		EQUIP:MASTER:(onepieceIdx / 100) = 0
+
+		callForm onEquip{onepieceIdx}
+		EQUIP:MASTER:(onepieceIdx / 100) = onepieceIdx
+		
+		printFormW %EQUIPNAME:(onepieceIdx / 100)% 장비를 %kr(ITEMNAME:(onepieceIdx / 100), "으로", "로")% 교체했습니다
+	catch
+	endcatch
+
 	callForm onEquip{EQUIP:MASTER:equipSlotIdx}
 
 	printFormW %EQUIPNAME:equipSlotIdx% 장비를 %kr(ITEMNAME:equipItemIdx, "으로", "로")% 교체했습니다
@@ -63,5 +90,22 @@
 
 	EQUIP:MASTER:equipSlotIdx = 0
 	printFormW %EQUIPNAME:equipSlotIdx% 장비를 해제했습니다
+	
+	return 1
+
+@unequipMasterEquipsSilently(equipSlotIdx)
+#dim dynamic equipSlotIdx
+
+	tryccallform isUnequipable{EQUIP:MASTER:equipSlotIdx}
+		if RESULT
+			callForm onUnequip{EQUIP:MASTER:equipSlotIdx}
+		else
+			return 0
+		endif
+	catch
+		return 0
+	endcatch
+
+	EQUIP:MASTER:equipSlotIdx = 0
 	
 	return 1

@@ -1,8 +1,13 @@
 ﻿@startHypno
 
+	FLAG:최면중 = 1
 	printL
 
 	setBgColor 0xffffff
+	setBgColor 0xcccccc
+	setBgColor 0x999999
+	setBgColor 0x666666
+	setBgColor 0x333333
 	resetBgColor
 	
 	call sleepMaster
@@ -10,7 +15,8 @@
 	EXP:MASTER:최면경험++
 	
 @endHypno
-	
+
+	FLAG:최면중 = 0
 	twait 100, 0
 	printL .
 	twait 100, 0
@@ -22,8 +28,13 @@
 	call wakeupMaster
 
 @hypnoSex
+#dim dynamic equipSlotIdx
 #dim dynamic partIdx
 #dim dynamic expResult, 200
+
+	for equipSlotIdx, 11, 19
+		call unequipMasterEquipsSilently(equipSlotIdx)
+	next
 
 	repeat BASE:MASTER:최면심도
 		partIdx = getSexualAtkBodyPart()
@@ -38,9 +49,7 @@
 
 		EXP:MASTER:partIdx += expResult:partIdx
 		printFormL %EXPNAME:partIdx%+{expResult:partIdx}
-	next
-	
-	for partIdx, 101, 200
+		
 		call increaseArousal(partIdx, expResult:partIdx * 100)
 
 		if isInsertablePart(partIdx) && RAND:5 < 4

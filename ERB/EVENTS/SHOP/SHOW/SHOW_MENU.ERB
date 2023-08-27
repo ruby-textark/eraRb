@@ -41,7 +41,6 @@
 	endif
 	printLC [203] - 장비변경
 	resetColor
-	printL
 
 	printLC [204] - 스킬창
 	resetColor
@@ -55,7 +54,7 @@
 	printLC [303] - 성당
 	resetColor
 	printL
-	
+
 	printL
 
 	printLC [801] - 저장
@@ -63,7 +62,12 @@
 	printLC [803] - CONFIG
 	printL
 	
+	if FLAG:원정중
+		setColor 0x777777
+	endif
 	printLC [900] - 눈을 붙인다
+	resetColor
+
 	if !isMasterFree() || MONEY < 2000 || FLAG:원정중
 		setColor 0x777777
 	endif

@@ -46,6 +46,7 @@
 	printL
 	
 	printLC [3] - 미궁의 계약
+	printLC [4] - 잠시 휴식한다
 
 @continueExpeditionHandleResult
 	
@@ -58,6 +59,7 @@
 		endif
 	elseif RESULT == 1
 		; nop
+		call expedition
 	elseif RESULT == 2
 		if FLAG:미궁위치 == 3
 			call bossBattle
@@ -68,9 +70,32 @@
 		; 계약 체결은 턴 소모 없음
 		call labyrinthContract
 		return 0
+	elseif RESULT == 4
+		call expeditionTurnEnd
 	else
 		return 0
 	endif
 
-	call expedition
 	return 1
+
+; @EVENTTURNEND 참고
+@expeditionTurnEnd
+
+	printFormW 잠시 눈을 붙인다...
+	
+	call statsUpgrade
+
+	call parasite
+	call stdStep
+	call stdRealize
+	
+	CFLAG:MASTER:의식있음 = 0
+
+	call holeTight
+	call addiction
+	call tattoo
+	call arousal
+
+	CFLAG:MASTER:의식있음 = 1
+	
+	call relax

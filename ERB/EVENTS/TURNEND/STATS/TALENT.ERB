@@ -36,17 +36,17 @@
 		call loseTalent("겁쟁이")
 		CFLAG:MASTER:전투결과 = 0
 
+	elseif !TALENT:MASTER:대범함 && !TALENT:MASTER:겁쟁이 && CFLAG:MASTER:전투결과 > 5
+		printFormW %kr(CALLNAME:MASTER, "은", "는")% 풍부한 승리의 경험으로 용기를 얻었다
+		call getTalent("대범함")
+		CFLAG:MASTER:전투결과 = 0
+
 	elseif TALENT:MASTER:대범함 && CFLAG:MASTER:전투결과 < -5
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 이어진 패배로 용기를 잃었다
 		call loseTalent("대범함")
 		CFLAG:MASTER:전투결과 = 0
 
-	elseif !TALENT:MASTER:겁쟁이 && CFLAG:MASTER:전투결과 > 5
-		printFormW %kr(CALLNAME:MASTER, "은", "는")% 풍부한 승리의 경험으로 용기를 얻었다
-		call getTalent("대범함")
-		CFLAG:MASTER:전투결과 = 0
-
-	elseif !TALENT:MASTER:대범함 && CFLAG:MASTER:전투결과 < -5
+	elseif !TALENT:MASTER:겁쟁이 && !TALENT:MASTER:대범함 && CFLAG:MASTER:전투결과 < -5
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 습관적인 패배로 완전히 겁을 먹어버렸다
 		call getTalent("겁쟁이")
 		CFLAG:MASTER:전투결과 = 0

@@ -10,6 +10,13 @@
 	
 	EXP:MASTER:partIdx++
 	EXP:MASTER:삽입경험++
+	; 종족별성경험추가
+	EXP:MASTER:(60 + CFLAG:TARGET:종족)++
+	
+	if !CFLAG:TARGET:경험완료
+		CFLAG:TARGET:경험완료 = 1
+		EXP:MASTER:경험인원수++
+	endif
 
 	call checkStd
 	call checkVirgin

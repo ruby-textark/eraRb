@@ -1,13 +1,19 @@
-@kr(text, postfix1, postfix2)
+﻿@kr(text, postfix1, postfix2)
 #FUNCTIONS
 #dims dynamic text
 #dims dynamic postfix1
 #dims dynamic postfix2
 
 	if (encodeToUni(text, strlensu(text) - 1) - 44032) % 28 == 0
-		returnf text+postfix2
+		returnf text + postfix2
+	elseif (encodeToUni(text, strlensu(text) - 1) - 44032) % 28 == 8
+		if postfix1 == "으로"
+			returnf text + postfix2
+		else
+			returnf text + postfix1
+		endif
 	else
-		returnf text+postfix1
+		returnf text + postfix1
 	endif
 
 @krPost(text, postfix1, postfix2)

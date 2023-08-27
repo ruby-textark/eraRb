@@ -1,11 +1,6 @@
 ﻿@checkVirgin
 #dim dynamic partIdx
 
-	if !CFLAG:MASTER:의식있음
-		setBit CFLAG:MASTER:무의식중사건, 0
-		return
-	endif
-
 	for partIdx, 101, 200
 		if isMasterInserted(partIdx, 1) && TALENT:MASTER:(200 + partIdx)
 			if RAND:2 == 0

@@ -4,6 +4,14 @@
 	FLAG:원정중 = 0
 	
 	printFormW %kr(NAME:MASTER, "은", "는")% 미궁에서 쫓겨났다...
+	
+	drawLine
+	; 소지 마석의 50% 소실
+	printFormW 마석 {FLAG:마석 / 2} 개를 잃었다.
+	FLAG:마석 -= FLAG:마석 / 2
+	
+	drawLine
+	
 	printW 미궁도시로 돌아갑니다
 
 	; todo 쓰러진 사이에 당함
