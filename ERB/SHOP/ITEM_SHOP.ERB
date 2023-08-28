@@ -47,6 +47,13 @@ $itemLoop
 			continue
 		endif
 		
+		tryccallform isBuyable{itemIdx}
+			if RESULT == 0
+				continue
+			endif
+		catch
+		endcatch
+		
 		itemString = [{itemIdx}] - %ITEMNAME:itemIdx% ({ITEMPRICE:itemIdx})
 		
 		printFormLC %itemString, 30, LEFT%

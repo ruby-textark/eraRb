@@ -35,6 +35,14 @@
 	printL )
 	
 	printL
+	barstr BASE:MASTER:체력, MAXBASE:MASTER:체력, 10
+	printFormL 체력 : %RESULTS% ({BASE:MASTER:체력}/{MAXBASE:MASTER:체력})
+
+	barstr BASE:MASTER:마력, MAXBASE:MASTER:마력, 10
+	printFormL 마력 : %RESULTS% ({BASE:MASTER:마력}/{MAXBASE:MASTER:마력})
+	drawLine
+	
+	printL
 	printLC [0] - 미궁을 빠져나간다
 	printLC [1] - 주변을 탐색한다
 	

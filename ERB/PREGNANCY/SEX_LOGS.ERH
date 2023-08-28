@@ -1,4 +1,5 @@
 ﻿#dim savedata SexLogPtr
+#dim const SexLogSize = 1000
 
 ; 사정량
 #dim savedata SexLogAmount, 1000
@@ -12,7 +13,7 @@
 #dims savedata SexLogName, 1000
 
 ; 최근 기록 포인터
-#define LastSexPtr ((SexLogPtr + 9999) % 10000)
+#define LastSexPtr ((SexLogPtr + SexLogSize - 1) % SexLogSize)
 ;최근 사정량
 #define recentCumAmount (SexLogAmount:LastSexPtr)
 ;최근 사정자

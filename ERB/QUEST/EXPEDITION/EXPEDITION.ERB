@@ -20,13 +20,37 @@
 
 	call addMonster(FLAG:미궁위치 * 100 + 1 + RAND:(FLAG:(100 + FLAG:미궁위치 * 10)))
 	
-	printFormW %CALLNAME:TARGET% %kr(NAME:TARGET, "과", "와")% 마주쳤습니다. 전투를 개시합니다.
-	printL
-	
-	call applyContractBeforeBattle
-	begin train
+	printFormW %CALLNAME:TARGET% %kr(NAME:TARGET, "과", "와")% 마주쳤습니다.
+	printL 어떻게 할까?
 
-	return
+	printL [1] - 전투 개시
+	printL [2] - 도망친다
+	
+$battleChoiceLoop
+
+	input
+	
+	if RESULT == 1	
+		call applyContractBeforeBattle
+		begin train
+	elseif RESULT == 2
+		if RAND:100 < 30 + (ABL:MASTER:은신술 - ABL:TARGET:추적술) * 5
+			call delMonster
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 조심스레 몸을 빼는 데 성공했다
+		else
+			printFormW 살그머니 움직여 본 %kr(CALLNAME:MASTER, "이었지만", "였지만")% %NAME:TARGET%에게서 벗어날 수는 없었다
+			printFormW 간신히 달려서 도망쳐 나오며 %kr(CALLNAME:MASTER, "은", "는")% 부상을 당했다
+			
+			BASE:MASTER:체력 -= BASE:MASTER:체력 / 10
+			BASE:MASTER:마력 -= BASE:MASTER:마력 / 20
+
+			call delMonster
+		endif
+	else
+		clearLine 1
+		goto battleChoiceLoop
+	endif
+
 
 @bossBattle
 

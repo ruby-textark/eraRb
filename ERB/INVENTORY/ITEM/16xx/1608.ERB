@@ -1,0 +1,28 @@
+﻿; 유리검
+@itemOption1608()
+	RESULTS '= "[공격력+36][방어력-20][마법내성+5][조건:전투기술>=3]"
+
+@itemExpl1608()
+	RESULTS '= "손잡이부터 날끝까지 투명한 유리로 만들어진 검.\n어느 방향에서 보나 한 점 흐트러짐이 없는 모습은 언제든지 쥔 자에게도 이빨을 드러내고 있는 듯 하다."
+
+@isUsable1608(targetIdx)
+#dim dynamic targetIdx
+	return 0
+
+@onUseItem1608(targetIdx)
+#dim dynamic targetIdx
+
+@isEquipable1608
+	return ABL:MASTER:전투기술 > 2
+@isUnequipable1608
+	return 1
+
+@onEquip1608
+	ABL:MASTER:공격력 += 36
+	ABL:MASTER:방어력 -= 20
+	ABL:MASTER:마법내성 += 5
+
+@onUnequip1608
+	ABL:MASTER:공격력 -= 36
+	ABL:MASTER:방어력 += 20
+	ABL:MASTER:마법내성 -= 5

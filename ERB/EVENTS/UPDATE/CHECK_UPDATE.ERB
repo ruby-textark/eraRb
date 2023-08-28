@@ -62,6 +62,7 @@
 		printL v0.013
 		printW 일부 NPC가 추가되었습니다
 		printFormW %CALLNAME:MASTER%의 대사 색상이 추가되었습니다
+		printFormW 기본으로 적용되던 [피임결계]가 태생 [성녀] 이외에는 적용되지 않도록 변경되었습니다
 
 		call initNPC
 		
@@ -75,6 +76,10 @@
 			CFLAG:MASTER:대사색상 = 0xaa55ff
 		elseif CFLAG:MASTER:성격 == 5
 			CFLAG:MASTER:대사색상 = 0x008cff
+		endif
+		
+		if CFLAG:MASTER:태생 != 5
+			TALENT:MASTER:피임결계 = 0
 		endif
 		
 		call speak(MASTER, "현재 대사 색상은 이렇습니다")
