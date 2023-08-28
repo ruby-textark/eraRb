@@ -40,7 +40,7 @@
 		printFormL 마석을 {mobDrop}개 주웠다
 		FLAG:마석 += mobDrop
 		
-		mobDrop = 1 + RAND:3
+		mobDrop = 1 + RAND:(3 * (CFLAG:TARGET:레어드랍 + 1))
 		if mobDrop == 1 && CFLAG:TARGET:드랍재료1 > 0
 			ITEM:(CFLAG:TARGET:드랍재료1) += 1
 			printFormL %kr(ITEMNAME:(CFLAG:TARGET:드랍재료1), "을", "를")% 얻었다

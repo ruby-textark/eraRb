@@ -1,3 +1,35 @@
 ﻿@onMasterSexualAttacked(partIdx)
 #dim dynamic partIdx
 
+	; 범용구상
+	if RAND:4 == 0		
+		if !FLAG:성교합의
+			if ABL:TARGET:성교기술 >= MIN(ABL:MASTER:성교기술 + 2, 6)
+				if CFLAG:MASTER:성격 == 1
+					if RAND:2 == 0
+						call speak(MASTER, "(아아, 둥실둥실한 기분이에요)")
+					else
+						call speak(MASTER, "(이건 분명 나쁜 짓이라고 배웠는데... 어째서...)")
+					endif
+				elseif CFLAG:MASTER:성격 == 2 || CFLAG:MASTER:성격 == 5
+					if RAND:2 == 0
+						call speak(MASTER, "(이 녀석, 쓸 데 없이 잘 하잖아...)")
+					else
+						call speak(MASTER, "(왜 이렇게 여자가 능숙한 거야...)")
+					endif
+				elseif CFLAG:MASTER:성격 == 3
+					if RAND:2 == 0
+						call speak(MASTER, "(꽤 하네. 정말, 예상 밖인걸.)")
+					else
+						call speak(MASTER, "(으음, 그래, 거기... 아, 솜씨가 좋긴 하네.)")
+					endif
+				elseif CFLAG:MASTER:성격 == 4
+					if RAND:2 == 0
+						call speak(MASTER, "(꽤 하네. 정말, 예상 밖인걸.)")
+					else
+						call speak(MASTER, "(으음, 그래, 거기... 아, 솜씨가 좋긴 하네.)")
+					endif
+				endif
+			endif
+		endif
+	endif

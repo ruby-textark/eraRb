@@ -28,6 +28,7 @@ CFLAG,드랍마석최대,0
 CFLAG,드랍재료1,1608,;유리검
 CFLAG,드랍재료2,-1
 CFLAG,드랍재료3,-1
+CFLAG,레어드랍,9
 
 CFLAG,성공격빈도,10
 CFLAG,종족,1

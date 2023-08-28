@@ -49,10 +49,16 @@
 #dim dynamic partsCount
 #dim dynamic availableParts, 100
 
+	; 높은 확률로 이전 턴 부위를 따라감
 	if TCVAR:TARGET:성희롱부위 && isAttackableBodyPart(TCVAR:TARGET:성희롱부위)
-		if RAND:5 < 4
+		if RAND:3 < 2
 			returnf TCVAR:TARGET:성희롱부위
 		endif
+	endif
+
+	; 구멍을 노리고 있고 이미 어느 정도 진행됐으면 계속
+	if isMasterInserted(TCVAR:TARGET:성희롱부위, 1) && PALAM:TARGET:사정 > 2000	
+		returnf TCVAR:TARGET:성희롱부위
 	endif
 
 	partsCount = 0
@@ -70,10 +76,16 @@
 #dim dynamic partsCount
 #dim dynamic availableParts, 100
 
+	; 높은 확률로 이전 턴 부위를 따라감
 	if TCVAR:TARGET:성희롱부위 && isAttackableBodyPart(TCVAR:TARGET:성희롱부위)
-		if RAND:5 < 4
+		if RAND:3 < 2
 			returnf TCVAR:TARGET:성희롱부위
 		endif
+	endif
+
+	; 구멍을 노리고 있고 이미 어느 정도 진행됐으면 계속
+	if isMasterInserted(TCVAR:TARGET:성희롱부위, 1) && PALAM:TARGET:사정 > 2000	
+		returnf TCVAR:TARGET:성희롱부위
 	endif
 
 	partsCount = 0
@@ -88,3 +100,9 @@
 	next
 
 	returnf availableParts:(RAND:partsCount)
+
+@isHole(partIdx)
+#function
+#dim dynamic partIdx
+
+	returnf partIdx == 101 || partIdx == 102 || partIdx == 115 || partIdx == 116 || partIdx == 121 || partIdx == 123 || partIdx == 124 || partIdx == 125

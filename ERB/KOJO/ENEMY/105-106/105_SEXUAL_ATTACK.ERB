@@ -39,7 +39,7 @@
 		if RAND:3 == 0
 			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에 흥미를 잃은 것 같다
 		elseif RAND:2 == 0
-			printFormL %kr(NAME:TARGET, "은", "는")% 꾸물거리며 %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에서 떨어져나왔다
+			printFormL %kr(NAME:TARGET, "은", "는")% 꾸물거리며 %CALLNAME:MASTER%의 %CSTR:MASTER:(TCVAR:TARGET:성희롱부위)%에서 손을 뗐다
 		else
 			printFormL 무언가 마음에 들지 않은 것인지 %kr(NAME:TARGET, "은", "는")% 붙들고 있던 %CALLNAME:MASTER%의 %kr(CSTR:MASTER:(TCVAR:TARGET:성희롱부위), "을", "를")% 놓아주었다
 		endif
@@ -62,6 +62,18 @@
 			endif
 		; Insert
 		else
+			if TALENT:MASTER:(attackedIdx + 200)
+				call speak(TARGET, "뭐냐, 너 신품이었어? 이건 또 의외의 소득인데.")
+			endif
+			
+			if RAND:3 == 0
+				call speak(TARGET, "하, 재미 좀 보자고")
+			elseif RAND:2 == 0
+				call speak(TARGET, "어디 이 예쁜 주둥아리에서 신음이 나오나 볼까")
+			else
+				call speak(TARGET, "아주 뒤질때까지 쑤셔주지")
+			endif
+
 			call insertIntoMaster(attackedIdx, 1)
 
 			if RAND:5 == 0
@@ -91,6 +103,15 @@
 			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 비집고 삽입하려 했지만 잘 되지 않은 모양이다
 		endif
 	elseif attackedIdx == 113
+	
+		if PALAM:MASTER:attackedIdx > masterOrgasmThres() / 2
+			if RAND:2 == 0
+				call speak(TARGET, "가슴만으로 이렇게 되는 여자는 처음인데? 이거 진짜 개 변태네 아주")
+			else
+				call speak(TARGET, "아주 빨딱 섰네? 너도 사실 좋은거잖아?")
+			endif
+		endif
+	
 		if RAND:5 == 0
 			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 쿡쿡 찌르고 있다
 		elseif RAND:4 == 0
@@ -108,7 +129,7 @@
 		elseif RAND:4 == 0
 			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 숨이 막히도록 집요하게 키스했다
 		elseif RAND:3 == 0
-			printFormL %kr(NAME:TARGET, "은", "는")% 거친 숨결로 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 틀어막았다
+			printFormL %kr(NAME:TARGET, "은", "는")% 숨을 거칠게 몰아쉬며 %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 틀어막았다
 		elseif RAND:2 == 0
 			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 구석구석을 혀로 농락했다
 		else
@@ -116,15 +137,15 @@
 		endif
 	else
 		if RAND:5 == 0
-			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 노렸다
+			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 톡톡 건드리며 애태우고 있다
 		elseif RAND:4 == 0
 			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 부드럽게 쓰다듬었다
 		elseif RAND:3 == 0
-			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 꽉 조였다
+			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 마구 주물렀다
 		elseif RAND:2 == 0
 			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %kr(partStr(attackedIdx), "을", "를")% 격렬하게 자극했다
 		else
-			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 근처를 쓰다듬었다
+			printFormL %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%의 %partStr(attackedIdx)% 근처를 아플 정도로 꽉 쥐었다
 		endif
 	endif
 

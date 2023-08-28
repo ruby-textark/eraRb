@@ -4,11 +4,57 @@
 	printFormW 아무래도 %kr(CALLNAME:MASTER, "은", "는")% 임신한 모양이다
 
 	if CFLAG:MASTER:성격 == 1
+		call speakW(MASTER, "이게 그, 저, 아기가 생긴 걸까요.")
 		PALAM:MASTER:굴복 += 50
+		
+		if CFLAG:MASTER:잠재적아버지 == 1
+			call speakW(MASTER, @"그럼 아빠는 %CSTR:MASTER:아이아버지이름%인 거겠죠?")
+			printFormW 아이 아버지가 %kr(CSTR:MASTER:아이아버지이름, "으로", "로")% 밝혀졌습니다.
+		endif
+		
+		if CFLAG:MASTER:비자발임신
+			call speakW(MASTER, "아기는 귀엽지만, 그래도, 이런 건 별로 기분이 안 좋네요.")
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 횡설수설하며 혼잣말을 늘어놓기 시작했다.
+			printFormW 누군가에게 이렇게 부정적인 감정을 느껴 본 적이 거의 없는 %CALLNAME:MASTER%로서는 갈피를 잡지 못하고 혼란스러워 하는 것도 당연했다.
+		else
+			call speakW(MASTER, "그럼 저를 닮은 걸까요. 에헤헤.")
+			printFormW 생글생글 웃는 %CALLNAME:MASTER%의 미소가 어쩐지 평소보다 더 사랑스러운 듯 했다.
+		endif
 	elseif CFLAG:MASTER:성격 == 2
+		call speakW(MASTER, "어, 이건 설마. 진짜, 임신이야?")
 		PALAM:MASTER:억울 += 50
+		
+		if CFLAG:MASTER:잠재적아버지 == 1
+			call speakW(MASTER, "확실해, 이거. 그 녀석 때문이겠지.")
+			printFormW 아이 아버지가 %kr(CSTR:MASTER:아이아버지이름, "으로", "로")% 밝혀졌습니다.
+		endif
+		
+		if CFLAG:MASTER:비자발임신
+			call speakW(MASTER, "대체... 왜 나한테 이런 일이...")
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 한참 동안 고개를 숙인 채 흐느꼈다.
+			printFormW 고개를 드는 데에는 오랜 시간이, 그리고 흉내로나마 다시 미소를 짓기까지는 더 오랜 시간이 걸렸다.
+		else
+			call speakW(MASTER, "그래, 뭐. 사실 각오는 하고 있었잖아?")
+			printFormW 대수롭지 않은 듯 말해봤지만 %kr(CALLNAME:MASTER, "은", "는")% 콩닥거리는 심장을 주체할 수 없었다.
+		endif
 	elseif CFLAG:MASTER:성격 == 3
+		call speakW(MASTER, "이런. 생겨버린 모양이네.")
 		PALAM:MASTER:욕정 += 50
+		
+		if CFLAG:MASTER:잠재적아버지 == 1
+			call speakW(MASTER, "그럼 그 때 생긴 걸까?")
+			printFormW 아이 아버지가 %kr(CSTR:MASTER:아이아버지이름, "으로", "로")% 밝혀졌습니다.
+		endif
+		
+		if CFLAG:MASTER:비자발임신
+			call speakW(MASTER, "즐겼으면 됐지만... 그래도 기분 한 번 더럽네")
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 가만히 벽에 기대 눈을 감고 깊게 한숨을 내쉬었다.
+			printFormW 오늘따라 정말로 술을 찾고 싶은 기분이었다. 언제까지고 손바닥으로 하늘을 가릴 순 없겠지만, 잠시라면 잊을 수 있을 테니까.
+		else
+			call speakW(MASTER, "참 사랑스럽네. 어쩌면 이 쪽이 더 기분이 좋은 걸지도 모르겠어.")
+			printFormW 평소 남들을 유혹할 때처럼 간드러지는 목소리였지만 분명 %CALLNAME:MASTER%의 말 속에는 기대와 흥분이 느껴졌다.
+			printFormW 게다가, 항상 쾌락만을 좇던 그 눈빛이, 어쩐지 예전보다 맑아 보인 것이 착각만은 아닐 것이다.
+		endif
 	elseif CFLAG:MASTER:성격 == 4
 		call speakW(MASTER, "에, 이건... 그, 그런가... 임신이라니.")
 		PALAM:MASTER:욕정 += 50
@@ -21,9 +67,11 @@
 		if CFLAG:MASTER:비자발임신
 			call speakW(MASTER, "이런 건 싫어... 싫은데...")
 			printFormW 조용히 눈물을 흘리는 %CALLNAME:MASTER%의 곁에는 아무도 없었다.
+			printFormW 누군가에게 다가가지도, 사실은 내심 누군가가 다가오길 바라지도 않던 %kr(CALLNAME:MASTER, "은", "는")% 오늘 인생에서 몇 안되는 지독한 외로움에 빠져 헤엄치고 있었다.
 		else
-			; call speakW(MASTER, "하. 이렇게 감상에 젖는 건 내 스타일이 아닌데.")
-			; printFormW 말은 그렇게 하면서 별 일 아닌 척 넘기려 하는 %CALLNAME:MASTER%의 얼굴에는 분명 희미한 미소가 보였다.
+			call speakW(MASTER, "내가, 과연 제대로 엄마 노릇을 할 수 있을까...")
+			printFormW 사람의 앞길은 한 치 앞을 내다볼 수 없다지만, %kr(CALLNAME:MASTER, "은", "는")% 배꼽에 손을 얹고 굳게 나아갈 다짐을 할 수 있었다.
+			printFormW 겁쟁이에, 나서기를 좋아하지 않는 외톨이도, 부모라는 이름이 붙으면 무엇과도 비교할 수 없는 용기가 생기는 법이리라.
 		endif
 	elseif CFLAG:MASTER:성격 == 5
 		call speakW(MASTER, "결국 이렇게 됐네. 하긴. 반쯤은 각오하고 있었어.")
@@ -36,6 +84,7 @@
 		if CFLAG:MASTER:비자발임신
 			call speakW(MASTER, "...괜찮아.")
 			printFormW 무덤덤하게 혼잣말하는 %CALLNAME:MASTER%의 손은 피가 통하지 않을 정도로 주먹을 꽉 쥔것이 눈에 보일 정도였다.
+			printFormW 생각해 보면 당연한 결과라고 해도, 그게 자신에게 닥쳐왔을 때에도 항상 가볍게 넘어갈 수 있는 사람은 거의 드문 법이다.
 		else
 			call speakW(MASTER, "하. 이렇게 감상에 젖는 건 내 스타일이 아닌데.")
 			printFormW 말은 그렇게 하면서 별 일 아닌 척 넘기려 하는 %CALLNAME:MASTER%의 얼굴에는 분명 희미한 미소가 보였다.

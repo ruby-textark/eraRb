@@ -6,7 +6,7 @@
 
 	partsCount = 0
 	for parasiteIdx, 101, 200
-		if strlens(CFLAGNAME:(200 + parasiteIdx)) && !isParasiteInside(parasiteIdx) && isAttackableBodyPart(parasiteIdx)
+		if strlens(CFLAGNAME:(200 + parasiteIdx)) && !isParasiteInside(parasiteIdx) && isAttackableBodyPart(parasiteIdx) && isHole(parasiteIdx)
 			availableParts:(partsCount++) = parasiteIdx
 		endif
 	next
