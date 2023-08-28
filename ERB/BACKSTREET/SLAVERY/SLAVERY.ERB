@@ -7,7 +7,7 @@
 
 $inputLoop
 
-	call colorPrint(0xd0936d, "「자, 골라보게나.」")
+	call speakNPC(2100, "「자, 골라보게나.」")
 	printL
 	printFormL [1] - 약물실험
 	printFormL [2] - 자궁대여
@@ -23,7 +23,7 @@ $inputLoop
 	elseif RESULT == 3
 		call slaveryHelp
 	elseif RESULT == 0
-		call colorPrintW(0xd0936d, "「가는 길 조심하게.」")
+		call speakNPCW(2100, "「가는 길 조심하게.」")
 		return
 	endif
 
@@ -36,14 +36,14 @@ $inputLoop
 	printW .
 	printW .
 	printW .
-	call colorPrintW(0xd0936d, "「일어났나 보군」")
+	call speakNPCW(2100, "「일어났나 보군」")
 	printFormW 정신을 차린 %CALLNAME:MASTER%의 눈 앞에는 얼굴과 체형이 드러나지 않도록 온통 검은 차림의, 가면을 쓰고 품이 넓은 복장을 입은 사람이 앉아있었다.
-	call colorPrintW(0xd0936d, "「밖에서 있던 일은 양해해 주길 바라네. 우리도 나름의 확인 절차가 필요하니까.」")
+	call speakNPCW(2100, "「밖에서 있던 일은 양해해 주길 바라네. 우리도 나름의 확인 절차가 필요하니까.」")
 	printFormW %kr(CALLNAME:MASTER, "이", "가")% 조금 진정된 것처럼 보이자, 그는 말을 이었다.
-	call colorPrintW(0xd0936d, "「그래, 나를 찾았다고. 보통 돈이 필요한 녀석들은 저 너머 창관으로 가는데 말이지. 아무리 그래도 이런 곳까지 와서 떨어질대로 떨어지기를 바라는 녀석들은 드무니까.」")
+	call speakNPCW(2100, "「그래, 나를 찾았다고. 보통 돈이 필요한 녀석들은 저 너머 창관으로 가는데 말이지. 아무리 그래도 이런 곳까지 와서 떨어질대로 떨어지기를 바라는 녀석들은 드무니까.」")
 	printFormW 잠시 긴장이 담긴 침묵이 흘렀고, %kr(CALLNAME:MASTER, "이", "가")% 입을 열려는 순간 그가 말을 가로막는 듯이 먼저 나섰다.
-	call colorPrintW(0xd0936d, "「됐어, 상관없으니까. 어쨌든 문제를 일으킬 것 같아보이지는 않고, 무엇보다 잘 팔릴만한 몸이니 말이야.」")
-	call colorPrintW(0xd0936d, "「반갑네, 신체대여가게에 온 것을 환영하지.」")
+	call speakNPCW(2100, "「됐어, 상관없으니까. 어쨌든 문제를 일으킬 것 같아보이지는 않고, 무엇보다 잘 팔릴만한 몸이니 말이야.」")
+	call speakNPCW(2100, @"「반갑네, 신체대여가게에 온 것을 환영하지. 나는 %NAME:getChara(2100)%. 그렇게 불러주면 좋겠어.」")
 
 @slaveryHelp
 

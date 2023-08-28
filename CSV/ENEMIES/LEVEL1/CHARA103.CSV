@@ -19,10 +19,10 @@ CFLAG,캐릭터번호,103
 素質,남성,1
 
 ; Mob Settings
-CFLAG,드랍골드최소,20
-CFLAG,드랍골드최대,60
-CFLAG,드랍마석최소,1
-CFLAG,드랍마석최대,2
+CFLAG,드랍골드최소,0
+CFLAG,드랍골드최대,0
+CFLAG,드랍마석최소,2
+CFLAG,드랍마석최대,4
 
 CFLAG,드랍재료1,502
 CFLAG,드랍재료2,-1

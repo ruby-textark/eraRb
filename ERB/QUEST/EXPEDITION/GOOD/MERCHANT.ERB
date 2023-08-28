@@ -1,9 +1,9 @@
 ﻿@goodRoomMerchant
 
 	printW 수상한 차림의 남자와 마주쳤다.
-	call speakNPC(2001, "아, 반갑네. 이런 곳에서 사람을 다 보다니.")
-	call speakNPC(2001, "혹시 필요한 게 있나? 급하게 필요한 게 있다면 말해봐. 남은 게 있다면 적당한 값을 받고 팔아주지.")
-	call speakNPC(2001, "참고로 나는 마석만 받는다네.")
+	call speakNPCW(2001, "아, 반갑네. 이런 곳에서 사람을 다 보다니.")
+	call speakNPCW(2001, "혹시 필요한 게 있나? 급하게 필요한 게 있다면 말해봐. 남은 게 있다면 적당한 값을 받고 팔아주지.")
+	call speakNPCW(2001, "참고로 나는 마석만 받는다네.")
 
 	printFormL [1] - 약초 묶음(20개입)을 산다(마석 {labyrinthMerchantPrice("약초", 20)}개)
 	printFormL [2] - 화살 묶음(100개입)을 산다(마석 {labyrinthMerchantPrice("화살", 100)}개)
@@ -21,7 +21,7 @@ $inputLoop
 			FLAG:마석 -= labyrinthMerchantPrice("약초", 20)
 			ITEM:약초 += 20
 		else
-			call speakNPC(2001, "마석이 부족하군.")
+			call speakNPCW(2001, "마석이 부족하군.")
 			goto inputLoop
 		endif
 	elseif RESULT == 2
@@ -29,7 +29,7 @@ $inputLoop
 			FLAG:마석 -= labyrinthMerchantPrice("화살", 100)
 			ITEM:화살 += 100
 		else
-			call speakNPC(2001, "마석이 부족하군.")
+			call speakNPCW(2001, "마석이 부족하군.")
 			goto inputLoop
 		endif
 	elseif RESULT == 3
@@ -37,7 +37,7 @@ $inputLoop
 			FLAG:마석 -= labyrinthMerchantPrice("회복약", 5)
 			ITEM:회복약 += 5
 		else
-			call speakNPC(2001, "마석이 부족하군.")
+			call speakNPCW(2001, "마석이 부족하군.")
 			goto inputLoop
 		endif
 	else
@@ -46,8 +46,8 @@ $inputLoop
 		goto inputLoop
 	endif
 	
-	call speakNPC(2001, "좋아. 거래 성립이다.")
-	call speakNPC(2001, "다음에 만날때도 잘 부탁하지.")
+	call speakNPCW(2001, "좋아. 거래 성립이다.")
+	call speakNPCW(2001, "다음에 만날때도 잘 부탁하지.")
 
 @labyrinthMerchantPrice(itemNameStr, itemCount)
 #function

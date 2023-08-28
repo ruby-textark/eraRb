@@ -9,6 +9,15 @@
 	; RESULT sideeffect때문에
 	return RESULT
 
+@speakW(charaIdx, string)
+#dim dynamic charaIdx
+#dims dynamic string
+
+	call speak(charaIdx, string)
+	wait
+
+	return RESULT
+
 @speakNPC(npcNo, string)
 #dim dynamic npcNo
 #dims dynamic string
@@ -17,6 +26,15 @@
 	charaIdx = getChara(npcNo)
 	
 	call speak(charaIdx, @"%CALLNAME:charaIdx% %NAME:charaIdx% : %string%")
+
+	; RESULT sideeffect때문에
+	return RESULT
+
+@speakNPCW(npcNo, string)
+#dim dynamic npcNo
+#dims dynamic string
+
+	call speakNPC(npcNo, string)
 	wait
 
 	; RESULT sideeffect때문에

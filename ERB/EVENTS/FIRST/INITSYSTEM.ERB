@@ -25,4 +25,23 @@
 @initNPC
 
 	; 떠돌이 상인: 2001
-	addChara 2001
+	call addNpcIfNotExists(2001)
+
+	; 신체거래 브로커
+	call addNpcIfNotExists(2100)
+	
+	; 신체거래 고객
+	call addNpcIfNotExists(2101)
+	call addNpcIfNotExists(2102)
+	call addNpcIfNotExists(2103)
+	call addNpcIfNotExists(2104)
+	call addNpcIfNotExists(2105)
+	call addNpcIfNotExists(2106)
+	call addNpcIfNotExists(2107)
+
+@addNpcIfNotExists(charaNo)
+#dim dynamic charaNo
+
+	if getChara(charaNo) < 0
+		addChara charaNo
+	endif

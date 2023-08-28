@@ -177,6 +177,24 @@ $inputCharacteristics
 		elseif CFLAG:MASTER:태생 == 5 && (RESULT == 3 || RESULT == 4)
 			printW 주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.
 		endif
+		
+		if RESULT == 1
+			CFLAG:MASTER:대사색상 = 0xb9fc00
+			call speakW(MASTER, "안녕하세요. 잘 부탁드려요.")
+		elseif RESULT == 2
+			CFLAG:MASTER:대사색상 = 0xfca400
+			call speakW(MASTER, "모험이네요! 좋죠!")
+		elseif RESULT == 3
+			CFLAG:MASTER:대사색상 = 0xff7aba
+			call speakW(MASTER, "드디어 시작되는 건가?")
+		elseif RESULT == 4
+			CFLAG:MASTER:대사색상 = 0xaa55ff
+			call speakW(MASTER, "밖으로 나가는건... 좀 힘든데.")
+		elseif RESULT == 5
+			CFLAG:MASTER:대사색상 = 0x008cff
+			call speakW(MASTER, "좋아요, 출발할까요")
+		endif
+		
 	else
 		clearLine 1
 		goto inputCharacteristics

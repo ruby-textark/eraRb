@@ -114,8 +114,7 @@
 	; 임신자각
 	if !TALENT:MASTER:임신 && BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수 / 10
 		; 임신자각처리
-		printFormW %kr(CALLNAME:MASTER, "은", "는")% 최근 생리주기가 이상한 것을 알아챘다...
-		printFormW 아무래도 %kr(CALLNAME:MASTER, "은", "는")% 임신한 모양이다
+		call onMasterPregnantNoticed
 
 		call getTalent("임신")
 		EXP:MASTER:임신경험++
@@ -123,8 +122,7 @@
 			EXP:MASTER:이종임신경험++
 		endif
 	elseif FLAG:자궁대여료 && BASE:MASTER:임신일수 && !TALENT:MASTER:임신
-		printFormW %kr(CALLNAME:MASTER, "은", "는")% 자는 동안 아랫배에서 올라오는 열기에 쉽사리 잠들지 못하고 몸을 계속해서 뒤척이고 있다
-		printFormW %CALLNAME:MASTER%의 자궁대여는 오늘부터 시작이다
+		call onMasterWombRentalStarted
 
 		call getTalent("임신")
 		EXP:MASTER:임신경험++
@@ -135,6 +133,11 @@
 
 	; 임신중일 경우
 	if BASE:MASTER:임신일수 > 0
+	
+		if BASE:MASTER:임신일수 % 5 == 0 || !RAND:10
+			call onPregnencyStep
+		endif
+	
 		; 점차 자궁크기 증가
 		BASE:MASTER:자궁크기 = LIMIT(BASE:MASTER:자궁크기, MAXBASE:MASTER:자궁크기 * BASE:MASTER:임신일수 / MAXBASE:MASTER:임신일수, MAXBASE:MASTER:자궁크기)
 		; 점차 모유최대량 증가

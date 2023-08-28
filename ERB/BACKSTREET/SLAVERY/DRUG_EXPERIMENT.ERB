@@ -3,7 +3,7 @@
 #dim dynamic sideEffect2
 #dim dynamic reward
 
-	printFormW 점장은 가게 한쪽으로 가더니 서랍을 뒤적이고는 앰플 하나를 꺼내왔다.
+	printFormW %kr(NAME:getChara(2100), "은", "는")% 가게 한쪽으로 가더니 서랍을 뒤적이고는 앰플 하나를 꺼내왔다.
 
 $drugLoop
 	; sideEffect1은 base 변경
@@ -12,7 +12,7 @@ $drugLoop
 	sideEffect2 = RAND:3
 	reward = 1000 ; 기본보수
 	
-	call colorPrint(0xff8c00, "「이건 어떤가?」")
+	call speakNPCW(2100, "「이건 어떤가?」")
 	printL
 	printForm 그의 손에 들린 주사는\ 
 	
@@ -55,8 +55,7 @@ $drugLoop
 	endif
 	
 	printFormL \ 액체를 담고 있었다.
-	call colorPrint(0xff8c00, @"「보수는 {reward}. 선택은 자네 몫이야.」")
-	printL
+	call speakNPC(2100, @"「보수는 {reward}. 선택은 자네 몫이야.」")
 	
 	printL [0] - 다른 주사로 바꾼다
 	printL [1] - 맞는다
@@ -69,8 +68,8 @@ $drugLoop
 		return
 	endif
 	
-	printFormW 점장은 능숙하게 주사를 뽑고, %CALLNAME:MASTER%의 옷을 걷어낸 뒤, 드러난 살갗에 대고 주사바늘을 갖다댔다.
-	call colorPrintW(0xd0936d, "「잠깐 따끔할거야. 걱정 마. 주사는 많이 놓아 봤으니까.」")
+	printFormW %kr(NAME:getChara(2100), "은", "는")% 능숙하게 주사를 뽑고, %CALLNAME:MASTER%의 옷을 걷어낸 뒤, 드러난 살갗에 대고 주사바늘을 갖다댔다.
+	call speakW(2100, "「잠깐 따끔할거야. 걱정 마. 주사는 많이 놓아 봤으니까.」")
 	
 	if sideEffect1 == 0
 	elseif sideEffect1 == 1

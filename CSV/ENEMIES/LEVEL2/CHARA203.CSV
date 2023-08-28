@@ -18,8 +18,8 @@ CFLAG,캐릭터번호,203
 素質,남성,1
 
 ; Mob Settings
-CFLAG,드랍골드최소,200
-CFLAG,드랍골드최대,300
+CFLAG,드랍골드최소,100
+CFLAG,드랍골드최대,150
 CFLAG,드랍마석최소,14
 CFLAG,드랍마석최대,19
 

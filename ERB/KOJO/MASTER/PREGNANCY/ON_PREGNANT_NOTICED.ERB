@@ -1,0 +1,21 @@
+﻿@onMasterPregnantNoticed
+
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 최근 생리주기가 이상한 것을 알아챘다...
+	printFormW 아무래도 %kr(CALLNAME:MASTER, "은", "는")% 임신한 모양이다
+
+	if CFLAG:MASTER:태생 == 1
+		if CFLAG:MASTER:성격 == 1
+		elseif CFLAG:MASTER:성격 == 2
+		elseif CFLAG:MASTER:성격 == 3
+		elseif CFLAG:MASTER:성격 == 4
+			call speakW(MASTER, "에, 이건... 그, 그런가...")
+			PALAM:MASTER:욕정 += 50
+		elseif CFLAG:MASTER:성격 == 5
+			call speakW(MASTER, "결국 이렇게 됐네. 하긴. 반쯤은 각오하고 있었어.")
+			PALAM:MASTER:굴복 += 50
+		endif
+	elseif CFLAG:MASTER:태생 == 2
+	elseif CFLAG:MASTER:태생 == 3
+	elseif CFLAG:MASTER:태생 == 4
+	elseif CFLAG:MASTER:태생 == 5
+	endif
