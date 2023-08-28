@@ -11,8 +11,7 @@
 		cumAmount *= 2 * TALENT:TARGET:대량사정 + RAND:2
 	endif
 	
-	CSTR:MASTER:최근피사정자 = %CALLNAME:TARGET% %NAME:TARGET%
-	CFLAG:MASTER:최근피사정량 = cumAmount
+	call addSexLog(cumAmount)
 
 	SOURCE:MASTER:피사정 = 10 * cumAmount
 	EXP:MASTER:정액경험 += 1 + ((cumAmount - 1) / 2)
@@ -46,6 +45,7 @@
 			endif
 
 			call loseTalent("피임결계")
+			FLAG:비자발임신 = 1
 			
 			if RAND:3 == 0
 				printFormL 그동안 정액에 갈증을 느끼던 %CALLNAME:MASTER%의 %kr(partStr(116), "이", "가")% 무너진 결계 사이로 들어오는 정자에 환희하고 있다
@@ -58,7 +58,7 @@
 			BASE:MASTER:마력 -= cumAmount * 50
 
 			if BASE:MASTER:마력 < 150
-				call colorPrint(0xcc0000, "마력이 거의 바닥났다... 아마 다음번에는 반드시 수정하고 말 것이다.\n")
+				call colorPrint(0xcc0000, "마력이 거의 바닥났다... 아마 다음번에는 거의 확실히 수정하고 말 것이다.\n")
 			elseif BASE:MASTER:마력 < 250
 				call colorPrint(0xcccc00, "마력이 상당히 낮다... 주의하지 않으면 피임결계가 해제될지도 모른다.\n")
 			elseif BASE:MASTER:마력 < 350
@@ -75,9 +75,6 @@
 		TALENT:MASTER:생리중 = 0
 		TALENT:MASTER:가임기 = 1
 	endif
-
-	BASE:MASTER:자궁내정액1 += cumAmount
-	BASE:MASTER:(320 + CFLAG:TARGET:종족) += cumAmount
 
 	; 전투중일경우 필요함
 	TFLAG:이번사정량 += cumAmount

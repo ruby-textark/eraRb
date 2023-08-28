@@ -2,6 +2,10 @@
 #dim dynamic lostHp
 #dim dynamic lostMp
 
+	if lostHp == 0
+		return
+	endif
+
 	; 피격(약)
 	if lostHp < MAXBASE:MASTER:체력 / 10
 		if CFLAG:MASTER:성격 == 1

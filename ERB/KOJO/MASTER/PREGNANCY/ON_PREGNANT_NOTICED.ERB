@@ -3,19 +3,43 @@
 	printFormW %kr(CALLNAME:MASTER, "은", "는")% 최근 생리주기가 이상한 것을 알아챘다...
 	printFormW 아무래도 %kr(CALLNAME:MASTER, "은", "는")% 임신한 모양이다
 
-	if CFLAG:MASTER:태생 == 1
-		if CFLAG:MASTER:성격 == 1
-		elseif CFLAG:MASTER:성격 == 2
-		elseif CFLAG:MASTER:성격 == 3
-		elseif CFLAG:MASTER:성격 == 4
-			call speakW(MASTER, "에, 이건... 그, 그런가...")
-			PALAM:MASTER:욕정 += 50
-		elseif CFLAG:MASTER:성격 == 5
-			call speakW(MASTER, "결국 이렇게 됐네. 하긴. 반쯤은 각오하고 있었어.")
-			PALAM:MASTER:굴복 += 50
+	if CFLAG:MASTER:성격 == 1
+		PALAM:MASTER:굴복 += 50
+	elseif CFLAG:MASTER:성격 == 2
+		PALAM:MASTER:억울 += 50
+	elseif CFLAG:MASTER:성격 == 3
+		PALAM:MASTER:욕정 += 50
+	elseif CFLAG:MASTER:성격 == 4
+		call speakW(MASTER, "에, 이건... 그, 그런가... 임신이라니.")
+		PALAM:MASTER:욕정 += 50
+		
+		if CFLAG:MASTER:잠재적아버지 == 1
+			call speakW(MASTER, "어, 그럼 그 때밖에 없는데...?")
+			printFormW 아이 아버지가 %kr(CSTR:MASTER:아이아버지이름, "으로", "로")% 밝혀졌습니다.
 		endif
-	elseif CFLAG:MASTER:태생 == 2
-	elseif CFLAG:MASTER:태생 == 3
-	elseif CFLAG:MASTER:태생 == 4
-	elseif CFLAG:MASTER:태생 == 5
+		
+		if CFLAG:MASTER:비자발임신
+			call speakW(MASTER, "이런 건 싫어... 싫은데...")
+			printFormW 조용히 눈물을 흘리는 %CALLNAME:MASTER%의 곁에는 아무도 없었다.
+		else
+			; call speakW(MASTER, "하. 이렇게 감상에 젖는 건 내 스타일이 아닌데.")
+			; printFormW 말은 그렇게 하면서 별 일 아닌 척 넘기려 하는 %CALLNAME:MASTER%의 얼굴에는 분명 희미한 미소가 보였다.
+		endif
+	elseif CFLAG:MASTER:성격 == 5
+		call speakW(MASTER, "결국 이렇게 됐네. 하긴. 반쯤은 각오하고 있었어.")
+		
+		if CFLAG:MASTER:잠재적아버지 == 1
+			call speakW(MASTER, "이건 아무리 봐도 분명 그 녀석이겠지...")
+			printFormW 아이 아버지가 %kr(CSTR:MASTER:아이아버지이름, "으로", "로")% 밝혀졌습니다.
+		endif
+		
+		if CFLAG:MASTER:비자발임신
+			call speakW(MASTER, "...괜찮아.")
+			printFormW 무덤덤하게 혼잣말하는 %CALLNAME:MASTER%의 손은 피가 통하지 않을 정도로 주먹을 꽉 쥔것이 눈에 보일 정도였다.
+		else
+			call speakW(MASTER, "하. 이렇게 감상에 젖는 건 내 스타일이 아닌데.")
+			printFormW 말은 그렇게 하면서 별 일 아닌 척 넘기려 하는 %CALLNAME:MASTER%의 얼굴에는 분명 희미한 미소가 보였다.
+		endif
+		
+		PALAM:MASTER:굴복 += 50
 	endif

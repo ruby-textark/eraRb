@@ -144,7 +144,7 @@
 		endif
 	elseif partIdx == 114
 		if !RAND:3 && TALENT:MASTER:임신
-			if CFLAG:MASTER:아이아버지 == 1
+			if CFLAG:MASTER:아이종족 == 1
 				retStr:(retStrCnt++) = 아이를 밴 채
 			else
 				retStr:(retStrCnt++) = 이종의 새끼를 임신한 채
@@ -176,7 +176,7 @@
 			retStr:(retStrCnt++) = 성적인 자극에 익숙하지 않은
 		endif
 	elseif partIdx == 116
-		if BASE:MASTER:자궁내정액1 || BASE:MASTER:자궁내정액2 || BASE:MASTER:자궁내정액3 || BASE:MASTER:자궁내정액4
+		if semenAmount(0) > 0
 			retStr:(retStrCnt++) = 찐득한 정액이 들어차
 		endif
 		if RAND:2 && ABL:MASTER:자궁감도 > 9

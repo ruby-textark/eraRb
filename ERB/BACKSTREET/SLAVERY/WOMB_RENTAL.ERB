@@ -129,7 +129,7 @@ $drugLoop
 		call speakNPCW(2100, "「좋아, 다음.」")
 	endif
 
-	if BASE:MASTER:자궁내정액1 || BASE:MASTER:자궁내정액2 || BASE:MASTER:자궁내정액3 || BASE:MASTER:자궁내정액4
+	if semenAmount(0) > 0
 		printFormW %CALLNAME:MASTER%의 %partStr(121)%에 아직 찐득한 정액이 남아있는 것을 확인한 %kr(NAME:getChara(2100), "은", "는")%, 한구석에서 고무 호스를 꺼냈다.
 		call speakNPCW(2100, "「자네가 이해해주게. 이쪽이 아무래도 확실한 결과물을 보장해 줄 수 있을 테니까 말이야.」")
 		
@@ -142,17 +142,7 @@ $drugLoop
 		endif
 		
 		BASE:MASTER:임신일수 = 0
-		
-		BASE:MASTER:자궁내정액1 = 0
-		BASE:MASTER:자궁내정액2 = 0
-		BASE:MASTER:자궁내정액3 = 0
-		BASE:MASTER:자궁내정액4 = 0
-		
-		BASE:MASTER:자궁내인간정액 = 0
-		BASE:MASTER:자궁내몬스터정액 = 0
-		BASE:MASTER:자궁내벌레정액 = 0
-		BASE:MASTER:자궁내짐승정액 = 0
-		BASE:MASTER:자궁내마족정액 = 0
+		call flushWomb
 		
 		call speakNPCW(2100, "「좋아, 다음.」")
 	endif
@@ -195,9 +185,11 @@ $drugLoop
 			call speakNPCW(2100, "「뭐, 호기심이 생겼다면야.」")
 			printFormW 잠시 따끔한 느낌이 느껴진 뒤, %NAME:getChara(2100)%의 손가락이 주사기의 끝을 누르자 %kr(CALLNAME:MASTER, "은", "는")% 모순적이게도 아랫배에서 차가운 감각과 음란한 따스함이 동시에 올라오는 것을 느꼈다.
 		endif
-		
-		BASE:MASTER:자궁내정액1 = 2 + RAND:10
-		BASE:MASTER:(320 + creatureType) = BASE:MASTER:자궁내정액1
+
+		call addMobChara(1201)
+		CFLAG:TARGET:종족 = creatureType
+		call cumIntoMaster(121)
+		call delMobChara
 		
 	elseif ejacType == 1
 		; 직접교미

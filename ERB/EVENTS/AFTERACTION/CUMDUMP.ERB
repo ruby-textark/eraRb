@@ -146,14 +146,14 @@
 		call cumIntoMaster(insertInto)
 		call outFromMaster(insertInto, 1)
 		
-		FLAG:육변기사정량 += CFLAG:MASTER:최근피사정량
+		FLAG:육변기사정량 += recentCumAmount
 		
 		if insertInto == 115 || insertInto == 116 || insertInto == 121
-			FLAG:육변기질내사정량 += CFLAG:MASTER:최근피사정량
+			FLAG:육변기질내사정량 += recentCumAmount
 		elseif insertInto == 123
-			FLAG:육변기항내사정량 += CFLAG:MASTER:최근피사정량
+			FLAG:육변기항내사정량 += recentCumAmount
 		elseif insertInto == 102
-			FLAG:육변기정음량 += CFLAG:MASTER:최근피사정량
+			FLAG:육변기정음량 += recentCumAmount
 		endif
 		
 		if RAND:3 == 0

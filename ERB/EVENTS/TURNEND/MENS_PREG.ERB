@@ -6,6 +6,7 @@
 
 @mensAndPreg
 #dim dynamic pregType
+#dim dynamic pregSemen
 
 	; 생리주기 계산
 	MAXBASE:MASTER:생리주기 = LIMIT(MAXBASE:MASTER:생리주기, 8, 35)
@@ -38,46 +39,38 @@
 	else
 		TALENT:MASTER:가임기 = 0
 	endif
-
-	; 자궁 크기에 맞춰 오늘 담은 정액을 흘림
-	BASE:MASTER:자궁내정액1 = LIMIT(BASE:MASTER:자궁내정액1, 0, BASE:MASTER:자궁크기)
 	
 	; 임신판정
 	if !BASE:MASTER:임신일수 && (TALENT:MASTER:가임기 || FLAG:자궁대여료)
 		; 자궁이 가득차있을 경우 100% 기준으로 난수 돌려서 임신판정
-		if FLAG:자궁대여료 || (RAND:100 < 100 * (BASE:MASTER:자궁내정액1 + BASE:MASTER:자궁내정액2 + BASE:MASTER:자궁내정액3 + BASE:MASTER:자궁내정액4) / (BASE:MASTER:자궁크기 * 15 / 8))
+		if FLAG:자궁대여료 || (RAND:100 < 100 * semenAmount(0) / (BASE:MASTER:자궁크기 * 15 / 8))
 			; 임신처리
 			BASE:MASTER:임신일수 = 1
+			pregSemen = getLogPos(RAND:semenAmount(0))
 			
-			if RAND:(BASE:MASTER:자궁내인간정액+BASE:MASTER:자궁내몬스터정액+BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액+BASE:MASTER:자궁내마족정액) < BASE:MASTER:자궁내인간정액
-				; 인간임신
-				CFLAG:MASTER:아이아버지 = 1
-			elseif RAND:(BASE:MASTER:자궁내몬스터정액+BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액+BASE:MASTER:자궁내마족정액) < BASE:MASTER:자궁내몬스터정액
-				; 몬스터임신
-				CFLAG:MASTER:아이아버지 = 2
-			elseif RAND:(BASE:MASTER:자궁내벌레정액+BASE:MASTER:자궁내짐승정액+BASE:MASTER:자궁내마족정액) < BASE:MASTER:자궁내벌레정액
-				; 벌레임신
-				CFLAG:MASTER:아이아버지 = 3
-			elseif RAND:(BASE:MASTER:자궁내짐승정액+BASE:MASTER:자궁내마족정액) < BASE:MASTER:자궁내짐승정액
-				; 짐승임신
-				CFLAG:MASTER:아이아버지 = 4
-			else
-				; 마족임신
-				CFLAG:MASTER:아이아버지 = 5
-			endif
+			CFLAG:MASTER:아이종족 = getSemenRace(pregSemen)
+			CFLAG:MASTER:비자발임신 = isSexUnwanted(pregSemen)
+			CFLAG:MASTER:아이아버지 = getSemenOwner(pregSemen)
+			CSTR:MASTER:아이아버지이름 = %SexLogName:pregSemen%
 			
-			if CFLAG:MASTER:아이아버지 == 1
+			if CFLAG:MASTER:아이종족 == 1
 				BASE:MASTER:자궁침식도 -= 1 + RAND:4
 			else
 				BASE:MASTER:자궁침식도 += 1 + RAND:4
 
 				; 마족일 경우 침식도 추가 상승
-				if CFLAG:MASTER:아이아버지 == 5
+				if CFLAG:MASTER:아이종족 == 5
 					BASE:MASTER:자궁침식도 += 1 + RAND:2
 				endif
 			endif
+
 			BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도, 0, MAXBASE:MASTER:자궁침식도)
 		endif
+	endif
+	
+	if BASE:MASTER:임신일수 < 3
+		; 원래는 좀 더 명확하게 계속 추적해야되는데 일단은 이렇게 계산하기로 함
+		CFLAG:MASTER:잠재적아버지 = MAX(CFLAG:MASTER:잠재적아버지, semenCount())
 	endif
 	
 	; 사후피임약 복용시 24-72시간 이내일 경우 95% / 80% / 50% 확률로 피임
@@ -91,22 +84,13 @@
 	endif
 	
 	; 정액 하루씩 묵히기
-	BASE:MASTER:자궁내정액4 = BASE:MASTER:자궁내정액3 / 2
-	BASE:MASTER:자궁내정액3 = BASE:MASTER:자궁내정액2 / 2
-	BASE:MASTER:자궁내정액2 = BASE:MASTER:자궁내정액1 / 2
-	BASE:MASTER:자궁내정액1 = 0
-	
-	BASE:MASTER:자궁내인간정액 = BASE:MASTER:자궁내인간정액 / 2
-	BASE:MASTER:자궁내몬스터정액 = BASE:MASTER:자궁내몬스터정액 / 2
-	BASE:MASTER:자궁내벌레정액 = BASE:MASTER:자궁내벌레정액 / 2
-	BASE:MASTER:자궁내짐승정액 = BASE:MASTER:자궁내짐승정액 / 2
-	BASE:MASTER:자궁내마족정액 = BASE:MASTER:자궁내마족정액 / 2
+	call diminishSemen
 	
 	; 몬스터 혹은 벌레 정액이 인간 정액보다 많을 경우 침식도 증가
-	if BASE:MASTER:자궁내몬스터정액 + BASE:MASTER:자궁내벌레정액 + BASE:MASTER:자궁내마족정액 > BASE:MASTER:자궁내인간정액
+	if semenAmount(0) > semenAmount(1) * 2
 		BASE:MASTER:자궁침식도 += 1 + RAND:2
 	; 반대면 감소
-	elseif BASE:MASTER:자궁내인간정액 > BASE:MASTER:자궁내몬스터정액 + BASE:MASTER:자궁내벌레정액 + BASE:MASTER:자궁내마족정액
+	elseif semenAmount(1) * 2 > semenAmount(0)
 		BASE:MASTER:자궁침식도 -= 1 + RAND:2
 	endif
 	BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도, 0, MAXBASE:MASTER:자궁침식도)
@@ -116,9 +100,13 @@
 		; 임신자각처리
 		call onMasterPregnantNoticed
 
+		if CFLAG:MASTER:비자발임신
+			PALAM:MASTER:억울 += 1000
+		endif
+
 		call getTalent("임신")
 		EXP:MASTER:임신경험++
-		if CFLAG:MASTER:아이아버지 > 1
+		if CFLAG:MASTER:아이종족 > 1
 			EXP:MASTER:이종임신경험++
 		endif
 	elseif FLAG:자궁대여료 && BASE:MASTER:임신일수 && !TALENT:MASTER:임신
@@ -126,7 +114,7 @@
 
 		call getTalent("임신")
 		EXP:MASTER:임신경험++
-		if CFLAG:MASTER:아이아버지 > 1
+		if CFLAG:MASTER:아이종족 > 1
 			EXP:MASTER:이종임신경험++
 		endif
 	endif
@@ -165,7 +153,7 @@
 	endif
 
 	if TALENT:MASTER:임신 && BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수 / 5
-		if CFLAG:MASTER:아이아버지 == 1 && RAND:(MAXBASE:MASTER:자궁침식도) < BASE:MASTER:자궁침식도
+		if CFLAG:MASTER:아이종족 == 1 && RAND:(MAXBASE:MASTER:자궁침식도) < BASE:MASTER:자궁침식도
 			; 인간임신실패 - 낙태
 			; 자궁침식도 감소
 			call colorPrintW(0xcc0000, @"%kr(CALLNAME:MASTER, "은", "는")% 배에서 격통을 느꼈다")
@@ -174,7 +162,7 @@
 			BASE:MASTER:자궁침식도 = LIMIT(BASE:MASTER:자궁침식도 - (1 + RAND:4), 0, MAXBASE:MASTER:자궁침식도)
 
 			call abort
-		elseif CFLAG:MASTER:아이아버지 > 1 && RAND:(MAXBASE:MASTER:자궁침식도) < MAXBASE:MASTER:자궁침식도 - BASE:MASTER:자궁침식도
+		elseif CFLAG:MASTER:아이종족 > 1 && RAND:(MAXBASE:MASTER:자궁침식도) < MAXBASE:MASTER:자궁침식도 - BASE:MASTER:자궁침식도
 			; 이종임신실패 - 낙태
 			; 자궁침식도 증가
 			call colorPrintW(0xcc0000, @"%kr(CALLNAME:MASTER, "은", "는")% 갑자기 다리 사이로 대량의 피를 흘렸다")
@@ -205,8 +193,8 @@
 		printFormW .
 		printFormW .
 
-		printForm %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%STR:(300 + CFLAG:MASTER:아이아버지)%]의\ 
-		if CFLAG:MASTER:아이아버지 == 1
+		printForm %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%STR:(300 + CFLAG:MASTER:아이종족)%]의\ 
+		if CFLAG:MASTER:아이종족 == 1
 			printW 아이를 출산했습니다
 		else
 			printW 새끼를 출산했습니다
@@ -214,7 +202,7 @@
 		
 		call loseTalent("임신")
 		BASE:MASTER:임신일수 = 0
-		CFLAG:MASTER:아이아버지 = 0
+		CFLAG:MASTER:아이종족 = 0
 		EXP:MASTER:출산경험++
 		BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2 + 1
 		
@@ -232,7 +220,7 @@
 	
 	call loseTalent("임신")
 	BASE:MASTER:임신일수 = 0
-	CFLAG:MASTER:아이아버지 = 0
+	CFLAG:MASTER:아이종족 = 0
 	EXP:MASTER:낙태경험++
 	
 	BASE:MASTER:자궁상태 = LIMIT(BASE:MASTER:자궁상태 - (5 + RAND:10), 0, MAXBASE:MASTER:자궁상태)

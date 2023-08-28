@@ -1,9 +1,9 @@
 ﻿@tattoo
 
 	if MARK:MASTER:음문각인 >= 1
-		if BASE:MASTER:자궁내정액1 < BASE:MASTER:자궁크기 / 2
+		if semenAmount(0) < BASE:MASTER:자궁크기 / 2
 			printFormW %CALLNAME:MASTER%의 하복부에 새겨진 음문이 정액의 갈증을 호소하고 있다...
-			PALAM:MASTER:불쾌 += 200 - 200 * BASE:MASTER:자궁내정액1 / BASE:MASTER:자궁크기
+			PALAM:MASTER:불쾌 += 200 - 200 * semenAmount(0) / BASE:MASTER:자궁크기
 			
 			if BASE:MASTER:이성 == 0 && !TALENT:MASTER:발정
 				printFormW 결국 이성이 바닥나버린 %kr(CALLNAME:MASTER, "은", "는")% 필사적으로 정기를 갈구하고 있다...
@@ -34,7 +34,7 @@
 	endif
 
 	; 정액량 조건을 만족시켰을 경우 낮은 확률로 음문 레벨 상승
-	if RAND:10 == 0 && BASE:MASTER:자궁내정액1 >= BASE:MASTER:자궁크기 / 2
+	if RAND:10 == 0 && semenAmount(0) >= BASE:MASTER:자궁크기 / 2
 		printFormW %CALLNAME:MASTER%에게 새겨진 음문이 스스로 복잡한 무늬를 새기며 더욱 커지고 있다...
 		printFormW %CALLNAME:MASTER%의 음문은 %partStrRaw(116)% 안에 가득 따라진 정액을 흡수해 힘이 더욱 강해졌다.
 		

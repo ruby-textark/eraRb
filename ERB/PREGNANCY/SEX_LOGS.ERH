@@ -1,0 +1,19 @@
+﻿#dim savedata SexLogPtr
+
+; 사정량
+#dim savedata SexLogAmount, 1000
+; 종족 기록
+#dim savedata SexLogRace, 1000
+; 자발/비자발 기록
+#dim savedata SexLogUnwanted, 1000
+; 캐릭터번호 기록
+#dim savedata SexLogOwner, 1000
+; 이름 기록
+#dims savedata SexLogName, 1000
+
+; 최근 기록 포인터
+#define LastSexPtr ((SexLogPtr + 9999) % 10000)
+;최근 사정량
+#define recentCumAmount (SexLogAmount:LastSexPtr)
+;최근 사정자
+#define recentCumOwnerName (SexLogName:LastSexPtr)

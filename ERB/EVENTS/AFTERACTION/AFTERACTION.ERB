@@ -2,6 +2,10 @@
 ; 하지만 전투시 train 종료 후에도 호출됨
 @afterAction
 
+	; 기본적으로 비자발
+	; 일부 자발적인 케이스에서만 꺼 줄것
+	FLAG:비자발임신 = 1
+
 	call clearFlags
 	call calcPalam
 	call applyUpDown

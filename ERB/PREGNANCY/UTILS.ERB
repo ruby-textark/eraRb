@@ -1,0 +1,114 @@
+﻿@semenAmount(type)
+#function
+#dim dynamic type
+#dim dynamic logIdx
+#dim dynamic amount
+
+	for logIdx, 0, 10000
+		if type == 0 || SexLogRace:logIdx == type
+			amount += SexLogAmount:logIdx
+		endif
+	next
+
+	returnf amount
+
+@semenCount(type)
+#function
+#dim dynamic type
+#dim dynamic logIdx
+#dim dynamic countNumber
+
+	for logIdx, 0, 10000
+		if type == 0 || SexLogRace:logIdx == type
+			countNumber += 1
+		endif
+	next
+
+	returnf countNumber
+
+@diminishSemen
+#dim dynamic logIdx
+
+	for logIdx, 0, 10000
+		SexLogAmount:logIdx /= 2
+	next
+
+@getLogPos(semenIdx)
+#function
+#dim dynamic semenIdx
+#dim dynamic leftover
+#dim dynamic logIdx
+
+	leftover = semenIdx
+
+	for logIdx, 0, 10000
+		leftover -= SexLogAmount:logIdx
+
+		if leftover <= 0
+			returnf logIdx
+		endif
+	next
+	
+	returnf -1
+
+@getSemenRace(logIdx)
+#function
+#dim dynamic logIdx
+
+	returnf SexLogRace:logIdx
+	
+@isSexUnwanted(logIdx)
+#function
+#dim dynamic logIdx
+
+	returnf SexLogUnwanted:logIdx
+
+@getSemenOwner(logIdx)
+#function
+#dim dynamic logIdx
+
+	returnf SexLogOwner:logIdx
+
+@addSexLog(amount)
+#dim dynamic amount
+
+	SexLogAmount:SexLogPtr = amount
+	SexLogRace:SexLogPtr = CFLAG:TARGET:종족
+	SexLogUnwanted:SexLogPtr = FLAG:비자발임신
+	SexLogOwner:SexLogPtr = CFLAG:캐릭터번호
+	SexLogName:SexLogPtr = %CALLNAME:TARGET% %NAME:TARGET%
+
+	SexLogPtr = (SexLogPtr + 1) % 1000
+	
+	call rebalance
+
+@rebalance
+#dim dynamic logIdx
+#dim dynamic shouldDrop
+#dim dynamic dropAmount
+
+	shouldDrop = semenAmount() - BASE:MASTER:자궁크기
+
+	; 충분히 수용할 수 있을 때까지 무한 반복
+	while shouldDrop > 0
+		
+		logIdx = SexLogPtr
+
+		; 가장 늦은 것부터 20%씩 흘림
+		while logIdx != SexLogPtr && shouldDrop > 0
+			dropAmount = SexLogAmount:logIdx / 5
+			
+			SexLogAmount:logIdx -= dropAmount
+			shouldDrop -= dropAmount
+			
+			logIdx = (logIdx + 1) % 1000
+		wend
+	wend
+
+@flushWomb
+#dim dynamic logIdx
+
+	for logIdx, 0, 1000
+		SexLogAmount:logIdx = 0
+	next
+	SexLogPtr = 0

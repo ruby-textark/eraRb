@@ -12,9 +12,13 @@
 		printFormL %kr(NAME:MASTER, "은", "는")% 임신 {BASE:MASTER:임신일수}일입니다.
 		print 현재 
 		setColor 0xff8c00
-		printForm %STR:(300 + CFLAG:MASTER:아이아버지)%
+		printForm %STR:(300 + CFLAG:MASTER:아이종족)%
 		resetColor
 		printL 의 아이를 임신중입니다.
+		
+		if CFLAG:MASTER:잠재적아버지 == 1
+			printFormL (아이 아버지 : %CSTR:MASTER:아이아버지이름%)
+		endif
 	else
 		printFormL %NAME:MASTER%의 다음 생리 예정일은 {MAXBASE:MASTER:생리주기 - BASE:MASTER:생리주기}일 뒤입니다
 	endif
@@ -24,32 +28,32 @@
 
 	printL
 	printL 자궁상태
-	printFormL 자궁 내 정액량 : {BASE:MASTER:자궁내정액1+BASE:MASTER:자궁내정액2+BASE:MASTER:자궁내정액3+BASE:MASTER:자궁내정액4}mL
+	printFormL 자궁 내 정액량 : {semenCount(0)}종 {semenAmount(0)}mL
 	
-	if CFLAG:MASTER:최근피사정량
-		printFormL 마지막 사정 : %CSTR:MASTER:최근피사정자%에게 {CFLAG:MASTER:최근피사정량}mL 당했다
+	if recentCumAmount
+		printFormL 마지막 사정 : %recentCumOwnerName%에게 {recentCumAmount}mL 당했다
 	endif
 	
 	if TALENT:MASTER:임신
-		if CFLAG:MASTER:아이아버지 == 1
+		if CFLAG:MASTER:아이종족 == 1
 			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
 				printFormL %NAME:MASTER%의 자궁은 소중한 수정란을 품고 있다
 			else
 				printFormL %NAME:MASTER%의 자궁은 인간의 아이를 품고 있다
 			endif
-		elseif CFLAG:MASTER:아이아버지 == 2
+		elseif CFLAG:MASTER:아이종족 == 2
 			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
 				printFormL %NAME:MASTER%의 자궁은 요사스러운 수정란을 감싸고 있다
 			else
 				printFormL %NAME:MASTER%의 자궁에는 괴물의 새끼가 머물고 있다
 			endif
-		elseif CFLAG:MASTER:아이아버지 == 3
+		elseif CFLAG:MASTER:아이종족 == 3
 			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
 				printFormL %NAME:MASTER%의 자궁 벽에는 찐득한 벌레의 알이 붙어있다
 			else
 				printFormL %NAME:MASTER%의 자궁에는 징그러운 벌레가 제 집인것처럼 똬리를 틀고 있다
 			endif
-		elseif CFLAG:MASTER:아이아버지 == 4
+		elseif CFLAG:MASTER:아이종족 == 4
 			if BASE:MASTER:임신일수 < MAXBASE:MASTER:임신일수 / 8
 				printFormL %NAME:MASTER%의 자궁은 꺼림찍한 수정란을 감싸고 있다
 			else
