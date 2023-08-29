@@ -47,11 +47,12 @@
 			; 임신처리
 			BASE:MASTER:임신일수 = 1
 			pregSemen = getLogPos(RAND:semenAmount(0))
-			
+
 			CFLAG:MASTER:아이종족 = getSemenRace(pregSemen)
 			CFLAG:MASTER:비자발임신 = isSexUnwanted(pregSemen)
 			CFLAG:MASTER:아이아버지 = getSemenOwner(pregSemen)
 			CSTR:MASTER:아이아버지이름 = %SexLogName:pregSemen%
+			CFLAG:MASTER:아버지유전자 = getSemenGene(pregSemen)
 			
 			if CFLAG:MASTER:아이종족 == 1
 				BASE:MASTER:자궁침식도 -= 1 + RAND:4
@@ -186,32 +187,7 @@
 	endif
 
 	if BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수
-		; todo 출산구상추가
-		printFormW 최근 %CALLNAME:MASTER%의 상태가 이상하다...
-		printFormW %kr(CALLNAME:MASTER, "은", "는")% 갑자기 찾아온 고통에 만삭의 배를 부여잡고 고통을 그저 견뎠다
-		printFormW .
-		printFormW .
-		printFormW .
-
-		printForm %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%STR:(300 + CFLAG:MASTER:아이종족)%]의\ 
-		if CFLAG:MASTER:아이종족 == 1
-			printW 아이를 출산했습니다
-		else
-			printW 새끼를 출산했습니다
-		endif
-		
-		call loseTalent("임신")
-		BASE:MASTER:임신일수 = 0
-		CFLAG:MASTER:아이종족 = 0
-		EXP:MASTER:출산경험++
-		BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2 + 1
-		
-		BASE:MASTER:질상태 = LIMIT(BASE:MASTER:질상태 - (1 + RAND:3), 0, MAXBASE:MASTER:질상태)
-
-		if FLAG:자궁대여료
-			MONEY += FLAG:자궁대여료
-			FLAG:자궁대여료 = 0
-		endif
+		call birth
 	endif
 
 @abort
@@ -231,4 +207,33 @@
 
 		printW 낙태하였기 떄문에, 자동적으로 자궁 대여 계약은 파기되었습니다.
 		call colorPrintW(0xd0936d, "「계약은 계약이지. 위약금을 물지 않은 것을 다행으로 여기게나.」")
+	endif
+
+@birth
+
+	; todo 출산구상추가
+	printFormW 최근 %CALLNAME:MASTER%의 상태가 이상하다...
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 갑자기 찾아온 고통에 만삭의 배를 부여잡고 고통을 그저 견뎠다
+	printFormW .
+	printFormW .
+	printFormW .
+
+	printForm %kr(CALLNAME:MASTER, "은", "는")% 무사히 [%STR:(300 + CFLAG:MASTER:아이종족)%]의\ 
+	if CFLAG:MASTER:아이종족 == 1
+		printW 아이를 출산했습니다
+	else
+		printW 새끼를 출산했습니다
+	endif
+	
+	call loseTalent("임신")
+	BASE:MASTER:임신일수 = 0
+	CFLAG:MASTER:아이종족 = 0
+	EXP:MASTER:출산경험++
+	BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2 + 1
+	
+	BASE:MASTER:질상태 = LIMIT(BASE:MASTER:질상태 - (1 + RAND:3), 0, MAXBASE:MASTER:질상태)
+
+	if FLAG:자궁대여료
+		MONEY += FLAG:자궁대여료
+		FLAG:자궁대여료 = 0
 	endif

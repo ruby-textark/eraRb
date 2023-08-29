@@ -1,0 +1,4 @@
+﻿; 이것은 캐릭터 번호의 최대치에 맞출것
+#dim const BirthPediaSize = 10000
+
+#dim savedata BirthPedia, BirthPediaSize

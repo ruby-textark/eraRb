@@ -84,3 +84,18 @@
 		
 		call speak(MASTER, "현재 대사 색상은 이렇습니다")
 	endif
+	
+	if LASTLOAD_VERSION < 14
+		printL v0.014
+		printW 캐릭터 유전자 및 유전자 도감이 추가되었습니다
+
+		call randomizeChara(getChara(2001))
+		call randomizeChara(getChara(2100))
+		call randomizeChara(getChara(2101))
+		call randomizeChara(getChara(2102))
+		call randomizeChara(getChara(2103))
+		call randomizeChara(getChara(2104))
+		call randomizeChara(getChara(2105))
+		call randomizeChara(getChara(2106))
+		call randomizeChara(getChara(2107))
+	endif

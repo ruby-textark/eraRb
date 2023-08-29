@@ -1,0 +1,28 @@
+﻿@showBirthPedia
+
+	printFormL [생태도감]
+	printFormL %kr(NAME:MASTER, "이", "가")% 출산한 아이가 지닌 유전자에 따라 자동적으로 도감에 등록됩니다.
+	printFormL 도감에 더 많은 유전자를 수집할수록, 다양한 특전이 주어집니다.
+
+	drawLine
+
+$inputLoop
+
+	printL [1] - 몬스터 도감을 확인한다
+	printL [2] - NPC 도감을 확인한다
+	printL [3] - 특전을 확인한다
+
+	printL [0] - 돌아간다
+	
+	input
+	
+	if RESULT == 1
+	elseif RESULT == 2
+	elseif RESULT == 3
+	elseif RESULT == 0
+		return
+	else
+		printFormW 잘못된 입력입니다
+		clearLine 2
+		goto inputLoop
+	endif

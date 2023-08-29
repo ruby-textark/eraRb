@@ -150,7 +150,8 @@ $inputHistory
 		TALENT:MASTER:모유체질 = 1
 		TALENT:MASTER:피임결계 = 1
 	else
-		clearLine 1
+		printFormW 잘못된 입력입니다
+		clearLine 2
 		goto inputHistory
 	endif
 
@@ -197,7 +198,8 @@ $inputCharacteristics
 		endif
 		
 	else
-		clearLine 1
+		printFormW 잘못된 입력입니다
+		clearLine 2
 		goto inputCharacteristics
 	endif
 

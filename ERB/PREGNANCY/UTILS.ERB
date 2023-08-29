@@ -69,6 +69,12 @@
 
 	returnf SexLogOwner:logIdx
 
+@getSemenGene(logIdx)
+#function
+#dim dynamic logIdx
+
+	returnf SexLogGene:logIdx
+	
 @addSexLog(amount)
 #dim dynamic amount
 
@@ -77,6 +83,7 @@
 	SexLogUnwanted:SexLogPtr = FLAG:비자발임신
 	SexLogOwner:SexLogPtr = CFLAG:캐릭터번호
 	SexLogName:SexLogPtr = %CALLNAME:TARGET% %NAME:TARGET%
+	SexLogGene:SexLogPtr = BASE:TARGET:유전자
 
 	SexLogPtr = (SexLogPtr + 1) % SexLogSize
 	

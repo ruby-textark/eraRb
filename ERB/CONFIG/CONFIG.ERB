@@ -19,9 +19,11 @@ $inputLoop
 		call sexualharassmentConfig
 	elseif RESULT == 0
 		return
+	else
+		printFormW 잘못된 입력입니다
+		clearLine 2
 	endif
 
-	clearLine 1
 	goto inputLoop
 
 @stdConfig

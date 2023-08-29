@@ -2,15 +2,17 @@
 #dim const SexLogSize = 1000
 
 ; 사정량
-#dim savedata SexLogAmount, 1000
+#dim savedata SexLogAmount, SexLogSize
 ; 종족 기록
-#dim savedata SexLogRace, 1000
+#dim savedata SexLogRace, SexLogSize
 ; 자발/비자발 기록
-#dim savedata SexLogUnwanted, 1000
+#dim savedata SexLogUnwanted, SexLogSize
 ; 캐릭터번호 기록
-#dim savedata SexLogOwner, 1000
+#dim savedata SexLogOwner, SexLogSize
 ; 이름 기록
-#dims savedata SexLogName, 1000
+#dims savedata SexLogName, SexLogSize
+; 유전자 기록
+#dim savedata SexLogGene, SexLogSize
 
 ; 최근 기록 포인터
 #define LastSexPtr ((SexLogPtr + SexLogSize - 1) % SexLogSize)

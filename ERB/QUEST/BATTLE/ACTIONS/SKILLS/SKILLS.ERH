@@ -1,4 +1,4 @@
 ﻿
 #dim const SkillNumber = 10000
 #dim const SkillNumberStart = 1000
-#dim savedata SkillMastery, 10000
+#dim savedata SkillMastery, SkillNumber

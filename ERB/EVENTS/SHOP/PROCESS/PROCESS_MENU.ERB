@@ -41,6 +41,10 @@
 	elseif RESULT == 303 && isMasterFree() && !FLAG:원정중
 		call cathedral
 
+	; COLLECTION MENU
+	elseif RESULT == 701
+		call showBirthPedia
+
 	; SYSTEM MENU
 	elseif RESULT == 801
 		saveGame

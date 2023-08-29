@@ -1,7 +1,6 @@
 ﻿@addCharaAtPos(charaIdx, charaPos)
 #dim dynamic charaIdx
 #dim dynamic charaPos
-#dim dynamic stdRate
 
 	; 새로 추가할 캐릭터
 	addChara charaIdx
@@ -10,18 +9,27 @@
 	swapChara getChara(charaIdx), charaPos
 	delChara getChara(1000 + charaPos)
 	
+	call randomizeChara(charaPos)
+
+@randomizeChara(charaIdx)
+#dim dynamic charaIdx
+#dim dynamic stdRate
+	
+	; 유전자 처리
+		BASE:charaIdx:유전자 = 1 + RAND:30
+
 	; 기술 처리
 
 		; 성교능숙
 		if RAND:100 < 50
-			ABL:charaPos:성교기술 += 1 + (RAND:3)
+			ABL:charaIdx:성교기술 += 1 + (RAND:3)
 		endif
 	
 	; 재능 처리
 
 		;조루
 		if RAND:100 < 25
-			TALENT:charaPos:조루 = 1
+			TALENT:charaIdx:조루 = 1
 		endif
 	
 	; CFLAG 처리
@@ -31,12 +39,12 @@
 		stdRate = FLAG:성병보균율
 		
 		; 인간이 아닐 경우 2배 증가
-		if CFLAG:charaPos:종족 != 1
+		if CFLAG:charaIdx:종족 != 1
 			stdRate *= 2
 		endif
 
 		if RAND:1000 < stdRate
-			CFLAG:charaPos:성병보균자 = 1
+			CFLAG:charaIdx:성병보균자 = 1
 		endif
 
 @delCharaAtPos(charaPos)
