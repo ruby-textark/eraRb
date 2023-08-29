@@ -13,7 +13,6 @@
 #dim dynamic maxValue
 #dim dynamic deviation
 #dim dynamic randValue
-#dim dynamic randStep
 #dim dynamic decreaseDev
 #dim dynamic increaseDev
 
@@ -27,7 +26,7 @@
 
 	randValue = (minValue + maxValue) / 2
 	
-	for randStep, 0, deviation
+	repeat deviation
 		decreaseDev = (RAND:(deviation + 100) * (randValue - minValue + 1)) / 100
 		increaseDev = (RAND:(deviation + 100) * (maxValue - randValue + 1)) / 100
 
@@ -37,7 +36,7 @@
 			randValue -= max((RAND:deviation * (maxValue - minValue)) / 100, 1)
 		endif
 		randValue = limit(randValue, minValue, maxValue)
-	next
+	rend
 
 	returnf randValue
 

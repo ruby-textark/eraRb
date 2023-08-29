@@ -1,0 +1,82 @@
+﻿@showMobBirthPedia
+#dim dynamic mobPage
+#dim dynamic mobIdx
+
+	mobPage = 1
+
+$showLoop
+
+	clearLine 99999
+	printFormL 도시의 생물도감 - {mobPage}장
+	printL
+	drawLine
+	printL
+	
+	for mobIdx, 1000 + mobPage * 100, 1000 + mobPage * 100 + 100
+		existCsv mobIdx
+		if RESULT
+			printForm [{mobIdx}]\ 
+			
+			fontBold
+			
+			setColor 0xcccc00
+			printForm %CSVCALLNAME(mobIdx)%\ 
+			resetColor
+			
+			printForm %CSVNAME(mobIdx)%
+			fontRegular
+			
+			print  (
+			
+			if birthPediaCollectionCount(mobIdx) == 30
+				setColor 0x0033ff
+			elseif birthPediaCollectionCount(mobIdx) > 20
+				setColor 0x334ebd
+			elseif birthPediaCollectionCount(mobIdx) > 10
+				setColor 0x5252a3
+			elseif birthPediaCollectionCount(mobIdx) > 0
+				setColor 0x75759e
+			else
+				setColor 0x636363
+			endif
+			printForm {birthPediaCollectionCount(mobIdx)}\ 
+			resetColor
+			
+			printFormL / 30)
+		endif
+	next
+	
+	printL
+	drawLine
+	
+	if mobPage == 1
+		setColor 0x777777
+	endif
+
+	print [1] - 이전 장으로 
+	resetColor
+	
+	if mobPage == 9
+		setColor 0x777777
+	endif
+
+	printL [2] - 다음 장으로 
+	resetColor
+
+	printL [0] - 돌아가기
+	
+	input
+	
+	if RESULT == 1
+		mobPage -= 1
+	elseif RESULT == 2
+		mobPage += 1
+	elseif RESULT == 0
+		return
+	else
+		printFormW 잘못된 입력입니다
+		clearLine 2
+	endif
+	
+	mobPage = limit(mobPage, 1, 9)
+	goto showLoop

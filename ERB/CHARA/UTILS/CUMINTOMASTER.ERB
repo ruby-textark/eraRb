@@ -10,8 +10,6 @@
 	if TALENT:TARGET:대량사정
 		cumAmount *= 2 * TALENT:TARGET:대량사정 + RAND:2
 	endif
-	
-	call addSexLog(cumAmount)
 
 	SOURCE:MASTER:피사정 = 10 * cumAmount
 	EXP:MASTER:정액경험 += 1 + ((cumAmount - 1) / 2)
@@ -20,6 +18,7 @@
 
 	if partIdx == 115 || partIdx == 116 || partIdx == 121
 		EXP:MASTER:질내사정경험++
+		call addSexLog(cumAmount)
 
 	elseif partIdx == 123
 		EXP:MASTER:항내사정경험++

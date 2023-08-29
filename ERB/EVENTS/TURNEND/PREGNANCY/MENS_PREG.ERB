@@ -99,7 +99,11 @@
 	; 임신자각
 	if !TALENT:MASTER:임신 && BASE:MASTER:임신일수 == MAXBASE:MASTER:임신일수 / 10
 		; 임신자각처리
-		call onMasterPregnantNoticed
+		if FLAG:자궁대여료
+			call onMasterWombRentalStarted
+		else
+			call onMasterPregnantNoticed
+		endif
 
 		if CFLAG:MASTER:비자발임신
 			PALAM:MASTER:억울 += 1000

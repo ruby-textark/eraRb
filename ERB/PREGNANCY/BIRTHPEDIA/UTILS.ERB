@@ -1,4 +1,4 @@
-﻿@birthPediaCollectionRate(charaIdx)
+﻿@birthPediaCollectionCount(charaIdx)
 #function
 #dim dynamic charaIdx
 #dim dynamic bitIdx
@@ -25,4 +25,4 @@
 		printFormW 이번에 출산한 %CSTR:MASTER:아이아버지이름%의 아이에게서 새로운 유전자를 발견했습니다.
 	endif
 
-	printFormW %CSTR:MASTER:아이아버지이름%의 유전자 수집률 : {birthPediaCollectionRate(CFLAG:MASTER:아이아버지)} / 30
+	printFormW %CSTR:MASTER:아이아버지이름%의 유전자 수집률 : {birthPediaCollectionCount(CFLAG:MASTER:아이아버지)} / 30

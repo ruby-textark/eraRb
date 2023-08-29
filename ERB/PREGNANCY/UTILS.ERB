@@ -91,6 +91,7 @@
 
 @rebalance
 #dim dynamic logIdx
+#dim dynamic offset
 #dim dynamic shouldDrop
 #dim dynamic dropAmount
 
@@ -99,16 +100,21 @@
 	; 충분히 수용할 수 있을 때까지 무한 반복
 	while shouldDrop > 0
 		
-		logIdx = SexLogPtr
-
+		offset = 0
 		; 가장 늦은 것부터 20%씩 흘림
-		while logIdx != SexLogPtr && shouldDrop > 0
+		while offset != SexLogSize && shouldDrop > 0
+			logIdx = (SexLogPtr + offset) % SexLogSize
+
 			dropAmount = SexLogAmount:logIdx / 5
+
+			if SexLogAmount:logIdx > 0
+				dropAmount = max(dropAmount, 1)
+			endif
 			
 			SexLogAmount:logIdx -= dropAmount
 			shouldDrop -= dropAmount
 			
-			logIdx = (logIdx + 1) % SexLogSize
+			offset += 1
 		wend
 	wend
 

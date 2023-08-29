@@ -1,0 +1,77 @@
+﻿@showMonsterBirthPedia
+#dim dynamic monsterLevel
+#dim dynamic monsterIdx
+
+	monsterLevel = 1
+
+$showLoop
+
+	clearLine 99999
+	printFormL 미궁의 생물도감 - {monsterLevel}층
+	printL
+	drawLine
+	printL
+	
+	for monsterIdx, monsterLevel * 100, monsterLevel * 100 + 100
+		existCsv monsterIdx
+		if RESULT
+			printForm [{monsterIdx}]\ 
+			
+			setColor 0xcccc00
+			printForm %CSVCALLNAME(monsterIdx)%\ 
+			resetColor
+			
+			printForm %CSVNAME(monsterIdx)% (
+			
+			if birthPediaCollectionCount(monsterIdx) == 30
+				setColor 0x0033ff
+			elseif birthPediaCollectionCount(monsterIdx) > 20
+				setColor 0x334ebd
+			elseif birthPediaCollectionCount(monsterIdx) > 10
+				setColor 0x5252a3
+			elseif birthPediaCollectionCount(monsterIdx) > 0
+				setColor 0x75759e
+			else
+				setColor 0x636363
+			endif
+			printForm {birthPediaCollectionCount(monsterIdx)}\ 
+			resetColor
+			
+			printFormL / 30)
+		endif
+	next
+	
+	printL
+	drawLine
+	
+	if monsterLevel == 1
+		setColor 0x777777
+	endif
+
+	print [1] - 이전 층으로 
+	resetColor
+	
+	if monsterLevel == 3
+		setColor 0x777777
+	endif
+
+	printL [2] - 다음 층으로 
+	resetColor
+
+	printL [0] - 돌아가기
+	
+	input
+	
+	if RESULT == 1
+		monsterLevel -= 1
+	elseif RESULT == 2
+		monsterLevel += 1
+	elseif RESULT == 0
+		return
+	else
+		printFormW 잘못된 입력입니다
+		clearLine 2
+	endif
+	
+	monsterLevel = limit(monsterLevel, 1, 3)
+	goto showLoop

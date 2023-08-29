@@ -1,0 +1,82 @@
+﻿@showNamedNPCBirthPedia
+#dim dynamic npcPage
+#dim dynamic npcIdx
+
+	npcPage = 1
+
+$showLoop
+
+	clearLine 99999
+	printFormL 특별한 생물도감 - {npcPage}장
+	printL
+	drawLine
+	printL
+	
+	for npcIdx, 2000 + npcPage * 100, 2000 + npcPage * 100 + 100
+		existCsv npcIdx
+		if RESULT
+			printForm [{npcIdx}]\ 
+			
+			fontBold
+			
+			setColor 0xcccc00
+			printForm %CSVCALLNAME(npcIdx)%\ 
+			resetColor
+			
+			printForm %CSVNAME(npcIdx)%
+			fontRegular
+			
+			print  (
+			
+			if birthPediaCollectionCount(npcIdx) == 30
+				setColor 0x0033ff
+			elseif birthPediaCollectionCount(npcIdx) > 20
+				setColor 0x334ebd
+			elseif birthPediaCollectionCount(npcIdx) > 10
+				setColor 0x5252a3
+			elseif birthPediaCollectionCount(npcIdx) > 0
+				setColor 0x75759e
+			else
+				setColor 0x636363
+			endif
+			printForm {birthPediaCollectionCount(npcIdx)}\ 
+			resetColor
+			
+			printFormL / 30)
+		endif
+	next
+	
+	printL
+	drawLine
+	
+	if npcPage == 1
+		setColor 0x777777
+	endif
+
+	print [1] - 이전 장으로 
+	resetColor
+	
+	if npcPage == 9
+		setColor 0x777777
+	endif
+
+	printL [2] - 다음 장으로 
+	resetColor
+
+	printL [0] - 돌아가기
+	
+	input
+	
+	if RESULT == 1
+		npcPage -= 1
+	elseif RESULT == 2
+		npcPage += 1
+	elseif RESULT == 0
+		return
+	else
+		printFormW 잘못된 입력입니다
+		clearLine 2
+	endif
+	
+	npcPage = limit(npcPage, 1, 9)
+	goto showLoop

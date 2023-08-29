@@ -1,6 +1,7 @@
 ﻿@showBirthPedia
 
-	printFormL [생태도감]
+	printL
+	printFormL [생물도감]
 	printFormL %kr(NAME:MASTER, "이", "가")% 출산한 아이가 지닌 유전자에 따라 자동적으로 도감에 등록됩니다.
 	printFormL 도감에 더 많은 유전자를 수집할수록, 다양한 특전이 주어집니다.
 
@@ -8,19 +9,25 @@
 
 $inputLoop
 
-	printL [1] - 몬스터 도감을 확인한다
-	printL [2] - NPC 도감을 확인한다
-	printL [3] - 특전을 확인한다
+	printL [1] - 미궁의 생물도감을 확인한다
+	printL [2] - 도시의 생물도감을 확인한다
+	printL [3] - 특별한 생물도감을 확인한다
+	; printL [4] - 특전을 확인한다
 
 	printL [0] - 돌아간다
 	
 	input
 	
 	if RESULT == 1
+		call showMonsterBirthPedia
 	elseif RESULT == 2
+		call showMobBirthPedia
 	elseif RESULT == 3
+		call showNamedNPCBirthPedia
+	elseif RESULT == 4
+		; todo 특전 제작
 	elseif RESULT == 0
-		return
+		return 0
 	else
 		printFormW 잘못된 입력입니다
 		clearLine 2
