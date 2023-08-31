@@ -1,0 +1,14 @@
+﻿@onBuff1017(charaIdx)
+#dim dynamic charaIdx
+
+	TCVAR:charaIdx:방어력 += 100000000
+	TCVAR:charaIdx:마법내성 += 100000000
+
+@progressBuff1017(charaIdx)
+#dim dynamic charaIdx
+
+@offBuff1017(charaIdx)
+#dim dynamic charaIdx
+
+	TCVAR:charaIdx:방어력 -= 100000000
+	TCVAR:charaIdx:마법내성 -= 100000000

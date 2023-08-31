@@ -20,7 +20,7 @@
 		return 1
 	endif
 	
-	damageBase = 20 * MAX(2, getActualMatk(MASTER) * 3 - getActualMdef(TARGET))
+	damageBase = 20 * MAX(1, getActualMatk(MASTER) * 3 - getActualMdef(TARGET))
 	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)	
 
 	return 1

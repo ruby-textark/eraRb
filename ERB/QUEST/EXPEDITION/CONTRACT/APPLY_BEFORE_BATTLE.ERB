@@ -1,45 +1,46 @@
 ﻿@applyContractBeforeBattle
 
-	if FLAG:"흉포의 계약"
+	if FLAG:흉포의계약
 		setColor 0xd40404
 		fontBold
-		printFormL [흉포의 계약Lv{FLAG:"흉포의 계약"}]이 적용된다
+		printFormL [흉포의 계약Lv{FLAG:흉포의계약}]이 적용된다
 		fontRegular
 		resetColor
 
-		TCVAR:TARGET:공격력 += FLAG:"흉포의 계약" * ABL:TARGET:공격력 * 3 / 20
-		TCVAR:TARGET:마법공격 += FLAG:"흉포의 계약" * ABL:TARGET:마법공격 / 10
+		TCVAR:TARGET:공격력 += FLAG:흉포의계약 * ABL:TARGET:공격력 * 3 / 20
+		TCVAR:TARGET:마법공격 += FLAG:흉포의계약 * ABL:TARGET:마법공격 / 10
 	endif
 	
-	if FLAG:"탈진의 계약"
+	if FLAG:탈진의계약
 		setColor 0xd40404
 		fontBold
-		printFormL [탈진의 계약Lv{FLAG:"탈진의 계약"}]이 적용된다
+		printFormL [탈진의 계약Lv{FLAG:탈진의계약}]이 적용된다
 		fontRegular
 		resetColor
 
-		TCVAR:MASTER:공격력 -= FLAG:"탈진의 계약" * ABL:MASTER:공격력 / 10
-		TCVAR:MASTER:마법공격 -= FLAG:"탈진의 계약" * ABL:MASTER:마법공격 / 20
+		TCVAR:MASTER:공격력 -= FLAG:탈진의계약 * ABL:MASTER:공격력 / 10
+		TCVAR:MASTER:마법공격 -= FLAG:탈진의계약 * ABL:MASTER:마법공격 / 20
 	endif
 	
-	if FLAG:"견고의 계약"
+	if FLAG:견고의계약
 		setColor 0xd40404
 		fontBold
-		printFormL [견고의 계약Lv{FLAG:"견고의 계약"}]이 적용된다
+		printFormL [견고의 계약Lv{FLAG:견고의계약}]이 적용된다
 		fontRegular
 		resetColor
 
-		TCVAR:TARGET:방어력 += FLAG:"견고의 계약" * ABL:TARGET:방어력 / 10
+		TCVAR:TARGET:방어력 += FLAG:견고의계약 * ABL:TARGET:방어력 / 10
+		TCVAR:TARGET:마법내성 += FLAG:견고의계약 * ABL:TARGET:마법내성 * 3 / 40
 	endif
 	
-	if FLAG:"부동의 계약"
+	if FLAG:부동의계약
 		setColor 0xd40404
 		fontBold
-		printFormL [부동의 계약Lv{FLAG:"부동의 계약"}]이 적용된다
+		printFormL [부동의 계약Lv{FLAG:부동의계약}]이 적용된다
 		fontRegular
 		resetColor
 
-		TCVAR:TARGET:마법내성 += FLAG:"부동의 계약" * ABL:TARGET:마법내성 * 3 / 40
+		call applyBuffTo(TARGET, "보호", FLAG:부동의계약)
 	endif
 	
 	

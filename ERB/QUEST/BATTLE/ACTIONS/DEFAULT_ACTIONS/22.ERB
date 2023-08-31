@@ -17,7 +17,7 @@
 		return 1
 	endif
 	
-	damageBase = 20 * MAX(2, getActualAtk(MASTER) - getActualDef(TARGET) / 2)
+	damageBase = 10 * MAX(1, getActualAtk(MASTER) - getActualDef(TARGET) / 2)
 	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
 	
 	call useAmmo()
