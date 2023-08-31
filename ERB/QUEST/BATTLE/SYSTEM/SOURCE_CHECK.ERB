@@ -6,11 +6,19 @@
 #dim dynamic forceAblUp
 
 	SOURCE:MASTER:공격 = 1000 * (LOSEBASE:체력 / MAXBASE:TARGET:체력)
-	BASE:TARGET:체력 -= LOSEBASE:0
-	BASE:TARGET:마력 -= LOSEBASE:1
+	
+	if FLAG:억제의계약
+		repeat FLAG:억제의계약			
+			LOSEBASE:체력 += LOSEBASE:체력 / 10
+			LOSEBASE:마력 += LOSEBASE:마력 / 10
+		rend
+	endif
+	
+	BASE:TARGET:체력 -= LOSEBASE:체력
+	BASE:TARGET:마력 -= LOSEBASE:마력
 
-	LOSEBASE:0 = 0
-	LOSEBASE:1 = 0
+	LOSEBASE:체력 = 0
+	LOSEBASE:마력 = 0
 
 $enemyTurn
 

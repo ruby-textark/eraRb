@@ -16,9 +16,8 @@
 			for pLevel, 0, 11
 				if PALAM:charaIdx:palamIdx >= PALAMLV:(10 - pLevel)
 					JUEL:charaIdx:palamIdx += PALAMLV:(10 - pLevel) / 10
+					PALAM:charaIdx:palamIdx -= PALAMLV:(10 - pLevel)
 				endif
 			next
-
-			PALAM:charaIdx:palamIdx = 0
 		next
 	next

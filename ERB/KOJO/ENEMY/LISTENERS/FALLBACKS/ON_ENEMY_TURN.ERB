@@ -4,7 +4,9 @@
 	sexualAttackRate = CFLAG:TARGET:성공격빈도
 
 	if FLAG:유혹의계약
-		sexualAttackRate = sexualAttackRate * (10 + FLAG:유혹의계약) / 10
+		repeat FLAG:유혹의계약
+			sexualAttackRate = sexualAttackRate * (10 + FLAG:유혹의계약) / 10
+		rend
 	endif
 
 	; 같은 위치에 있는 경우

@@ -1,0 +1,15 @@
+﻿@onMasterMasturbation(partIdx)
+#dim dynamic partIdx
+
+	; 1회당 250
+	repeat (1 + RAND:19)
+		EXP:MASTER:자위경험++
+		EXP:MASTER:partIdx++
+
+		call increaseArousal(partIdx, 250)
+		call checkOrgasm
+
+		if PALAM:MASTER:partIdx < masterOrgasmThres() / 4
+			break
+		endif
+	rend

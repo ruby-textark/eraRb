@@ -7,19 +7,23 @@
 		fontRegular
 		resetColor
 
-		TCVAR:TARGET:공격력 += FLAG:흉포의계약 * ABL:TARGET:공격력 * 3 / 20
-		TCVAR:TARGET:마법공격 += FLAG:흉포의계약 * ABL:TARGET:마법공격 / 10
+		repeat FLAG:흉포의계약
+			TCVAR:TARGET:공격력 += TCVAR:TARGET:공격력 * 3 / 20
+			TCVAR:TARGET:마법공격 += TCVAR:TARGET:마법공격 / 10
+		rend
 	endif
 	
-	if FLAG:탈진의계약
+	if FLAG:죽음의계약
 		setColor 0xd40404
 		fontBold
-		printFormL [탈진의 계약Lv{FLAG:탈진의계약}]이 적용된다
+		printFormL [탈진의 계약Lv{FLAG:죽음의계약}]이 적용된다
 		fontRegular
 		resetColor
 
-		TCVAR:MASTER:공격력 -= FLAG:탈진의계약 * ABL:MASTER:공격력 / 10
-		TCVAR:MASTER:마법공격 -= FLAG:탈진의계약 * ABL:MASTER:마법공격 / 20
+		repeat FLAG:죽음의계약
+			TCVAR:MASTER:공격력 -= TCVAR:MASTER:공격력 / 10
+			TCVAR:MASTER:마법공격 -= TCVAR:MASTER:마법공격 / 20
+		rend
 	endif
 	
 	if FLAG:견고의계약
@@ -29,8 +33,10 @@
 		fontRegular
 		resetColor
 
-		TCVAR:TARGET:방어력 += FLAG:견고의계약 * ABL:TARGET:방어력 / 10
-		TCVAR:TARGET:마법내성 += FLAG:견고의계약 * ABL:TARGET:마법내성 * 3 / 40
+		repeat FLAG:견고의계약
+			TCVAR:TARGET:방어력 += TCVAR:TARGET:방어력 / 10
+			TCVAR:TARGET:마법내성 += TCVAR:TARGET:마법내성 * 3 / 40
+		rend
 	endif
 	
 	if FLAG:부동의계약
@@ -42,5 +48,3 @@
 
 		call applyBuffTo(TARGET, "보호", FLAG:부동의계약)
 	endif
-	
-	

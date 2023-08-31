@@ -1,4 +1,16 @@
-﻿@isAttackableBodyPart(partIdx)
+﻿@isOrdinaryPart(partIdx)
+#function
+#dim dynamic partIdx
+
+	returnf partIdx == 102 || partIdx == 112 || partIdx == 113 || partIdx == 121 || partIdx == 122 || partIdx == 123
+
+@isHole(partIdx)
+#function
+#dim dynamic partIdx
+
+	returnf partIdx == 101 || partIdx == 102 || partIdx == 115 || partIdx == 116 || partIdx == 121 || partIdx == 123 || partIdx == 124 || partIdx == 125
+
+@isAttackableBodyPart(partIdx)
 #function
 #dim dynamic partIdx
 
@@ -90,7 +102,7 @@
 
 	partsCount = 0
 	for partIdx, 101, 200
-		if partIdx == 101 || partIdx == 111 || partIdx == 114 || partIdx == 115 || partIdx == 116 || partIdx == 124 || partIdx == 125 || partIdx == 126
+		if !isOrdinaryPart(partIdx)
 			continue
 		endif
 
@@ -100,9 +112,3 @@
 	next
 
 	returnf availableParts:(RAND:partsCount)
-
-@isHole(partIdx)
-#function
-#dim dynamic partIdx
-
-	returnf partIdx == 101 || partIdx == 102 || partIdx == 115 || partIdx == 116 || partIdx == 121 || partIdx == 123 || partIdx == 124 || partIdx == 125

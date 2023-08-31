@@ -1,8 +1,22 @@
 ﻿@relax
 #dim dynamic mental
+#dim dynamic regenAmount
 
-	BASE:MASTER:체력 = LIMIT(BASE:MASTER:체력 + MAXBASE:MASTER:체력 / 10, 0, MAXBASE:MASTER:체력)
-	BASE:MASTER:마력 = LIMIT(BASE:MASTER:마력 + MAXBASE:MASTER:마력 / 20, 0, MAXBASE:MASTER:마력)
+	regenAmount = MAXBASE:MASTER:체력 / 10
+	if FLAG:원정중 && FLAG:탈진의계약
+		repeat FLAG:탈진의계약
+			regenAmount -= regenAmount / 10
+		rend
+	endif
+	BASE:MASTER:체력 = LIMIT(BASE:MASTER:체력 + regenAmount, 0, MAXBASE:MASTER:체력)
+	
+	regenAmount = MAXBASE:MASTER:마력 / 20
+	if FLAG:원정중 && FLAG:탈진의계약
+		repeat FLAG:탈진의계약
+			regenAmount -= regenAmount / 10
+		rend
+	endif
+	BASE:MASTER:마력 = LIMIT(BASE:MASTER:마력 + regenAmount, 0, MAXBASE:MASTER:마력)
 
 	mental = 100 * ((PALAM:MASTER:순종 + PALAM:MASTER:만족 + PALAM:MASTER:욕정) - (PALAM:MASTER:공포 + PALAM:MASTER:불쾌 + PALAM:MASTER:억울))
 	mental = LIMIT(mental, -500, 500)
@@ -16,7 +30,43 @@
 
 	BASE:MASTER:모유 = MAXBASE:MASTER:모유
 
+	call relaxMasturbation
 	call relaxPalams
+
+@relaxMasturbation
+#dim dynamic partIdx
+#dim dynamic availableParts
+#dim dynamic availableCount
+
+	for partIdx, 101, 200
+		if !isOrdinaryPart(partIdx)
+			continue
+		endif
+		
+		if PALAM:MASTER:partIdx > masterOrgasmThres() / 2
+			availableParts:(availableCount++) = partIdx
+		endif
+	next
+	
+	if !availableCount
+		return
+	endif
+	
+	partIdx = availableParts:(RAND:availableCount)
+	
+	if RAND:3 == 0
+		printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "이", "가")% 달아올라 자위를 시작했다
+	elseif RAND:2 == 0
+		if isHole(partIdx)
+			printFormW 해소되지 않은 욕망에 패배한 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "을", "를")% 쑤시며 자위를 시작했다
+		else
+			printFormW 해소되지 않은 욕망에 패배한 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "을", "를")% 만지작거리며 자위를 시작했다
+		endif
+	else
+		printFormW 인내심이 떨어진 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "으로", "로")% 자위하기 시작했다
+	endif
+
+	call onMasterMasturbation(partIdx)
 
 @relaxPalams
 #dim dynamic palamIdx

@@ -5,7 +5,7 @@
 #dim dynamic shuffleIdx
 
 	for contractIdx, 701, 800
-		if strlens(FLAGNAME:contractIdx) > 0
+		if strlens(FLAGNAME:contractIdx) > 0 && FLAG:contractIdx < 10
 			availableContracts:(contractsCount++) = contractIdx
 		endif
 	next
@@ -41,7 +41,7 @@ $contractLoop
 		FLAG:(availableContracts:RESULT) += 1
 		printFormW %FLAGNAME:(availableContracts:RESULT)%의 계약이 체결되었다(현재 {FLAG:(availableContracts:RESULT)}단계)
 		
-		FLAG:계약배율 = FLAG:계약배율 * (20 + FLAG:(availableContracts:RESULT)) / 20
+		FLAG:계약배율 += FLAG:(availableContracts:RESULT) * 10
 		printFormW 계약의 힘으로 마석의 습득이 {FLAG:(availableContracts:RESULT) / 10}.{FLAG:(availableContracts:RESULT) % 10}배 증가하였다.
 	else
 		printW 잘못된 입력입니다. 계약을 시작한 이상 반드시 하나를 선택해야만 합니다.

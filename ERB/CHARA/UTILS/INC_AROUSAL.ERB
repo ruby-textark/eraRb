@@ -18,9 +18,14 @@
 @increaseArousalToUp(partIdx, amount)
 #dim dynamic partIdx
 #dim dynamic amount
+#dim dynamic upAmount
+
+	upAmount = calcArousalValue(partIdx, amount)
 
 	if FLAG:음욕의계약
-		UP:partIdx += FLAG:음욕의계약 * calcArousalValue(partIdx, amount) / 5
+		repeat FLAG:음욕의계약
+			upAmount += upAmount / 5
+		rend
 	endif
 
-	UP:partIdx += calcArousalValue(partIdx, amount)
+	UP:partIdx += upAmount
