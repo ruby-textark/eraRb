@@ -69,8 +69,32 @@ $showLoop
 	elseif RESULT == 0
 		return
 	else
-		printFormW 잘못된 입력입니다
-		clearLine 2
+		monsterIdx = RESULT
+		existCsv monsterIdx
+
+		if !RESULT
+			printFormW 잘못된 입력입니다
+			clearLine 2
+		else
+			setColor 0xcccc00
+			printForm %CSVCALLNAME(monsterIdx)%\ 
+			resetColor
+
+			printFormL %CSVNAME(monsterIdx)%
+
+			tryccallform c{monsterIdx}BirthPedia
+				fontItalic
+				printFormL %RESULTS:0%
+				fontRegular
+				setColor 0xcc00cc
+				printFormL %RESULTS:1%
+				resetColor
+				printFormL %RESULTS:2%
+			catch
+				call colorPrint(0x888888, @"이 몬스터에 대한 상세 설명이 없습니다.")
+			endcatch
+			wait
+		endif
 	endif
 	
 	monsterLevel = limit(monsterLevel, 1, 3)

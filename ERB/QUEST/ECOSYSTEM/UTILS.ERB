@@ -1,0 +1,62 @@
+﻿@enemiesInLevel(level)
+#function
+#dim dynamic level
+
+	returnf FLAG:(100 + level * 10)
+
+@addEnemyPopulation(enemyIdx)
+#dim dynamic enemyIdx
+
+	EnemyPopulation:enemyIdx++
+
+@enemyPopulation(level)
+#function
+#dim dynamic level
+#dim dynamic enemyIdx
+#dim dynamic population
+
+	for enemyIdx, level * 100 + 1, level * 100 + 1 + enemiesInLevel(level)
+		population += EnemyPopulation:enemyIdx
+	next
+
+	returnf population
+
+@getEnemyIdx(level, location)
+#function
+#dim dynamic level
+#dim dynamic location
+#dim dynamic enemyIdx
+#dim dynamic leftover
+
+	leftover = location
+
+	for enemyIdx, level * 100 + 1, level * 100 + 1 + enemiesInLevel(level)
+		leftover -= EnemyPopulation:enemyIdx
+
+		if leftover <= 0
+			returnf enemyIdx
+		endif
+	next
+	
+	returnf -1
+
+@getRandomEnemy(level)
+#function
+#dim dynamic level
+
+	returnf getEnemyIdx(level, RAND:enemyPopulation(level))
+
+@resetEnemiesWithLevel(level)
+#dim dynamic level
+#dim dynamic enemyIdx
+
+	for enemyIdx, level * 100 + 1, level * 100 + 1 + enemiesInLevel(level)
+		EnemyPopulation:enemyIdx = 20
+	next
+
+@resetAllEnemies()
+#dim dynamic levelIdx
+
+	for levelIdx, 1, LevelSize
+		call resetEnemiesWithLevel(levelIdx)
+	next

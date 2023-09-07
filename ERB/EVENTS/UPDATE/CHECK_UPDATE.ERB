@@ -3,6 +3,7 @@
 
 	if LASTLOAD_VERSION < GAMEBASE_VERSION || forceUpdate
 		call updateCsv
+		call resetAllEnemies
 	endif
 
 	if LASTLOAD_VERSION < GAMEBASE_VERSION
@@ -98,4 +99,11 @@
 		call randomizeChara(getChara(2105))
 		call randomizeChara(getChara(2106))
 		call randomizeChara(getChara(2107))
+	endif
+	
+	if LASTLOAD_VERSION < 15
+		printL v0.015
+		printW 몬스터 개체 수가 추가되었습니다
+
+		call resetAllEnemies
 	endif

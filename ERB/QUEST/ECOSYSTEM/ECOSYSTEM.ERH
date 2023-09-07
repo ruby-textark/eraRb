@@ -1,0 +1,4 @@
+﻿#dim const LevelSize = 10
+#dim const EnemySize = 100 * LevelSize
+
+#dim savedata EnemyPopulation, EnemySize

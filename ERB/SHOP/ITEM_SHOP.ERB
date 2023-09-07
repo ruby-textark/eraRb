@@ -4,7 +4,7 @@
 	printFormL [1] - 잡화점
 	printFormL [2] - 장비점
 	printFormL [3] - 도매상
-	; printFormL [4] - 경매장
+	printFormL [4] - 마석 환전소
 	printFormL [0] - 돌아가기
 
 $inputLoop
@@ -16,104 +16,12 @@ $inputLoop
 		call itemShopMenu(1000, 1999)
 	elseif RESULT == 3
 		call wholesale
-	; elseif RESULT == 4
-		; call wholesale
+	elseif RESULT == 4
+		call tradeCenter
 	elseif RESULT == 0
 		return
 	else
 		printFormW 잘못된 입력입니다
 		clearLine 2
 		goto inputLoop
-	endif
-
-	
-@itemShopMenu(startIdx, endIdx)
-#dim dynamic startIdx
-#dim dynamic endIdx
-#dims dynamic itemString
-#dim dynamic showCount
-#dim dynamic itemIdx
-#dim dynamic availableCount
-#dim dynamic buyAmount
-
-$itemLoop
-	showCount = 0
-	clearLine 99999
-	for itemIdx, startIdx, endIdx
-		if itemIdx % 100 == 0
-			continue
-		endif
-
-		if strlens(ITEMNAME:itemIdx) == 0
-			continue
-		endif
-		
-		tryccallform isBuyable{itemIdx}
-			if RESULT == 0
-				continue
-			endif
-		catch
-		endcatch
-		
-		itemString = [{itemIdx}] - %ITEMNAME:itemIdx% ({ITEMPRICE:itemIdx})
-		
-		printFormLC %itemString, 30, LEFT%
-		showCount++
-		if showCount % 4 == 0
-			printL
-		endif
-	next
-
-	printL
-	printL [0] - 돌아가기
-
-	input
-	itemIdx = RESULT
-	
-	if strlens(ITEMNAME:itemIdx) > 0
-		if MONEY >= ITEMPRICE:itemIdx
-			availableCount = MONEY / ITEMPRICE:itemIdx
-			
-			printFormL 구입할 개수를 입력하세요(1-{availableCount})
-			print [0] - 돌아가기 [1] 1개
-
-			if availableCount >= 10
-				print [10] 10개
-			endif
-
-			if availableCount >= 100
-				print [100] 100개
-			endif
-			printFormL [{availableCount}] 전부
-
-$amountLoop
-			input
-			buyAmount = RESULT
-
-			if MONEY < buyAmount * ITEMPRICE:itemIdx
-				printW 돈이 부족합니다
-				goto amountLoop
-			elseif buyAmount > 0
-				MONEY -= buyAmount * ITEMPRICE:itemIdx
-				ITEM:itemIdx += buyAmount
-				
-				printFormW %kr(ITEMNAME:itemIdx, "을", "를")% 구입했습니다
-
-				; 한벌옷은 세트로 구입
-				tryccallform isOnePiece{itemIdx}
-					if RESULT
-						ITEM:RESULT += buyAmount
-						printFormW %kr(ITEMNAME:RESULT, "을", "를")% 구입했습니다
-					endif
-				catch
-				endcatch
-			endif
-		else
-			printW 돈이 부족합니다
-		endif
-		goto itemLoop
-	elseif itemIdx == 0
-		return
-	else
-		goto itemLoop
 	endif

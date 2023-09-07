@@ -15,12 +15,9 @@
 	call initNPC
 
 	; 난이도별 몬스터 
-	for mobIdx, 100, 1000
-		existCsv mobIdx
-		if RESULT
-			FLAG:(100 + (mobIdx / 100) * 10)++
-		endif
-	next
+	call updateCsv
+	
+	call resetAllEnemies
 
 @initNPC
 
