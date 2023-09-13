@@ -75,6 +75,10 @@
 				BASE:MASTER:체력 -= MIN(orgasmCount, 3) * MAXBASE:MASTER:체력 / 50
 			endif
 		endif
+		
+		if (PALAM:MASTER:가슴쾌감 >= orgasmThres || PALAM:MASTER:유두쾌감 >= orgasmThres) || (FLAG:원정중 && FLAG:풍요의계약)
+			call lactate(50 * ( (PALAM:MASTER:가슴쾌감 / orgasmThres) + (PALAM:MASTER:유두쾌감 / orgasmThres) ))
+		endif
 
 		BASE:MASTER:체력 = MAX(BASE:MASTER:체력 - MAXBASE:MASTER:체력 / 20, 0)
 

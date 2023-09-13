@@ -1,7 +1,58 @@
 ﻿@tradeCenter
 
-	print 현재 마석 환율은 
+$tradeLoop
+
+	print 오늘의 마석 환율은 
 	setColor 0x00cc00
 	printForm {FLAG:마석환율}원
 	resetColor
 	printL 입니다.
+
+	printL 어떻게 하시겠습니까?
+	
+	printL [1] - 마석을 현금으로 환금한다
+	printL [2] - 현금을 마석으로 교환한다
+	printL [0] - 거래소를 나간다
+
+	input
+	
+	if RESULT == 1
+
+		printFormL 얼마나 환금하시겠습니까? (보유 마석 수량 : {FLAG:마석}개 / 0개 입력으로 종료)
+		input
+		
+		if 1 <= RESULT && RESULT <= FLAG:마석
+			FLAG:마석 -= RESULT
+			MONEY += FLAG:마석환율 * RESULT
+			
+			printFormW 마석 {RESULT}개를 {FLAG:마석환율 * RESULT}원으로 환금했습니다.
+			
+		elseif RESULT != 0
+			printW 잘못된 입력입니다
+		endif
+		
+		printFormL 다음에 또 이용해주십시오.
+
+	elseif RESULT == 2
+		printFormL 얼마나 교환하시겠습니까? (가능한 최대 개수 : {MONEY / FLAG:마석환율}개 / 0개 입력으로 종료)
+		input
+		
+		if 1 <= RESULT && RESULT <= MONEY / FLAG:마석환율
+			FLAG:마석 += RESULT
+			MONEY -= FLAG:마석환율 * RESULT
+			
+			printFormW {FLAG:마석환율 * RESULT}원을 마석 {RESULT}개로 교환했습니다.
+			
+		elseif RESULT != 0
+			printW 잘못된 입력입니다
+		endif
+		
+		printFormL 다음에 또 이용해주십시오.
+	elseif RESULT == 0
+		return
+	else
+		printW 잘못된 입력입니다
+		clearLine 2
+	endif
+	
+	goto tradeLoop

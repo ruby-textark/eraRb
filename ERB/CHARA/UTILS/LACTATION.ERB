@@ -1,0 +1,18 @@
+﻿@lactate(amount)
+#dim dynamic amount
+#dim dynamic realAmount
+
+	realAmount = min(amount, BASE:MASTER:모유)
+	
+	if realAmount > 0
+		EXP:MASTER:분유경험++
+	endif
+	
+	if FLAG:원정중 && FLAG:풍요의계약
+		printFormW [풍요의 계약Lv{FLAG:풍요의계약}]으로 인해 %CALLNAME:MASTER%의 힘이 모유에 섞여 흩뿌려진다
+		
+		BASE:MASTER:체력 = BASE:MASTER:체력 * (20 - FLAG:풍요의계약) / 20
+		BASE:MASTER:마력 = BASE:MASTER:마력 * (20 - FLAG:풍요의계약) / 20
+	endif
+	
+	call onMasterLactate(amount)
