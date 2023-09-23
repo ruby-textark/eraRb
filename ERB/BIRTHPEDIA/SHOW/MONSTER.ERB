@@ -86,6 +86,15 @@ $showLoop
 				fontItalic
 				printFormL %RESULTS:0%
 				fontRegular
+				
+				setColor 0x77cccc
+				printFormL 출현 확률 {100 * EnemyPopulation:monsterIdx / enemyPopulation(monsterLevel)}\%
+				resetColor
+				
+				if EnemyPopulation:monsterIdx > enemyPopulation(monsterLevel) / 5
+					printFormL (최근 이 적이 대량으로 목격된다는 보고가 있습니다)
+				endif
+
 				setColor 0xcc00cc
 				printFormL %RESULTS:1%
 				resetColor
