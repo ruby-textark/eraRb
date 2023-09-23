@@ -13,18 +13,21 @@
 	addChara 1001
 	addChara 1002
 	addChara 1003
-
+	
 	call initNPC
 
-	; 난이도별 몬스터 
+	; CSV 값 수정
 	call updateCsv
 	
 	call resetAllEnemies
 
 @initNPC
 
-	; 떠돌이 상인: 2001
+	; 떠돌이 상인
 	call addNpcIfNotExists(2001)
+	
+	; 성당의 수녀
+	call addNpcIfNotExists(2002)
 
 	; 신체거래 브로커
 	call addNpcIfNotExists(2100)

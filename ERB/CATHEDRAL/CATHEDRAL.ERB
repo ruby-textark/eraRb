@@ -15,7 +15,11 @@ $processInput
 	printL
 	printL [1] - 기도한다
 	printL [2] - 봉헌한다
-	printL [3] - 나가기
+	
+	if !TALENT:MASTER:피임결계
+		printL [3] - 피임결계를 받는다
+	endif
+	printL [0] - 나가기
 
 	input
 
@@ -24,6 +28,8 @@ $processInput
 	elseif RESULT == 2
 		call dedicate
 	elseif RESULT == 3
+		call contraBarrier
+	elseif RESULT == 0
 		return
 	else
 		printW 잘못된 입력입니다

@@ -2,6 +2,7 @@
 #dim dynamic forceUpdate
 
 	if LASTLOAD_VERSION < GAMEBASE_VERSION || forceUpdate
+		call initNPC
 		call updateCsv
 		call resetAllEnemies
 	endif

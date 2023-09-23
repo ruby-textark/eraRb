@@ -16,6 +16,9 @@ $inputLoop
 	
 	if RESULT == 0
 		printW 별로 마음에 들지 않는다. 이 가격에 사기에는 아쉬운 것들뿐.
+		
+		call speakNPCW(2001, "그래? 뭐 좋아. 다음에 보자고.")
+		return
 	elseif RESULT == 1
 		if FLAG:마석 >= labyrinthMerchantPrice("약초", 20)
 			FLAG:마석 -= labyrinthMerchantPrice("약초", 20)

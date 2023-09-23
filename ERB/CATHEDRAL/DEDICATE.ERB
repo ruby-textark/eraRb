@@ -13,6 +13,7 @@ $inputLoop
 
 	if 1000 <= RESULT && RESULT <= MONEY
 		CFLAG:MASTER:신앙심 += MIN(RESULT / 1000, 1 + RESULT * 50 / MONEY)
+		CFLAG:MASTER:카르마++
 		MONEY -= RESULT
 	elseif RESULT == 0
 		return
