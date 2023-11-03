@@ -4,6 +4,9 @@
 	printFormL 하루가 끝났습니다
 
 	DAY++
+	if FLAG:장기숙박 > 0
+		FLAG:장기숙박 -= 1
+	endif
 	
 	call updateExchangeRate
 
@@ -25,5 +28,7 @@
 	call wakeupMaster
 
 	call relax
+	
+	FLAG:여관숙박 = 0
 
 	begin shop

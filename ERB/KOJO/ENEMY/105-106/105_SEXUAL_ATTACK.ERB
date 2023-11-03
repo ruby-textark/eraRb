@@ -1,18 +1,16 @@
 ﻿@c105ClothDestroy
 #dim dynamic equipSlotIdx
-#dim dynamic breakableEquipCount
-#dim dynamic breakableEquips, 10
 
 	for equipSlotIdx, 11, 19
 		if equipSlotIdx != 16 && EQUIP:MASTER:equipSlotIdx != 0
-			breakableEquips:(breakableEquipCount++) = equipSlotIdx
+			callf pushShuffle(equipSlotIdx, 1)
 		endif
 	next
 
-	if breakableEquipCount
+	if !isShuffleEmpty()
 		printFormL %kr(NAME:TARGET, "은", "는")% 거칠게 %CALLNAME:MASTER%의 옷을 벗겼다
 		printFormL 해제된 장비는 이번 전투 중에서는 사용할 수 없을 것 같다...
-		call unequipMasterEquips(breakableEquips:(RAND:breakableEquipCount))
+		call unequipMasterEquips(popShuffle())
 		
 		return 1
 	endif

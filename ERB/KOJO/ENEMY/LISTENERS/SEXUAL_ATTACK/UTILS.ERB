@@ -58,8 +58,6 @@
 @getSexualAtkBodyPart
 #function
 #dim dynamic partIdx
-#dim dynamic partsCount
-#dim dynamic availableParts, 100
 
 	; 높은 확률로 이전 턴 부위를 따라감
 	if TCVAR:TARGET:성희롱부위 && isAttackableBodyPart(TCVAR:TARGET:성희롱부위)
@@ -73,20 +71,17 @@
 		returnf TCVAR:TARGET:성희롱부위
 	endif
 
-	partsCount = 0
 	for partIdx, 101, 200
 		if isAttackableBodyPart(partIdx)
-			availableParts:(partsCount++) = partIdx
+			callf pushShuffle(partIdx, 1)
 		endif
 	next
 
-	returnf availableParts:(RAND:partsCount)
+	returnf popShuffle()
 
 @getOrdinarySexualAtkBodyPart
 #function
 #dim dynamic partIdx
-#dim dynamic partsCount
-#dim dynamic availableParts, 100
 
 	; 높은 확률로 이전 턴 부위를 따라감
 	if TCVAR:TARGET:성희롱부위 && isAttackableBodyPart(TCVAR:TARGET:성희롱부위)
@@ -100,15 +95,14 @@
 		returnf TCVAR:TARGET:성희롱부위
 	endif
 
-	partsCount = 0
 	for partIdx, 101, 200
 		if !isOrdinaryPart(partIdx)
 			continue
 		endif
 
 		if isAttackableBodyPart(partIdx)
-			availableParts:(partsCount++) = partIdx
+			callf pushShuffle(partIdx, 1)
 		endif
 	next
 
-	returnf availableParts:(RAND:partsCount)
+	returnf popShuffle()

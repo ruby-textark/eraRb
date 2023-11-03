@@ -35,8 +35,6 @@
 
 @relaxMasturbation
 #dim dynamic partIdx
-#dim dynamic availableParts
-#dim dynamic availableCount
 
 	for partIdx, 101, 200
 		if !isOrdinaryPart(partIdx)
@@ -44,15 +42,15 @@
 		endif
 		
 		if PALAM:MASTER:partIdx > masterOrgasmThres() / 2
-			availableParts:(availableCount++) = partIdx
+			callf pushShuffle(partIdx, 1)
 		endif
 	next
 	
-	if !availableCount
+	if isShuffleEmpty()
 		return
 	endif
 	
-	partIdx = availableParts:(RAND:availableCount)
+	partIdx = popShuffle()
 	
 	if RAND:3 == 0
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "이", "가")% 달아올라 자위를 시작했다
@@ -60,7 +58,7 @@
 		if isHole(partIdx)
 			printFormW 해소되지 않은 욕망에 패배한 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "을", "를")% 쑤시며 자위를 시작했다
 		else
-			printFormW 해소되지 않은 욕망에 패배한 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "을", "를")% 만지작거리며 자위를 시작했다
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 몽글몽글하게 퍼져나가는 쾌감에 빠져 %kr(partStrRaw(partIdx), "을", "를")% 만지작거리며 스스로를 위로하기 시작했다
 		endif
 	else
 		printFormW 인내심이 떨어진 %kr(CALLNAME:MASTER, "은", "는")% %kr(partStrRaw(partIdx), "으로", "로")% 자위하기 시작했다

@@ -1,21 +1,18 @@
 ﻿@c103Parasite
 #dim dynamic parasiteIdx
-#dim dynamic partsCount
 #dim dynamic attackedIdx
-#dim dynamic availableParts, 100
 
-	partsCount = 0
 	for parasiteIdx, 101, 200
 		if strlens(CFLAGNAME:(200 + parasiteIdx)) && !isParasiteInside(parasiteIdx) && isAttackableBodyPart(parasiteIdx) && isHole(parasiteIdx)
-			availableParts:(partsCount++) = parasiteIdx
+			callf pushShuffle(parasiteIdx, 1)
 		endif
 	next
 	
-	if !partsCount
+	if isShuffleEmpty()
 		return 0
 	endif
 	
-	attackedIdx = availableParts:(RAND:partsCount)
+	attackedIdx = popShuffle()
 	TFLAG:이번턴성공격 = attackedIdx
 	
 	printFormL %kr(NAME:TARGET, "이", "가")% 꾸물거리며 %CALLNAME:MASTER%의 %partStr(attackedIdx)% 안으로 기어들어간다

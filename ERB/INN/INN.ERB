@@ -1,0 +1,62 @@
+﻿@inn
+
+	printL
+	printL 여관에 도착했다.
+	printL 여정의 피로를 푸는 이들과, 사람이 적은 틈을 타 한 몫 챙기려 미궁으로 출발하는 이들이 한데 모여 꽤 혼잡한 모습을 연출하고 있다.
+
+	print [1] - 숙박한다(
+	if FLAG:장기숙박
+		printForm 장기 숙박 {FLAG:장기숙박}일 남음
+	else
+		print \2000 지불
+	endif
+	printL )
+	printL [2] - 장기 숙박한다(\10000 선지불, 6박 연속 이용 가능)
+	printL [0] - 나가기
+
+$inputLoop
+
+	input
+
+	if RESULT == 1
+		if FLAG:장기숙박 > 0
+			printW 장기 숙박을 선결제해서 무료로 이용할 수 있다
+		elseif MONEY >= 2000
+			MONEY -= 2000
+			printW \\2000원 지불했다
+		else
+			printFormW 하지만 돈이 부족하다...(현재 \\{MONEY}원)
+			clearLine 2
+			goto inputLoop
+		endif
+		
+		call innSleep
+		return 1
+	elseif RESULT == 2
+		if MONEY >= 10000
+			MONEY -= 10000
+			FLAG:장기숙박 = 6
+		else
+			printFormW 하지만 돈이 부족하다...(현재 \\{MONEY}원)
+			clearLine 2
+		endif
+	elseif RESULT == 0
+		return 0
+	else
+		printW 잘못된 입력입니다
+		clearLine 2
+	endif
+	
+	goto inputLoop
+
+	return 1
+
+@innSleep
+
+	FLAG:여관숙박 = 0
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 푹 쉬었다
+
+	BASE:MASTER:체력 = MAXBASE:MASTER:체력
+	BASE:MASTER:마력 = MAXBASE:MASTER:마력
+
+	begin turnend

@@ -1,0 +1,37 @@
+﻿@c302onEnemyTurn
+
+	; todo 여기랑 onEnemyDown 쌍으로 맞춰서 처리
+	if TCVAR:TARGET:10 == 0
+		if ABL:MASTER:전투기술 > 4
+			if EXP:MASTER:전투경험 > 200
+				call speak(TARGET, "그대는 뛰어난 전사로군. 부디 나의 일검을 받아주게나.")
+				TCVAR:TARGET:10 = 1
+			else
+				call speak(TARGET, "기세가 대단하군. 허나 타고난 힘에 휘둘리는 애송이로구나.")
+				call speak(TARGET, "아이야, 그 힘을 제대로 휘둘러 본 적은 있느냐?")
+				TCVAR:TARGET:10 = 2
+			endif
+		endif
+	endif
+
+	; 같은 위치에 있는 경우
+	if isMasterInRange()
+		if RAND:100 < CFLAG:TARGET:성공격빈도
+			TFLAG:이번턴성공격 = 1
+			tryccallform c{CFLAG:TARGET:캐릭터번호}onSexualAttack
+				;
+			catch
+				call fallbackOnSexualAttack
+			endcatch
+		else
+			TFLAG:이번턴성공격 = 0
+			tryccallform c{CFLAG:TARGET:캐릭터번호}onNormalAttack
+				;
+			catch
+				call fallbackOnNormalAttack
+			endcatch
+		endif
+	; 다른 위치에 있을 경우
+	else
+		call processMoveEnemy
+	endif

@@ -1,0 +1,4 @@
+﻿#dim const ShuffleSizeMax = 10000
+
+#dim savedata ShufflePtr
+#dim savedata ShuffleCandidate, ShuffleSizeMax

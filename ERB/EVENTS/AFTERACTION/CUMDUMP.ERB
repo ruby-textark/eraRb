@@ -4,8 +4,6 @@
 #dim dynamic reportCount
 #dims dynamic reports, 100
 #dim dynamic equipSlotIdx
-#dim dynamic breakableEquipCount
-#dim dynamic breakableEquips, 10
 
 	if !FLAG:육변기형시작일
 		return
@@ -157,16 +155,15 @@
 		endif
 		
 		if RAND:3 == 0
-			breakableEquipCount = 0
 			for equipSlotIdx, 11, 19
 				if equipSlotIdx != 16 && EQUIP:MASTER:equipSlotIdx != 0
-					breakableEquips:(breakableEquipCount++) = equipSlotIdx
+					callf pushShuffle(equipSlotIdx, 1)
 				endif
 			next
 
-			if breakableEquipCount
+			if !isShuffleEmpty()
 				printFormW 검은 손이 등 뒤에서 나타나, 순간 %CALLNAME:MASTER%의 옷을 벗겨버렸다!
-				call unequipMasterEquips(breakableEquips:(RAND:breakableEquipCount))
+				call unequipMasterEquips(popShuffle())
 			endif
 		endif
 		

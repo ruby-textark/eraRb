@@ -68,11 +68,11 @@
 	if FLAG:원정중
 		setColor 0x777777
 	endif
-	printLC [900] - 눈을 붙인다
+	printLC [900] - 노숙한다
 	resetColor
 
-	if !isMasterFree() || MONEY < 2000 || FLAG:원정중
+	if !isMasterFree() || FLAG:원정중
 		setColor 0x777777
 	endif
-	printLC [901] - 푹 쉰다(\2000 소모)
+	printLC [901] - 여관으로
 	resetColor

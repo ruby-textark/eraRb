@@ -2,7 +2,7 @@
 #dim dynamic npcPage
 #dim dynamic npcIdx
 
-	npcPage = 1
+	npcPage = 0
 
 $showLoop
 
@@ -78,5 +78,5 @@ $showLoop
 		clearLine 2
 	endif
 	
-	npcPage = limit(npcPage, 1, 9)
+	npcPage = limit(npcPage, 0, 9)
 	goto showLoop

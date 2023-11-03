@@ -1,0 +1,28 @@
+﻿
+@pushShuffle(value, weight)
+#function
+#dim dynamic value
+#dim dynamic weight
+
+	repeat weight
+		ShuffleCandidate:(ShufflePtr++) = value
+	rend
+
+@popShuffle()
+#function
+#dim dynamic peekResult
+
+	peekResult = peekShuffle()
+	ShufflePtr = 0
+	
+	returnf peekResult
+
+@peekShuffle()
+#function
+
+	returnf ShuffleCandidate:(RAND:ShufflePtr)
+
+@isShuffleEmpty()
+#function
+
+	returnf ShufflePtr == 0

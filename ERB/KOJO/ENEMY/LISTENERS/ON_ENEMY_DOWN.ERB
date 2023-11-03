@@ -1,0 +1,42 @@
+﻿@onEnemyDown
+#dim dynamic mobDrop
+
+	if CFLAG:TARGET:캐릭터번호 == FLAG:퀘스트대상
+		call stepQuest
+	endif
+	
+	; Looting
+	mobDrop = CFLAG:TARGET:드랍골드최소
+	if CFLAG:TARGET:드랍골드최소 > CFLAG:TARGET:드랍골드최대
+		mobDrop += RAND:(CFLAG:TARGET:드랍골드최대 - CFLAG:TARGET:드랍골드최소)
+	endif
+
+	printFormL 돈을 {mobDrop}원 주웠다
+	MONEY += mobDrop
+	
+	mobDrop = CFLAG:TARGET:드랍마석최소
+	if CFLAG:TARGET:드랍마석최대 > CFLAG:TARGET:드랍마석최소
+		mobDrop += RAND:(CFLAG:TARGET:드랍마석최대 - CFLAG:TARGET:드랍마석최소)
+	endif
+
+	mobDrop = mobDrop * FLAG:계약배율 / 100
+	printFormL 마석을 {mobDrop}개 주웠다
+	FLAG:마석 += mobDrop
+	
+	mobDrop = 1 + RAND:(3 * (CFLAG:TARGET:레어드랍 + 1))
+	if mobDrop == 1 && CFLAG:TARGET:드랍재료1 > 0
+		ITEM:(CFLAG:TARGET:드랍재료1) += 1
+		printFormL %kr(ITEMNAME:(CFLAG:TARGET:드랍재료1), "을", "를")% 얻었다
+	elseif mobDrop == 2 && CFLAG:TARGET:드랍재료2 > 0
+		ITEM:(CFLAG:TARGET:드랍재료2) += 1
+		printFormL %kr(ITEMNAME:(CFLAG:TARGET:드랍재료2), "을", "를")% 얻었다
+	elseif mobDrop == 3 && CFLAG:TARGET:드랍재료3 > 0
+		ITEM:(CFLAG:TARGET:드랍재료3) += 1
+		printFormL %kr(ITEMNAME:(CFLAG:TARGET:드랍재료3), "을", "를")% 얻었다
+	endif
+
+	tryccallform c{CFLAG:TARGET:캐릭터번호}onEnemyDown
+		;
+	catch
+		call fallbackOnEnemyDown
+	endcatch
