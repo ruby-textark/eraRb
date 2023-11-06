@@ -2,6 +2,7 @@
 ; TCVAR:TARGET:10 = 대사용(사용x)
 ; TCVAR:TARGET:11 = 돌진
 ; TCVAR:TARGET:12 = 투혼
+; TCVAR:TARGET:13 = 황혼
 @c302onNormalAttack
 #dim dynamic damageBase
 
@@ -16,12 +17,12 @@
 		TCVAR:TARGET:상하 = TCVAR:MASTER:상하
 		TCVAR:TARGET:좌우 = TCVAR:MASTER:좌우
 
-		damageBase = 10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER) / 2)
+		damageBase = 10 * MAX(1, getActualAtk(TARGET) * 2 - getActualDef(MASTER))
 		LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
 
 		TCVAR:TARGET:11 = 2
 	
-	elseif BASE:TARGET:체력 < MAXBASE:TARGET:체력 / 3 && TCVAR:TARGET:12 == 0
+	elseif BASE:TARGET:체력 < MAXBASE:TARGET:체력 / 2 && TCVAR:TARGET:12 == 0
 		call speak(TARGET, "훌륭하군.")
 		printFormL %kr(NAME:TARGET, "이", "가")% 검은 마력을 퍼뜨린다.
 		printFormL %NAME:TARGET%의 투혼

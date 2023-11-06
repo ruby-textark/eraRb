@@ -1,0 +1,36 @@
+﻿@showLabyrinthFloor
+	
+	fontBold
+	if FLAG:미궁위치 == 1
+		setColor 0x77cc77
+		print 미궁의 입구
+	elseif FLAG:미궁위치 == 2
+		setColor 0x22cc44
+		print 미궁의 상층부
+	elseif FLAG:미궁위치 == 3
+		setColor 0xcc44cc
+		print 미궁의 중층부
+	elseif FLAG:미궁위치 == 4
+		setColor 0x770077
+		print 미궁의 하층부
+	elseif FLAG:미궁위치 >= 5
+		setColor 0x770000
+		print 미궁의 심층부
+	endif
+	fontRegular
+	resetColor
+	
+@labyrinthFloorText
+#functions
+
+	if FLAG:미궁위치 == 1
+		returnf "미궁의 입구"
+	elseif FLAG:미궁위치 == 2
+		returnf "미궁의 상층부"
+	elseif FLAG:미궁위치 == 3
+		returnf "미궁의 중층부"
+	elseif FLAG:미궁위치 == 4
+		returnf "미궁의 하층부"
+	elseif FLAG:미궁위치 >= 5
+		returnf "미궁의 심층부"
+	endif

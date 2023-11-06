@@ -49,11 +49,15 @@
 	actualAtk += ABL:charaIdx:전투기술 * 10
 
 	; 쾌락치 90% 이상 1부위당 공격력 +5%
-
 	orgasmParts = 0
-	orgasmThres = masterOrgasmThres()
+	
+	orgasmThres = 10000
+	if charaIdx == MASTER
+		orgasmThres = masterOrgasmThres()
+	endif
+	
 	for partIdx, 101, 200
-		if PALAM:MASTER:partIdx > (orgasmThres * 9 / 10)
+		if PALAM:charaIdx:partIdx > (orgasmThres * 9 / 10)
 			orgasmParts++
 		endif
 	next
@@ -79,11 +83,15 @@
 	actualDef += ABL:charaIdx:전투기술 * 2
 
 	; 쾌락치 90% 이상 1부위당 방어력 -5%
-
 	orgasmParts = 0
-	orgasmThres = masterOrgasmThres()
+	
+	orgasmThres = 10000
+	if charaIdx == MASTER
+		orgasmThres = masterOrgasmThres()
+	endif
+	
 	for partIdx, 101, 200
-		if PALAM:MASTER:partIdx > (orgasmThres * 9 / 10)
+		if PALAM:charaIdx:partIdx > (orgasmThres * 9 / 10)
 			orgasmParts++
 		endif
 	next

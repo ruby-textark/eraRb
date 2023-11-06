@@ -1,36 +1,53 @@
 ﻿@c302onEnemyTurn
+#dim dynamic damageBase
 
 	; todo 이곳과 onEnemyDown 쌍으로 맞춰서 처리
 	if TCVAR:TARGET:10 == 0
 		if ABL:MASTER:전투기술 > 4
 			if EXP:MASTER:전투경험 > 200
-				call speak(TARGET, "그대는 뛰어난 전사로군. 부디 나의 일검을 받아주게나.")
-				TCVAR:TARGET:10 = 1
+				callf pushShuffle(1, 1)
 			else
-				call speak(TARGET, "기세가 대단하군. 허나 타고난 힘에 휘둘리는 애송이로구나.")
-				call speak(TARGET, "아이야, 그 힘을 제대로 휘둘러 본 적은 있느냐?")
-				TCVAR:TARGET:10 = 2
+				callf pushShuffle(2, 1)
+			endif
+		else
+			if EXP:MASTER:전투경험 > 200
+				callf pushShuffle(3, 1)
+			else
+				callf pushShuffle(4, 1)
 			endif
 		endif
+		
+		TCVAR:TARGET:10 = popShuffle()
+		
+		if TCVAR:TARGET:10 == 1
+			call speak(TARGET, "그대는 뛰어난 전사로군. 부디 나의 일검을 받아주게나.")
+		elseif TCVAR:TARGET:10 == 2
+			call speak(TARGET, "기세가 대단하군. 허나 타고난 힘에 휘둘리는 애송이로구나.")
+			call speak(TARGET, "아이야, 그 힘을 제대로 휘둘러 본 적은 있느냐?")
+		elseif TCVAR:TARGET:10 == 3
+			call speak(TARGET, "안타깝구나. 그대의 걸음에서 이룩한 업이 보인다.")
+			call speak(TARGET, "비록 보잘것없는 검기를 가졌으나, 잘 보고 따르도록 하게. 필히 얻는 것이 있을 터.")
+		elseif TCVAR:TARGET:10 == 4
+			call speak(TARGET, "이거 원, 완전히 풋내기가 아닌가.")
+			call speak(TARGET, "이곳까지 온 것을 보니, 운이 좋은가 보군. 나를 만난 이상 꼭 그렇지만도 않게 되겠지만.")
+		endif
+	endif
+	
+	if BASE:TARGET:체력 < MAXBASE:TARGET:체력 / 4 && TCVAR:TARGET:13 == 0
+		call speak(TARGET, "보여주겠네. 볼품없는 검에도, 의지를 담을 수 있다는 것을.")
+		printFormL %kr(NAME:TARGET, "이", "가")% 검을 치켜들었다.
+		printFormL %NAME:TARGET%의 황혼
+		
+		damageBase = 10 * MAX(1, getActualAtk(TARGET))
+		LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+		
+		TCVAR:TARGET:13 = 1
+		return
 	endif
 
 	; 같은 위치에 있는 경우
 	if isMasterInRange()
-		if RAND:100 < CFLAG:TARGET:성공격빈도
-			TFLAG:이번턴성공격 = 1
-			tryccallform c{CFLAG:TARGET:캐릭터번호}onSexualAttack
-				;
-			catch
-				call fallbackOnSexualAttack
-			endcatch
-		else
-			TFLAG:이번턴성공격 = 0
-			tryccallform c{CFLAG:TARGET:캐릭터번호}onNormalAttack
-				;
-			catch
-				call fallbackOnNormalAttack
-			endcatch
-		endif
+		call c302onNormalAttack
 	; 다른 위치에 있을 경우
 	else
 		call processMoveEnemy

@@ -5,7 +5,12 @@
 
 	FLAG:원정중 = 1
 	FLAG:미궁위치 = 1
+	FLAG:미궁상층발견 = 1
+	FLAG:미궁하층발견 = 0
 	
+	printFormL {FLAG:미궁상층발견}:{FLAG:미궁하층발견}
+	drawLine
+
 	call initCharFlags
 	call initContracts
 	

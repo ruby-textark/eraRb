@@ -12,25 +12,7 @@
 
 	print (현재 위치 : 
 	
-	fontBold
-	if FLAG:미궁위치 == 1
-		setColor 0x77cc77
-		print 미궁의 입구
-	elseif FLAG:미궁위치 == 2
-		setColor 0x22cc44
-		print 미궁의 상층부
-	elseif FLAG:미궁위치 == 3
-		setColor 0xcc44cc
-		print 미궁의 중층부
-	elseif FLAG:미궁위치 == 4
-		setColor 0x770077
-		print 미궁의 하층부
-	elseif FLAG:미궁위치 >= 5
-		setColor 0x770000
-		print 미궁의 심층부
-	endif
-	fontRegular
-	resetColor
+	call showLabyrinthFloor()
 	
 	printL )
 	
@@ -42,14 +24,27 @@
 	printFormL 마력 : %RESULTS% ({BASE:MASTER:마력}/{MAXBASE:MASTER:마력})
 	drawLine
 	
-	printL
-	printLC [0] - 미궁을 빠져나간다
-	printLC [1] - 주변을 탐색한다
+	printFormL {FLAG:미궁상층발견}:{FLAG:미궁하층발견}
+	drawLine
 	
-	if FLAG:미궁위치 > 2
+	printL
+	
+	if !FLAG:미궁상층발견
 		setColor 0x777777
 	endif
-	printLC [2] - 더 깊은 곳으로 나아간다
+	if FLAG:미궁위치 == 1
+		printLC [0] - 탐사를 종료한다
+	else
+		printLC [0] - 상층으로 이동한다
+	endif
+	resetColor
+
+	printLC [1] - 주변을 탐색한다
+	
+	if !FLAG:미궁하층발견
+		setColor 0x777777
+	endif
+	printLC [2] - 하층으로 나아간다
 	resetColor
 	printL
 	
@@ -59,20 +54,45 @@
 @continueExpeditionHandleResult
 	
 	if RESULT == 0
+		if !FLAG:미궁상층발견
+			printW 미궁의 상층으로 가는 길을 발견하지 못했습니다
+			return 0
+		endif
+
 		if FLAG:미궁위치 == 1
 			FLAG:원정중 = 0
+
+			printW 원정을 종료합니다
+
 			begin shop
 		else
 			FLAG:미궁위치 -= 1
+			FLAG:미궁상층발견 = 0
+			FLAG:미궁하층발견 = 1
+			FLAG:미궁현재층탐색수 = 0
+
+			call showLabyrinthFloor()
+			printFormW %krPost(labyrinthFloorText(), "으로", "로")% 이동했다
 		endif
 	elseif RESULT == 1
 		; nop
 		call expedition
 	elseif RESULT == 2
+		if !FLAG:미궁하층발견
+			printW 아직 미궁의 하층으로 가는 길을 발견하지 못했습니다
+			return 0
+		endif
+
 		if FLAG:미궁위치 == 3
 			call bossBattle
 		else
 			FLAG:미궁위치 += 1
+			FLAG:미궁상층발견 = 1
+			FLAG:미궁하층발견 = 0
+			FLAG:미궁현재층탐색수 = 0
+			
+			call showLabyrinthFloor()
+			printFormW %krPost(labyrinthFloorText(), "으로", "로")% 이동했다
 		endif
 	elseif RESULT == 3
 		; 계약 체결은 턴 소모 없음
