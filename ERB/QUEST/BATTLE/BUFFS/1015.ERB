@@ -6,7 +6,7 @@
 @progressBuff1015(charaIdx)
 #dim dynamic charaIdx
 
-	BASE:charaIdx:체력 += MAXBASE:charaIdx:체력 / 40
+	BASE:charaIdx:체력 = LIMIT(BASE:charaIdx:체력 + MAXBASE:charaIdx:체력 / 40, 0, MAXBASE:charaIdx:체력)
 
 @offBuff1015(charaIdx)
 #dim dynamic charaIdx

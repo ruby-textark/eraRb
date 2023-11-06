@@ -19,20 +19,20 @@ $inputLoop
 	input
 
 	if RESULT == 1 && CFLAG:MASTER:신앙심 >= requiredFaith
-		call speakNPCW(2002, "알겠습니다. 잠시만 기다려 주시지요.")
+		call speakNPC(2002, "알겠습니다. 잠시만 기다려 주시지요.")
 		
 		CFLAG:MASTER:신앙심 -= requiredFaith
 		CFLAG:MASTER:카르마--
 		call getTalent("피임결계")
 
-		call speakNPCW(2002, "다만 주의하십시오. 만일 그대가 이 힘에 빠져 쾌락만을 좇게 된다면, 저는 감히 그런 모습을 두고 보고만 있지는 않을 것입니다.")
+		call speakNPC(2002, "다만 주의하십시오. 만일 그대가 이 힘에 빠져 쾌락만을 좇게 된다면, 저는 감히 그런 모습을 두고 보고만 있지는 않을 것입니다.")
 		return
 	elseif RESULT == 1 && CFLAG:MASTER:신앙심 < requiredFaith
-		call speakNPCW(2002, "허나, 그대의 행적에 비추어 보건대, 다시 타락에 빠지는 미래가 눈에 선합니다. 선업을 쌓으려는 노력을 하지 않는 자에게는 허할 수 없습니다.")
+		call speakNPC(2002, "허나, 그대의 행적에 비추어 보건대, 다시 타락에 빠지는 미래가 눈에 선합니다. 선업을 쌓으려는 노력을 하지 않는 자에게는 허할 수 없습니다.")
 		
 		return
 	elseif RESULT == 0
-		call speakNPCW(2002, "좋습니다. 그대의 앞길이 뜻대로 되기를.")
+		call speakNPC(2002, "좋습니다. 그대의 앞길이 뜻대로 되기를.")
 		
 		return
 	else

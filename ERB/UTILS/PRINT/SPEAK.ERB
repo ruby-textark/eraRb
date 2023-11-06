@@ -3,6 +3,13 @@
 #dims dynamic string
 
 	setColor CFLAG:charaIdx:대사색상
+
+	if charaIdx == MASTER
+		printForm %NAME:MASTER% : 
+	else
+		printForm %CALLNAME:charaIdx% %NAME:charaIdx% : 
+	endif
+
 	printFormW %string%
 	resetColor
 
@@ -12,21 +19,8 @@
 @speakNPC(npcNo, string)
 #dim dynamic npcNo
 #dims dynamic string
-#dim dynamic charaIdx
-
-	charaIdx = getChara(npcNo)
 	
-	call speak(charaIdx, @"%CALLNAME:charaIdx% %NAME:charaIdx% : %string%")
-
-	; RESULT sideeffect때문에
-	return RESULT
-
-@speakNPCW(npcNo, string)
-#dim dynamic npcNo
-#dims dynamic string
-
-	call speakNPC(npcNo, string)
-	wait
+	call speak(getChara(npcNo), string)
 
 	; RESULT sideeffect때문에
 	return RESULT
