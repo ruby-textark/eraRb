@@ -2,30 +2,37 @@
 #dim dynamic partIdx
 #dim dynamic sexLogIdx
 
-	; todo 여기 끝낼것
-
 	; 최근 5회 내의 성교 경험을 떠올리며
 	if !RAND:3 && (partIdx == 121 || partIdx == 122)
 		sexLogIdx = ((SexLogPtr + SexLogSize - (1 + RAND:5)) % SexLogSize)
 
 		if SexLogAmount:sexLogIdx > 0
+			if SexLogUnwanted:sexLogIdx == 0
+				printFormW %kr(NAME:MASTER, "은", "는")% %SexLogName:sexLogIdx%에게 강제로 당했던 기억을 떠올렸다.
+				if CFLAG:MASTER:성격 == 3 || CFLAG:MASTER:성격 == 5
+					printFormW 아직도 그 순간만 생각하면 화가 나서 몸이 떨릴 지경이었지만, 그 떨림은 온전히 분노만으로 가득한 것은 아니었다.
+					printFormW 치욕 속에서 피어난 한 줄기 욕망이, %kr(NAME:MASTER, "을", "를")% 옥죄어 타락의 늪으로 빠뜨리려 했다.
+					printFormW %kr(NAME:MASTER, "은", "는")% 조용히 이를 갈며 자위하기 시작했다.
+				else
+					printFormW 트라우마를 떠올린 탓으로 %kr(NAME:MASTER, "은", "는")% 저절로 몸이 움츠러들었다.
+					call speak(MASTER, "안돼... 생각하면 안 돼...")
+					printFormW 하지만 떠올리지 않으려는 생각은 오히려 그 순간의 기억을 더욱 강렬하게 만들 뿐이었고, 동시에 부정하고 있던 폭력적인 쾌감이 %NAME:MASTER%의 머릿속을 헤집어놓기 시작했다.
+					printFormW 두려움에 몸을 떨면서도, %kr(NAME:MASTER, "은", "는")% 무의식중에 자위를 시작했다.
+				endif
+			else
+				; todo 여기도 성격 or 태생별로 추가할것
+				printFormW %kr(NAME:MASTER, "은", "는")% %kr(SexLogName:sexLogIdx, "과", "와")%의 정사를 떠올리며 자위하기 시작했다.
+			endif
 		endif
 	; 개발된 부위일 경우
 	elseif !RAND:3 && ABL:MASTER:partIdx > 3
-	
-		printFormW %kr(NAME:MASTER, "은", "는")% %partStrRaw(partIdx)%에
-	
-	; 유두자위
-	elseif !RAND:3 && (partIdx == 113)
-		if ABL:MASTER:유두감도 > 3
-			if RAND:3 == 0
-				printFormW 이미 추잡하게 개발된 %kr(partStrRaw(partIdx), "으로", "로")% 손가락을 갖다대자마자 그 꼭지부터 퍼지는 짜릿한 감각이 %kr(NAME:MASTER, "을", "를")% 미치게 만든다.
-			elseif RAND:2 == 0
-				printFormW %kr(NAME:MASTER, "은", "는")% 입을 반쯤 벌린 채 오직 %kr(partStrRaw(partIdx), "을", "를")% 양손가락으로 간질이며 음락의 파도 속을 헤어나오지 못하고 있다.
-			endif
+		if RAND:2 == 0
+			printFormW 이미 추잡하게 개발된 %kr(partStrRaw(partIdx), "으로", "로")% 손가락을 갖다대자마자 퍼지는 짜릿한 감각이 %kr(NAME:MASTER, "을", "를")% 미치게 만든다.
+		else
+			printFormW %kr(NAME:MASTER, "은", "는")% 입을 반쯤 벌린 채 오직 %kr(partStrRaw(partIdx), "을", "를")% 양손가락으로 간질이며 음락의 파도 속을 헤어나오지 못하고 있다.
 		endif
-	; 애널자위
-	elseif !RAND:3 && (partIdx == 123)
+	else
+		printFormW %kr(NAME:MASTER, "은", "는")% %partStrRaw(partIdx)%에 떨리는 손가락을 가져다대고는 스스로를 위로하기 시작했다.
 	endif
 
 	if RAND:3 == 0
@@ -54,9 +61,10 @@
 			endif
 		elseif CFLAG:MASTER:태생 == 3
 			if RAND:3 == 0
-				call speak(MASTER, "으응, 조금은 괜찮겠지?")
+				call speak(MASTER, "으응, 조금은 괜찮겠지.")
 			elseif RAND:2 == 0
-				call speak(MASTER, "으응, 조금은 괜찮겠지?")
+				call speak(MASTER, "♥... !!")
+				printFormW 말로 빚어지지 않는 교성을 흘린 %kr(NAME:MASTER, "은", "는")% 몸을 배배 꼬면서 자위에 열중했다.
 			endif
 		elseif CFLAG:MASTER:태생 == 4
 			if ABL:MASTER:자위중독 < 3 && RAND:3 == 0
@@ -96,16 +104,17 @@
 			endif
 		endif
 	else
+		; todo 여기 추가할것
 		if CFLAG:MASTER:성격 == 1
 			call speak(MASTER, "뭔가, 이렇게 만지면 기분이 좋아지네요")
 		elseif CFLAG:MASTER:성격 == 2
-			call speak(MASTER, "")
+			; call speak(MASTER, "")
 		elseif CFLAG:MASTER:성격 == 3
-			call speak(MASTER, "")
+			; call speak(MASTER, "")
 		elseif CFLAG:MASTER:성격 == 4
-			call speak(MASTER, "")
+			; call speak(MASTER, "")
 		elseif CFLAG:MASTER:성격 == 5
-			call speak(MASTER, "")
+			; call speak(MASTER, "")
 		endif
 	endif
 
