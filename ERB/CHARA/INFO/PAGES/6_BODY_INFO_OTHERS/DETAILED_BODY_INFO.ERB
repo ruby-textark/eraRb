@@ -3,20 +3,20 @@
 	printL 신체정보(상세) - 2
 	
 	printL
+	print 쓰리 사이즈는 
+	
+	setColor 0xcccc00
+	printForm %get3SizeString()%
+	resetColor
+	printL 입니다
+	
+	printL
 	printL 가슴
 	; 가슴상태
 	print 가슴의 크기는 
 	
 	setColor 0xcccc00
-	printForm {((BASE:MASTER:가슴둘레+24) - (BASE:MASTER:가슴둘레+24) % 50) / 10}
-	
-	if BASE:MASTER:가슴크기 < 50
-		print AAA
-	elseif BASE:MASTER:가슴크기 < 75
-		print AA
-	else
-		printForm %UNICODE(65 + (BASE:MASTER:가슴크기 - 100) / 25)%
-	endif
+	printForm %getMasterCupString()%
 	
 	resetColor
 	printL 입니다

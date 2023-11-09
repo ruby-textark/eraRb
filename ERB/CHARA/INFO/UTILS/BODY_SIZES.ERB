@@ -1,0 +1,40 @@
+﻿@getMasterBandSize()
+#function
+
+	returnf ((BASE:MASTER:가슴둘레 + 24) - (BASE:MASTER:가슴둘레 + 24) % 50) / 10
+
+@getMasterCupSize()
+#functions
+
+	if BASE:MASTER:가슴크기 < 50
+		returnf "AAA"
+	elseif BASE:MASTER:가슴크기 < 75
+		returnf "AA"
+	else
+		returnf @"%UNICODE(65 + (BASE:MASTER:가슴크기 - 100) / 25)%"
+	endif
+
+@getMasterCupString()
+#functions
+
+	returnf @"{getMasterBandSize()}%getMasterCupSize()%"
+
+@getMasterBSize()
+#function
+
+	returnf (getMasterBandSize() * 10 * 10 / 25 + 5) / 10
+
+@getMasterWSize()
+#function
+
+	returnf (BASE:MASTER:허리둘레 * 10 / 25 + 5) / 10
+
+@getMasterHSize()
+#function
+
+	returnf (BASE:MASTER:엉덩이둘레 * 10 / 25 + 5) / 10
+
+@get3SizeString()
+#functions
+
+	returnf @"{getMasterBSize()}-{getMasterWSize()}-{getMasterHSize()}"

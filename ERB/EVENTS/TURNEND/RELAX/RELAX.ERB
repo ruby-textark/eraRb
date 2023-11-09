@@ -32,6 +32,7 @@
 
 	call relaxMasturbation
 	call relaxPalams
+	call relaxDiets
 
 @relaxMasturbation
 #dim dynamic partIdx
@@ -76,3 +77,44 @@
 			PALAM:MASTER:palamIdx = 0
 		endif
 	next
+
+@relaxDiets
+#dim dynamic partIdx
+	
+	; 부적절한 식습관은 몸에 좋지 않습니다
+	if BASE:MASTER:영양상태 < MAXBASE:MASTER:영양상태 - 500 || BASE:MASTER:영양상태 > MAXBASE:MASTER:영양상태 + 500
+		for partIdx, 101, 200			
+			if strlens(BASENAME:partIdx) == 0
+				continue
+			endif
+			
+			BASE:MASTER:partIdx -= RAND:2
+		next
+		
+		if BASE:MASTER:영양상태 < MAXBASE:MASTER:영양상태 - 500
+			BASE:MASTER:가슴둘레 -= RAND:((MAXBASE:MASTER:영양상태 - BASE:MASTER:영양상태) / 300)
+			BASE:MASTER:가슴크기 -= RAND:((MAXBASE:MASTER:영양상태 - BASE:MASTER:영양상태) / 400)
+			BASE:MASTER:허리둘레 -= RAND:((MAXBASE:MASTER:영양상태 - BASE:MASTER:영양상태) / 200)
+			BASE:MASTER:엉덩이둘레 -= RAND:((MAXBASE:MASTER:영양상태 - BASE:MASTER:영양상태) / 250)
+		else
+			BASE:MASTER:가슴둘레 += RAND:((BASE:MASTER:영양상태 - MAXBASE:MASTER:영양상태) / 300)
+			BASE:MASTER:가슴크기 += RAND:((BASE:MASTER:영양상태 - MAXBASE:MASTER:영양상태) / 400)
+			BASE:MASTER:허리둘레 += RAND:((BASE:MASTER:영양상태 - MAXBASE:MASTER:영양상태) / 200)
+			BASE:MASTER:엉덩이둘레 += RAND:((BASE:MASTER:영양상태 - MAXBASE:MASTER:영양상태) / 250)
+		endif
+
+	; 잘 먹고 휴식하면 몸에 좋습니다
+	else
+		for partIdx, 101, 200			
+			if strlens(BASENAME:partIdx) == 0
+				continue
+			endif
+			
+			BASE:MASTER:partIdx += RAND:2
+		next
+	endif
+
+	; 기초대사량 재계산
+	; todo 활동대사량도 넣을것
+	MAXBASE:MASTER:영양상태 = getMasterMetabolicRate()
+	BASE:MASTER:영양상태 = 0

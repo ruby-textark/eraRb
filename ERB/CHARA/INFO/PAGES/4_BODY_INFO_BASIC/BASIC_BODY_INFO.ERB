@@ -2,7 +2,30 @@
 #dim dynamic partIdx
 
 	printL 신체정보(기본)
-
+	
+	printL
+	print 금일 대사량 
+	setColor 0xcccc00
+	printForm {MAXBASE:MASTER:영양상태}kcal
+	resetColor
+	
+	print  중 현재 섭취량 
+	
+	if BASE:MASTER:영양상태 < MAXBASE:MASTER:영양상태 / 3
+		setColor 0xcc0000
+	elseif BASE:MASTER:영양상태 < 2 * MAXBASE:MASTER:영양상태 / 3
+		setColor 0xcccc00
+	elseif BASE:MASTER:영양상태 < MAXBASE:MASTER:영양상태
+		setColor 0x00cc00
+	elseif BASE:MASTER:영양상태 < 4 * MAXBASE:MASTER:영양상태 / 3
+		setColor 0xcccc00
+	else
+		setColor 0xcc0000
+	endif
+	printFormL {BASE:MASTER:영양상태}kcal
+	resetColor
+	
+	printL
 	for partIdx, 101, 200
 		if strlens(BASENAME:partIdx) == 0
 			continue

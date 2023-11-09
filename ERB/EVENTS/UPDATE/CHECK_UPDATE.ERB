@@ -120,3 +120,15 @@
 		printW 성당의 축복에 있던 오류를 수정했습니다
 		printW 그 외 약간의 구상 추가
 	endif
+	
+	if LASTLOAD_VERSION < 17
+		printL v0.017
+		printW 신체 정보가 추가되었습니다
+		printW 기본값으로 설정합니다
+		
+		BASE:MASTER:허리둘레 = 650
+		BASE:MASTER:엉덩이둘레 = 800
+		
+		MAXBASE:MASTER:영양상태 = getMasterMetabolicRate()
+		
+	endif
