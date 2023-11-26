@@ -33,6 +33,7 @@
 	call relaxMasturbation
 	call relaxPalams
 	call relaxDiets
+	call relaxDrugs
 
 @relaxMasturbation
 #dim dynamic partIdx
@@ -92,16 +93,18 @@
 		next
 		
 		if BASE:MASTER:영양상태 < MAXBASE:MASTER:영양상태 - 500
-			BASE:MASTER:가슴둘레 -= RAND:((MAXBASE:MASTER:영양상태 - BASE:MASTER:영양상태) / 300)
 			BASE:MASTER:가슴크기 -= RAND:((MAXBASE:MASTER:영양상태 - BASE:MASTER:영양상태) / 400)
+			BASE:MASTER:가슴둘레 -= RAND:((MAXBASE:MASTER:영양상태 - BASE:MASTER:영양상태) / 300)
 			BASE:MASTER:허리둘레 -= RAND:((MAXBASE:MASTER:영양상태 - BASE:MASTER:영양상태) / 200)
 			BASE:MASTER:엉덩이둘레 -= RAND:((MAXBASE:MASTER:영양상태 - BASE:MASTER:영양상태) / 250)
 		else
-			BASE:MASTER:가슴둘레 += RAND:((BASE:MASTER:영양상태 - MAXBASE:MASTER:영양상태) / 300)
 			BASE:MASTER:가슴크기 += RAND:((BASE:MASTER:영양상태 - MAXBASE:MASTER:영양상태) / 400)
+			BASE:MASTER:가슴둘레 += RAND:((BASE:MASTER:영양상태 - MAXBASE:MASTER:영양상태) / 300)
 			BASE:MASTER:허리둘레 += RAND:((BASE:MASTER:영양상태 - MAXBASE:MASTER:영양상태) / 200)
 			BASE:MASTER:엉덩이둘레 += RAND:((BASE:MASTER:영양상태 - MAXBASE:MASTER:영양상태) / 250)
 		endif
+		
+		call coerceBodySize(MASTER)
 
 	; 잘 먹고 휴식하면 몸에 좋습니다
 	else
@@ -118,3 +121,11 @@
 	; todo 활동대사량도 넣을것
 	MAXBASE:MASTER:영양상태 = getMasterMetabolicRate()
 	BASE:MASTER:영양상태 = 0
+
+@relaxDrugs
+
+	if CFLAG:MASTER:금일약물경험 - CFLAG:MASTER:금일약물경험 > 3
+		EXP:MASTER:약물과다복용경험 += CFLAG:MASTER:금일약물경험 - CFLAG:MASTER:금일약물경험
+	endif
+	
+	CFLAG:MASTER:금일약물경험 = EXP:MASTER:약물경험

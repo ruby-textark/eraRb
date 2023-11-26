@@ -16,9 +16,9 @@
 	printFormW %NAME:targetIdx%에게 %kr(ITEMNAME:909, "을", "를")% 사용했다.
 
 	EXP:targetIdx:약물경험++
-	BASE:MASTER:생리주기 = MAXBASE:MASTER:생리주기 / 2
-	TALENT:MASTER:생리중 = 0
-	TALENT:MASTER:가임기 = 1
+	BASE:targetIdx:생리주기 = MAXBASE:MASTER:생리주기 / 2
+	TALENT:targetIdx:생리중 = 0
+	TALENT:targetIdx:가임기 = 1
 
 	printFormW %kr(NAME:targetIdx, "은", "는")% 약물의 효과로 강제로 배란했다.
 	

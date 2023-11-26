@@ -36,7 +36,7 @@
 
 	if randValue < 60
 		; 전투(60%)
-		call startBattle
+		call encounter
 	elseif randValue < 20
 		; 이로운방(20%)
 		call goodRoom
@@ -45,7 +45,7 @@
 		call badRoom
 	endif
 
-@startBattle
+@encounter
 
 	call addMonster(getRandomEnemy(FLAG:미궁위치))
 	
@@ -59,9 +59,8 @@ $battleChoiceLoop
 
 	input
 	
-	if RESULT == 1	
-		call applyContractBeforeBattle
-		begin train
+	if RESULT == 1
+		call startBattle
 	elseif RESULT == 2
 		if RAND:100 < 30 + (ABL:MASTER:은신술 - ABL:TARGET:추적술) * 5
 			call delMonster
@@ -81,6 +80,10 @@ $battleChoiceLoop
 		goto battleChoiceLoop
 	endif
 
+@startBattle
+
+	call applyContractBeforeBattle
+	begin train
 
 @bossBattle
 

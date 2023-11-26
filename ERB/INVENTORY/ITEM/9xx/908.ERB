@@ -23,7 +23,7 @@
 		printFormW %kr(NAME:targetIdx, "은", "는")% [모유체질]을 잃었다.
 	endif
 	
-	MAXBASE:MASTER:모유 = MAX(100, MAXBASE:MASTER:모유)
+	MAXBASE:targetIdx:모유 = MAX(100, MAXBASE:targetIdx:모유)
 
 	return 1
 

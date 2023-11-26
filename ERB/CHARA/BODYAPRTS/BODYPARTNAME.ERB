@@ -112,16 +112,16 @@
 				retStr:(retStrCnt++) = 경험 부족한
 			endif
 		else
-			if TALENT:MASTER:가슴크기 == -2
+			if TALENT:MASTER:납작가슴
 				retStr:(retStrCnt++) = 안쓰러울 정도로 작은
-			elseif TALENT:MASTER:가슴크기 == -1
+			elseif TALENT:MASTER:빈유
 				retStr:(retStrCnt++) = 조금 작은
-			elseif TALENT:MASTER:가슴크기 == 0
-				retStr:(retStrCnt++) = 한 손으로 쥐기에 알맞은
-			elseif TALENT:MASTER:가슴크기 == 1
+			elseif TALENT:MASTER:거유
 				retStr:(retStrCnt++) = 이리저리 출렁이는 큰
-			elseif TALENT:MASTER:가슴크기 == 2
+			elseif TALENT:MASTER:폭유
 				retStr:(retStrCnt++) = 터무니없이 큰 크기의
+			else
+				retStr:(retStrCnt++) = 한 손으로 쥐기에 알맞은
 			endif
 		endif
 	elseif partIdx == 113

@@ -51,3 +51,101 @@
 		call getTalent("겁쟁이")
 		CFLAG:MASTER:전투결과 = 0
 	endif
+
+	; 가슴크기
+	if BASE:MASTER:가슴크기 > 175 && BASE:MASTER:가슴둘레 > 800
+		if !TALENT:MASTER:폭유
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 최근 가슴이 멈추질 않고 성장하고 있다
+			
+			if TALENT:MASTER:거유
+				call loseTalent("거유")
+			elseif TALENT:MASTER:빈유
+				call loseTalent("빈유")
+			elseif TALENT:MASTER:납작가슴
+				call loseTalent("납작가슴")
+			endif
+			call getTalent("폭유")
+		endif
+	elseif BASE:MASTER:가슴크기 > 150 && BASE:MASTER:가슴둘레 > 750
+		if !TALENT:MASTER:거유
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 최근 가슴이 성장하고 있다
+			
+			if TALENT:MASTER:폭유
+				call loseTalent("폭유")
+			elseif TALENT:MASTER:빈유
+				call loseTalent("빈유")
+			elseif TALENT:MASTER:납작가슴
+				call loseTalent("납작가슴")
+			endif
+			call getTalent("거유")
+		endif
+	elseif BASE:MASTER:가슴크기 < 100 && BASE:MASTER:가슴둘레 < 650
+		if !TALENT:MASTER:빈유
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 최근 가슴 크기가 줄어드는 것을 느끼고 있다
+			
+			if TALENT:MASTER:폭유
+				call loseTalent("폭유")
+			elseif TALENT:MASTER:거유
+				call loseTalent("거유")
+			elseif TALENT:MASTER:납작가슴
+				call loseTalent("납작가슴")
+			endif
+			call getTalent("빈유")
+		endif
+	elseif BASE:MASTER:가슴크기 < 75 && BASE:MASTER:가슴둘레 < 650
+		if !TALENT:MASTER:납작가슴
+			printFormW 요즘들어 %kr(CALLNAME:MASTER, "은", "는")% 가슴이 안쓰러울 정도로 쪼그라들어 있다
+			
+			if TALENT:MASTER:폭유
+				call loseTalent("폭유")
+			elseif TALENT:MASTER:거유
+				call loseTalent("거유")
+			elseif TALENT:MASTER:빈유
+				call loseTalent("빈유")
+			endif
+			call getTalent("납작가슴")
+		endif
+	else
+		if TALENT:MASTER:폭유 || TALENT:MASTER:거유 || TALENT:MASTER:빈유 || TALENT:MASTER:납작가슴
+			printFormW 어느새 %CALLNAME:MASTER%의 가슴은 평범한 크기가 되어 있었다
+		endif
+
+		if TALENT:MASTER:폭유
+			call loseTalent("폭유")
+		elseif TALENT:MASTER:거유
+			call loseTalent("거유")
+		elseif TALENT:MASTER:빈유
+			call loseTalent("빈유")
+		elseif TALENT:MASTER:납작가슴
+			call loseTalent("납작가슴")
+		endif
+	endif
+
+	; 체중
+	if (100 * BASE:MASTER:허리둘레 / BASE:MASTER:엉덩이둘레) > 85
+		printFormW 요즘들어 %kr(CALLNAME:MASTER, "은", "는")% 살이 많이 찐 모양이다
+		
+		if TALENT:MASTER:저체중
+			call loseTalent("저체중")
+		endif
+		call getTalent("과체중")
+
+	elseif (100 * BASE:MASTER:허리둘레 / BASE:MASTER:엉덩이둘레) < 75
+		printFormW 요즘들어 %kr(CALLNAME:MASTER, "은", "는")% 살이 많이 빠져 여윈 모양이다
+		
+		if TALENT:MASTER:과체중
+			call loseTalent("과체중")
+		endif
+		call getTalent("저체중")
+		
+	else
+		if TALENT:MASTER:과체중 || TALENT:MASTER:저체중
+			printFormW 요즘들어 %kr(CALLNAME:MASTER, "은", "는")% 딱 보기 좋은 몸매가 되었다
+		endif
+		
+		if TALENT:MASTER:과체중
+			call loseTalent("과체중")
+		elseif TALENT:MASTER:저체중
+			call getTalent("저체중")
+		endif
+	endif

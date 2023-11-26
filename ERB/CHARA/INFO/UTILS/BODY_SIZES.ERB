@@ -38,3 +38,11 @@
 #functions
 
 	returnf @"{getMasterBSize()}-{getMasterWSize()}-{getMasterHSize()}"
+
+@coerceBodySize(targetIdx)
+#dim dynamic targetIdx
+
+	BASE:targetIdx:가슴크기 = limit(BASE:targetIdx:가슴크기, 45, MAXBASE:targetIdx:가슴크기)
+	BASE:targetIdx:가슴둘레 = limit(BASE:targetIdx:가슴둘레, 600, MAXBASE:targetIdx:가슴둘레)
+	BASE:targetIdx:허리둘레 = limit(BASE:targetIdx:허리둘레, 600, MAXBASE:targetIdx:허리둘레)
+	BASE:targetIdx:엉덩이둘레 = limit(BASE:targetIdx:엉덩이둘레, 600, MAXBASE:targetIdx:엉덩이둘레)

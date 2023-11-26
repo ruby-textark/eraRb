@@ -1,0 +1,38 @@
+﻿@badRoomFountain
+#dim dynamic partIdx
+
+	printL 알 수 없는 샘을 발견했다.
+	printW 마침 목도 좀 마른 것 같은데, 어떻게 할까?
+	
+	printL [0] - 지나친다
+	printL [1] - 물을 마셔본다
+
+$inputLoop
+
+	input
+	
+	if RESULT == 0
+		printW 미궁에서는 무슨 일이 일어날지 모른다... 아직 견딜만 하니 우선은 지나가도록 하자.
+	elseif RESULT == 1
+	
+		if RAND:2 == 0
+			printW 물 맛이 이상하다... 독이 든 것이 분명하다!
+			printW 황급히 샘물을 뱉어냈다
+			printW 체력 / 마력 감소
+			
+			BASE:MASTER:체력 = LIMIT(BASE:MASTER:체력 - MAXBASE:MASTER:체력 / 10, 0, MAXBASE:MASTER:체력)
+			BASE:MASTER:마력 = LIMIT(BASE:MASTER:마력 - MAXBASE:MASTER:마력 / 10, 0, MAXBASE:MASTER:마력)
+		else
+			printW 달콤한 샘물이 갈증을 해소해 준다
+			printW 그런데, 어쩐지 몸이 뜨거워지는 듯 한데...
+			
+			BASE:MASTER:체력 = LIMIT(BASE:MASTER:체력 + MAXBASE:MASTER:체력 / 20, 0, MAXBASE:MASTER:체력)
+			BASE:MASTER:마력 = LIMIT(BASE:MASTER:마력 + MAXBASE:MASTER:마력 / 20, 0, MAXBASE:MASTER:마력)
+			call increaseArousal(CFLAG:MASTER:(getSexualAtkBodyPart() + 400), 200)
+		endif
+
+	else
+		printW 잘못된 입력입니다
+		clearLine 2
+		goto inputLoop
+	endif

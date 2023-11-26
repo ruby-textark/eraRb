@@ -1,0 +1,34 @@
+﻿; 유방확대약
+@itemOption910()
+	RESULTS '= "[유방확대]"
+
+@itemExpl910()
+	RESULTS '= "사용시 가슴 크기/둘레가 증가한다."
+
+@isUsable910(targetIdx)
+#dim dynamic targetIdx
+
+	return targetIdx == MASTER
+
+@onUseItem910(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %NAME:targetIdx%에게 %kr(ITEMNAME:910, "을", "를")% 사용했다.
+
+	EXP:targetIdx:약물경험++
+	BASE:targetIdx:가슴크기 += 1 + RAND:5
+	BASE:targetIdx:가슴둘레 += 10 * (1 + RAND:5)
+
+	call coerceBodySize(targetIdx)
+
+	printFormW %kr(NAME:targetIdx, "은", "는")% 약물의 효과로 가슴이 커졌다.
+	
+	return 1
+
+@isEquipable910
+	return 0
+@isUnequipable910
+	return 0
+
+@onEquip910
+@onUnequip910

@@ -1,0 +1,34 @@
+﻿; 유방축소약
+@itemOption911()
+	RESULTS '= "[유방축소]"
+
+@itemExpl911()
+	RESULTS '= "사용시 가슴 크기/둘레가 감소한다."
+
+@isUsable911(targetIdx)
+#dim dynamic targetIdx
+
+	return targetIdx == MASTER
+
+@onUseItem911(targetIdx)
+#dim dynamic targetIdx
+
+	printFormW %NAME:targetIdx%에게 %kr(ITEMNAME:911, "을", "를")% 사용했다.
+
+	EXP:targetIdx:약물경험++
+	BASE:targetIdx:가슴크기 -= 1 + RAND:5
+	BASE:targetIdx:가슴둘레 -= 10 * (1 + RAND:5)
+
+	call coerceBodySize(targetIdx)
+
+	printFormW %kr(NAME:targetIdx, "은", "는")% 약물의 효과로 가슴이 커졌다.
+	
+	return 1
+
+@isEquipable911
+	return 0
+@isUnequipable911
+	return 0
+
+@onEquip911
+@onUnequip911

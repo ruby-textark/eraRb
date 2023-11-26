@@ -64,7 +64,8 @@
 		endif
 	endif
 	
-	if BASE:MASTER:가슴크기 < 100
+	; todo 나머지 두가지
+	if TALENT:MASTER:빈유
 		if CFLAG:MASTER:성격 == 1
 			call showDiaryItem("빈유", @"(%NAME:MASTER% 본인은 작은 가슴에 대해 별 생각이 없는 듯 하다)")
 		elseif CFLAG:MASTER:성격 == 2
@@ -76,9 +77,9 @@
 		else
 			call showDiaryItem("빈유", "아니, 뭐 좀 작을 수도 있지. 애초에 크기에 관계없이 그렇게 뚫어져라 쳐다보는건 예의가 아니지 않나?")
 		endif
-	elseif BASE:MASTER:가슴크기 > 170
+	elseif TALENT:MASTER:거유
 		if CFLAG:MASTER:성격 == 1
-			call showDiaryItem("거유", "히잉. 가슴이 너무 커서 물편해.")
+			call showDiaryItem("거유", "히잉. 가슴이 너무 커서 불편해.")
 		elseif CFLAG:MASTER:성격 == 2
 			call showDiaryItem("거유", "(자랑스러운 표정으로 가슴을 앞으로 쭉 내밀고 있다)")
 		elseif CFLAG:MASTER:성격 == 3
