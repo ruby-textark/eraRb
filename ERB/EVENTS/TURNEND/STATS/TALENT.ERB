@@ -61,8 +61,8 @@
 				call loseTalent("거유")
 			elseif TALENT:MASTER:빈유
 				call loseTalent("빈유")
-			elseif TALENT:MASTER:납작가슴
-				call loseTalent("납작가슴")
+			elseif TALENT:MASTER:빨래판
+				call loseTalent("빨래판")
 			endif
 			call getTalent("폭유")
 		endif
@@ -74,8 +74,8 @@
 				call loseTalent("폭유")
 			elseif TALENT:MASTER:빈유
 				call loseTalent("빈유")
-			elseif TALENT:MASTER:납작가슴
-				call loseTalent("납작가슴")
+			elseif TALENT:MASTER:빨래판
+				call loseTalent("빨래판")
 			endif
 			call getTalent("거유")
 		endif
@@ -87,13 +87,13 @@
 				call loseTalent("폭유")
 			elseif TALENT:MASTER:거유
 				call loseTalent("거유")
-			elseif TALENT:MASTER:납작가슴
-				call loseTalent("납작가슴")
+			elseif TALENT:MASTER:빨래판
+				call loseTalent("빨래판")
 			endif
 			call getTalent("빈유")
 		endif
 	elseif BASE:MASTER:가슴크기 < 75 && BASE:MASTER:가슴둘레 < 650
-		if !TALENT:MASTER:납작가슴
+		if !TALENT:MASTER:빨래판
 			printFormW 요즘들어 %kr(CALLNAME:MASTER, "은", "는")% 가슴이 안쓰러울 정도로 쪼그라들어 있다
 			
 			if TALENT:MASTER:폭유
@@ -103,10 +103,10 @@
 			elseif TALENT:MASTER:빈유
 				call loseTalent("빈유")
 			endif
-			call getTalent("납작가슴")
+			call getTalent("빨래판")
 		endif
 	else
-		if TALENT:MASTER:폭유 || TALENT:MASTER:거유 || TALENT:MASTER:빈유 || TALENT:MASTER:납작가슴
+		if TALENT:MASTER:폭유 || TALENT:MASTER:거유 || TALENT:MASTER:빈유 || TALENT:MASTER:빨래판
 			printFormW 어느새 %CALLNAME:MASTER%의 가슴은 평범한 크기가 되어 있었다
 		endif
 
@@ -116,8 +116,8 @@
 			call loseTalent("거유")
 		elseif TALENT:MASTER:빈유
 			call loseTalent("빈유")
-		elseif TALENT:MASTER:납작가슴
-			call loseTalent("납작가슴")
+		elseif TALENT:MASTER:빨래판
+			call loseTalent("빨래판")
 		endif
 	endif
 

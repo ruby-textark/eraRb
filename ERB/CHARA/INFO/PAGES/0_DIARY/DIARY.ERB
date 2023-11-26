@@ -60,7 +60,7 @@
 		if CFLAG:MASTER:성격 == 1 || CFLAG:MASTER:성격 == 2
 			call showDiaryItem("세로애널", @"이건 진짜 비밀로 해주세요... 실은 그, 요새 %kr(partStrRaw(123), "이", "가")% 넓어져서... 딱 한번, 좀 흘려버렸어요.")
 		else
-			call showDiaryItem("세로애널", @"이런 말 해도 되나 모르겠는데, %partStrRaw(123)%에 의식적으로 힘을 주지 않으면 가끔 살짝 샐 때가 있어서 불편하네.")
+			call showDiaryItem("세로애널", @"이런 말 해도 되나 모르겠는데, %partStrRaw(123)%에 의식적으로 힘을 주지 않으면 가끔 아찔할 때가 있어서 불편하네.")
 		endif
 	endif
 	
@@ -88,6 +88,30 @@
 			call showDiaryItem("거유", "역시 큰게 좋다고요? 헤헤... 저, 저도 그렇게 생각해요...")
 		else
 			call showDiaryItem("거유", "하여튼간에 남자란 것들은 다 똑같아서.")
+		endif
+	elseif TALENT:MASTER:빨래판
+		if CFLAG:MASTER:성격 == 1
+			call showDiaryItem("빨래판", @"(%NAME:MASTER% 본인은 작은 가슴에 대해 별 생각이 없는 듯 하다)")
+		elseif CFLAG:MASTER:성격 == 2
+			call showDiaryItem("빨래판", "흥. 커 봤자 싸울 땐 방해될 뿐이야.")
+		elseif CFLAG:MASTER:성격 == 3
+			call showDiaryItem("빨래판", "죽고 싶니...? 당장 눈 안 치워?")
+		elseif CFLAG:MASTER:성격 == 4
+			call showDiaryItem("빨래판", "차라리 안에 안 입어도 되니까... 편한 것 같기도 하고.")
+		else
+			call showDiaryItem("빨래판", "어딜 그렇게 쳐다보는거야? 나한테 보태준 거 있어?")
+		endif
+	elseif TALENT:MASTER:폭유
+		if CFLAG:MASTER:성격 == 1
+			call showDiaryItem("폭유", "요즘 자꾸 어깨가 아픈데, 가슴 때문에 그런걸까요?")
+		elseif CFLAG:MASTER:성격 == 2
+			call showDiaryItem("폭유", "아니, 뭐가 좋다고 그렇게들 바라보는 건지 모르겠네. ...싫은 건 아니지만.")
+		elseif CFLAG:MASTER:성격 == 3
+			call showDiaryItem("폭유", "이런 매력도 무기 아니겠어? 하여튼 눈을 떼지도 못하는 모습들을 보면 꽤 귀엽다니까.")
+		elseif CFLAG:MASTER:성격 == 4
+			call showDiaryItem("폭유", "그, 다들 시선이 너무 집중돼서. 조금 무섭다고 생각해.")
+		else
+			call showDiaryItem("폭유", "움직일 땐 좀 불편해도 여러모로 쓸만하긴 해.")
 		endif
 	endif
 
