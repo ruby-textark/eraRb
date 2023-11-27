@@ -4,7 +4,6 @@
 	return !isMasterDown() &&  isSkillAvailable(1006, "무기", 1601) && isTargetInRange()
 
 @COM1006
-#dim dynamic damageBase
 
 	printFormL %kr(CALLNAME:MASTER, "은", "는")% 예리한 마력을 두른 무기로 적을 노린다
 	
@@ -16,8 +15,7 @@
 	BASE:MASTER:마력 -= 12
 
 	; 피해량은 낮은 편
-	damageBase = 6 * MAX(1, getActualAtk(MASTER) - getActualDef(TARGET))
-	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+	LOSEBASE:체력 = randomizeDamage(6 * MAX(1, getActualAtk(MASTER) - getActualDef(TARGET)))
 	
 	; 2-3턴간 중독
 	call applyBuffTo(TARGET, "출혈", 2 + (RAND:2))

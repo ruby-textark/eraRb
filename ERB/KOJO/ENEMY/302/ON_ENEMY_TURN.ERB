@@ -1,5 +1,4 @@
 ﻿@c302onEnemyTurn
-#dim dynamic damageBase
 
 	; todo 이곳과 onEnemyDown 쌍으로 맞춰서 처리
 	if TCVAR:TARGET:10 == 0
@@ -38,8 +37,7 @@
 		printFormL %kr(NAME:TARGET, "이", "가")% 검을 치켜들었다.
 		printFormL %NAME:TARGET%의 황혼
 		
-		damageBase = 10 * MAX(1, getActualAtk(TARGET))
-		LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+		LOSEBASE:체력 = randomizeDamage(10 * MAX(1, getActualAtk(TARGET)))
 		
 		TCVAR:TARGET:13 = 1
 		return

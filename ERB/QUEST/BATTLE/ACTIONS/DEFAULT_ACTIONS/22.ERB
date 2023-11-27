@@ -3,7 +3,6 @@
 	return !isMasterDown() && isTargetInRange()
 
 @COM22
-#dim dynamic damageBase
 
 	printL 급소를 노렸다!
 	
@@ -17,8 +16,7 @@
 		return 1
 	endif
 	
-	damageBase = 10 * MAX(1, getActualAtk(MASTER) - getActualDef(TARGET) / 2)
-	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+	LOSEBASE:체력 = randomizeDamage(10 * MAX(1, getActualAtk(MASTER) - getActualDef(TARGET) / 2))
 	
 	call useAmmo()
 

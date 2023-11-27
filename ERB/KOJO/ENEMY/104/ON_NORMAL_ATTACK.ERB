@@ -2,7 +2,6 @@
 ; TCVAR:TARGET:10 = 능력치 3x
 ; TCVAR:TARGET:11 = 능력치 2x
 @c104onNormalAttack
-#dim dynamic damageBase
 
 	if (BASE:TARGET:체력 > 2 * MAXBASE:TARGET:체력 / 3) && !TCVAR:TARGET:10
 		printFormL %kr(NAME:TARGET, "이", "가")% 시끄럽게 날아다니면서 무리를 모으고 있다...
@@ -22,6 +21,5 @@
 		call clearBuff(TARGET, "거대화")
 	else
 		printFormL %NAME:TARGET%의 공격
-		damageBase = 10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER))
-		LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+		LOSEBASE:체력 = randomizeDamage(10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER)))
 	endif

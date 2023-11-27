@@ -1,0 +1,5 @@
+﻿@randomizeDamage(damageBase)
+#function
+#dim dynamic damageBase
+
+	returnf damageBase * 9 / 10 + RAND:(MAX(damageBase / 10, 1))

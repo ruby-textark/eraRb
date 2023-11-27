@@ -4,7 +4,6 @@
 	return !isMasterDown() &&  isSkillAvailable(1003, "장신구", 1702) && isTargetInRange() && !hasBuff(MASTER, "침묵")
 
 @COM1003
-#dim dynamic damageBase
 
 	printL 죽음의 키스를 날렸다
 	
@@ -15,8 +14,7 @@
 	BASE:MASTER:마력 -= 24
 
 	; 기본 마법 공격계수의 1.2배 적용 및 욕망 보정 추가
-	damageBase = 24 * MAX(1, getActualMatk(MASTER) * (ABL:MASTER:욕망 + 3) - getActualMdef(TARGET))
-	LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+	LOSEBASE:체력 = randomizeDamage(24 * MAX(1, getActualMatk(MASTER) * (ABL:MASTER:욕망 + 3) - getActualMdef(TARGET)))
 
 	; 반작용으로 자궁쾌감상승
 	SOURCE:MASTER:욕정 += 100

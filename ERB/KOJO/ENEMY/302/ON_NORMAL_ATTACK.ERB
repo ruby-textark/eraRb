@@ -4,7 +4,6 @@
 ; TCVAR:TARGET:12 = 투혼
 ; TCVAR:TARGET:13 = 황혼
 @c302onNormalAttack
-#dim dynamic damageBase
 
 	; todo 죽음의 기사 패턴 작업
 	if BASE:TARGET:체력 < MAXBASE:TARGET:체력 * 2 / 3 && TCVAR:TARGET:11 == 0
@@ -17,8 +16,7 @@
 		TCVAR:TARGET:상하 = TCVAR:MASTER:상하
 		TCVAR:TARGET:좌우 = TCVAR:MASTER:좌우
 
-		damageBase = 10 * MAX(1, getActualAtk(TARGET) * 2 - getActualDef(MASTER))
-		LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+		LOSEBASE:체력 = randomizeDamage(12 * MAX(1, getActualAtk(TARGET) * 2 - getActualDef(MASTER)))
 
 		TCVAR:TARGET:11 = 2
 	
@@ -33,6 +31,5 @@
 	
 	else
 		printFormL %NAME:TARGET%의 공격
-		damageBase = 10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER))
-		LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+		LOSEBASE:체력 = randomizeDamage(10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER)))
 	endif

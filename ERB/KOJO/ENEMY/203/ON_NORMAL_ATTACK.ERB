@@ -2,7 +2,6 @@
 ; TCVAR:TARGET:10 = 광폭화
 ; TCVAR:TARGET:11 = 속박
 @c203onNormalAttack
-#dim dynamic damageBase
 
 	; todo 골렘 패턴 작업
 	if BASE:TARGET:체력 < MAXBASE:TARGET:체력 / 2 && !TCVAR:TARGET:10
@@ -18,6 +17,5 @@
 		TCVAR:TARGET:11 = 1
 	else
 		printFormL %NAME:TARGET%의 공격
-		damageBase = 10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER))
-		LOSEBASE:체력 = damageBase * 9 / 10 + RAND:(damageBase / 10)
+		LOSEBASE:체력 = randomizeDamage(10 * MAX(1, getActualAtk(TARGET) - getActualDef(MASTER)))
 	endif
