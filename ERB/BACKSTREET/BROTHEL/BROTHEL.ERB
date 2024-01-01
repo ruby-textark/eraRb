@@ -1,23 +1,74 @@
 ﻿@brothel
 
-	printFormL %kr(CALLNAME:MASTER, "은", "는")% 홍등가로 발걸음을 옮겼다
-	printFormL 걸음걸음마다 빈민굴에서 나는 알 수 없는 찌든 오물냄새 대신 점차 싸구려 향수와 분내가 풍겨오기 시작했다.
-	printFormL 의외로 주위를 서성이는 사람들은 도시의 대로변에서 보이는 모습과 큰 차이가 없었다.
-	printFormL 아마 대다수를 이루는 모험가들이 매일같이 미궁에서 생명의 위협을 받는 것과 무관하지 않으리라.
-	printFormL 결국 영원한 것 없는 미궁도시에서, 돈을 오래 쥐고 있어 봐야 아무 짝에도 쓸모가 없기 때문이다.
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 홍등가로 발걸음을 옮겼다
+	printFormW 걸음걸음마다 빈민굴에서 나는 알 수 없는 찌든 오물냄새 대신 점차 은은한 향수와 분내가 풍겨오기 시작했다.
+	printFormW 의외로 주위를 서성이는 사람들은 도시의 대로변에서 보이는 모습과 큰 차이가 없었다.
+	printFormW 아마 대다수를 이루는 모험가들이 매일같이 미궁에서 생명의 위협을 받는 것과 무관하지 않으리라.
+	printFormW 결국 영원한 것 없는 미궁도시에서, 돈을 오래 쥐고 있어 봐야 아무 짝에도 쓸모가 없기 때문이다.
+
+	if !firstBrothelFlag
+		firstBrothelFlag = 1
+		call firstBrothel
+	endif
 
 $inputLoop
 	printFormL 무엇을 할까.
-	printFormL [1] - 창관에 들어선다
+	printFormL [1] - "일"을 한다
 	printFormL [0] - 돌아가기
 
 	input
 	
 	if RESULT == 1
+		call negotiateBrothel
 		return
 	elseif RESULT == 0
 		return
 	else
 		clearLine 4
 		goto inputLoop
+	endif
+
+@firstBrothel
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 마침내 저 너머의 거지꼴과 달리 확연히 고급이라는 느낌이 드는 건물 앞에 도착했다.
+	printW 잠시 망설였지만, 그래도 여기까지 온 이상 물러날 수는 없었다.
+	printFormW 조심스레 창관에 들어선 %CALLNAME:MASTER%의 첫눈에 들어온 것은 예상보다 정돈된 분위기와, 우아한 인테리어였다.
+
+	call speakNPC(2200, "그쪽은 누구죠?")
+	printW 홀에는 의외로 "고객"이랄 사람은 보이지 않아 고개를 갸우뚱하자, 반쯤 열린 방문이 천천히 열리더니 안에서 목소리가 들려왔다.
+	printFormW %kr(CALLNAME:MASTER, "이", "가")% 방으로 발걸음을 옮기자, 붉은 머리의 여인이 소파에 기대어 %kr(CALLNAME:MASTER, "을", "를")% 쳐다봤다.
+
+	call speakNPC(2200, "뭐, 솔직히 말해서 앞문으로 들어오는 사람은 잘 없지. 멋모르고 새로 오는 아가씨들 말고는.")
+	printFormW %kr(NAME:getChara(2200), "은", "는")% 옅은 미소를 지어보였다.
+	
+	if CFLAG:MASTER:성적명성 < 2000
+		call speakNPC(2200, "그래서, 일 하려고 온거야? 아니면, 뭐 다른 볼 일이... 있으려나?")
+	elseif CFLAG:MASTER:성적명성 < 6000
+		call speakNPC(2200, "그러니까 의외야 이거. 꽤 프로가 왔네? 일 하다 가려고?")
+		call speakNPC(2200, "잘 해줄게. 우리가 이 근처에서는 가장 잘 쳐준다니까.")
+	else
+		call speakNPC(2200, "그런데 예상 밖이잖아. 우리 가게에는 무슨 일이야? 밖에선 꽤 날리더니, 아주 뿌리까지 털어먹으려고 왔나?")
+		printW 그녀는 피식 웃으면서 말을 이었다.
+		
+		call speakNPC(2200, "뭐 우리가 어쩌겠어. 일하려고 온 거지? 그렇다고 해 줄래? 누구 때문에 요즘 좀 힘들거든.")
+	endif
+
+	printW 
+	call speakNPC(2200, "일 하러 왔든 아니든, 문제만 일으키지 마. 물론, 일을 한다면 더 좋고.")
+
+@negotiateBrothel
+
+	; todo 여기작업
+
+	; 최초시점
+	if FLAG:창관정산비율 == 0
+	
+		FLAG:창관정산비율 = 20
+	; 20
+	elseif FLAG:창관정산비율 == 20
+	
+		FLAG:창관정산비율 = 15
+	; 15
+	elseif FLAG:창관정산비율 == 15
+	
+		FLAG:창관정산비율 = 10
 	endif

@@ -1,7 +1,7 @@
 ﻿@contraBarrier
 #dim dynamic requiredFaith
 
-	requiredFaith = 5 + 5 * (100 - CFLAG:MASTER:카르마) / 100
+	requiredFaith = 5
 
 	call speakNPC(2002, "비록 세상을 풍요롭게 하고, 새로운 생명의 탄생을 축복하는 것이 올바른 길이라 하나, 축복받지 못하고 이 땅에 내려온 삶이 짓밟히는 것 역시 주의 뜻에 반하는 법입니다.")
 	printL
@@ -22,7 +22,6 @@ $inputLoop
 		call speakNPC(2002, "알겠습니다. 잠시만 기다려 주시지요.")
 		
 		CFLAG:MASTER:신앙심 -= requiredFaith
-		CFLAG:MASTER:카르마--
 		call getTalent("피임결계")
 
 		call speakNPC(2002, "다만 주의하십시오. 만일 그대가 이 힘에 빠져 쾌락만을 좇게 된다면, 저는 감히 그런 모습을 두고 보고만 있지는 않을 것입니다.")

@@ -140,11 +140,19 @@
 		printL v0.018
 		printW 명성 관련 이벤트가 추가되었습니다
 		printW 체포 이벤트 설정이 추가되었습니다
+		printW 창관이 추가되었습니다
 		
 		CFLAG:MASTER:기본명성 *= 100
 		CFLAG:MASTER:성적명성 *= 100
 		CFLAG:MASTER:최면명성 *= 100
 		CFLAG:MASTER:악명 *= 100
+
+		; 카르마 제거
+		CFLAG:MASTER:11 = 0
+		
+		; 최초플래그를 erh에서 관리
+		firstSlaveryFlag = FLAG:203
+		FLAG:203 = 0
 
 		FLAG:체포확률 = 10
 		FLAG:명성확률 = 10

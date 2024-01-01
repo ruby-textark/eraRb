@@ -10,6 +10,8 @@
 		if CFLAG:MASTER:잠재적아버지 == 1
 			call speak(MASTER, @"그럼 아빠는 %CSTR:MASTER:아이아버지이름%인 거겠죠?")
 			printFormW 아이 아버지가 %kr(CSTR:MASTER:아이아버지이름, "으로", "로")% 밝혀졌습니다.
+		else
+			call speak(MASTER, "그런데, 그럼 이 아이는 대체 누구의...?")
 		endif
 		
 		if CFLAG:MASTER:비자발임신
@@ -27,6 +29,8 @@
 		if CFLAG:MASTER:잠재적아버지 == 1
 			call speak(MASTER, "확실해, 이거. 그 녀석 때문이겠지.")
 			printFormW 아이 아버지가 %kr(CSTR:MASTER:아이아버지이름, "으로", "로")% 밝혀졌습니다.
+		else
+			call speak(MASTER, "이거 그러면 애 아빠가 누구더라?")
 		endif
 		
 		if CFLAG:MASTER:비자발임신
@@ -44,6 +48,8 @@
 		if CFLAG:MASTER:잠재적아버지 == 1
 			call speak(MASTER, "그럼 그 때 생긴 걸까?")
 			printFormW 아이 아버지가 %kr(CSTR:MASTER:아이아버지이름, "으로", "로")% 밝혀졌습니다.
+		else
+			call speak(MASTER, "칵테일을 만들었는데, 이름을 모르겠네.")
 		endif
 		
 		if CFLAG:MASTER:비자발임신
@@ -79,6 +85,8 @@
 		if CFLAG:MASTER:잠재적아버지 == 1
 			call speak(MASTER, "이건 아무리 봐도 분명 그 녀석이겠지...")
 			printFormW 아이 아버지가 %kr(CSTR:MASTER:아이아버지이름, "으로", "로")% 밝혀졌습니다.
+		else
+			call speak(MASTER, "누구 자식이든. 무슨 상관이겠어.")
 		endif
 		
 		if CFLAG:MASTER:비자발임신

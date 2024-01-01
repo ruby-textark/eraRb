@@ -15,7 +15,7 @@
 	
 	call addMobChara(1501 + RAND:5)
 
-	CFLAG:MASTER:성희롱경험++
+	EXP:MASTER:성희롱경험++
 	
 	if RAND:3 == 0
 		printFormW 뒷골목은 이곳에서 사는 이들이 아닌 이상, 입에도 올리기 어려운 장소였고, 그래서 떳떳하지 않은 행인을 위해 곳곳마다 사람이 숨기 쉬운 그늘과 틈이 있었다.
@@ -48,7 +48,7 @@
 	endif
 
 	if RAND:2 == 0
-		if CFLAG:MASTER:성희롱경험 < 50
+		if EXP:MASTER:성희롱경험 < 50
 			printFormW 얼굴이 붉어진 %kr(CALLNAME:MASTER, "은", "는")% 고개를 홱 돌렸지만 재빨리 몸을 뺀 %kr(CALLNAME:TARGET, "을", "를")% 쫓아가는 것은 포기해야 했다.
 		else
 			printFormW 이미 이런 말을 듣는 데 너무 익숙해진 %kr(CALLNAME:MASTER, "은", "는")% 이런 일에 신경써 봤자 자신만 손해라는 것을 알아 %kr(CALLNAME:TARGET, "을", "를")% 한 번 노려보기만 하고 그대로 갈 길을 가기로 했다.

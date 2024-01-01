@@ -18,6 +18,8 @@
 		
 		if CFLAG:MASTER:잠재적아버지 == 1
 			printFormL (아이 아버지 : %CSTR:MASTER:아이아버지이름%)
+		else
+			printFormL (잠재적 아이 아버지 : {CFLAG:MASTER:잠재적아버지}인)
 		endif
 	else
 		printFormL %NAME:MASTER%의 다음 생리 예정일은 {MAXBASE:MASTER:생리주기 - BASE:MASTER:생리주기}일 뒤입니다
