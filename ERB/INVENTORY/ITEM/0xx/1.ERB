@@ -13,7 +13,6 @@
 @onUseItem1(targetIdx)
 #dim dynamic targetIdx
 
-	printFormW %NAME:targetIdx%에게 %kr(ITEMNAME:1, "을", "를")% 사용했다.
 	BASE:targetIdx:체력 = LIMIT(BASE:targetIdx:체력 + 50, 0, MAXBASE:targetIdx:체력)
 
 	return 1

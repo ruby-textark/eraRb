@@ -12,11 +12,11 @@
 	
 	printFormW 명성이 {decreasedFame} 감소했다.
 
-	if CFLAG:MASTER:기본명성 < 20
+	if CFLAG:MASTER:기본명성 < 2000
 		printFormW 게다가 실력도 없는 것이 분수도 모른다며 악명이 쌓이고 말았다.
-		CFLAG:MASTER:악명 = LIMIT(CFLAG:MASTER:악명 + RAND:5, 0, 100)
+		CFLAG:MASTER:악명 = LIMIT(CFLAG:MASTER:악명 + 5 + RAND:5, 0, 10000)
 	endif
 
-	CFLAG:MASTER:기본명성 = LIMIT(CFLAG:MASTER:기본명성 - decreasedFame, 0, 100)
+	CFLAG:MASTER:기본명성 = LIMIT(CFLAG:MASTER:기본명성 - decreasedFame, 0, 10000)
 
 	return 1

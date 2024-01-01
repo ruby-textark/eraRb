@@ -22,8 +22,8 @@
 			call startHypno
 			call hypnoSex
 			call endHypno
-			
+
 			BASE:MASTER:최면심도 = LIMIT(BASE:MASTER:최면심도 + 1 + RAND:2, 0, MAXBASE:MASTER:최면심도)
-			CFLAG:MASTER:최면명성 += LIMIT(CFLAG:MASTER:최면명성 + RAND:3, 0, 100)
+			CFLAG:MASTER:최면명성 += LIMIT(CFLAG:MASTER:최면명성 + RAND:3, 0, 10000)
 		endif
 	endif

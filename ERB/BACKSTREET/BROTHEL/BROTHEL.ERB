@@ -1,0 +1,23 @@
+﻿@brothel
+
+	printFormL %kr(CALLNAME:MASTER, "은", "는")% 홍등가로 발걸음을 옮겼다
+	printFormL 걸음걸음마다 빈민굴에서 나는 알 수 없는 찌든 오물냄새 대신 점차 싸구려 향수와 분내가 풍겨오기 시작했다.
+	printFormL 의외로 주위를 서성이는 사람들은 도시의 대로변에서 보이는 모습과 큰 차이가 없었다.
+	printFormL 아마 대다수를 이루는 모험가들이 매일같이 미궁에서 생명의 위협을 받는 것과 무관하지 않으리라.
+	printFormL 결국 영원한 것 없는 미궁도시에서, 돈을 오래 쥐고 있어 봐야 아무 짝에도 쓸모가 없기 때문이다.
+
+$inputLoop
+	printFormL 무엇을 할까.
+	printFormL [1] - 창관에 들어선다
+	printFormL [0] - 돌아가기
+
+	input
+	
+	if RESULT == 1
+		return
+	elseif RESULT == 0
+		return
+	else
+		clearLine 4
+		goto inputLoop
+	endif

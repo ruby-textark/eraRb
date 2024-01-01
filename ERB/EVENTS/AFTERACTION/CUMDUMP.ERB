@@ -102,14 +102,14 @@
 				reports:(reportCount++) = "화장실이 급해서 잠깐 %partStrRaw(insertInto)% 좀 빌렸어요."
 			endif
 		elseif RAND:3 == 0
-			if CFLAG:MASTER:성적명성 > 80
+			if CFLAG:MASTER:성적명성 > 8000
 				reports:(reportCount++) = "뒷골목에선 %kr(CALLNAME:MASTER, "이라고", "라고")% 하면 다들 알아줌. 프로다운 %partStrRaw(insertInto)%. {9 + RAND:2}/10"
-			elseif CFLAG:MASTER:성적명성 > 60
+			elseif CFLAG:MASTER:성적명성 > 6000
 				reports:(reportCount++) = "나쁜 건 아닌데 좀 어설픔. 몸 좀 험하게 굴리는 년이라고 들었는데 입으로는 아직 많이 하지 않은듯. {7 + RAND:2}/10"
-			elseif CFLAG:MASTER:성적명성 > 40
+			elseif CFLAG:MASTER:성적명성 > 4000
 				reports:(reportCount++) = "솔직히 말해 거품. %CALLNAME:MASTER%? 공짜라서 쓰지 이걸 돈 주고 사먹던 놈은 대체 여자가 얼마나 고팠던걸까? {5 + RAND:2}/10"
 			else
-				if EXP:MASTER:insertInto > 30
+				if EXP:MASTER:insertInto > 3000
 					reports:(reportCount++) = "처음 보는데 신입인거 감안하고 이 정도면 나쁘지 않다. 객관적으로는 좋은 편 아님. {3 + RAND:2}/10"
 				else
 					reports:(reportCount++) = "별로. 공공변소니까 딴 년들 안 받아주던거 시켜보는 용도론 괜찮을지도. {1 + RAND:2}/10"
@@ -170,18 +170,20 @@
 		if RAND:50 == 0
 			printFormW 잠시 쉬고 있던 %CALLNAME:MASTER%의 뒷편에서 부스럭거리는 소리가 나더니, 순간 따끔한 느낌이 들었다.
 			
-			print 몸에 음란한 열기가 퍼져나가는 것을 보니, 아무래도 누군가 지나가면서
-			call colorPrint(0xcc33cc, " 미약")
+			print 몸에 음란한 열기가 퍼져나가는 것을 보니, 아무래도 누군가 지나가면서 
+			call colorPrint(0xcc33cc, "미약")
 			printW 을 주사한 것 같다...
+			call onUseItem901(MASTER)
 			BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 10 + RAND:10, 0, MAXBASE:MASTER:혈중미약농도)
 		endif
 		
 		if RAND:100 == 0
 			printFormW 잠시 쉬고 있던 %CALLNAME:MASTER%에게 모자를 푹 눌러쓴 괴한이 다가와 아랫배에 손을 갖다대자 순간 따끔한 느낌이 들었다.
 			
-			print 아랫배가 심상찮게 떨려오는 것을 보니, 아무래도
-			call colorPrint(0xcc0000, " 배란유도제")
+			print 아랫배가 심상찮게 떨려오는 것을 보니, 아무래도 
+			call colorPrint(0xcc0000, "배란유도제")
 			printW 를 주사당한 것 같다...
+			call onUseItem909(MASTER)
 			BASE:MASTER:혈중미약농도 = LIMIT(BASE:MASTER:혈중미약농도 + 10 + RAND:10, 0, MAXBASE:MASTER:혈중미약농도)
 		endif
 		
@@ -192,8 +194,8 @@
 	next
 	
 	CSTR:MASTER:육변기형소감문 = %strJoin(reports, "\n", 0, reportCount)%
-	CFLAG:MASTER:악명 = MAX(CFLAG:MASTER:악명 - FLAG:육변기최근이용자수 / 2, 0)
-	CFLAG:MASTER:성적명성 = MIN(CFLAG:MASTER:성적명성 + FLAG:육변기최근이용자수 / 2, 100)
+	CFLAG:MASTER:악명 = MAX(CFLAG:MASTER:악명 - FLAG:육변기최근이용자수 * 50, 0)
+	CFLAG:MASTER:성적명성 = MIN(CFLAG:MASTER:성적명성 + FLAG:육변기최근이용자수, 10000)
 	
 	if CFLAG:MASTER:악명 == 0
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 드디어 육변기형에서 풀려났다...

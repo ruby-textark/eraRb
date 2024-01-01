@@ -1,0 +1,77 @@
+﻿@backStreetSexualFame
+#dim dynamic fameRate
+#dim dynamic partIdx
+#dim dynamic fameAmount
+
+	; 뒷골목은 기본적으로 2배
+	fameRate = FLAG:성희롱확률 * 2
+	
+	; 성적 명성에 따라 성희롱 확률 최대 2배 상승
+	fameRate = fameRate * (10000 + CFLAG:MASTER:성적명성) / 10000
+
+	if RAND:100 >= fameRate
+		return
+	endif
+	
+	call addMobChara(1501 + RAND:5)
+
+	CFLAG:MASTER:성희롱경험++
+	
+	if RAND:3 == 0
+		printFormW 뒷골목은 이곳에서 사는 이들이 아닌 이상, 입에도 올리기 어려운 장소였고, 그래서 떳떳하지 않은 행인을 위해 곳곳마다 사람이 숨기 쉬운 그늘과 틈이 있었다.
+		printFormW 그리고 그 틈에서, 슬쩍 손이 뻗어나와 근처를 지나가는 뜨내기들의 짐을 노리는 것은 그저 일상과도 같아서, 일일이 언급하는 것이 유난일 정도였다.
+		printFormW 다만 이번에는, 그 손길이 %CALLNAME:MASTER%의 주머니가 아니라, 몸 그 자체였다는 점에서 차이가 있었다.
+
+		printFormW 해를 끼치려는 미궁의 공격과는 방향이 다른 음습한 손눌림에 %kr(CALLNAME:MASTER, "이", "가")% 잠시 반응하지 못하고 멈칫한 사이, %CALLNAME:TARGET%의 손이 무방비한 엉덩이를 찰싹 때렸다.
+		printFormW %kr(CALLNAME:MASTER, "은", "는")% 반사적으로 그 손을 쳐내긴 했으나, %kr(CALLNAME:TARGET, "이", "가")% 재빨리 몸을 빼고는 시끄럽게 떠드는 것을 막을 수는 없었다.
+	elseif RAND:2 == 0
+		printFormW 미궁도시에서 누군가의 이름이 널리 알려지는 상황은 보통 미궁의 깊은 층을 공략했거나, 대단한 보물을 가지고 돌아온 경우이다.
+		printFormW 하지만 도시에서 가장 이질적인 이곳에선 조금 다른 유명세가 퍼지곤 했는데, 대낮에도 음침한 분위기를 흘리는 장소답게, 당사자 앞에서 말하기는 어렵지만, 은근히 떠도는 추문을 바탕으로 알려지는 명성이 바로 그것이었다.
+		printFormW 그리고 오늘의 소문의 주인은 바로 %kr(CALLNAME:MASTER, "이었", "였")%다.
+	else
+	endif
+	
+	fameAmount = max(CFLAG:MASTER:성적명성 / 1000, 1)
+
+	if RAND:5 == 0 && EXP:MASTER:육변기경험
+		call speak(TARGET, "저 년 저번에 전시됐을때 써 봤지. 구멍이 아주 쫄깃하니 기가 막혔는데 말이야.")
+	elseif RAND:5 == 0 && EXP:MASTER:경험인원수 > 20
+		call speak(TARGET, @"내가 아는 사람들 중에서만 세도 %kr(CALLNAME:MASTER, "이랑", "랑")% 해 봤다는 사람이 한 손에 들어가지도 않아.")
+	elseif RAND:5 == 0 && EXP:MASTER:인간성경험 > 100
+		call speak(TARGET, @"우욱, 걸레 냄새. 저거 %CALLNAME:MASTER% 맞냐? 존나게 대주고 다닌다는데.")
+	elseif RAND:5 == 0 && BASE:MASTER:임신일수 > MAXBASE:MASTER:임신일수 / 2
+		call speak(TARGET, @"저거 임신한 거 아닌가? 근데 무슨 정신으로 여길 돌아다닌대?")
+	elseif RAND:2 == 0
+		call speak(TARGET, "와, 엉덩이 흔들고 다니는거 봐라. 아주 그냥 개같이 따먹어 달라고 광고하고 다니네.")
+	else
+		call speak(TARGET, "이 년 빵댕이 튼실한 거 봐라! 애도 잘 낳겠네, 푸하핫!")
+	endif
+
+	if RAND:2 == 0
+		if CFLAG:MASTER:성희롱경험 < 50
+			printFormW 얼굴이 붉어진 %kr(CALLNAME:MASTER, "은", "는")% 고개를 홱 돌렸지만 재빨리 몸을 뺀 %kr(CALLNAME:TARGET, "을", "를")% 쫓아가는 것은 포기해야 했다.
+		else
+			printFormW 이미 이런 말을 듣는 데 너무 익숙해진 %kr(CALLNAME:MASTER, "은", "는")% 이런 일에 신경써 봤자 자신만 손해라는 것을 알아 %kr(CALLNAME:TARGET, "을", "를")% 한 번 노려보기만 하고 그대로 갈 길을 가기로 했다.
+		endif
+	else
+		if CFLAG:MASTER:성격 == 1
+			call speak(MASTER, "에? 뭐라구요..?! 윽.")
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 꾸준히 들려오는 음담패설의 대부분을 이해하지 못했지만, 그 중에 간혹 뜻을 알아듣는 것이 나올때마다 얼굴을 붉힐 수밖에 없었다.
+		elseif CFLAG:MASTER:성격 == 2
+			call speak(MASTER, "아니 뭐라고? 하 참, 정말...")
+			printFormW 옅은 미소를 지으며 헛소리들을 넘기는 %kr(CALLNAME:MASTER, "이었", "였")%지만 그 중에 틀린 말은 그리 많지 않다는 사실에 입 안으로 나지막히 욕설을 삼켰다.
+		elseif CFLAG:MASTER:성격 == 3
+			call speak(MASTER, "훗. 꼴에 예쁜 건 알아가지고. 어디 밤에 많이들 외로웠나봐?")
+			printFormW 천박한 농담에 아랑곳않고 당당하게 고개를 치켜든 %CALLNAME:MASTER%의 시선에서는 부끄러움보다는 외려 끈적한 눈빛이 보였다.
+		elseif CFLAG:MASTER:성격 == 4
+			call speak(MASTER, "읏, 딸꾹.. 너무해...")
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 눈도 제대로 못 마주치고 자신의 이름이 들려올 때마다 몸을 부르르 떨었다.
+		else
+			call speak(MASTER, "거 참 시끄럽게들 구네. 여자 한 번 못 안아본 찌질이들처럼.")
+			printFormW %kr(CALLNAME:MASTER, "은", "는")% 참다 못해 한 마디 쏘아붙였지만, 돌아오는 반응은 오히려 더 거리낌 없는 성희롱뿐이었다.
+		endif
+	endif
+	
+	call delMobChara
+
+	CFLAG:MASTER:성적명성 += fameAmount

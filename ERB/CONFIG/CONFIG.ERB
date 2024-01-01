@@ -6,6 +6,7 @@ $inputLoop
 	printFormL [1] - 성병 보균율을 설정한다(현재 : {FLAG:성병보균율 / 10}.{FLAG:성병보균율 % 10}\%)
 	printFormL [2] - 최면 이벤트 확률을 설정한다(현재 : {FLAG:최면이벤트확률}\%)
 	printFormL [3] - 성희롱 확률을 설정한다(현재 : {FLAG:성희롱확률}\%)
+	printFormL [4] - 체포 확률을 설정한다(현재 : {FLAG:체포확률}\%)
 	printL
 	printFormL [0] - 돌아간다
 
@@ -17,6 +18,8 @@ $inputLoop
 		call hypnoConfig
 	elseif RESULT == 3
 		call sexualharassmentConfig
+	elseif RESULT == 4
+		call arrestConfig
 	elseif RESULT == 0
 		return
 	else
@@ -76,6 +79,25 @@ $inputLoop
 
 	if 0 <= RESULT && RESULT <= 100
 		FLAG:성희롱확률 = RESULT
+
+		printW 변경이 완료되었습니다
+	else
+		printW 잘못된 값입니다
+		goto inputLoop
+	endif
+
+@arrestConfig
+
+	printW 체포 이벤트의 발생 확률을 설정합니다.
+	printW 악명에 따라 확률이 변동하기 때문에 체감 확률과 다를 수 있습니다.
+	printFormL 새 값을 입력해주세요(현재 : {FLAG:체포확률} 단위 : 1\%)
+	
+$inputLoop
+
+	input
+
+	if 0 <= RESULT && RESULT <= 100
+		FLAG:체포확률 = RESULT
 
 		printW 변경이 완료되었습니다
 	else

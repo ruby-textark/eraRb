@@ -13,8 +13,6 @@
 @onUseItem908(targetIdx)
 #dim dynamic targetIdx
 
-	printFormW %NAME:targetIdx%에게 %kr(ITEMNAME:908, "을", "를")% 사용했다.
-
 	EXP:targetIdx:약물경험++
 	TALENT:targetIdx:모유체질 = !TALENT:targetIdx:모유체질
 	if TALENT:targetIdx:모유체질

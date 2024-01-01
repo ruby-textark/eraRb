@@ -1,7 +1,8 @@
 ﻿@arrest
 
 	; 악명 1당 0.2% 확률로 체포됨
-	if !FLAG:육변기형시작일 && (frand(500) < CFLAG:MASTER:악명)
+	; 체포확률 10%으로 최대치 20%가 기본값
+	if !FLAG:육변기형시작일 && (frand(5000 * FLAG:체포확률) < CFLAG:MASTER:악명)
 		call colorPrintW(0x008080, "「어이, 잠깐.」")
 		printFormW 길을 걷던 %CALLNAME:MASTER%의 등 뒤에서 누군가 어깨에 손을 짚으며 말했다
 		call colorPrintW(0x008080, "「이 근처에서 범죄자가 돌아다닌다는 신고가 들어왔다. 잠시 협조하도록.」")

@@ -117,6 +117,7 @@ $inputLoop
 
 	tryccallform isUsable{itemIdx}(MASTER)
 		if RESULT
+			printFormW %NAME:MASTER%에게 %kr(ITEMNAME:itemIdx, "을", "를")% 사용했다.
 			tryccallform onUseItem{itemIdx}(MASTER)
 				ITEM:itemIdx--
 			catch
