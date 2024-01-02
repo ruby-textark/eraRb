@@ -68,13 +68,13 @@ $amountLoop
 				MONEY -= buyAmount * ITEMPRICE:itemIdx
 				ITEM:itemIdx += buyAmount
 				
-				printFormW %kr(ITEMNAME:itemIdx, "을", "를")% 구입했습니다
+				call systemNotify(@"%kr(ITEMNAME:itemIdx, "을", "를")% 구입했습니다")
 
 				; 한벌옷은 세트로 구입
 				tryccallform isOnePiece{itemIdx}
 					if RESULT
 						ITEM:RESULT += buyAmount
-						printFormW %kr(ITEMNAME:RESULT, "을", "를")% 구입했습니다
+						call systemNotify(@"%kr(ITEMNAME:RESULT, "을", "를")% 구입했습니다")
 					endif
 				catch
 				endcatch

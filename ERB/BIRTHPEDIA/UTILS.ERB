@@ -19,10 +19,10 @@
 	
 	; alreay exists
 	if getBit(BirthPedia:(CFLAG:MASTER:아이아버지), babyGene)
-		printFormW 이번에 출산한 %CSTR:MASTER:아이아버지이름%의 아이는 이미 수집한 유전자를 가지고 있었습니다.
+		call systemNotify(@"이번에 출산한 %CSTR:MASTER:아이아버지이름%의 아이는 이미 수집한 유전자를 가지고 있었습니다.")
 	else
 		setBit BirthPedia:(CFLAG:MASTER:아이아버지), babyGene
-		printFormW 이번에 출산한 %CSTR:MASTER:아이아버지이름%의 아이에게서 새로운 유전자를 발견했습니다.
+		call systemNotify(@"이번에 출산한 %CSTR:MASTER:아이아버지이름%의 아이에게서 새로운 유전자를 발견했습니다.")
 	endif
 
 	printFormW %CSTR:MASTER:아이아버지이름%의 유전자 수집률 : {birthPediaCollectionCount(CFLAG:MASTER:아이아버지)} / 30

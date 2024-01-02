@@ -52,12 +52,13 @@ $inputLoop
 			
 			FLAG:(510 + arrIdx * 10 + 4) = 1
 
-			printFormW %kr(ITEMNAME:(FLAG:(510 + arrIdx * 10 + 1)), "을", "를")% 구입했습니다
+			call systemNotify(@"%kr(ITEMNAME:(FLAG:(510 + arrIdx * 10 + 1)), "을", "를")% 구입했습니다")
+			printFormW 
 		endif
 	elseif RESULT == 0
 		return
 	endif
 	
-	printW 잘못된 입력입니다
+	call systemError("잘못된 입력입니다")
 	clearLine 2
 	goto inputLoop

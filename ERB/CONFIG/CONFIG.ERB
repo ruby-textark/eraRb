@@ -23,7 +23,7 @@ $inputLoop
 	elseif RESULT == 0
 		return
 	else
-		printW 잘못된 입력입니다
+		call systemError("잘못된 입력입니다")
 		clearLine 2
 	endif
 
@@ -42,7 +42,7 @@ $inputLoop
 	if 0 <= RESULT && RESULT <= 1000
 		FLAG:성병보균율 = RESULT
 
-		printW 변경이 완료되었습니다
+		call systemNotify("변경이 완료되었습니다")
 	else
 		printW 잘못된 값입니다
 		goto inputLoop
@@ -61,7 +61,7 @@ $inputLoop
 	if 0 <= RESULT && RESULT <= 100
 		FLAG:최면이벤트확률 = RESULT
 
-		printW 변경이 완료되었습니다
+		call systemNotify("변경이 완료되었습니다")
 	else
 		printW 잘못된 값입니다
 		goto inputLoop
@@ -80,7 +80,7 @@ $inputLoop
 	if 0 <= RESULT && RESULT <= 100
 		FLAG:성희롱확률 = RESULT
 
-		printW 변경이 완료되었습니다
+		call systemNotify("변경이 완료되었습니다")
 	else
 		printW 잘못된 값입니다
 		goto inputLoop
@@ -99,7 +99,7 @@ $inputLoop
 	if 0 <= RESULT && RESULT <= 100
 		FLAG:체포확률 = RESULT
 
-		printW 변경이 완료되었습니다
+		call systemNotify("변경이 완료되었습니다")
 	else
 		printW 잘못된 값입니다
 		goto inputLoop

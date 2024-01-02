@@ -49,8 +49,9 @@ $skillLoop
 			printFormW 습득의 구슬이 부족하여 %TRAINNAME:RESULT% 스킬을 마스터할 수 없습니다
 		else
 			JUEL:MASTER:습득 -= 100
-			printFormW %TRAINNAME:RESULT% 스킬을 마스터했습니다.
-			printFormW 앞으로는 해당 스킬이 귀속된 장비를 착용하지 않아도 스킬을 사용할 수 있습니다
+
+			call systemNotify(@"%TRAINNAME:RESULT% 스킬을 마스터했습니다.")
+			call systemNotify("앞으로는 해당 스킬이 귀속된 장비를 착용하지 않아도 스킬을 사용할 수 있습니다")
 		endif
 	endif
 	

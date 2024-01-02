@@ -21,7 +21,7 @@
 
 	; 기생
 	elseif CFLAG:TARGET:기생성공
-		printFormL %CALLNAME:TARGET% %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 기생해버렸습니다...
+		call systemNotify(@"%CALLNAME:TARGET% %kr(NAME:TARGET, "은", "는")% %CALLNAME:MASTER%에게 기생해버렸습니다...")
 		
 		EXP:MASTER:전투패배경험++
 	; 패배

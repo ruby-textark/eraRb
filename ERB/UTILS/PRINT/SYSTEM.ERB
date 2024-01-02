@@ -1,0 +1,22 @@
+﻿@systemNotify(string)
+#dims dynamic string
+
+	setColor 0x00cc00
+	printFormW %string%
+	resetColor
+
+@systemWarning(string)
+#dims dynamic string
+
+	setColor 0xcccc00
+	printFormW %string%
+	resetColor
+
+@systemError(string)
+#dims dynamic string
+
+	setColor 0xcc0000
+	
+	printFormW %string%
+	
+	resetColor

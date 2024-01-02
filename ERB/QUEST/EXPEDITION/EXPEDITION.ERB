@@ -49,7 +49,7 @@
 
 	call addMonster(getRandomEnemy(FLAG:미궁위치))
 	
-	printFormW %CALLNAME:TARGET% %kr(NAME:TARGET, "과", "와")% 마주쳤습니다
+	call systemNotify(@"%CALLNAME:TARGET% %kr(NAME:TARGET, "과", "와")% 마주쳤습니다")
 	printL 어떻게 할까?
 
 	printL [1] - 전투 개시
@@ -75,7 +75,7 @@ $battleChoiceLoop
 			call delMonster
 		endif
 	else
-		printW 잘못된 입력입니다
+		call systemError("잘못된 입력입니다")
 		clearLine 2
 		goto battleChoiceLoop
 	endif

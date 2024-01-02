@@ -19,7 +19,7 @@ $inputLoop
 		BASE:MASTER:체력 = LIMIT(BASE:MASTER:체력 + MAXBASE:MASTER:체력 / 10, 0, MAXBASE:MASTER:체력)
 		BASE:MASTER:마력 = LIMIT(BASE:MASTER:마력 + MAXBASE:MASTER:마력 / 10, 0, MAXBASE:MASTER:마력)
 	else
-		printW 잘못된 입력입니다
+		call systemError("잘못된 입력입니다")
 		clearLine 2
 		goto inputLoop
 	endif

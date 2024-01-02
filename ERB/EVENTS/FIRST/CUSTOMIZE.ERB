@@ -150,7 +150,7 @@ $inputHistory
 		TALENT:MASTER:모유체질 = 1
 		TALENT:MASTER:피임결계 = 1
 	else
-		printW 잘못된 입력입니다
+		call systemError("잘못된 입력입니다")
 		clearLine 2
 		goto inputHistory
 	endif
@@ -173,11 +173,11 @@ $inputCharacteristics
 		CFLAG:MASTER:성격 = RESULT
 
 		if CFLAG:MASTER:태생 == 2 && (RESULT == 1 || RESULT == 2)
-			printW 주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.
+			call systemWarning("주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.")
 		elseif CFLAG:MASTER:태생 == 3 && RESULT == 1
-			printW 주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.
+			call systemWarning("주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.")
 		elseif CFLAG:MASTER:태생 == 5 && (RESULT == 3 || RESULT == 4)
-			printW 주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.
+			call systemWarning("주의 : 해당 설정은 이전의 태생 설정과 충돌하는 경향이 있습니다. 플레이 시 참고하시기 바랍니다.")
 		endif
 		
 		if RESULT == 1
@@ -198,7 +198,7 @@ $inputCharacteristics
 		endif
 		
 	else
-		printW 잘못된 입력입니다
+		call systemError("잘못된 입력입니다")
 		clearLine 2
 		goto inputCharacteristics
 	endif

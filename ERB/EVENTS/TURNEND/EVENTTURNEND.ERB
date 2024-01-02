@@ -1,7 +1,7 @@
 ﻿; @expeditionTurnEnd에도 필요하면 추가할것
 @EVENTTURNEND
 
-	printFormL 하루가 끝났습니다
+	call systemNotify("하루가 끝났습니다")
 
 	DAY++
 	if FLAG:장기숙박 > 0

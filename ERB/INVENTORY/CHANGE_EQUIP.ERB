@@ -4,12 +4,12 @@
 #dim dynamic onepieceIdx
 
 	if equipSlotIdx < 11 || 19 < equipSlotIdx
-		printW 잘못된 장비 위치입니다
+		call systemError("잘못된 장비 위치입니다")
 		return 0
 	endif
 
 	if ITEM:equipItemIdx == 0
-		printW 해당 장비 아이템을 소지하고 있지 않습니다
+		call systemError("해당 장비 아이템을 소지하고 있지 않습니다")
 		return 0
 	endif
 	
@@ -19,11 +19,11 @@
 			if RESULT
 				callForm onUnequip{EQUIP:MASTER:equipSlotIdx}
 			else
-				printW 해당 위치에 장착된 아이템을 해제할 수 없습니다
+				call systemError("해당 위치에 장착된 아이템을 해제할 수 없습니다")
 				return 0
 			endif
 		catch
-			printW 해당 위치에 장착된 아이템을 해제할 수 없습니다
+			call systemError("해당 위치에 장착된 아이템을 해제할 수 없습니다")
 			return 0
 		endcatch
 	endif
@@ -33,11 +33,11 @@
 		if RESULT
 			EQUIP:MASTER:equipSlotIdx = equipItemIdx
 		else
-			printW 해당 아이템을 장비할 수 없습니다
+			call systemError("해당 아이템을 장비할 수 없습니다")
 			return 0
 		endif
 	catch
-		printW 해당 아이템을 장비할 수 없습니다
+		call systemError("해당 아이템을 장비할 수 없습니다")
 		return 0
 	endcatch
 
@@ -48,12 +48,12 @@
 		; 반대쪽 옷을 벗길 수 있는지 확인
 		callForm isUnequipable{EQUIP:MASTER:(onepieceIdx / 100)}
 		if !RESULT
-			printW 한벌옷의 반대편 위치에 장착된 아이템을 해제할 수 없습니다
+			call systemError("한벌옷의 반대편 위치에 장착된 아이템을 해제할 수 없습니다")
 		endif
 		
 		callForm isEquipable{onepieceIdx}
 		if !RESULT
-			printW 한벌옷의 반대편 옷을 장착할 수 없습니다
+			call systemError("한벌옷의 반대편 옷을 장착할 수 없습니다")
 		endif
 
 		; 반대쪽 옷 먼저 해제 후 장착
@@ -62,14 +62,14 @@
 
 		callForm onEquip{onepieceIdx}
 		EQUIP:MASTER:(onepieceIdx / 100) = onepieceIdx
-		
-		printFormW %EQUIPNAME:(onepieceIdx / 100)% 장비를 %kr(ITEMNAME:(onepieceIdx / 100), "으로", "로")% 교체했습니다
+
+		call systemNotify(@"%EQUIPNAME:(onepieceIdx / 100)% 장비를 %kr(ITEMNAME:(onepieceIdx / 100), "으로", "로")% 교체했습니다")
 	catch
 	endcatch
 
 	callForm onEquip{EQUIP:MASTER:equipSlotIdx}
 
-	printFormW %EQUIPNAME:equipSlotIdx% 장비를 %kr(ITEMNAME:equipItemIdx, "으로", "로")% 교체했습니다
+	call systemNotify(@"%EQUIPNAME:equipSlotIdx% 장비를 %kr(ITEMNAME:equipItemIdx, "으로", "로")% 교체했습니다")
 	
 	return 1
 
@@ -80,16 +80,16 @@
 		if RESULT
 			callForm onUnequip{EQUIP:MASTER:equipSlotIdx}
 		else
-			printW 해당 위치에 장착된 아이템을 해제할 수 없습니다
+			call systemError("해당 위치에 장착된 아이템을 해제할 수 없습니다")
 			return 0
 		endif
 	catch
-		printW 해당 위치에 장착된 아이템을 해제할 수 없습니다
+		call systemError("해당 위치에 장착된 아이템을 해제할 수 없습니다")
 		return 0
 	endcatch
 
 	EQUIP:MASTER:equipSlotIdx = 0
-	printFormW %EQUIPNAME:equipSlotIdx% 장비를 해제했습니다
+	call systemNotify(@"%EQUIPNAME:equipSlotIdx% 장비를 해제했습니다")
 	
 	return 1
 

@@ -33,7 +33,7 @@ $inputLoop
 			ITEM:treasureItem += treasureItemCount
 		endif
 	else
-		printW 잘못된 입력입니다
+		call systemError("잘못된 입력입니다")
 		clearLine 2
 		goto inputLoop
 	endif

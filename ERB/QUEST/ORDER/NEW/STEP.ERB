@@ -5,7 +5,7 @@
 	endif
 	
 	if FLAG:퀘스트종류 == 0
-		printFormW %csvCallname(FLAG:퀘스트대상)%의 토벌에 성공했습니다.
+		call systemNotify(@"%csvCallname(FLAG:퀘스트대상)%의 토벌에 성공했습니다.")
 		
 		FLAG:퀘스트값 -= 1
 		
@@ -14,7 +14,7 @@
 		endif
 
 	elseif FLAG:퀘스트종류 == 1
-		printFormW %ITEMNAME:(FLAG:퀘스트대상)%을 납품했습니다.
+		call systemNotify(@"%ITEMNAME:(FLAG:퀘스트대상)%을 납품했습니다.")
 		FLAG:퀘스트진행중 = 0
 	endif
 

@@ -74,7 +74,7 @@ $showLoop
 	elseif RESULT == 0
 		return
 	else
-		printW 잘못된 입력입니다
+		call systemError("잘못된 입력입니다")
 		clearLine 2
 	endif
 	

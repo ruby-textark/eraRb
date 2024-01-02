@@ -20,6 +20,8 @@ $inputLoop
 	
 	if RESULT == 1
 		call negotiateBrothel
+		; todo 여기 작업
+		; call workBrothel
 		return
 	elseif RESULT == 0
 		return
@@ -57,18 +59,59 @@ $inputLoop
 
 @negotiateBrothel
 
-	; todo 여기작업
-
 	; 최초시점
 	if FLAG:창관정산비율 == 0
-	
-		FLAG:창관정산비율 = 20
+		if CFLAG:MASTER:성적명성 < 6000
+			call speakNPC(2200, @"%kr(CALLNAME:MASTER, "이라", "라")%고 했지? 처음은 8:2야. 들어본 적 있지? 하는 거 봐서 더 올려줄 수도 있고.")
+			call systemNotify("정산 비율이 20%로 설정되었습니다.")
+			FLAG:창관정산비율 = 20
+		else
+			call speakNPC(2200, @"%CALLNAME:MASTER%. 그래, 솔직히 말해서 여기는 처음이라고 해도, 급 떨어지게 우리가 20\%씩 떼갈 순 없겠지?")
+			call speakNPC(2200, "알겠어. 맞춰줄게. 대신 우리도 원래 일하던 언니들이 있으니까 눈치를 좀 보긴 해야 돼. 무슨 말인지 알지?")
+
+			call systemNotify("정산 비율이 15%로 설정되었습니다.")
+			FLAG:창관정산비율 = 15
+		endif
 	; 20
 	elseif FLAG:창관정산비율 == 20
-	
-		FLAG:창관정산비율 = 15
+		if CFLAG:MASTER:매춘명성 > 2000 && EXP:MASTER:매춘경험 > 50
+			printFormW %kr(NAME:getChara(2200), "은", "는")% 점점 %kr(CALLNAME:MASTER, "이", "가")% 쓸만하다는 말을 전해들은 모양이다.
+			call speakNPC(2200, "요즘 손님들이 네 얘기 많이 하더라? 아, 아니. 뭐라 하는건 아니고. 말 그대로 잘 하고 있다고 칭찬하는 거야.")
+			call speakNPC(2200, "어디 그럼 우리 앞으로도 잘 부탁한다는 의미에서 선물을 좀 해줘야겠지?")
+
+			call systemNotify("정산 비율이 15%로 설정되었습니다.")
+			FLAG:창관정산비율 = 15
+		endif
 	; 15
 	elseif FLAG:창관정산비율 == 15
-	
-		FLAG:창관정산비율 = 10
+
+		if CFLAG:MASTER:매춘명성 > 4000 && EXP:MASTER:매춘경험 > 100
+			printFormW %kr(NAME:getChara(2200), "은", "는")% %kr(CALLNAME:MASTER, "이", "가")% 많은 손님을 불러모으고 있다는 말을 들은 모양이다.
+			call speakNPC(2200, @"역시 우리 가게 에이스. 내가 항상 %CALLNAME:MASTER%만 믿는거 알지?")
+			call speakNPC(2200, "에이, 우리 사이에 설마 그러겠어? 아니 뭐 그냥, 이제 슬슬 재계약할 때 됐잖아?")
+
+			call systemNotify("정산 비율이 10%로 설정되었습니다.")
+			call speakNPC(2200, "음, 잘 부탁해. 앞으로도.")
+			FLAG:창관정산비율 = 10
+		endif
+		
+		if CFLAG:MASTER:매춘명성 < 2000
+			printFormW %kr(NAME:getChara(2200), "이", "가")% 최근 %CALLNAME:MASTER%의 접대에 대해 별로 좋지 못한 소문이 도는 것을 들은 모양이다.
+			call speakNPC(2200, "요새 대체 뭐 하고 다니는거야? 네 얘기 많이 나와. 이번엔 진짜로 혼내는거 맞아.")
+			call speakNPC(2200, "좀 정신 차리라는 의미에서 그러는거야. 너무 그러지 마. 나도 이러고 싶진 않았어.")
+
+			call systemNotify("정산 비율이 20%로 설정되었습니다.")
+			FLAG:창관정산비율 = 20
+		endif
+	; 10
+	elseif FLAG:창관정산비율 == 10
+		
+		if CFLAG:MASTER:매춘명성 < 4000
+			printFormW %kr(NAME:getChara(2200), "이", "가")% 최근 %kr(CALLNAME:MASTER, "이", "가")% 예전만 못하다는 말이 나온 것을 들은 모양이다.
+			call speakNPC(2200, @"다들 최고라고 오냐오냐해주니까 좀 빠졌나봐? 정신차려 %CALLNAME:MASTER%. 너 그러다 한방에 훅 간다?")
+			call speakNPC(2200, "경고하는거야. 제대로 하자고 앞으로. 제대로.")
+
+			call systemNotify("정산 비율이 15%로 설정되었습니다.")
+			FLAG:창관정산비율 = 15
+		endif
 	endif

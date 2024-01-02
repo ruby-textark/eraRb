@@ -138,9 +138,10 @@
 
 	if LASTLOAD_VERSION < 18
 		printL v0.018
-		printW 명성 관련 이벤트가 추가되었습니다
-		printW 체포 이벤트 설정이 추가되었습니다
-		printW 창관이 추가되었습니다
+		
+		call systemNotify("명성 관련 이벤트가 추가되었습니다")
+		call systemNotify("체포 이벤트 설정이 추가되었습니다")
+		call systemNotify("창관이 추가되었습니다")
 		
 		CFLAG:MASTER:기본명성 *= 100
 		CFLAG:MASTER:성적명성 *= 100

@@ -44,7 +44,7 @@ $contractLoop
 		FLAG:계약배율 += FLAG:(availableContracts:RESULT) * 10
 		printFormW 계약의 힘으로 마석의 습득이 {FLAG:(availableContracts:RESULT) / 10}.{FLAG:(availableContracts:RESULT) % 10}배 증가하였다.
 	else
-		printW 잘못된 입력입니다. 계약을 시작한 이상 반드시 하나를 선택해야만 합니다.
+		call systemError("잘못된 입력입니다. 계약을 시작한 이상 반드시 하나를 선택해야만 합니다.")
 		clearLine 2
 		goto contractLoop
 	endif

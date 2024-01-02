@@ -25,10 +25,10 @@ $tradeLoop
 			FLAG:마석 -= RESULT
 			MONEY += FLAG:마석환율 * RESULT
 			
-			printFormW 마석 {RESULT}개를 {FLAG:마석환율 * RESULT}원으로 환금했습니다.
+			call systemNotify(@"마석 {RESULT}개를 {FLAG:마석환율 * RESULT}원으로 환금했습니다.")
 			
 		elseif RESULT != 0
-			printW 잘못된 입력입니다
+			call systemError("잘못된 입력입니다")
 		endif
 		
 		printFormL 다음에 또 이용해주십시오.
@@ -41,17 +41,17 @@ $tradeLoop
 			FLAG:마석 += RESULT
 			MONEY -= FLAG:마석환율 * RESULT
 			
-			printFormW {FLAG:마석환율 * RESULT}원을 마석 {RESULT}개로 교환했습니다.
+			call systemNotify(@"{FLAG:마석환율 * RESULT}원을 마석 {RESULT}개로 교환했습니다.")
 			
 		elseif RESULT != 0
-			printW 잘못된 입력입니다
+			call systemError("잘못된 입력입니다")
 		endif
 		
 		printFormL 다음에 또 이용해주십시오.
 	elseif RESULT == 0
 		return
 	else
-		printW 잘못된 입력입니다
+		call systemError("잘못된 입력입니다")
 		clearLine 2
 	endif
 	

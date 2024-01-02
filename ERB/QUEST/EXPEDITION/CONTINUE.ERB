@@ -55,7 +55,7 @@
 	
 	if RESULT == 0
 		if !FLAG:미궁상층발견
-			printW 미궁의 상층으로 가는 길을 발견하지 못했습니다
+			call systemError("미궁의 상층으로 가는 길을 발견하지 못했습니다")
 			return 0
 		endif
 
@@ -79,7 +79,7 @@
 		call expedition
 	elseif RESULT == 2
 		if !FLAG:미궁하층발견
-			printW 아직 미궁의 하층으로 가는 길을 발견하지 못했습니다
+			call systemError("미궁의 하층으로 가는 길을 발견하지 못했습니다")
 			return 0
 		endif
 
