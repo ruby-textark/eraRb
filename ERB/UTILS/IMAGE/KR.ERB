@@ -1,0 +1,12 @@
+﻿@showImage(resourceName, size)
+#dims dynamic resourceName
+#dim dynamic size
+#dims dynamic html
+
+	html = <img src='%resourceName%' height='{size * 100}'>
+
+	repeat size
+		html += "<br>"
+	rend
+	
+	HTML_PRINT html
