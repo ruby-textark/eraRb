@@ -4,7 +4,7 @@
 #dim dynamic randMax
 	FLAG:고정난수시드 = (FLAG:고정난수시드 * 1664525 + 1013904223) % __INT_MAX__
 	
-	returnf abs(FLAG:고정난수시드) % randMax
+	returnf abs(FLAG:고정난수시드) % max(1, randMax)
 
 ; range deviated random
 @rdrand(minValue, maxValue, deviation)
