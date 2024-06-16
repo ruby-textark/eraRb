@@ -1,0 +1,21 @@
+﻿@c303onEnemyCum(partIdx)
+#dim dynamic partIdx
+
+	if RAND:2 == 0
+		printFormL 인간은 물론이고, 생명체라고 보기에도 어려운 %CALLNAME:TARGET%의 정액은 점성뿐 아니라 그 양 역시 비할 바가 없었다.
+		printFormL 아랫배를 가득 채우는 기분 나쁜 액체에 %kr(NAME:MASTER, "은", "는")% 극심한 공포를 느꼈다.
+
+		SOURCE:MASTER:공포 += 100
+	endif
+
+	if partIdx == 121
+		printFormL 더러운 %CALLNAME:TARGET%의 정액이 %kr(NAME:MASTER, "을", "를")% 타락시킨다.
+		call systemNotify(@"%NAME:MASTER%의 자궁침식도 조금 상승")
+		BASE:MASTER:자궁침식도 += 1 + RAND:2
+	elseif partIdx == 116
+		printFormL 더러운 %CALLNAME:TARGET%의 정액이 %kr(NAME:MASTER, "을", "를")% 타락시킨다.
+		call systemNotify(@"%NAME:MASTER%의 자궁침식도 상승")
+		BASE:MASTER:자궁침식도 += 2 + RAND:2
+	endif
+	
+	printFormL %kr(NAME:MASTER, "은", "는")% 근원부터 다른 마력이 자신을 침식하는 것을 느끼며 두려움 속에서 피어나는 쾌락에 몸부림치고 있다.

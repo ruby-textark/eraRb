@@ -1,0 +1,16 @@
+﻿@c303onMasterOrgasm(orgasmParts, orgasmCounts)
+#dim ref orgasmParts, 0
+#dim dynamic orgasmCounts
+
+	if RAND:3 == 0
+		printFormL %kr(NAME:MASTER, "은", "는")% 인간이 주지 못하는 쾌락에 절어 정신을 놓았다.
+		printFormL 흐릿해지는 사고 속에서 %kr(NAME:MASTER, "은", "는")% 다시는 이형의 쾌락을 모르던 예전으로 돌아갈 수 없음을 직감하고 눈물을 흘렸다.
+		SOURCE:MASTER:욕정 += 100
+	elseif RAND:2 == 0
+		printFormL 꿈틀거리는 %NAME:TARGET%의 생식기도, 그것이 사정한 액체도 하나같이 다른 곳에서는 느껴본 적이 없던 것이었다.
+		printFormL 난생 처음의 쾌락에 전혀 면역 없이 노출된 %kr(NAME:MASTER, "은", "는")% 그저 다리를 뻣뻣하게 세우며 절정에 도달할 수밖에 없었다.
+	else
+		printFormL 있어서는 안 될 일이지만, %kr(NAME:TARGET, "은", "는")% 이 더럽혀진 마력으로 수정하게 되는 자신을 쉽게 상상할 수 있었다.
+		printFormL 위대한 모험가도 한낱 볼품없는 암컷이 되어 시궁창을 나뒹구는 것을 본 적 있는 %kr(NAME:MASTER, "은", "는")% 자신 역시 그들과 같은 꼴에 처한 것에 피학적인 쾌감을 느끼고 있었다.
+		SOURCE:MASTER:복종 += 100
+	endif

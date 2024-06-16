@@ -86,7 +86,7 @@
 				call colorPrintW(0xff3399, @"%kr(parasiteName(insertIdx), "은", "는")% %CALLNAME:MASTER%의 몸 안에서 미약을 분비한 것 같다")
 				BASE:MASTER:혈중미약농도 += RAND:20
 			endif
-			
+
 			; 벌레일 경우 10% 확률로 해당 신체부위 상태 악화
 			if RAND:10 == 0 && parasiteType(insertIdx) == 4
 				; todo 신체결손구상

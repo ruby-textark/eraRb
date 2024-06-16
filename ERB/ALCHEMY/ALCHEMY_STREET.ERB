@@ -1,0 +1,48 @@
+﻿@alchemyStreet
+
+	printFormW %kr(CALLNAME:MASTER, "은", "는")% 연금술 공방으로 향했다.
+
+
+	if !firstAlchemyStreetFlag
+		firstAlchemyStreetFlag = 1
+		call firstAlchemyStreet
+	endif
+
+$inputLoop
+	printFormL 무엇을 할까.
+	printFormL [1] - 마석을 정제한다
+	printFormL [2] - 연금술을 사용한다
+	printFormL [9] - 도움말
+	printFormL [0] - 돌아가기
+
+	input
+	
+	if RESULT == 1
+		call refineStone
+	elseif RESULT == 2
+		call alchemy
+	elseif RESULT == 9
+		call alchemyStreetHelp
+	elseif RESULT == 0
+		return
+	else
+		clearLine 4
+		goto inputLoop
+	endif
+
+@firstAlchemyStreet
+
+	printW 도시의 다양한 거리과 가게, 거주지를 가를 수 있는 가장 주요한 기준은 금전이다.
+	printW 다양한 사유로 인해 사람들은 자신과 비슷한 처지에 있는 이들과 모이는 법이고, 그렇기 때문에 거주자의 주머니가 두둑할수록 거리에는 쓰레기가 적고, 범죄율도 낮아진다.
+	printW 다만, 그러한 법칙에서 예외인 경우가 종종 있었는데, 연금술사들의 거리가 바로 그랬다.
+	printW
+	printW 그들은 거리에서 가장 중요한 역할 중 하나를 맡고 있었기 때문에, 자연스럽게 돈을 쓸어담을 수밖에 없는 구조였지만, 그들의 생횔 양식은 비천한 뒷골목의 비렁뱅이와 큰 차이가 없었다.
+	printW 어째서 그들이 많은 금화를 가지고도 거지같은 몰골을 하고 돌아다니는지에 대해서 사람들이 추측하기로는,
+	printW 그들은 연금술 이외에는 아무것도 관심이 없기 때문이 아닐까 하는 이들이 많은 편이었다.
+
+@alchemyStreetHelp
+	
+	printFormL (1) 마석을 정제하여 얻은 마력의 정수로 능력치를 상승시킬 수 있습니다.
+	printFormL (2) 정해진 재료를 수집하여 연금술로만 얻을 수 있는 재료 혹은 물약 등을 만들 수도 있습니다.
+	printFormL %NAME:MASTER%의 연금술 수준이 높다면 상관없지만, 만일 거리의 연금술사에게 작업을 부탁한다면 수수료가 발생합니다.
+	wait

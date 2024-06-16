@@ -35,7 +35,7 @@
 	printL
 	printL 태생 선택
 	printL [1] - 마탑의 천재 마법사
-	printL       마력++ 마법공격++
+	printL       마력++ 마법공격++ 연금술+
 	printL       체력-- 약물중독
 	printL
 	printL [2] - 길거리 출신 용병
@@ -72,6 +72,7 @@ $inputHistory
 		BASE:MASTER:체력 -= 500
 
 		ABL:MASTER:마법공격 += 2
+		ABL:MASTER:연금술 = 1
 		
 		EXP:MASTER:약물경험 = 10
 		ABL:MASTER:약물중독 = 1

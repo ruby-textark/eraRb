@@ -1,0 +1,15 @@
+﻿@c2201onMasterLostVirgin(partIdx)
+#dim dynamic partIdx
+
+	if partIdx == 121
+		call speakNPC(2201, "너 지금 정말 예뻐.")
+		printFormW %NAME:2201%, 이 남자는 항상 추문이 끊이질 않곤 했다.
+		printFormW 그의 외모에 반했거나, 감언이설에 넘어갔거나, 혹은 재력에 굴복해 그에게 다리를 벌렸다는 여성들은\(때로는 본인들이 그것을 시원하게 인정하곤 했다\) 신분과 나이를 막론하고 수없이 많았고,
+		printFormW 당연하지만 %kr(NAME:MASTER, "은", "는")% 자신의 처음을 그런 남자에게 팔 정도로 스스로의 가치를 낮게 생각하지 않고 있었지만...
+		printFormW 그런데, 운명의 장난인지. 결국 이 날이 오고 말았다.
+		printFormW 상황과 상황이 겹쳐, 아무에게도 허락한 적 없었건만 결국 그에게 처음으로 몸을 허락하게 된 %kr(NAME:MASTER, "은", "는")% 그야말로 기분이 최악인 채 눈을 질끈 감고 있었고,
+		printFormW 반대로 %kr(NAME:2201, "은", "는")% 여유 넘치는 표정으로 재수 없는 얼굴을 들이밀고 있었다.
+		
+		call speakNPC(2201, "그렇게 눈도 안 마주쳐 주면 난 좀 슬픈데.")
+		printFormW 헛소리. %kr(NAME:MASTER, "은", "는")%, 아무리 속삭이는 미성이라고 할지라도, 이 목소리를 평생 끔찍한 기억으로 기억할 것이라고, 생각했다.
+	endif

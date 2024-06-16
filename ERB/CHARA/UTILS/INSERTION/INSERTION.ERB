@@ -12,8 +12,9 @@
 	EXP:MASTER:삽입경험++
 	; 종족별성경험추가
 	EXP:MASTER:(60 + CFLAG:TARGET:종족)++
-	
-	if !CFLAG:TARGET:경험완료
+
+	; 사람 또는 모브급 이상의 NPC일 경우에만 카운팅
+	if !CFLAG:TARGET:경험완료 && ( CFLAG:TARGET:캐릭터번호 >= 1000 || CFLAG:TARGET:종족 == 1 )
 		CFLAG:TARGET:경험완료 = 1
 		EXP:MASTER:경험인원수++
 	endif

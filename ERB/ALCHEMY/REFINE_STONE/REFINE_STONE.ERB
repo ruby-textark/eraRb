@@ -1,0 +1,72 @@
+﻿@refineStone
+#dim dynamic refineRate
+
+	refineRate = 100000 - 50000 / (ABL:MASTER:연금술 + 1)
+
+$tradeLoop
+
+	print 당신의 연금술 레벨은 
+	setColor 0x00cc00
+	printForm Lv.{ABL:MASTER:연금술}\(정제효율 {refineRate / 1000}.{(refineRate / 100) % 10}\%\)
+	resetColor
+	printL 입니다.
+
+	printL 어떻게 하시겠습니까?
+	
+	printL [1] - 직접 마석을 정제한다
+	printL [2] - 거리의 연금술사에게 부탁한다
+	printL [0] - 그만둔다
+
+	input
+	
+	if RESULT == 1
+
+		printFormL 얼마나 정제하시겠습니까? (보유 마석 수량 : {FLAG:마석}개 / 0개 입력으로 종료)
+		input
+		
+		if 1 <= RESULT && RESULT <= FLAG:마석
+			FLAG:마석 -= RESULT
+			ITEM:마력의정수 += (refineRate * RESULT) / 100000
+			
+			call systemNotify(@"마석 {RESULT}개를 마력의 정수 {(refineRate * RESULT) / 100000}개로 정제했습니다.")
+			
+		elseif RESULT != 0
+			call systemError("잘못된 입력입니다")
+		endif
+		
+		EXP:MASTER:연금술경험 += RESULT
+
+	elseif RESULT == 2
+		printFormL 정제하는 마석 1개당 수수료 30원이 발생하며, 정제효율은 80\%입니다
+		printFormL 얼마나 정제하시겠습니까? (보유 마석 수량 : {FLAG:마석}개 / 0개 입력으로 종료)
+		input
+		
+		if 1 <= RESULT && RESULT <= FLAG:마석 && RESULT * 30 >= MONEY
+
+			FLAG:마석 -= RESULT
+			ITEM:마력의정수 += (RESULT * 4) / 5
+			MONEY -= RESULT * 30
+			
+			call systemNotify(@"마석 {RESULT}개를 마력의 정수 {(refineRate * RESULT) / 100000}개로 정제했습니다.")
+			call systemNotify(@"수수료 {RESULT * 30}원을 지불했습니다.")
+			
+		elseif RESULT != 0
+			if RESULT < 0
+				call systemError("잘못된 입력입니다")
+			elseif FLAG:마석 < RESULT
+				call systemError("마석이 부족합니다")
+			elseif MONEY < RESULT * 30
+				call systemError("돈이 부족합니다")
+			else
+				call systemError("잘못된 입력입니다")
+			endif
+		endif
+
+	elseif RESULT == 0
+		return
+	else
+		call systemError("잘못된 입력입니다")
+		clearLine 2
+	endif
+	
+	goto tradeLoop

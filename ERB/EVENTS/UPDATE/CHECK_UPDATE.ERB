@@ -159,4 +159,14 @@
 		FLAG:명성확률 = 10
 
 	endif
+	
+	if LASTLOAD_VERSION < 19
+		printL v0.019
+		
+		call systemNotify("연금술이 추가되었습니다")
+		
+		if CFLAG:MASTER:태생 == 1
+			ABL:MASTER:연금술 = 1
+		endif
+	endif
 

@@ -20,16 +20,13 @@ $inputLoop
 	
 	if RESULT == 1
 		call negotiateBrothel
-		; todo 여기 작업
-		; call workBrothel
-		printFormW 아직 작업중입니다.
-		return
+		call workBrothel
 	elseif RESULT == 0
 		return
 	else
 		clearLine 4
-		goto inputLoop
 	endif
+	goto inputLoop
 
 @firstBrothel
 	printFormW %kr(CALLNAME:MASTER, "은", "는")% 마침내 저 너머의 거지꼴과 달리 확연히 고급이라는 느낌이 드는 건물 앞에 도착했다.

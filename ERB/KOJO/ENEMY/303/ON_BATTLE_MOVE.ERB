@@ -1,0 +1,37 @@
+﻿@c303onBattleMove
+
+	TCVAR:TARGET:10++
+	
+	; 한 번 달라붙으면 계속 쫓아옴
+	if !isMasterInserted(121, 1) && TCVAR:TARGET:10 % 3
+		printFormL %kr(CALLNAME:TARGET, "은", "는")% 제자리에서 꿈틀대며, 별다른 반응을 보이지 않고 있다.
+		return
+	endif
+
+	TCVAR:TARGET:이번턴이동 = 1
+
+	printFormL 갑자기 %kr(CALLNAME:TARGET, "이", "가")% 무서운 기세로 달려든다.
+
+	repeat 2
+		if RAND:2 == 0
+			if TCVAR:MASTER:좌우 < TCVAR:TARGET:좌우
+				TCVAR:TARGET:좌우--
+			elseif TCVAR:MASTER:좌우 > TCVAR:TARGET:좌우
+				TCVAR:TARGET:좌우++
+			elseif TCVAR:MASTER:상하 < TCVAR:TARGET:상하
+				TCVAR:TARGET:상하--
+			elseif TCVAR:MASTER:상하 > TCVAR:TARGET:상하
+				TCVAR:TARGET:상하++
+			endif
+		else
+			if TCVAR:MASTER:상하 < TCVAR:TARGET:상하
+				TCVAR:TARGET:상하--
+			elseif TCVAR:MASTER:상하 > TCVAR:TARGET:상하
+				TCVAR:TARGET:상하++
+			elseif TCVAR:MASTER:좌우 < TCVAR:TARGET:좌우
+				TCVAR:TARGET:좌우--
+			elseif TCVAR:MASTER:좌우 > TCVAR:TARGET:좌우
+				TCVAR:TARGET:좌우++
+			endif
+		endif
+	rend

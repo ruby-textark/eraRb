@@ -1,0 +1,64 @@
+﻿@c303onSexualAttack
+#dim dynamic attackedIdx
+#dims dynamic attackedName
+
+	attackedIdx = 121
+
+	if isMasterInserted(121, 1) && TALENT:MASTER:자궁구벌어짐
+		call outFromMaster(121, 1)
+		attackedIdx = 116
+	endif
+
+	TFLAG:이번턴성공격 = attackedIdx
+
+	attackedName = %CSTR:MASTER:attackedIdx%
+
+	if isMasterInserted(partIdx, 1)
+		TFLAG:TARGET:11++
+
+		if TFLAG:TARGET:11 == 3 || RAND:5 == 0
+			call outFromMaster(partIdx, 1)
+			printFormL %kr(CALLNAME:TARGET, "은", "는")% 제 할일을 다했다는 듯 %NAME:MASTER%의 %partStr(partIdx)%에서 스르르 떨어져나왔다.
+		else
+			if RAND:4 == 0
+				printFormL 한 차례 부르르 떨던 %kr(CALLNAME:TARGET, "은", "는")% 믿기지 않은 양의 정액을 %NAME:MASTER%의 안에 사정했다.
+			elseif RAND:3 == 0
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% %NAME:MASTER%에게 달라붙은 채로 기세 좋게 사정했다.
+			elseif RAND:2 == 0
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% 타락한 마력을 가득 담은 정액을 %NAME:MASTER%의 %partStr(partIdx)% 안으로 흘렸다.
+			else
+				printFormL %NAME:MASTER%의 생명을 잉태하는 장소를 범하고자 %kr(CALLNAME:TARGET, "은", "는")% 한 차례 크게 맥동하더니 더럽혀진 액체를 뿜어냈다.
+			endif
+
+			if TALENT:MASTER:피임결계
+				printFormL %kr(CALLNAME:TARGET, "은", "는")% 신의 힘조차 비웃듯이 %kr(NAME:MASTER, "이", "가")% 지니고 있던 피임결계를 무시했다.
+				TALENT:MASTER:피임결계 = 0
+				call cumIntoMaster(partIdx)
+				TALENT:MASTER:피임결계 = 1
+			else
+				call cumIntoMaster(partIdx)
+			endif
+		endif
+	else
+		if partIdx == 121
+			printFormL 가만히 있던 %kr(CALLNAME:TARGET, "은", "는")% 한순간 날렵하게 덤벼들어 %kr(NAME:MASTER, "이", "가")% 반응할 틈도 주지 않고 생식기를 삽입했다.
+		else
+			printFormL 아직 부족하다는 듯 %kr(CALLNAME:TARGET, "은", "는")% %NAME:MASTER%의 더욱 깊은 곳까지 성기를 밀어붙였다.
+		endif
+		
+		if RAND:2 == 0
+			printFormL 인간의 것과는 전혀 다른 형태를 한 %CALLNAME:TARGET%의 성기가 %kr(NAME:MASTER, "을", "를")% 무참히 유린한다.
+		else
+			printFormL %CALLNAME:TARGET%의 구불구불한 생식기가 %NAME:MASTER%에게 깨닫고 나면 돌이킬 수 없을 쾌락을 가르친다.
+		endif
+
+		call insertIntoMaster(partIdx, 1)
+	endif
+
+	TCVAR:TARGET:성희롱부위 = attackedIdx
+	SOURCE:MASTER:attackedIdx += 90 + RAND:20
+
+	; exp 가산
+	EXP:MASTER:attackedIdx++
+
+	call onMasterSexualAttacked(attackedIdx)

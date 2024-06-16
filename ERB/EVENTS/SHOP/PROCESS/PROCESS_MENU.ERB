@@ -40,6 +40,8 @@
 		call backStreet
 	elseif RESULT == 303 && isMasterFree() && !FLAG:원정중
 		call cathedral
+	elseif RESULT == 304 && isMasterFree() && !FLAG:원정중
+		call alchemyStreet
 
 	; COLLECTION MENU
 	elseif RESULT == 701

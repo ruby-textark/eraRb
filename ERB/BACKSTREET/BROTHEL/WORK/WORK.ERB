@@ -1,0 +1,73 @@
+﻿@workBrothel
+
+$inputLoop
+
+	clearLine 99999
+	printFormL %NAME:MASTER%의 매춘 명성 : {CFLAG:MASTER:매춘명성}
+	printL 명성 및 외모 조건에 따라 고객에 보정이 적용됩니다.
+	printL 영업을 개시할까요?
+	printL [1] - 예
+	printL [2] - 돌아간다
+
+	input
+	
+	if RESULT == 1
+		call addBrothelNPC
+		printFormL 이번의 손님은 %CALLNAME:TARGET% %NAME:TARGET%입니다.
+		
+		callForm c{CFLAG:TARGET:캐릭터번호}onEnemyBrothel
+		call cleanupBrothelNPC
+		
+		EXP:MASTER:매춘경험++
+	elseif RESULT == 2
+		return
+	else
+		printFormW 잘못된 입력입니다
+	endif
+	goto inputLoop
+
+@addBrothelNPC
+
+	; 명성 8000 이상에서 20% 확률로 네임드 NPC 출현
+	if CFLAG:MASTER:매춘명성 > 8000
+		if !RAND:5
+			call addBrothelNamedNPC
+			return
+		endif
+	; 명성 6000 이상에서 14% 확률로 네임드 NPC 출현
+	elseif CFLAG:MASTER:매춘명성 > 6000
+		if !RAND:7
+			call addBrothelNamedNPC
+			return
+		endif
+	; 명성 4000 이상에서 11% 확률로 네임드 NPC 출현
+	elseif CFLAG:MASTER:매춘명성 > 4000
+		if !RAND:9
+			call addBrothelNamedNPC
+			return
+		endif
+	endif
+
+	call addMobChara(1601 + RAND:3)
+
+@addBrothelNamedNPC
+
+	; TARGET만 변경해줌(이미 존재하는 캐릭터이기 때문)
+
+	; 60% 확률로 카르노
+	if RAND:5 < 3
+		TARGET = getChara(2201)
+	; 40% 확률로 스탈리온
+	else
+		TARGET = getChara(2202)
+	endif
+
+@cleanupBrothelNPC
+
+	; 모브 캐릭터면 삭제
+	if 1600 <= CFLAG:TARGET:캐릭터번호 && CFLAG:TARGET:캐릭터번호 < 1700
+		call delMobChara
+	; 아니면 TARGET 해제만
+	else
+		TARGET = 0
+	endif
