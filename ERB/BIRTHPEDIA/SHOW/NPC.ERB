@@ -74,8 +74,33 @@ $showLoop
 	elseif RESULT == 0
 		return
 	else
-		call systemError("잘못된 입력입니다")
-		clearLine 2
+		npcIdx = RESULT
+		existCsv npcIdx
+
+		if !RESULT
+			call systemError("잘못된 입력입니다")
+			clearLine 2
+		else
+			setColor 0xcccc00
+			printForm %CSVCALLNAME(npcIdx)%\ 
+			resetColor
+
+			printFormL %CSVNAME(npcIdx)%
+
+			tryccallform c{npcIdx}BirthPedia
+				fontItalic
+				printFormL %RESULTS:0%
+				fontRegular
+				
+				setColor 0xcc00cc
+				printFormL %RESULTS:1%
+				resetColor
+				printFormL %RESULTS:2%
+			catch
+				call colorPrint(0x888888, @"이 대상에 대한 상세 설명이 없습니다.")
+			endcatch
+			wait
+		endif
 	endif
 	
 	npcPage = limit(npcPage, 0, 9)

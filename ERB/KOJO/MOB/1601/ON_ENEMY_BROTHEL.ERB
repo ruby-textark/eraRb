@@ -1,48 +1,48 @@
 ﻿@c1601onEnemyBrothel()
 #dim dynamic bodyPart
 
-	printL 말수가 적어 보이는 손님이 조심스레 문을 열고 들어왔다.
+	printW 말수가 적어 보이는 손님이 조심스레 문을 열고 들어왔다.
 
 	call speak(TARGET, "아, 안녕하세요.")
 	
 	if RAND:4 == 0
 		if EXP:MASTER:매춘경험 < 50
-			printFormL 딱 봐도 이런 경험이 많아 보이지 않는 모습에, %kr(NAME:MASTER, "은", "는")% 슬쩍 꼼수를 쓰기로 했다.
+			printFormW 딱 봐도 이런 경험이 많아 보이지 않는 모습에, %kr(NAME:MASTER, "은", "는")% 슬쩍 꼼수를 쓰기로 했다.
 		else
-			printFormL %kr(NAME:MASTER, "은", "는")% 평소같았으면 손으로만 끝내버리려 했겠지만, 옷차림과 다르게 은근 취향에 맞는 얼굴에 한 번 서비스해주기로 했다.
+			printFormW %kr(NAME:MASTER, "은", "는")% 평소같았으면 손으로만 끝내버리려 했겠지만, 옷차림과 다르게 은근 취향에 맞는 얼굴에 한 번 서비스해주기로 했다.
 		endif
 	else
 		if EXP:MASTER:매춘경험 < 50
-			printFormL 딱 봐도 이런 경험이 많아 보이지 않는 모습에, %kr(NAME:MASTER, "은", "는")% 슬쩍 꼼수를 쓰기로 했다.
+			printFormW 딱 봐도 이런 경험이 많아 보이지 않는 모습에, %kr(NAME:MASTER, "은", "는")% 슬쩍 꼼수를 쓰기로 했다.
 		else
-			printFormL 경험상 이런 손님들은 가게 매뉴얼대로 가면 시간이 질질 끌린다는 것을 알고 있기에, %kr(NAME:MASTER, "은", "는")% 조금만 꼼수를 쓰기로 했다.
+			printFormW 경험상 이런 손님들은 가게 매뉴얼대로 가면 시간이 질질 끌린다는 것을 알고 있기에, %kr(NAME:MASTER, "은", "는")% 조금만 꼼수를 쓰기로 했다.
 		endif
 				
 		call speak(MASTER, "손님, 우선 샤워부터 할까요?")
-		printFormL %NAME:MASTER%의 계산으로는 샤워하면서 한 번, 손으로 한 번 정도 뽑으면 후딱 해치울 수 있다는 생각이었다.
+		printFormW %NAME:MASTER%의 계산으로는 샤워하면서 한 번, 손으로 한 번 정도 뽑으면 후딱 해치울 수 있다는 생각이었다.
 		if RAND:5 == 0
-			printL 그런데 겉보기와는 달리, 이번 손님은 그렇게까지 호락호락한 상대는 아니었던 모양이다.
-			printL (어라...? 이정도면 이미 갈 땐데...)
+			printW 그런데 겉보기와는 달리, 이번 손님은 그렇게까지 호락호락한 상대는 아니었던 모양이다.
+			printW (어라...? 이정도면 이미 갈 땐데...)
 			call speak(TARGET, "저기 누나, 내가 그렇게 호구같아보였어?")
 			call speak(MASTER, "아니, 저, 그게...")
 			
 			EXP:MASTER:정액경험 += 1
 			EXP:MASTER:정음경험 += 1
 
-			printFormL %kr(NAME:MASTER, "은", "는")% 우악스럽게 돌진해진 육봉에 입 안을 범해졌다.
-			printL
+			printFormW %kr(NAME:MASTER, "은", "는")% 우악스럽게 돌진해진 육봉에 입 안을 범해졌다.
+			printW
 			call speak(MASTER, "우읍, 저기, 잠깐만, 좀만 쉬고...")
 
 			call insertIntoMaster(121, 1)
 			call cumIntoMaster(121)
 			call outFromMaster(121, 1)
 
-			printFormL %kr(NAME:MASTER, "은", "는")% 그대로 붙들려 성욕의 배출구로 사용당했다...
+			printFormW %kr(NAME:MASTER, "은", "는")% 그대로 붙들려 성욕의 배출구로 사용당했다...
 		else
 			call speak(TARGET, "으읏, 잠깐만요... 거긴...")
 			
 			EXP:MASTER:정액경험 += 2
 
-			printFormL %kr(NAME:MASTER, "은", "는")% 가벼운 손풀기를 하는 느낌으로 손님을 처리했다.
+			printFormW %kr(NAME:MASTER, "은", "는")% 가벼운 손풀기를 하는 느낌으로 손님을 처리했다.
 		endif
 	endif

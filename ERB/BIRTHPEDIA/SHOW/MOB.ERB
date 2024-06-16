@@ -74,8 +74,33 @@ $showLoop
 	elseif RESULT == 0
 		return
 	else
-		call systemError("잘못된 입력입니다")
-		clearLine 2
+		mobIdx = RESULT
+		existCsv mobIdx
+
+		if !RESULT
+			call systemError("잘못된 입력입니다")
+			clearLine 2
+		else
+			setColor 0xcccc00
+			printForm %CSVCALLNAME(mobIdx)%\ 
+			resetColor
+
+			printFormL %CSVNAME(mobIdx)%
+
+			tryccallform c{mobIdx}BirthPedia
+				fontItalic
+				printFormL %RESULTS:0%
+				fontRegular
+				
+				setColor 0xcc00cc
+				printFormL %RESULTS:1%
+				resetColor
+				printFormL %RESULTS:2%
+			catch
+				call colorPrint(0x888888, @"이 대상에 대한 상세 설명이 없습니다.")
+			endcatch
+			wait
+		endif
 	endif
 	
 	mobPage = limit(mobPage, 1, 9)

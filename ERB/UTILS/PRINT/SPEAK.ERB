@@ -2,7 +2,9 @@
 #dim dynamic charaIdx
 #dims dynamic string
 
-	setColor CFLAG:charaIdx:대사색상
+	if CFLAG:charaIdx:대사색상
+		setColor CFLAG:charaIdx:대사색상
+	endif
 
 	if charaIdx == MASTER
 		call showImage(@"FACE_MASTER_{CFLAG:MASTER:태생}", 10)

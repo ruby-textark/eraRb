@@ -17,21 +17,22 @@
 
 	EXP:MASTER:성희롱경험++
 	
-	if RAND:3 == 0
+	if RAND:2 == 0
 		printFormW 뒷골목은 이곳에서 사는 이들이 아닌 이상, 입에도 올리기 어려운 장소였고, 그래서 떳떳하지 않은 행인을 위해 곳곳마다 사람이 숨기 쉬운 그늘과 틈이 있었다.
 		printFormW 그리고 그 틈에서, 슬쩍 손이 뻗어나와 근처를 지나가는 뜨내기들의 짐을 노리는 것은 그저 일상과도 같아서, 일일이 언급하는 것이 유난일 정도였다.
 		printFormW 다만 이번에는, 그 손길이 %CALLNAME:MASTER%의 주머니가 아니라, 몸 그 자체였다는 점에서 차이가 있었다.
 
 		printFormW 해를 끼치려는 미궁의 공격과는 방향이 다른 음습한 손눌림에 %kr(CALLNAME:MASTER, "이", "가")% 잠시 반응하지 못하고 멈칫한 사이, %CALLNAME:TARGET%의 손이 무방비한 엉덩이를 찰싹 때렸다.
 		printFormW %kr(CALLNAME:MASTER, "은", "는")% 반사적으로 그 손을 쳐내긴 했으나, %kr(CALLNAME:TARGET, "이", "가")% 재빨리 몸을 빼고는 시끄럽게 떠드는 것을 막을 수는 없었다.
-	elseif RAND:2 == 0
+	else
 		printFormW 미궁도시에서 누군가의 이름이 널리 알려지는 상황은 보통 미궁의 깊은 층을 공략했거나, 대단한 보물을 가지고 돌아온 경우이다.
 		printFormW 하지만 도시에서 가장 이질적인 이곳에선 조금 다른 유명세가 퍼지곤 했는데, 대낮에도 음침한 분위기를 흘리는 장소답게, 당사자 앞에서 말하기는 어렵지만, 은근히 떠도는 추문을 바탕으로 알려지는 명성이 바로 그것이었다.
 		printFormW 그리고 오늘의 소문의 주인은 바로 %kr(CALLNAME:MASTER, "이었", "였")%다.
-	else
 	endif
 	
 	fameAmount = max(CFLAG:MASTER:성적명성 / 1000, 1)
+
+	printFormW {TARGET}
 
 	if RAND:5 == 0 && EXP:MASTER:육변기경험
 		call speak(TARGET, "저 년 저번에 전시됐을때 써 봤지. 구멍이 아주 쫄깃하니 기가 막혔는데 말이야.")

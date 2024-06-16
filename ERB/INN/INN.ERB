@@ -35,7 +35,7 @@ $inputLoop
 	elseif RESULT == 2
 		if MONEY >= 10000
 			MONEY -= 10000
-			FLAG:장기숙박 = 6
+			FLAG:장기숙박 += 6
 		else
 			printFormW 하지만 돈이 부족하다...(현재 \\{MONEY}원)
 			clearLine 2
