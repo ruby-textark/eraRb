@@ -1,4 +1,5 @@
 ﻿@workBrothel
+#dim dynamic income
 
 $inputLoop
 
@@ -16,6 +17,9 @@ $inputLoop
 		printFormL 이번의 손님은 %CALLNAME:TARGET% %NAME:TARGET%입니다.
 		
 		callForm c{CFLAG:TARGET:캐릭터번호}onEnemyBrothel
+		
+		income = 25 * (1 + (CFLAG:MASTER:매춘명성) / 25) + RAND:(75 * (1 + (CFLAG:MASTER:매춘명성) / 75))
+		printFormL 이번 수입은 \\{income}원입니다.
 		call cleanupBrothelNPC
 		
 		EXP:MASTER:매춘경험++
